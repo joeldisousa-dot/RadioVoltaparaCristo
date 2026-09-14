@@ -3,7 +3,7 @@
 // Cole aqui a URL do seu Web App do Google Apps Script
 // (termina em /exec). Veja apps-script/Code.gs e o README.
 // ============================================================
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpUdFgqkdcKjG8Oa2IEL9q3vD3ubZzLjKxiP64Vykl/dev";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec";
 
 const FREQ_MIN = 88.0;
 const FREQ_MAX = 108.0;
