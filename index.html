@@ -9,32 +9,30 @@
 
 <title>Onda Livre FM</title>
 
+<meta
+name="description"
+content="Onda Livre FM — Rádio ao vivo, música e informação."
+
+>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
 
 <style>
 
 /* =========================================================
-   BASE
+   RESET
 ========================================================= */
-
-:root {
-    --blue: #1264e8;
-    --blue-light: #3b82f6;
-    --dark: #07111f;
-    --dark-2: #0c1828;
-    --text: #111827;
-    --muted: #697586;
-    --light: #f5f7fa;
-    --white: #ffffff;
-    --border: #e7ebf0;
-    --green: #19b56b;
-}
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -42,13 +40,11 @@ html {
 }
 
 body {
-    margin: 0;
-    background: var(--light);
-    color: var(--text);
-
     font-family: "DM Sans", sans-serif;
-
-    -webkit-font-smoothing: antialiased;
+    background: #f5f7fb;
+    color: #111827;
+    line-height: 1.5;
+    overflow-x: hidden;
 }
 
 button,
@@ -61,8 +57,33 @@ button {
 }
 
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --blue: #1769e0;
+    --blue-dark: #0d4fb5;
+    --blue-light: #eaf2ff;
+
+    --green: #17a673;
+
+    --dark: #07111f;
+    --dark-2: #0b1728;
+
+    --text: #111827;
+    --muted: #6b7280;
+
+    --border: #e5e9f0;
+
+    --white: #ffffff;
+
 }
 
 
@@ -72,30 +93,31 @@ a {
 
 header {
 
-    position: sticky;
+    position: absolute;
+
     top: 0;
-    z-index: 100;
+    left: 0;
 
-    height: 70px;
+    width: 100%;
 
-    background: rgba(255,255,255,.92);
+    z-index: 20;
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    padding: 22px 5%;
 
-    border-bottom: 1px solid rgba(0,0,0,.06);
 }
 
-.header-inner {
+.navbar {
 
-    width: min(1180px, calc(100% - 44px));
-    height: 100%;
+    max-width: 1180px;
 
-    margin: auto;
+    margin: 0 auto;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
 }
 
 
@@ -106,68 +128,81 @@ header {
 .logo {
 
     display: flex;
+
     align-items: center;
+
     gap: 11px;
+
+    color: #ffffff;
 
     font-family: "Space Grotesk", sans-serif;
 
     font-size: 20px;
-    font-weight: 700;
 
-    letter-spacing: -.7px;
-}
-
-.logo-icon {
-
-    width: 34px;
-    height: 34px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 10px;
-
-    background: var(--blue);
-
-    color: white;
-
-    font-size: 11px;
     font-weight: 700;
 
     letter-spacing: -.5px;
 
-    box-shadow: 0 6px 18px rgba(18,100,232,.25);
 }
 
-.logo span {
-    color: var(--blue);
+.logo-mark {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: linear-gradient(
+        135deg,
+        #2581ff,
+        #1557c5
+    );
+
+    box-shadow:
+        0 8px 25px rgba(23, 105, 224, .28);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
 }
 
 
 /* =========================================================
-   NAV
+   MENU
 ========================================================= */
 
 nav {
 
     display: flex;
+
     align-items: center;
 
-    gap: 34px;
+    gap: 32px;
 
-    font-size: 13px;
-    font-weight: 600;
-
-    color: #687386;
 }
 
 nav a {
-    transition: color .2s ease;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition: .2s ease;
+
 }
 
 nav a:hover {
-    color: var(--blue);
+
+    color: #ffffff;
+
 }
 
 
@@ -177,29 +212,41 @@ nav a:hover {
 
 .hero {
 
+    min-height: 680px;
+
     position: relative;
 
     overflow: hidden;
 
+    display: flex;
+
+    align-items: center;
+
+    padding:
+        120px 5%
+        80px;
+
     background:
+
         radial-gradient(
-            circle at 82% 18%,
-            rgba(31,110,235,.22),
+            circle at 78% 35%,
+            rgba(35, 113, 231, .22),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 15% 90%,
+            rgba(20, 81, 164, .18),
             transparent 30%
         ),
-        radial-gradient(
-            circle at 65% 80%,
-            rgba(28,83,156,.14),
-            transparent 34%
-        ),
+
         linear-gradient(
             135deg,
-            #07111f 0%,
-            #091523 52%,
-            #0d1e34 100%
+            #06101d 0%,
+            #091727 50%,
+            #07111f 100%
         );
 
-    color: white;
 }
 
 .hero::before {
@@ -208,15 +255,16 @@ nav a:hover {
 
     position: absolute;
 
-    width: 420px;
-    height: 420px;
+    width: 600px;
+    height: 600px;
 
-    right: -180px;
-    top: -190px;
+    right: -250px;
+    top: -250px;
+
+    border-radius: 50%;
 
     border: 1px solid rgba(255,255,255,.06);
 
-    border-radius: 50%;
 }
 
 .hero::after {
@@ -225,49 +273,54 @@ nav a:hover {
 
     position: absolute;
 
-    width: 620px;
-    height: 620px;
+    width: 900px;
+    height: 900px;
 
-    right: -280px;
-    top: -290px;
+    right: -400px;
+    top: -400px;
+
+    border-radius: 50%;
 
     border: 1px solid rgba(255,255,255,.035);
 
-    border-radius: 50%;
 }
 
-.hero-inner {
+.hero-container {
 
-    position: relative;
-    z-index: 2;
+    width: 100%;
 
-    width: min(1180px, calc(100% - 44px));
+    max-width: 1180px;
 
-    min-height: 500px;
-
-    margin: auto;
+    margin: 0 auto;
 
     display: grid;
 
-    grid-template-columns: 1.15fr .85fr;
+    grid-template-columns:
+        minmax(0, 1fr)
+        410px;
 
     align-items: center;
 
     gap: 80px;
 
-    padding: 70px 0;
+    position: relative;
+
+    z-index: 2;
+
 }
 
 
 /* =========================================================
-   HERO TEXTO
+   HERO TEXT
 ========================================================= */
 
-.hero-copy {
-    max-width: 680px;
+.hero-content {
+
+    max-width: 650px;
+
 }
 
-.live-status {
+.live-label {
 
     display: inline-flex;
 
@@ -275,60 +328,67 @@ nav a:hover {
 
     gap: 9px;
 
-    margin-bottom: 23px;
+    margin-bottom: 22px;
 
-    color: #9eacc0;
+    color: #7eb4ff;
 
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 12px;
 
-    text-transform: uppercase;
+    font-weight: 700;
 
-    letter-spacing: 1.8px;
+    letter-spacing: 1.5px;
+
 }
 
 .live-dot {
 
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
 
     border-radius: 50%;
 
-    background: var(--green);
+    background: #20d49a;
 
     box-shadow:
-        0 0 0 4px rgba(25,181,107,.13),
-        0 0 15px rgba(25,181,107,.3);
+        0 0 0 5px rgba(32,212,154,.1),
+        0 0 15px rgba(32,212,154,.45);
+
 }
 
 .hero h1 {
 
-    margin: 0;
-
     font-family: "Space Grotesk", sans-serif;
 
-    font-size: clamp(48px, 6vw, 76px);
+    font-size: clamp(46px, 6vw, 76px);
 
     line-height: .98;
 
-    letter-spacing: -4px;
+    letter-spacing: -3px;
+
+    color: #ffffff;
+
+    margin-bottom: 25px;
+
 }
 
 .hero h1 span {
-    color: #4d8ff3;
+
+    color: #55a0ff;
+
 }
 
 .hero-description {
 
-    max-width: 520px;
+    max-width: 570px;
 
-    margin: 25px 0 32px;
+    color: rgba(255,255,255,.63);
 
-    color: #a8b4c5;
-
-    font-size: 16px;
+    font-size: 17px;
 
     line-height: 1.7;
+
+    margin-bottom: 32px;
+
 }
 
 .hero-button {
@@ -336,286 +396,281 @@ nav a:hover {
     display: inline-flex;
 
     align-items: center;
-    justify-content: center;
 
-    height: 46px;
+    gap: 10px;
 
-    padding: 0 22px;
+    padding: 13px 20px;
 
-    border-radius: 9px;
+    border: 0;
 
-    background: var(--blue);
+    border-radius: 11px;
 
-    color: white;
+    background: #ffffff;
 
-    font-size: 13px;
+    color: #101827;
+
+    font-size: 14px;
+
     font-weight: 700;
 
-    box-shadow: 0 10px 28px rgba(18,100,232,.25);
-
     transition: .2s ease;
+
 }
 
 .hero-button:hover {
 
-    background: var(--blue-light);
+    transform: translateY(-2px);
 
-    transform: translateY(-1px);
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.22);
+
 }
 
 
 /* =========================================================
-   PLAYER HERO
-========================================================= */
-
-.hero-player {
-
-    width: 100%;
-
-    max-width: 400px;
-
-    justify-self: end;
-}
-
-
-/* =========================================================
-   PLAYER CARD
+   PLAYER
 ========================================================= */
 
 .player-card {
 
-    position: relative;
+    width: 100%;
 
-    padding: 26px;
+    max-width: 410px;
 
-    border-radius: 20px;
+    padding: 25px;
+
+    border-radius: 22px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.09),
-            rgba(255,255,255,.035)
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.045)
         );
 
-    border: 1px solid rgba(255,255,255,.11);
+    border: 1px solid rgba(255,255,255,.10);
 
     box-shadow:
-        0 30px 70px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.05);
+        0 30px 80px rgba(0,0,0,.32);
 
     backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
 }
 
 
 /* =========================================================
-   PLAYER TOPO
+   PLAYER TOP
 ========================================================= */
 
 .player-top {
 
     display: flex;
 
-    align-items: center;
     justify-content: space-between;
 
-    margin-bottom: 27px;
+    align-items: center;
+
+    margin-bottom: 23px;
+
 }
 
 .player-live {
 
     display: flex;
+
     align-items: center;
 
     gap: 8px;
 
-    color: #9eacc0;
-
-    font-family: monospace;
+    color: rgba(255,255,255,.6);
 
     font-size: 10px;
 
-    letter-spacing: 1.3px;
+    font-weight: 700;
 
-    text-transform: uppercase;
+    letter-spacing: 1.4px;
+
 }
 
-.player-live span {
+.player-live::before {
 
-    width: 6px;
-    height: 6px;
+    content: "";
+
+    width: 7px;
+    height: 7px;
 
     border-radius: 50%;
 
-    background: var(--green);
+    background: #20d49a;
 
-    box-shadow: 0 0 10px rgba(25,181,107,.6);
+    box-shadow:
+        0 0 12px rgba(32,212,154,.8);
+
 }
 
 .player-frequency {
 
-    color: #68788e;
+    color: rgba(255,255,255,.45);
 
-    font-family: monospace;
+    font-family: "Space Grotesk", sans-serif;
 
-    font-size: 10px;
+    font-size: 12px;
 
-    letter-spacing: 1px;
 }
 
 
 /* =========================================================
-   CAPA / ÍCONE DO PLAYER
+   CAPA / VISUAL
 ========================================================= */
 
-.player-main {
+.album-area {
+
+    width: 100%;
+
+    height: 125px;
 
     display: flex;
 
     align-items: center;
 
-    gap: 17px;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
 }
 
-.station-art {
+.album-art {
 
-    position: relative;
+    width: 115px;
+    height: 115px;
 
-    flex: 0 0 62px;
-
-    width: 62px;
-    height: 62px;
+    border-radius: 20px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 15px;
-
     background:
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(74,148,255,.42),
+            transparent 28%
+        ),
+
         linear-gradient(
             145deg,
-            #1d75ed,
-            #0e4fb9
+            #0f3769,
+            #081c35
         );
 
+    border: 1px solid rgba(255,255,255,.1);
+
     box-shadow:
-        0 10px 25px rgba(0,0,0,.22);
+        0 18px 45px rgba(0,0,0,.3);
+
+    position: relative;
+
+    overflow: hidden;
+
 }
 
-.station-art::before,
-.station-art::after {
+.album-art::before {
 
     content: "";
 
     position: absolute;
 
-    border: 1px solid rgba(255,255,255,.2);
+    width: 75px;
+    height: 75px;
 
     border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.12);
+
 }
 
-.station-art::before {
+.album-art::after {
 
-    width: 30px;
-    height: 30px;
+    content: "";
+
+    position: absolute;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.12);
+
 }
 
-.station-art::after {
-
-    width: 16px;
-    height: 16px;
-
-    background: rgba(255,255,255,.12);
-}
-
-.station-art strong {
+.album-logo {
 
     position: relative;
-    z-index: 2;
 
-    color: white;
+    z-index: 2;
 
     font-family: "Space Grotesk", sans-serif;
 
-    font-size: 10px;
+    color: #ffffff;
 
-    letter-spacing: -.3px;
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
 }
 
 
 /* =========================================================
-   TRACK INFO
+   INFORMAÇÕES DA MÚSICA
 ========================================================= */
 
-.track-data {
+.track-info {
 
-    min-width: 0;
+    text-align: center;
 
-    flex: 1;
+    margin-bottom: 22px;
+
 }
 
-.track-now {
+.track-title {
 
-    margin-bottom: 5px;
-
-    color: #71839a;
-
-    font-size: 10px;
-
-    font-weight: 600;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1.2px;
-}
-
-#trackTitle {
-
-    overflow: hidden;
-
-    margin: 0;
-
-    color: white;
+    color: #ffffff;
 
     font-family: "Space Grotesk", sans-serif;
 
-    font-size: 16px;
+    font-size: 17px;
 
     font-weight: 600;
 
-    text-overflow: ellipsis;
-
     white-space: nowrap;
-}
-
-#trackArtist {
 
     overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+.track-artist {
 
     margin-top: 4px;
 
-    color: #8998aa;
+    color: rgba(255,255,255,.48);
 
     font-size: 12px;
 
+    white-space: nowrap;
+
+    overflow: hidden;
+
     text-overflow: ellipsis;
 
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   PLAYER LINHA
-========================================================= */
-
-.player-line {
-
-    height: 1px;
-
-    margin: 24px 0;
-
-    background: rgba(255,255,255,.08);
 }
 
 
@@ -623,89 +678,81 @@ nav a:hover {
    CONTROLES
 ========================================================= */
 
-.player-bottom {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-}
-
 .player-controls {
 
     display: flex;
 
     align-items: center;
 
-    gap: 5px;
+    justify-content: center;
+
+    gap: 13px;
+
 }
 
-.player-controls button {
+.player-control {
 
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
+
+    border: 0;
+
+    border-radius: 50%;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    padding: 0;
-
-    border: 0;
-
-    border-radius: 8px;
-
-    background: transparent;
-
-    color: #8190a3;
-
-    transition: .2s ease;
-}
-
-.player-controls button:hover {
+    color: rgba(255,255,255,.65);
 
     background: rgba(255,255,255,.07);
 
-    color: white;
+    transition: .2s ease;
+
 }
 
+.player-control:hover {
 
-/* =========================================================
-   PLAY
-========================================================= */
+    color: #ffffff;
 
-#playBtn {
+    background: rgba(255,255,255,.13);
 
-    width: 42px;
-    height: 42px;
+    transform: translateY(-1px);
 
-    margin: 0 5px;
+}
+
+.player-main {
+
+    width: 52px;
+    height: 52px;
+
+    border: 0;
 
     border-radius: 50%;
 
-    background: white;
+    display: flex;
 
-    color: #0b1b2e;
+    align-items: center;
+    justify-content: center;
 
-    box-shadow: 0 7px 22px rgba(0,0,0,.25);
+    color: #ffffff;
+
+    background: #1769e0;
+
+    box-shadow:
+        0 8px 25px rgba(23,105,224,.4);
 
     transition: .2s ease;
+
 }
 
-#playBtn:hover {
+.player-main:hover {
 
-    background: #f2f5f9;
+    background: #2778eb;
 
     transform: scale(1.04);
-}
 
-#playIcon {
-
-    font-size: 13px;
-
-    transform: translateX(1px);
 }
 
 
@@ -719,72 +766,146 @@ nav a:hover {
 
     align-items: center;
 
-    gap: 8px;
+    gap: 10px;
+
+    margin-top: 22px;
+
 }
 
-.volume-area span {
+.volume-icon {
 
-    color: #78879a;
+    width: 18px;
+    height: 18px;
 
-    font-size: 11px;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(255,255,255,.55);
+
 }
 
 #volume {
 
-    width: 65px;
+    width: 100%;
 
     height: 3px;
 
-    accent-color: #7faef7;
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.13);
+
+    outline: none;
+
+}
+
+#volume::-webkit-slider-thumb {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
 
     cursor: pointer;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.3);
+
+}
+
+#volume::-moz-range-thumb {
+
+    width: 12px;
+    height: 12px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
 }
 
 
 /* =========================================================
-   ELEMENTOS ANTIGOS — MANTIDOS
+   ELEMENTOS ANTIGOS DO PLAYER
+   Mantidos para compatibilidade com script.js
 ========================================================= */
 
-#onair,
-#freq,
 #dial,
 #dialTicks,
 #dialNeedle {
 
-    position: absolute;
+    display: none !important;
 
-    width: 1px;
-    height: 1px;
-
-    overflow: hidden;
-
-    opacity: 0;
-
-    pointer-events: none;
-}
-
-#audio {
-    display: none;
 }
 
 
 /* =========================================================
-   PLAYER FORA DO HERO
-   Mantido para compatibilidade estrutural
+   SEÇÕES
 ========================================================= */
 
-.player-section {
+.section {
 
-    position: absolute;
+    padding: 95px 5%;
 
-    width: 1px;
-    height: 1px;
+}
 
-    overflow: hidden;
+.section-container {
 
-    opacity: 0;
+    max-width: 1180px;
 
-    pointer-events: none;
+    margin: 0 auto;
+
+}
+
+.section-header {
+
+    margin-bottom: 38px;
+
+}
+
+.section-label {
+
+    color: var(--blue);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 9px;
+
+}
+
+.section-title {
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 34px;
+
+    line-height: 1.15;
+
+    letter-spacing: -1.2px;
+
+    color: var(--text);
+
 }
 
 
@@ -792,97 +913,80 @@ nav a:hover {
    PROGRAMAÇÃO
 ========================================================= */
 
-.program-section {
+#programacao {
 
-    padding: 80px 0;
+    background: #ffffff;
 
-    background: white;
 }
 
-.section-inner {
-
-    width: min(1080px, calc(100% - 44px));
-
-    margin: auto;
-}
-
-.section-heading {
-
-    margin-bottom: 32px;
-}
-
-.section-label {
-
-    margin-bottom: 8px;
-
-    color: var(--blue);
-
-    font-size: 10px;
-    font-weight: 700;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1.8px;
-}
-
-.section-heading h2 {
-
-    margin: 0;
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 38px;
-
-    letter-spacing: -1.8px;
-}
-
-.section-heading p {
-
-    max-width: 550px;
-
-    margin: 11px 0 0;
-
-    color: var(--muted);
-
-    line-height: 1.6;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   PLAYLIST
-========================================================= */
-
-#playlist {
+.playlist {
 
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    gap: 15px;
+    gap: 16px;
+
 }
 
-.playlist-item {
+.program-card {
 
-    padding: 20px;
+    padding: 22px;
 
     border: 1px solid var(--border);
 
-    border-radius: 13px;
+    border-radius: 15px;
 
-    background: white;
+    background: #ffffff;
 
     transition: .2s ease;
+
 }
 
-.playlist-item:hover {
+.program-card:hover {
 
-    border-color: #cbdcf6;
-
-    box-shadow: 0 12px 28px rgba(17,24,39,.06);
+    border-color: #cbd8eb;
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 35px rgba(15,35,65,.07);
+
+}
+
+.program-time {
+
+    color: var(--blue);
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+.program-name {
+
+    color: var(--text);
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+.program-description {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 5px;
+
 }
 
 
@@ -890,53 +994,35 @@ nav a:hover {
    PEDIDOS
 ========================================================= */
 
-.request-section {
+#pedidos {
 
-    padding: 80px 0;
+    background: #f5f7fb;
 
-    background: var(--light);
 }
 
-.request-card {
+.request-box {
 
-    max-width: 680px;
+    max-width: 650px;
 
     padding: 32px;
 
-    background: white;
+    background: #ffffff;
 
     border: 1px solid var(--border);
 
     border-radius: 18px;
 
-    box-shadow: 0 15px 40px rgba(17,24,39,.05);
+    box-shadow:
+        0 12px 35px rgba(15,35,65,.05);
+
 }
 
-.request-card h2 {
-
-    margin: 0 0 7px;
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 29px;
-
-    letter-spacing: -1px;
-}
-
-.request-card > p {
-
-    margin: 0 0 25px;
-
-    color: var(--muted);
-
-    font-size: 14px;
-}
-
-#requestForm {
+.request-form {
 
     display: grid;
 
-    gap: 14px;
+    gap: 15px;
+
 }
 
 .form-group {
@@ -944,6 +1030,7 @@ nav a:hover {
     display: grid;
 
     gap: 7px;
+
 }
 
 .form-group label {
@@ -952,72 +1039,81 @@ nav a:hover {
 
     font-size: 12px;
 
-    font-weight: 600;
+    font-weight: 700;
+
 }
 
 .form-group input {
 
     width: 100%;
 
-    height: 44px;
+    height: 46px;
 
-    padding: 0 13px;
+    padding: 0 14px;
 
-    border: 1px solid #dfe4eb;
+    border: 1px solid #dfe4ec;
 
-    border-radius: 9px;
-
-    background: white;
-
-    color: var(--text);
+    border-radius: 10px;
 
     outline: none;
 
-    font-size: 13px;
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 14px;
 
     transition: .2s ease;
+
 }
 
 .form-group input:focus {
 
     border-color: var(--blue);
 
-    box-shadow: 0 0 0 3px rgba(18,100,232,.09);
+    box-shadow:
+        0 0 0 3px rgba(23,105,224,.08);
+
 }
 
-.request-submit {
+.request-button {
 
-    height: 44px;
-
-    padding: 0 20px;
+    height: 46px;
 
     border: 0;
 
-    border-radius: 9px;
+    border-radius: 10px;
 
     background: var(--blue);
 
-    color: white;
+    color: #ffffff;
 
-    font-size: 13px;
+    font-size: 14px;
 
     font-weight: 700;
 
     transition: .2s ease;
+
 }
 
-.request-submit:hover {
+.request-button:hover {
 
-    background: var(--blue-light);
+    background: var(--blue-dark);
+
+    transform: translateY(-1px);
+
 }
 
 #requestStatus {
 
-    min-height: 17px;
+    min-height: 20px;
 
-    color: var(--muted);
+    margin-top: 2px;
 
-    font-size: 12px;
+    color: var(--green);
+
+    font-size: 13px;
+
 }
 
 
@@ -1027,19 +1123,36 @@ nav a:hover {
 
 footer {
 
-    padding: 27px 20px;
+    padding: 30px 5%;
 
-    background: #07111f;
+    background: #06101d;
 
-    color: #77869a;
+    color: rgba(255,255,255,.4);
 
-    text-align: center;
+    font-size: 12px;
 
-    font-size: 11px;
 }
 
-footer strong {
-    color: white;
+.footer-container {
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+.footer-brand {
+
+    color: rgba(255,255,255,.75);
+
+    font-weight: 600;
+
 }
 
 
@@ -1047,115 +1160,160 @@ footer strong {
    RESPONSIVO
 ========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
 
-    .hero-inner {
+    .hero {
+
+        padding-top: 125px;
+
+    }
+
+    .hero-container {
 
         grid-template-columns: 1fr;
 
-        gap: 40px;
+        gap: 50px;
 
-        padding: 65px 0;
     }
 
-    .hero-player {
+    .hero-content {
 
-        justify-self: start;
+        max-width: 700px;
 
-        max-width: 500px;
     }
 
-    #playlist {
+    .player-card {
 
-        grid-template-columns: repeat(2, 1fr);
+        margin: 0 auto;
+
     }
+
+    .playlist {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
 
     header {
-        height: 64px;
-    }
 
-    .header-inner,
-    .hero-inner,
-    .section-inner {
+        padding:
+            16px 20px;
 
-        width: calc(100% - 30px);
     }
 
     nav {
-        gap: 15px;
-        font-size: 11px;
-    }
 
-    nav a:last-child {
         display: none;
+
     }
 
-    .hero-inner {
+    .hero {
 
         min-height: auto;
 
-        padding: 55px 0;
+        padding:
+            115px 20px
+            65px;
+
+    }
+
+    .hero-container {
+
+        gap: 42px;
+
     }
 
     .hero h1 {
 
         font-size: 48px;
 
-        letter-spacing: -2.8px;
+        letter-spacing: -2px;
+
     }
 
     .hero-description {
 
-        font-size: 14px;
+        font-size: 15px;
+
     }
 
     .player-card {
 
         padding: 21px;
+
+        border-radius: 18px;
+
     }
 
-    .volume-area {
-        display: none;
+    .album-area {
+
+        height: 110px;
+
     }
 
-    #playlist {
+    .album-art {
+
+        width: 100px;
+        height: 100px;
+
+    }
+
+    .section {
+
+        padding:
+            65px 20px;
+
+    }
+
+    .section-title {
+
+        font-size: 29px;
+
+    }
+
+    .playlist {
+
         grid-template-columns: 1fr;
+
     }
 
-    .program-section,
-    .request-section {
+    .request-box {
 
-        padding: 60px 0;
+        padding: 22px;
+
     }
 
-    .request-card {
+    .footer-container {
 
-        padding: 23px;
+        flex-direction: column;
+
+        gap: 8px;
+
+        text-align: center;
+
     }
 
 }
 
 
 /* =========================================================
-   REDUÇÃO DE MOVIMENTO
+   ACESSIBILIDADE
 ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
 
-    *,
-    *::before,
-    *::after {
+    outline: 3px solid rgba(23,105,224,.35);
 
-        scroll-behavior: auto !important;
+    outline-offset: 3px;
 
-        transition: none !important;
-
-        animation: none !important;
-    }
 }
 
 </style>
@@ -1170,16 +1328,22 @@ footer strong {
 
 <header>
 
+```
+<div class="navbar">
 
-<div class="header-inner">
+    <a
+        href="#player"
+        class="logo"
+        aria-label="Onda Livre FM"
+    >
 
-    <a href="#" class="logo">
-
-        <div class="logo-icon">
+        <span class="logo-mark">
             OL
-        </div>
+        </span>
 
-        Onda <span>Livre</span> FM
+        <span>
+            Onda Livre FM
+        </span>
 
     </a>
 
@@ -1195,68 +1359,92 @@ footer strong {
         </a>
 
         <a href="#pedidos">
-            Pedidos
+            Pedir música
         </a>
 
     </nav>
 
 </div>
-
+```
 
 </header>
 
 <!-- =======================================================
-     HERO
+     HERO / PLAYER
 ======================================================= -->
 
+<main id="player">
+
+```
 <section class="hero">
 
+    <div class="hero-container">
 
-<div class="hero-inner">
+
+        <!-- =================================================
+             TEXTO
+        ================================================== -->
+
+        <div class="hero-content">
+
+            <div class="live-label">
+
+                <span class="live-dot"></span>
+
+                <span id="onair">
+                    AO VIVO
+                </span>
+
+            </div>
 
 
-    <div class="hero-copy">
+            <h1>
 
-        <div class="live-status">
+                Sua música.
+                <br>
 
-            <span class="live-dot"></span>
+                <span>Sua onda.</span>
 
-            AO VIVO • TRANSMISSÃO CONTÍNUA
+            </h1>
+
+
+            <p class="hero-description">
+
+                A Onda Livre FM leva música,
+                informação e companhia para
+                todos os momentos do seu dia.
+
+            </p>
+
+
+            <a
+                href="#player"
+                class="hero-button"
+                onclick="document.getElementById('playBtn')?.click(); return false;"
+            >
+
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+
+                    <path d="M8 5v14l11-7z"></path>
+
+                </svg>
+
+                Ouvir agora
+
+            </a>
 
         </div>
 
 
-        <h1>
-
-            A sua rádio.<br>
-
-            <span>A sua onda.</span>
-
-        </h1>
-
-
-        <p class="hero-description">
-
-            Música, informação e companhia para acompanhar
-            você em todos os momentos.
-
-        </p>
-
-
-        <a href="#player" class="hero-button">
-
-            ▶ &nbsp; Ouvir agora
-
-        </a>
-
-    </div>
-
-
-    <!-- =================================================
-         PLAYER
-    ================================================== -->
-
-    <div class="hero-player" id="player">
+        <!-- =================================================
+             PLAYER
+        ================================================== -->
 
         <div class="player-card">
 
@@ -1265,275 +1453,431 @@ footer strong {
 
                 <div class="player-live">
 
-                    <span></span>
-
-                    NO AR
-
-                </div>
-
-
-                <div class="player-frequency" id="freq">
-
-                    ONDA LIVRE FM
-
-                </div>
-
-            </div>
-
-
-            <div class="player-main">
-
-
-                <div class="station-art">
-
-                    <strong>
-                        FM
-                    </strong>
-
-                </div>
-
-
-                <div class="track-data">
-
-                    <div class="track-now">
-                        Tocando agora
-                    </div>
-
-                    <div id="trackTitle">
-                        Onda Livre FM
-                    </div>
-
-                    <div id="trackArtist">
-                        Transmissão ao vivo
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="player-line"></div>
-
-
-            <div class="player-bottom">
-
-
-                <div class="player-controls">
-
-
-                    <button
-                        id="shuffleBtn"
-                        type="button"
-                        aria-label="Aleatório"
-                    >
-                        ⤨
-                    </button>
-
-
-                    <button
-                        id="prevBtn"
-                        type="button"
-                        aria-label="Anterior"
-                    >
-                        ‹
-                    </button>
-
-
-                    <button
-                        id="playBtn"
-                        type="button"
-                        aria-label="Reproduzir"
-                    >
-
-                        <span id="playIcon">
-                            ▶
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        id="nextBtn"
-                        type="button"
-                        aria-label="Próxima"
-                    >
-                        ›
-                    </button>
-
-                </div>
-
-
-                <div class="volume-area">
-
-                    <span>
-                        🔊
+                    <span id="onair">
+                        AO VIVO
                     </span>
 
-                    <input
-                        id="volume"
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value="1"
-                        aria-label="Volume"
-                    >
+                </div>
+
+                <div
+                    class="player-frequency"
+                    id="freq"
+                >
+                    ONDA LIVRE FM
+                </div>
+
+            </div>
+
+
+            <!-- Elementos preservados para compatibilidade -->
+
+            <div
+                id="dial"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                id="dialTicks"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                id="dialNeedle"
+                aria-hidden="true"
+            ></div>
+
+
+            <div class="album-area">
+
+                <div class="album-art">
+
+                    <div class="album-logo">
+                        ONDA<br>LIVRE
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- ELEMENTOS MANTIDOS PARA O SCRIPT -->
+            <div class="track-info">
 
-            <div id="onair">
-                LIVE
+                <div
+                    class="track-title"
+                    id="trackTitle"
+                >
+                    Onda Livre FM
+                </div>
+
+                <div
+                    class="track-artist"
+                    id="trackArtist"
+                >
+                    Ao vivo
+                </div>
+
             </div>
 
-            <div id="dial"></div>
-            <div id="dialTicks"></div>
-            <div id="dialNeedle"></div>
 
-            <audio id="audio" autoplay playsinline></audio>
+            <!-- CONTROLES -->
+
+            <div class="player-controls">
+
+
+                <button
+                    type="button"
+                    class="player-control"
+                    id="shuffleBtn"
+                    aria-label="Aleatório"
+                    title="Aleatório"
+                >
+
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        aria-hidden="true"
+                    >
+
+                        <path d="M3 7h3c4 0 5 10 10 10h5"></path>
+
+                        <path d="M18 14l3 3-3 3"></path>
+
+                        <path d="M3 17h3c1.4 0 2.4-1 3.1-2"></path>
+
+                        <path d="M15.9 9c.7-1 1.5-2 3.1-2H21"></path>
+
+                        <path d="M18 4l3 3-3 3"></path>
+
+                    </svg>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="player-control"
+                    id="prevBtn"
+                    aria-label="Anterior"
+                    title="Anterior"
+                >
+
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+
+                        <path d="M6 5h2v14H6z"></path>
+
+                        <path d="M19 5v14L9 12z"></path>
+
+                    </svg>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="player-main"
+                    id="playBtn"
+                    aria-label="Reproduzir"
+                    title="Reproduzir"
+                >
+
+                    <span id="playIcon">
+
+                        <svg
+                            width="19"
+                            height="19"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+
+                            <path d="M8 5v14l11-7z"></path>
+
+                        </svg>
+
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="player-control"
+                    id="nextBtn"
+                    aria-label="Próxima"
+                    title="Próxima"
+                >
+
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+
+                        <path d="M16 5h2v14h-2z"></path>
+
+                        <path d="M5 5v14l10-7z"></path>
+
+                    </svg>
+
+                </button>
+
+
+            </div>
+
+
+            <!-- VOLUME -->
+
+            <div class="volume-area">
+
+                <div
+                    class="volume-icon"
+                    id="volumeIcon"
+                >
+
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                    >
+
+                        <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+
+                        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+
+                        <path d="M19 5a10 10 0 0 1 0 14"></path>
+
+                    </svg>
+
+                </div>
+
+
+                <input
+                    type="range"
+                    id="volume"
+                    min="0"
+                    max="100"
+                    value="100"
+                    step="1"
+                    aria-label="Volume"
+                >
+
+            </div>
+
 
         </div>
 
     </div>
 
-</div>
-
-
 </section>
 
-<!-- =======================================================
-     PLAYER SECTION — COMPATIBILIDADE
-======================================================= -->
 
-<section class="player-section">
-
-</section>
-
-<!-- =======================================================
+<!-- =====================================================
      PROGRAMAÇÃO
-======================================================= -->
+====================================================== -->
 
 <section
-    class="program-section"
+    class="section"
     id="programacao"
 >
 
+    <div class="section-container">
 
-<div class="section-inner">
 
+        <div class="section-header">
 
-    <div class="section-heading">
+            <div class="section-label">
+                Na Onda
+            </div>
 
-        <div class="section-label">
-            programação
+            <h2 class="section-title">
+                Programação
+            </h2>
+
         </div>
 
-        <h2>
-            O que vem por aí
-        </h2>
 
-        <p>
-            Confira nossa programação e acompanhe
-            a Onda Livre FM durante todo o dia.
-        </p>
+        <div
+            class="playlist"
+            id="playlist"
+        >
+
+            <div class="program-card">
+
+                <div class="program-time">
+                    AO VIVO
+                </div>
+
+                <div class="program-name">
+                    Onda Livre FM
+                </div>
+
+                <div class="program-description">
+                    Música e companhia.
+                </div>
+
+            </div>
+
+
+            <div class="program-card">
+
+                <div class="program-time">
+                    PROGRAMAÇÃO
+                </div>
+
+                <div class="program-name">
+                    Em breve
+                </div>
+
+                <div class="program-description">
+                    Confira nossa programação.
+                </div>
+
+            </div>
+
+
+            <div class="program-card">
+
+                <div class="program-time">
+                    OUVINTES
+                </div>
+
+                <div class="program-name">
+                    Peça sua música
+                </div>
+
+                <div class="program-description">
+                    Envie seu pedido para a rádio.
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
-
-
-    <div id="playlist">
-
-        <!--
-            O script.js preenche esta área.
-        -->
-
-    </div>
-
-</div>
-
 
 </section>
 
-<!-- =======================================================
+
+<!-- =====================================================
      PEDIDOS
-======================================================= -->
+====================================================== -->
 
 <section
-    class="request-section"
+    class="section"
     id="pedidos"
 >
 
-
-<div class="section-inner">
-
-
-    <div class="request-card">
-
-        <h2>
-            Peça sua música
-        </h2>
+    <div class="section-container">
 
 
-        <p>
-            Envie seu pedido e participe da programação.
-        </p>
+        <div class="section-header">
 
-
-        <form id="requestForm">
-
-
-            <div class="form-group">
-
-                <label for="reqName">
-                    Seu nome
-                </label>
-
-                <input
-                    id="reqName"
-                    type="text"
-                    placeholder="Digite seu nome"
-                    autocomplete="name"
-                >
-
+            <div class="section-label">
+                Participe
             </div>
 
+            <h2 class="section-title">
+                Peça sua música
+            </h2>
 
-            <div class="form-group">
-
-                <label for="reqSong">
-                    Música
-                </label>
-
-                <input
-                    id="reqSong"
-                    type="text"
-                    placeholder="Artista e música"
-                >
-
-            </div>
+        </div>
 
 
-            <button
-                type="submit"
-                class="request-submit"
+        <div class="request-box">
+
+            <form
+                id="requestForm"
+                class="request-form"
             >
-                Enviar pedido
-            </button>
 
 
-            <div id="requestStatus"></div>
+                <div class="form-group">
 
-        </form>
+                    <label for="reqName">
+                        Seu nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="reqName"
+                        name="name"
+                        placeholder="Digite seu nome"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="reqSong">
+                        Música ou artista
+                    </label>
+
+                    <input
+                        type="text"
+                        id="reqSong"
+                        name="song"
+                        placeholder="Qual música você quer ouvir?"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="request-button"
+                >
+                    Enviar pedido
+                </button>
+
+
+                <div
+                    id="requestStatus"
+                    aria-live="polite"
+                ></div>
+
+
+            </form>
+
+        </div>
 
     </div>
 
-</div>
-
-
 </section>
+```
+
+</main>
+
+<!-- =======================================================
+     ÁUDIO
+======================================================= -->
+
+<audio
+id="audio"
+autoplay
+playsinline
+preload="none"
+
+> </audio>
 
 <!-- =======================================================
      FOOTER
@@ -1541,145 +1885,145 @@ footer strong {
 
 <footer>
 
+```
+<div class="footer-container">
 
-<strong>Onda Livre FM</strong>
+    <div class="footer-brand">
+        Onda Livre FM
+    </div>
 
-&nbsp;•&nbsp;
+    <div>
+        Música, informação e liberdade.
+    </div>
 
-Música que acompanha você
-
+</div>
+```
 
 </footer>
 
 <!-- =======================================================
-     SCRIPT ORIGINAL
+     SCRIPT PRINCIPAL
 ======================================================= -->
 
 <script src="script.js"></script>
 
 <!-- =======================================================
-     AUTOPLAY
+     GARANTIA DE VOLUME E AUTOPLAY
 ======================================================= -->
 
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const audio = document.getElementById("audio");
-    const playBtn = document.getElementById("playBtn");
-    const playIcon = document.getElementById("playIcon");
+    const audio =
+        document.getElementById("audio");
 
-    if (!audio) return;
-
-
-    /*
-       Tenta iniciar automaticamente.
-
-       O navegador pode bloquear autoplay com áudio.
-       Nesse caso, a primeira interação do usuário
-       libera a reprodução.
-    */
-
-    function iniciarRadio() {
-
-        const tentativa = audio.play();
-
-        if (tentativa !== undefined) {
-
-            tentativa
-                .then(function () {
-
-                    if (playIcon) {
-                        playIcon.textContent = "❚❚";
-                    }
-
-                })
-                .catch(function () {
-
-                    /*
-                       Autoplay bloqueado pelo navegador.
-                       O usuário poderá iniciar pelo botão.
-                    */
-
-                    if (playIcon) {
-                        playIcon.textContent = "▶";
-                    }
-
-                });
-
-        }
-
+    if (!audio) {
+        return;
     }
 
+    /*
+     * Volume máximo do elemento HTML.
+     */
+
+    audio.volume = 1;
 
     /*
-       Primeira tentativa ao carregar.
-    */
+     * Tenta iniciar depois que o script principal
+     * configurar a transmissão.
+     */
 
-    iniciarRadio();
+    const tentarIniciar = function () {
 
-
-    /*
-       Se o navegador bloquear o autoplay,
-       qualquer primeira interação na página
-       tenta iniciar novamente.
-    */
-
-    function liberarAudio() {
-
-        if (audio.paused) {
-            iniciarRadio();
+        if (!audio.paused) {
+            return;
         }
 
-        document.removeEventListener(
-            "click",
-            liberarAudio
-        );
+        audio.play()
+            .then(function () {
 
-        document.removeEventListener(
-            "touchstart",
-            liberarAudio
-        );
+                console.log(
+                    "Onda Livre FM iniciada automaticamente."
+                );
 
-    }
+            })
+            .catch(function (erro) {
+
+                /*
+                 * Chrome/Edge podem bloquear autoplay
+                 * com som até existir interação do usuário.
+                 */
+
+                console.log(
+                    "Autoplay aguardando interação do usuário."
+                );
+
+            });
+
+    };
+
+
+    /*
+     * Tentativas após o carregamento.
+     */
+
+    setTimeout(tentarIniciar, 500);
+
+    setTimeout(tentarIniciar, 1500);
+
+    setTimeout(tentarIniciar, 3000);
+
+
+    /*
+     * Quando o navegador liberar a transmissão.
+     */
+
+    audio.addEventListener(
+        "canplay",
+        tentarIniciar
+    );
+
+    audio.addEventListener(
+        "loadeddata",
+        tentarIniciar
+    );
+
+
+    /*
+     * Primeiro clique/toque libera o áudio.
+     */
+
+    const liberarAudio = function () {
+
+        audio.volume = 1;
+
+        audio.play()
+            .catch(function () {});
+
+    };
+
 
     document.addEventListener(
         "click",
         liberarAudio,
-        { once: true }
+        {
+            once: true
+        }
     );
 
     document.addEventListener(
         "touchstart",
         liberarAudio,
-        { once: true }
+        {
+            once: true,
+            passive: true
+        }
     );
-
-
-    /*
-       Atualiza o ícone conforme o estado.
-    */
-
-    audio.addEventListener("play", function () {
-
-        if (playIcon) {
-            playIcon.textContent = "❚❚";
-        }
-
-    });
-
-
-    audio.addEventListener("pause", function () {
-
-        if (playIcon) {
-            playIcon.textContent = "▶";
-        }
-
-    });
 
 });
 
 </script>
 
 </body>
+
 </html>
