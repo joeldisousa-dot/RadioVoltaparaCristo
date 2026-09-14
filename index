@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rádio Onda Livre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="rack">
+
+  <header class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <h1>Onda Livre</h1>
+  </header>
+
+  <main class="tuner" aria-label="Player de rádio">
+
+    <div class="readout">
+      <span id="freq" class="freq">88.0</span>
+      <span class="freq-unit">FM</span>
+      <span id="onair" class="onair">NO AR</span>
+    </div>
+
+    <div class="dial" id="dial" role="img" aria-label="Sintonizador">
+      <div class="dial-ticks" id="dialTicks"></div>
+      <div class="dial-needle" id="dialNeedle"></div>
+    </div>
+
+    <div class="now-playing">
+      <p class="label">tocando agora</p>
+      <p id="trackTitle" class="track-title">carregando playlist…</p>
+      <p id="trackArtist" class="track-artist">&nbsp;</p>
+    </div>
+
+    <div class="controls">
+      <button id="prevBtn" class="ctrl-btn" aria-label="Faixa anterior">&#9664;&#9664;</button>
+      <button id="playBtn" class="play-btn" aria-label="Tocar/Pausar">
+        <span id="playIcon">&#9654;</span>
+      </button>
+      <button id="nextBtn" class="ctrl-btn" aria-label="Próxima faixa">&#9654;&#9654;</button>
+    </div>
+
+    <div class="volume-row">
+      <label for="volume">volume</label>
+      <input type="range" id="volume" min="0" max="100" value="80">
+      <button id="shuffleBtn" class="toggle-btn" aria-pressed="false">aleatório</button>
+    </div>
+
+    <audio id="audio" preload="none"></audio>
+  </main>
+
+  <section class="request" aria-label="Pedir uma música">
+    <p class="label">pedir uma música</p>
+    <form id="requestForm">
+      <input type="text" id="reqName" placeholder="seu nome" maxlength="40" required>
+      <input type="text" id="reqSong" placeholder="música / artista" maxlength="80" required>
+      <button type="submit">enviar pedido</button>
+    </form>
+    <p id="requestStatus" class="request-status" aria-live="polite"></p>
+  </section>
+
+  <section class="playlist-wrap">
+    <p class="label">programação</p>
+    <ol id="playlist" class="playlist"></ol>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
