@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,27 +12,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 /* =========================================================
-   CONFIGURAÇÃO GERAL
+   BASE
 ========================================================= */
 
 :root {
-    --bg: #f5f7fa;
+    --blue: #1264e8;
+    --blue-light: #3b82f6;
+    --dark: #07111f;
+    --dark-2: #0c1828;
+    --text: #111827;
+    --muted: #697586;
+    --light: #f5f7fa;
     --white: #ffffff;
-    --navy: #08111f;
-    --navy-2: #101d2e;
-    --blue: #1769e0;
-    --blue-dark: #0d4fb5;
-    --green: #20b26b;
-    --text: #172131;
-    --muted: #718096;
-    --border: #e6ebf1;
-    --shadow: 0 18px 45px rgba(15, 31, 52, .08);
-    --radius: 18px;
+    --border: #e7ebf0;
+    --green: #19b56b;
 }
 
 * {
@@ -43,9 +43,11 @@ html {
 
 body {
     margin: 0;
-    background: var(--bg);
+    background: var(--light);
     color: var(--text);
-    font-family: "Space Grotesk", sans-serif;
+
+    font-family: "DM Sans", sans-serif;
+
     -webkit-font-smoothing: antialiased;
 }
 
@@ -59,32 +61,36 @@ button {
 }
 
 a {
-    color: inherit;
     text-decoration: none;
+    color: inherit;
 }
+
 
 /* =========================================================
    HEADER
 ========================================================= */
 
 header {
+
     position: sticky;
     top: 0;
     z-index: 100;
 
-    height: 72px;
+    height: 70px;
 
-    display: flex;
-    align-items: center;
+    background: rgba(255,255,255,.92);
 
-    background: rgba(255, 255, 255, .94);
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-    border-bottom: 1px solid rgba(230, 235, 241, .85);
+    border-bottom: 1px solid rgba(0,0,0,.06);
 }
 
 .header-inner {
-    width: min(1160px, calc(100% - 40px));
+
+    width: min(1180px, calc(100% - 44px));
+    height: 100%;
+
     margin: auto;
 
     display: flex;
@@ -92,23 +98,29 @@ header {
     justify-content: space-between;
 }
 
+
 /* =========================================================
    LOGO
 ========================================================= */
 
 .logo {
+
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
+
+    font-family: "Space Grotesk", sans-serif;
 
     font-size: 20px;
     font-weight: 700;
+
     letter-spacing: -.7px;
 }
 
-.logo-mark {
-    width: 32px;
-    height: 32px;
+.logo-icon {
+
+    width: 34px;
+    height: 34px;
 
     display: flex;
     align-items: center;
@@ -117,566 +129,919 @@ header {
     border-radius: 10px;
 
     background: var(--blue);
+
     color: white;
 
-    font-size: 15px;
+    font-size: 11px;
     font-weight: 700;
 
-    box-shadow: 0 7px 18px rgba(23, 105, 224, .25);
+    letter-spacing: -.5px;
+
+    box-shadow: 0 6px 18px rgba(18,100,232,.25);
 }
 
 .logo span {
     color: var(--blue);
 }
 
+
 /* =========================================================
    NAV
 ========================================================= */
 
 nav {
+
     display: flex;
     align-items: center;
-    gap: 30px;
 
-    font-size: 14px;
-    font-weight: 500;
+    gap: 34px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #687386;
 }
 
 nav a {
-    color: #5d6878;
-    transition: .2s ease;
+    transition: color .2s ease;
 }
 
 nav a:hover {
     color: var(--blue);
 }
 
+
 /* =========================================================
    HERO
 ========================================================= */
 
 .hero {
+
     position: relative;
+
     overflow: hidden;
 
     background:
-        radial-gradient(circle at 80% 20%, rgba(23,105,224,.20), transparent 32%),
-        linear-gradient(135deg, #08111f 0%, #0c1929 55%, #0e2036 100%);
+        radial-gradient(
+            circle at 82% 18%,
+            rgba(31,110,235,.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 65% 80%,
+            rgba(28,83,156,.14),
+            transparent 34%
+        ),
+        linear-gradient(
+            135deg,
+            #07111f 0%,
+            #091523 52%,
+            #0d1e34 100%
+        );
 
     color: white;
 }
 
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    right: -180px;
+    top: -190px;
+
+    border: 1px solid rgba(255,255,255,.06);
+
+    border-radius: 50%;
+}
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 620px;
+    height: 620px;
+
+    right: -280px;
+    top: -290px;
+
+    border: 1px solid rgba(255,255,255,.035);
+
+    border-radius: 50%;
+}
+
 .hero-inner {
-    width: min(1160px, calc(100% - 40px));
+
+    position: relative;
+    z-index: 2;
+
+    width: min(1180px, calc(100% - 44px));
+
+    min-height: 500px;
+
     margin: auto;
 
-    min-height: 430px;
+    display: grid;
 
-    display: flex;
+    grid-template-columns: 1.15fr .85fr;
+
     align-items: center;
 
-    padding: 72px 0;
+    gap: 80px;
+
+    padding: 70px 0;
 }
 
-.hero-content {
-    max-width: 650px;
+
+/* =========================================================
+   HERO TEXTO
+========================================================= */
+
+.hero-copy {
+    max-width: 680px;
 }
 
-.live-label {
+.live-status {
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 9px;
 
-    margin-bottom: 20px;
+    margin-bottom: 23px;
 
-    color: #aebdce;
+    color: #9eacc0;
 
-    font-family: "IBM Plex Mono", monospace;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
 
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+
+    letter-spacing: 1.8px;
 }
 
 .live-dot {
-    width: 8px;
-    height: 8px;
+
+    width: 7px;
+    height: 7px;
 
     border-radius: 50%;
 
     background: var(--green);
 
-    box-shadow: 0 0 0 5px rgba(32,178,107,.12);
+    box-shadow:
+        0 0 0 4px rgba(25,181,107,.13),
+        0 0 15px rgba(25,181,107,.3);
 }
 
 .hero h1 {
+
     margin: 0;
 
-    max-width: 700px;
+    font-family: "Space Grotesk", sans-serif;
 
-    font-size: clamp(42px, 6vw, 72px);
+    font-size: clamp(48px, 6vw, 76px);
+
     line-height: .98;
-    letter-spacing: -3.5px;
+
+    letter-spacing: -4px;
 }
 
 .hero h1 span {
-    color: #4e91f5;
+    color: #4d8ff3;
 }
 
-.hero p {
-    max-width: 560px;
+.hero-description {
+
+    max-width: 520px;
 
     margin: 25px 0 32px;
 
-    color: #aeb9c8;
+    color: #a8b4c5;
 
-    font-size: 17px;
-    line-height: 1.65;
+    font-size: 16px;
+
+    line-height: 1.7;
 }
 
-.hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+.hero-button {
 
-.primary-button {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
-    min-height: 46px;
-    padding: 0 21px;
+    height: 46px;
 
-    border: 0;
-    border-radius: 10px;
+    padding: 0 22px;
+
+    border-radius: 9px;
 
     background: var(--blue);
+
     color: white;
 
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
 
-    box-shadow: 0 10px 25px rgba(23,105,224,.25);
+    box-shadow: 0 10px 28px rgba(18,100,232,.25);
 
     transition: .2s ease;
 }
 
-.primary-button:hover {
-    background: #2578ef;
+.hero-button:hover {
+
+    background: var(--blue-light);
+
     transform: translateY(-1px);
 }
 
+
 /* =========================================================
-   PLAYER
+   PLAYER HERO
 ========================================================= */
 
-.player-section {
-    padding: 42px 0;
-    background: var(--bg);
+.hero-player {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    justify-self: end;
 }
 
-.player-wrapper {
-    width: min(980px, calc(100% - 40px));
-    margin: auto;
+
+/* =========================================================
+   PLAYER CARD
+========================================================= */
+
+.player-card {
+
+    position: relative;
+
+    padding: 26px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.035)
+        );
+
+    border: 1px solid rgba(255,255,255,.11);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.05);
+
+    backdrop-filter: blur(20px);
 }
 
-/*
-   PLAYER COMPACTO
-*/
 
-.player {
-    min-height: 94px;
+/* =========================================================
+   PLAYER TOPO
+========================================================= */
 
-    display: grid;
-    grid-template-columns: 48px 1fr auto auto;
+.player-top {
+
+    display: flex;
+
     align-items: center;
-    gap: 18px;
+    justify-content: space-between;
 
-    padding: 18px 22px;
-
-    background: var(--white);
-
-    border: 1px solid var(--border);
-    border-radius: 16px;
-
-    box-shadow: var(--shadow);
+    margin-bottom: 27px;
 }
 
-/* =========================================================
-   ON AIR
-========================================================= */
-
-#onair {
-    width: 48px;
-    height: 48px;
+.player-live {
 
     display: flex;
     align-items: center;
-    justify-content: center;
 
-    border-radius: 13px;
+    gap: 8px;
 
-    background: #edf4ff;
-    color: var(--blue);
+    color: #9eacc0;
 
-    font-family: "IBM Plex Mono", monospace;
+    font-family: monospace;
+
     font-size: 10px;
-    font-weight: 600;
+
+    letter-spacing: 1.3px;
 
     text-transform: uppercase;
 }
 
-/* =========================================================
-   INFORMAÇÕES DA FAIXA
-========================================================= */
+.player-live span {
 
-.track-info {
-    min-width: 0;
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+
+    box-shadow: 0 0 10px rgba(25,181,107,.6);
 }
 
-.track-label {
-    margin-bottom: 4px;
+.player-frequency {
 
-    color: var(--green);
+    color: #68788e;
 
-    font-family: "IBM Plex Mono", monospace;
+    font-family: monospace;
+
     font-size: 10px;
-    font-weight: 600;
 
-    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+
+/* =========================================================
+   CAPA / ÍCONE DO PLAYER
+========================================================= */
+
+.player-main {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+}
+
+.station-art {
+
+    position: relative;
+
+    flex: 0 0 62px;
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d75ed,
+            #0e4fb9
+        );
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.22);
+}
+
+.station-art::before,
+.station-art::after {
+
+    content: "";
+
+    position: absolute;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    border-radius: 50%;
+}
+
+.station-art::before {
+
+    width: 30px;
+    height: 30px;
+}
+
+.station-art::after {
+
+    width: 16px;
+    height: 16px;
+
+    background: rgba(255,255,255,.12);
+}
+
+.station-art strong {
+
+    position: relative;
+    z-index: 2;
+
+    color: white;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: -.3px;
+}
+
+
+/* =========================================================
+   TRACK INFO
+========================================================= */
+
+.track-data {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+.track-now {
+
+    margin-bottom: 5px;
+
+    color: #71839a;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+}
+
 #trackTitle {
+
     overflow: hidden;
 
     margin: 0;
 
-    color: var(--navy);
+    color: white;
 
-    font-size: 15px;
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 16px;
+
     font-weight: 600;
 
     text-overflow: ellipsis;
+
     white-space: nowrap;
 }
 
 #trackArtist {
+
     overflow: hidden;
 
-    margin-top: 3px;
+    margin-top: 4px;
 
-    color: var(--muted);
+    color: #8998aa;
 
     font-size: 12px;
 
     text-overflow: ellipsis;
+
     white-space: nowrap;
 }
+
+
+/* =========================================================
+   PLAYER LINHA
+========================================================= */
+
+.player-line {
+
+    height: 1px;
+
+    margin: 24px 0;
+
+    background: rgba(255,255,255,.08);
+}
+
 
 /* =========================================================
    CONTROLES
 ========================================================= */
 
-.player-controls {
+.player-bottom {
+
     display: flex;
+
     align-items: center;
-    gap: 7px;
+
+    justify-content: space-between;
 }
 
-.player button {
-    border: 0;
-}
-
-#prevBtn,
-#nextBtn,
-#shuffleBtn {
-    width: 32px;
-    height: 32px;
+.player-controls {
 
     display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.player-controls button {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border-radius: 9px;
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 8px;
 
     background: transparent;
-    color: #718096;
 
-    font-size: 13px;
+    color: #8190a3;
 
     transition: .2s ease;
 }
 
-#prevBtn:hover,
-#nextBtn:hover,
-#shuffleBtn:hover {
-    background: #f1f4f8;
-    color: var(--blue);
+.player-controls button:hover {
+
+    background: rgba(255,255,255,.07);
+
+    color: white;
 }
 
+
+/* =========================================================
+   PLAY
+========================================================= */
+
 #playBtn {
+
     width: 42px;
     height: 42px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0 5px;
 
     border-radius: 50%;
 
-    background: var(--blue);
-    color: white;
+    background: white;
 
-    box-shadow: 0 7px 18px rgba(23,105,224,.25);
+    color: #0b1b2e;
+
+    box-shadow: 0 7px 22px rgba(0,0,0,.25);
 
     transition: .2s ease;
 }
 
 #playBtn:hover {
-    background: var(--blue-dark);
+
+    background: #f2f5f9;
+
     transform: scale(1.04);
 }
 
 #playIcon {
-    font-size: 14px;
+
+    font-size: 13px;
+
+    transform: translateX(1px);
 }
+
 
 /* =========================================================
    VOLUME
 ========================================================= */
 
-.volume-control {
+.volume-area {
+
     display: flex;
+
     align-items: center;
+
     gap: 8px;
 }
 
-.volume-icon {
-    color: #7b8797;
-    font-size: 13px;
+.volume-area span {
+
+    color: #78879a;
+
+    font-size: 11px;
 }
 
 #volume {
-    width: 82px;
-    accent-color: var(--blue);
+
+    width: 65px;
+
+    height: 3px;
+
+    accent-color: #7faef7;
+
+    cursor: pointer;
 }
 
+
 /* =========================================================
-   ELEMENTOS EXISTENTES
+   ELEMENTOS ANTIGOS — MANTIDOS
 ========================================================= */
 
+#onair,
 #freq,
 #dial,
 #dialTicks,
 #dialNeedle {
-    display: none;
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
 }
 
 #audio {
     display: none;
 }
 
+
+/* =========================================================
+   PLAYER FORA DO HERO
+   Mantido para compatibilidade estrutural
+========================================================= */
+
+.player-section {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
 /* =========================================================
    PROGRAMAÇÃO
 ========================================================= */
 
 .program-section {
-    padding: 70px 0;
+
+    padding: 80px 0;
+
     background: white;
 }
 
 .section-inner {
-    width: min(1060px, calc(100% - 40px));
+
+    width: min(1080px, calc(100% - 44px));
+
     margin: auto;
 }
 
-.section-header {
-    margin-bottom: 30px;
+.section-heading {
+
+    margin-bottom: 32px;
 }
 
-.section-kicker {
+.section-label {
+
     margin-bottom: 8px;
 
     color: var(--blue);
 
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 700;
 
     text-transform: uppercase;
-    letter-spacing: 1.3px;
+
+    letter-spacing: 1.8px;
 }
 
-.section-header h2 {
+.section-heading h2 {
+
     margin: 0;
 
-    color: var(--navy);
+    font-family: "Space Grotesk", sans-serif;
 
-    font-size: clamp(28px, 4vw, 40px);
-    letter-spacing: -1.5px;
+    font-size: 38px;
+
+    letter-spacing: -1.8px;
 }
 
-.section-header p {
-    max-width: 560px;
+.section-heading p {
 
-    margin: 12px 0 0;
+    max-width: 550px;
+
+    margin: 11px 0 0;
 
     color: var(--muted);
 
     line-height: 1.6;
+
+    font-size: 14px;
 }
+
 
 /* =========================================================
    PLAYLIST
 ========================================================= */
 
 #playlist {
+
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+
+    gap: 15px;
 }
 
 .playlist-item {
+
     padding: 20px;
 
     border: 1px solid var(--border);
-    border-radius: 14px;
 
-    background: #fff;
+    border-radius: 13px;
+
+    background: white;
 
     transition: .2s ease;
 }
 
 .playlist-item:hover {
-    border-color: #d3e2f8;
-    box-shadow: 0 10px 28px rgba(15,31,52,.07);
+
+    border-color: #cbdcf6;
+
+    box-shadow: 0 12px 28px rgba(17,24,39,.06);
+
     transform: translateY(-2px);
 }
+
 
 /* =========================================================
    PEDIDOS
 ========================================================= */
 
 .request-section {
-    padding: 70px 0;
-    background: var(--bg);
+
+    padding: 80px 0;
+
+    background: var(--light);
 }
 
 .request-card {
-    max-width: 720px;
+
+    max-width: 680px;
 
     padding: 32px;
 
     background: white;
 
     border: 1px solid var(--border);
-    border-radius: var(--radius);
 
-    box-shadow: var(--shadow);
+    border-radius: 18px;
+
+    box-shadow: 0 15px 40px rgba(17,24,39,.05);
 }
 
 .request-card h2 {
-    margin: 0 0 8px;
 
-    color: var(--navy);
+    margin: 0 0 7px;
 
-    font-size: 28px;
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 29px;
+
     letter-spacing: -1px;
 }
 
 .request-card > p {
+
     margin: 0 0 25px;
 
     color: var(--muted);
 
-    line-height: 1.6;
+    font-size: 14px;
 }
 
 #requestForm {
+
     display: grid;
+
     gap: 14px;
 }
 
 .form-group {
+
     display: grid;
+
     gap: 7px;
 }
 
 .form-group label {
-    color: #39475a;
+
+    color: #374151;
 
     font-size: 12px;
+
     font-weight: 600;
 }
 
 .form-group input {
+
     width: 100%;
-    height: 45px;
+
+    height: 44px;
 
     padding: 0 13px;
 
-    border: 1px solid #dfe5ec;
+    border: 1px solid #dfe4eb;
+
     border-radius: 9px;
+
+    background: white;
+
+    color: var(--text);
 
     outline: none;
 
-    background: white;
-    color: var(--text);
-
-    font-size: 14px;
+    font-size: 13px;
 
     transition: .2s ease;
 }
 
 .form-group input:focus {
+
     border-color: var(--blue);
 
-    box-shadow: 0 0 0 3px rgba(23,105,224,.10);
+    box-shadow: 0 0 0 3px rgba(18,100,232,.09);
+}
+
+.request-submit {
+
+    height: 44px;
+
+    padding: 0 20px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: var(--blue);
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: .2s ease;
+}
+
+.request-submit:hover {
+
+    background: var(--blue-light);
 }
 
 #requestStatus {
-    min-height: 18px;
+
+    min-height: 17px;
 
     color: var(--muted);
 
-    font-size: 13px;
+    font-size: 12px;
 }
+
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 footer {
-    padding: 28px 20px;
 
-    background: var(--navy);
+    padding: 27px 20px;
 
-    color: #8997aa;
+    background: #07111f;
+
+    color: #77869a;
 
     text-align: center;
 
-    font-family: "IBM Plex Mono", monospace;
     font-size: 11px;
 }
 
 footer strong {
     color: white;
-    font-weight: 500;
 }
 
-/* =========================================================
-   ACESSIBILIDADE
-========================================================= */
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-    outline: 3px solid rgba(23,105,224,.25);
-    outline-offset: 3px;
-}
 
 /* =========================================================
    RESPONSIVO
@@ -684,104 +1049,112 @@ input:focus-visible {
 
 @media (max-width: 850px) {
 
-    nav {
-        gap: 17px;
-    }
-
     .hero-inner {
-        min-height: 390px;
-        padding: 60px 0;
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+        padding: 65px 0;
     }
 
-    .player {
-        grid-template-columns: 48px 1fr auto;
-    }
+    .hero-player {
 
-    .volume-control {
-        display: none;
+        justify-self: start;
+
+        max-width: 500px;
     }
 
     #playlist {
+
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 620px) {
+
+@media (max-width: 600px) {
 
     header {
         height: 64px;
     }
 
-    .header-inner {
-        width: calc(100% - 28px);
-    }
+    .header-inner,
+    .hero-inner,
+    .section-inner {
 
-    .logo {
-        font-size: 17px;
-    }
-
-    .logo-mark {
-        width: 29px;
-        height: 29px;
+        width: calc(100% - 30px);
     }
 
     nav {
-        gap: 13px;
-        font-size: 12px;
+        gap: 15px;
+        font-size: 11px;
     }
 
-    nav a:nth-child(3) {
+    nav a:last-child {
         display: none;
     }
 
     .hero-inner {
-        width: calc(100% - 28px);
-        padding: 52px 0;
+
+        min-height: auto;
+
+        padding: 55px 0;
     }
 
     .hero h1 {
-        font-size: 43px;
-        letter-spacing: -2px;
+
+        font-size: 48px;
+
+        letter-spacing: -2.8px;
     }
 
-    .hero p {
-        font-size: 15px;
+    .hero-description {
+
+        font-size: 14px;
     }
 
-    .player-wrapper {
-        width: calc(100% - 28px);
+    .player-card {
+
+        padding: 21px;
     }
 
-    .player {
-        grid-template-columns: 42px 1fr;
-        gap: 13px;
-
-        padding: 15px;
-    }
-
-    #onair {
-        width: 42px;
-        height: 42px;
-    }
-
-    .player-controls {
-        grid-column: 1 / -1;
-
-        justify-content: center;
-
-        padding-top: 3px;
+    .volume-area {
+        display: none;
     }
 
     #playlist {
         grid-template-columns: 1fr;
     }
 
-    .section-inner {
-        width: calc(100% - 28px);
+    .program-section,
+    .request-section {
+
+        padding: 60px 0;
     }
 
     .request-card {
+
         padding: 23px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        scroll-behavior: auto !important;
+
+        transition: none !important;
+
+        animation: none !important;
     }
 }
 
@@ -801,14 +1174,30 @@ input:focus-visible {
 <div class="header-inner">
 
     <a href="#" class="logo">
-        <div class="logo-mark">OL</div>
+
+        <div class="logo-icon">
+            OL
+        </div>
+
         Onda <span>Livre</span> FM
+
     </a>
 
+
     <nav>
-        <a href="#player">Ouvir</a>
-        <a href="#programacao">Programação</a>
-        <a href="#pedidos">Pedidos</a>
+
+        <a href="#player">
+            Ouvir
+        </a>
+
+        <a href="#programacao">
+            Programação
+        </a>
+
+        <a href="#pedidos">
+            Pedidos
+        </a>
+
     </nav>
 
 </div>
@@ -825,28 +1214,187 @@ input:focus-visible {
 ```
 <div class="hero-inner">
 
-    <div class="hero-content">
 
-        <div class="live-label">
+    <div class="hero-copy">
+
+        <div class="live-status">
+
             <span class="live-dot"></span>
-            transmissão contínua
+
+            AO VIVO • TRANSMISSÃO CONTÍNUA
+
         </div>
 
+
         <h1>
+
             A sua rádio.<br>
+
             <span>A sua onda.</span>
+
         </h1>
 
-        <p>
+
+        <p class="hero-description">
+
             Música, informação e companhia para acompanhar
-            você durante todo o dia.
+            você em todos os momentos.
+
         </p>
 
-        <div class="hero-actions">
 
-            <a href="#player" class="primary-button">
-                Ouvir agora
-            </a>
+        <a href="#player" class="hero-button">
+
+            ▶ &nbsp; Ouvir agora
+
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         PLAYER
+    ================================================== -->
+
+    <div class="hero-player" id="player">
+
+        <div class="player-card">
+
+
+            <div class="player-top">
+
+                <div class="player-live">
+
+                    <span></span>
+
+                    NO AR
+
+                </div>
+
+
+                <div class="player-frequency" id="freq">
+
+                    ONDA LIVRE FM
+
+                </div>
+
+            </div>
+
+
+            <div class="player-main">
+
+
+                <div class="station-art">
+
+                    <strong>
+                        FM
+                    </strong>
+
+                </div>
+
+
+                <div class="track-data">
+
+                    <div class="track-now">
+                        Tocando agora
+                    </div>
+
+                    <div id="trackTitle">
+                        Onda Livre FM
+                    </div>
+
+                    <div id="trackArtist">
+                        Transmissão ao vivo
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="player-line"></div>
+
+
+            <div class="player-bottom">
+
+
+                <div class="player-controls">
+
+
+                    <button
+                        id="shuffleBtn"
+                        type="button"
+                        aria-label="Aleatório"
+                    >
+                        ⤨
+                    </button>
+
+
+                    <button
+                        id="prevBtn"
+                        type="button"
+                        aria-label="Anterior"
+                    >
+                        ‹
+                    </button>
+
+
+                    <button
+                        id="playBtn"
+                        type="button"
+                        aria-label="Reproduzir"
+                    >
+
+                        <span id="playIcon">
+                            ▶
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        id="nextBtn"
+                        type="button"
+                        aria-label="Próxima"
+                    >
+                        ›
+                    </button>
+
+                </div>
+
+
+                <div class="volume-area">
+
+                    <span>
+                        🔊
+                    </span>
+
+                    <input
+                        id="volume"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value="1"
+                        aria-label="Volume"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ELEMENTOS MANTIDOS PARA O SCRIPT -->
+
+            <div id="onair">
+                LIVE
+            </div>
+
+            <div id="dial"></div>
+            <div id="dialTicks"></div>
+            <div id="dialNeedle"></div>
+
+            <audio id="audio" autoplay playsinline></audio>
 
         </div>
 
@@ -858,94 +1406,10 @@ input:focus-visible {
 </section>
 
 <!-- =======================================================
-     PLAYER
+     PLAYER SECTION — COMPATIBILIDADE
 ======================================================= -->
 
-<section class="player-section" id="player">
-
-```
-<div class="player-wrapper">
-
-    <div class="player">
-
-        <div id="onair">
-            LIVE
-        </div>
-
-        <div class="track-info">
-
-            <div class="track-label">
-                No ar agora
-            </div>
-
-            <div id="trackTitle">
-                Onda Livre FM
-            </div>
-
-            <div id="trackArtist">
-                Transmissão ao vivo
-            </div>
-
-        </div>
-
-
-        <div class="player-controls">
-
-            <button id="shuffleBtn" type="button" aria-label="Aleatório">
-                ⤨
-            </button>
-
-            <button id="prevBtn" type="button" aria-label="Anterior">
-                ‹
-            </button>
-
-            <button id="playBtn" type="button" aria-label="Reproduzir">
-
-                <span id="playIcon">
-                    ▶
-                </span>
-
-            </button>
-
-            <button id="nextBtn" type="button" aria-label="Próxima">
-                ›
-            </button>
-
-        </div>
-
-
-        <div class="volume-control">
-
-            <span class="volume-icon">
-                🔊
-            </span>
-
-            <input
-                id="volume"
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value="1"
-                aria-label="Volume"
-            >
-
-        </div>
-
-
-        <!-- Elementos mantidos para compatibilidade -->
-
-        <div id="freq"></div>
-        <div id="dial"></div>
-        <div id="dialTicks"></div>
-        <div id="dialNeedle"></div>
-
-        <audio id="audio"></audio>
-
-    </div>
-
-</div>
-```
+<section class="player-section">
 
 </section>
 
@@ -953,14 +1417,18 @@ input:focus-visible {
      PROGRAMAÇÃO
 ======================================================= -->
 
-<section class="program-section" id="programacao">
+<section
+    class="program-section"
+    id="programacao"
+>
 
 ```
 <div class="section-inner">
 
-    <div class="section-header">
 
-        <div class="section-kicker">
+    <div class="section-heading">
+
+        <div class="section-label">
             programação
         </div>
 
@@ -969,15 +1437,18 @@ input:focus-visible {
         </h2>
 
         <p>
-            Confira nossa programação e acompanhe a Onda Livre
-            durante todo o dia.
+            Confira nossa programação e acompanhe
+            a Onda Livre FM durante todo o dia.
         </p>
 
     </div>
 
+
     <div id="playlist">
 
-        <!-- O script.js pode preencher esta área -->
+        <!--
+            O script.js preenche esta área.
+        -->
 
     </div>
 
@@ -990,10 +1461,14 @@ input:focus-visible {
      PEDIDOS
 ======================================================= -->
 
-<section class="request-section" id="pedidos">
+<section
+    class="request-section"
+    id="pedidos"
+>
 
 ```
 <div class="section-inner">
+
 
     <div class="request-card">
 
@@ -1001,11 +1476,14 @@ input:focus-visible {
             Peça sua música
         </h2>
 
+
         <p>
-            Mande seu pedido para a Onda Livre FM.
+            Envie seu pedido e participe da programação.
         </p>
 
+
         <form id="requestForm">
+
 
             <div class="form-group">
 
@@ -1040,10 +1518,11 @@ input:focus-visible {
 
             <button
                 type="submit"
-                class="primary-button"
+                class="request-submit"
             >
                 Enviar pedido
             </button>
+
 
             <div id="requestStatus"></div>
 
@@ -1064,7 +1543,9 @@ input:focus-visible {
 
 ```
 <strong>Onda Livre FM</strong>
+
 &nbsp;•&nbsp;
+
 Música que acompanha você
 ```
 
@@ -1075,6 +1556,130 @@ Música que acompanha você
 ======================================================= -->
 
 <script src="script.js"></script>
+
+<!-- =======================================================
+     AUTOPLAY
+======================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("playBtn");
+    const playIcon = document.getElementById("playIcon");
+
+    if (!audio) return;
+
+
+    /*
+       Tenta iniciar automaticamente.
+
+       O navegador pode bloquear autoplay com áudio.
+       Nesse caso, a primeira interação do usuário
+       libera a reprodução.
+    */
+
+    function iniciarRadio() {
+
+        const tentativa = audio.play();
+
+        if (tentativa !== undefined) {
+
+            tentativa
+                .then(function () {
+
+                    if (playIcon) {
+                        playIcon.textContent = "❚❚";
+                    }
+
+                })
+                .catch(function () {
+
+                    /*
+                       Autoplay bloqueado pelo navegador.
+                       O usuário poderá iniciar pelo botão.
+                    */
+
+                    if (playIcon) {
+                        playIcon.textContent = "▶";
+                    }
+
+                });
+
+        }
+
+    }
+
+
+    /*
+       Primeira tentativa ao carregar.
+    */
+
+    iniciarRadio();
+
+
+    /*
+       Se o navegador bloquear o autoplay,
+       qualquer primeira interação na página
+       tenta iniciar novamente.
+    */
+
+    function liberarAudio() {
+
+        if (audio.paused) {
+            iniciarRadio();
+        }
+
+        document.removeEventListener(
+            "click",
+            liberarAudio
+        );
+
+        document.removeEventListener(
+            "touchstart",
+            liberarAudio
+        );
+
+    }
+
+    document.addEventListener(
+        "click",
+        liberarAudio,
+        { once: true }
+    );
+
+    document.addEventListener(
+        "touchstart",
+        liberarAudio,
+        { once: true }
+    );
+
+
+    /*
+       Atualiza o ícone conforme o estado.
+    */
+
+    audio.addEventListener("play", function () {
+
+        if (playIcon) {
+            playIcon.textContent = "❚❚";
+        }
+
+    });
+
+
+    audio.addEventListener("pause", function () {
+
+        if (playIcon) {
+            playIcon.textContent = "▶";
+        }
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>
