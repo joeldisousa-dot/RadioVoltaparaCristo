@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * por outro código, este valor poderá ser alterado.
      */
 
-    const STREAM_URL = "COLOQUE_AQUI_A_URL_DA_TRANSMISSAO";
+    const STREAM_URL = "https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec";
 
     /* ========================================================
        CONFIGURAÇÕES
