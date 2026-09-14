@@ -37,6 +37,7 @@ content="Onda Livre FM — Rádio ao vivo, música e informação."
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 82px;
 }
 
 body {
@@ -88,27 +89,50 @@ a {
 
 
 /* =========================================================
-   HEADER
+   HEADER FIXO
 ========================================================= */
 
 header {
 
-    position: absolute;
+    position: fixed;
 
     top: 0;
     left: 0;
+    right: 0;
 
     width: 100%;
 
-    z-index: 20;
+    z-index: 9999;
 
-    padding: 22px 5%;
+    padding: 15px 5%;
+
+    background: rgba(6, 16, 29, .82);
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    transition:
+        background .25s ease,
+        box-shadow .25s ease;
+
+}
+
+header.scrolled {
+
+    background: rgba(6, 16, 29, .96);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.18);
 
 }
 
 .navbar {
 
     max-width: 1180px;
+
+    height: 50px;
 
     margin: 0 auto;
 
@@ -189,19 +213,47 @@ nav {
 
 nav a {
 
+    position: relative;
+
     color: rgba(255,255,255,.72);
 
     font-size: 14px;
 
     font-weight: 500;
 
-    transition: .2s ease;
+    transition: color .2s ease;
+
+}
+
+nav a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -7px;
+
+    width: 0;
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: #4e98ff;
+
+    transition: width .2s ease;
 
 }
 
 nav a:hover {
 
     color: #ffffff;
+
+}
+
+nav a:hover::after {
+
+    width: 100%;
 
 }
 
@@ -223,7 +275,7 @@ nav a:hover {
     align-items: center;
 
     padding:
-        120px 5%
+        145px 5%
         80px;
 
     background:
@@ -461,7 +513,7 @@ nav a:hover {
 
 
 /* =========================================================
-   PLAYER TOP
+   PLAYER TOPO
 ========================================================= */
 
 .player-top {
@@ -522,7 +574,7 @@ nav a:hover {
 
 
 /* =========================================================
-   CAPA / VISUAL
+   ÁREA DA CAPA
 ========================================================= */
 
 .album-area {
@@ -622,13 +674,17 @@ nav a:hover {
 
     font-weight: 700;
 
+    line-height: 1.05;
+
+    text-align: center;
+
     letter-spacing: -1px;
 
 }
 
 
 /* =========================================================
-   INFORMAÇÕES DA MÚSICA
+   MÚSICA
 ========================================================= */
 
 .track-info {
@@ -722,6 +778,14 @@ nav a:hover {
 
 }
 
+.player-control.active {
+
+    color: #6eaeff;
+
+    background: rgba(23,105,224,.18);
+
+}
+
 .player-main {
 
     width: 52px;
@@ -752,6 +816,12 @@ nav a:hover {
     background: #2778eb;
 
     transform: scale(1.04);
+
+}
+
+.player-main:active {
+
+    transform: scale(.97);
 
 }
 
@@ -790,7 +860,7 @@ nav a:hover {
 
     width: 100%;
 
-    height: 3px;
+    height: 4px;
 
     appearance: none;
 
@@ -802,6 +872,8 @@ nav a:hover {
 
     outline: none;
 
+    cursor: pointer;
+
 }
 
 #volume::-webkit-slider-thumb {
@@ -810,8 +882,8 @@ nav a:hover {
 
     -webkit-appearance: none;
 
-    width: 12px;
-    height: 12px;
+    width: 13px;
+    height: 13px;
 
     border-radius: 50%;
 
@@ -826,8 +898,8 @@ nav a:hover {
 
 #volume::-moz-range-thumb {
 
-    width: 12px;
-    height: 12px;
+    width: 13px;
+    height: 13px;
 
     border: 0;
 
@@ -841,8 +913,8 @@ nav a:hover {
 
 
 /* =========================================================
-   ELEMENTOS ANTIGOS DO PLAYER
-   Mantidos para compatibilidade com script.js
+   ELEMENTOS LEGADOS
+   Mantidos para o script.js
 ========================================================= */
 
 #dial,
@@ -850,6 +922,17 @@ nav a:hover {
 #dialNeedle {
 
     display: none !important;
+
+}
+
+
+/* =========================================================
+   ÁUDIO
+========================================================= */
+
+#audio {
+
+    display: none;
 
 }
 
@@ -1164,7 +1247,7 @@ footer {
 
     .hero {
 
-        padding-top: 125px;
+        padding-top: 135px;
 
     }
 
@@ -1203,7 +1286,28 @@ footer {
     header {
 
         padding:
-            16px 20px;
+            10px 20px;
+
+    }
+
+    .navbar {
+
+        height: 48px;
+
+    }
+
+    .logo {
+
+        font-size: 17px;
+
+    }
+
+    .logo-mark {
+
+        width: 34px;
+        height: 34px;
+
+        border-radius: 9px;
 
     }
 
@@ -1323,10 +1427,10 @@ input:focus-visible {
 <body>
 
 <!-- =======================================================
-     HEADER
+     MENU SUPERIOR FIXO
 ======================================================= -->
 
-<header>
+<header id="siteHeader">
 
 ```
 <div class="navbar">
@@ -1370,7 +1474,7 @@ input:focus-visible {
 </header>
 
 <!-- =======================================================
-     HERO / PLAYER
+     HERO
 ======================================================= -->
 
 <main id="player">
@@ -1381,9 +1485,7 @@ input:focus-visible {
     <div class="hero-container">
 
 
-        <!-- =================================================
-             TEXTO
-        ================================================== -->
+        <!-- TEXTO -->
 
         <div class="hero-content">
 
@@ -1420,7 +1522,7 @@ input:focus-visible {
             <a
                 href="#player"
                 class="hero-button"
-                onclick="document.getElementById('playBtn')?.click(); return false;"
+                id="heroPlayButton"
             >
 
                 <svg
@@ -1453,11 +1555,12 @@ input:focus-visible {
 
                 <div class="player-live">
 
-                    <span id="onair">
+                    <span>
                         AO VIVO
                     </span>
 
                 </div>
+
 
                 <div
                     class="player-frequency"
@@ -1469,23 +1572,16 @@ input:focus-visible {
             </div>
 
 
-            <!-- Elementos preservados para compatibilidade -->
+            <!-- Elementos preservados -->
 
-            <div
-                id="dial"
-                aria-hidden="true"
-            ></div>
+            <div id="dial" aria-hidden="true"></div>
 
-            <div
-                id="dialTicks"
-                aria-hidden="true"
-            ></div>
+            <div id="dialTicks" aria-hidden="true"></div>
 
-            <div
-                id="dialNeedle"
-                aria-hidden="true"
-            ></div>
+            <div id="dialNeedle" aria-hidden="true"></div>
 
+
+            <!-- CAPA -->
 
             <div class="album-area">
 
@@ -1500,6 +1596,8 @@ input:focus-visible {
             </div>
 
 
+            <!-- MÚSICA -->
+
             <div class="track-info">
 
                 <div
@@ -1508,6 +1606,7 @@ input:focus-visible {
                 >
                     Onda Livre FM
                 </div>
+
 
                 <div
                     class="track-artist"
@@ -1581,6 +1680,8 @@ input:focus-visible {
 
                 </button>
 
+
+                <!-- PLAY -->
 
                 <button
                     type="button"
@@ -1806,7 +1907,6 @@ input:focus-visible {
                 class="request-form"
             >
 
-
                 <div class="form-group">
 
                     <label for="reqName">
@@ -1854,7 +1954,6 @@ input:focus-visible {
                     id="requestStatus"
                     aria-live="polite"
                 ></div>
-
 
             </form>
 
@@ -1908,119 +2007,76 @@ preload="none"
 <script src="script.js"></script>
 
 <!-- =======================================================
-     GARANTIA DE VOLUME E AUTOPLAY
+     COMPORTAMENTO DO MENU E BOTÃO "OUVIR AGORA"
 ======================================================= -->
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
 
-    const audio =
-        document.getElementById("audio");
+    const header =
+        document.getElementById("siteHeader");
 
-    if (!audio) {
-        return;
-    }
+    const heroButton =
+        document.getElementById("heroPlayButton");
 
-    /*
-     * Volume máximo do elemento HTML.
-     */
-
-    audio.volume = 1;
+    const playButton =
+        document.getElementById("playBtn");
 
     /*
-     * Tenta iniciar depois que o script principal
-     * configurar a transmissão.
+     * Menu fica mais sólido quando a página é rolada.
      */
 
-    const tentarIniciar = function () {
+    function atualizarHeader() {
 
-        if (!audio.paused) {
+        if (!header) {
             return;
         }
 
-        audio.play()
-            .then(function () {
+        if (window.scrollY > 20) {
 
-                console.log(
-                    "Onda Livre FM iniciada automaticamente."
-                );
+            header.classList.add("scrolled");
 
-            })
-            .catch(function (erro) {
+        } else {
 
-                /*
-                 * Chrome/Edge podem bloquear autoplay
-                 * com som até existir interação do usuário.
-                 */
+            header.classList.remove("scrolled");
 
-                console.log(
-                    "Autoplay aguardando interação do usuário."
-                );
-
-            });
-
-    };
-
-
-    /*
-     * Tentativas após o carregamento.
-     */
-
-    setTimeout(tentarIniciar, 500);
-
-    setTimeout(tentarIniciar, 1500);
-
-    setTimeout(tentarIniciar, 3000);
-
-
-    /*
-     * Quando o navegador liberar a transmissão.
-     */
-
-    audio.addEventListener(
-        "canplay",
-        tentarIniciar
-    );
-
-    audio.addEventListener(
-        "loadeddata",
-        tentarIniciar
-    );
-
-
-    /*
-     * Primeiro clique/toque libera o áudio.
-     */
-
-    const liberarAudio = function () {
-
-        audio.volume = 1;
-
-        audio.play()
-            .catch(function () {});
-
-    };
-
-
-    document.addEventListener(
-        "click",
-        liberarAudio,
-        {
-            once: true
         }
-    );
 
-    document.addEventListener(
-        "touchstart",
-        liberarAudio,
+    }
+
+    window.addEventListener(
+        "scroll",
+        atualizarHeader,
         {
-            once: true,
             passive: true
         }
     );
 
-});
+    atualizarHeader();
+
+
+    /*
+     * "Ouvir agora" aciona exatamente o mesmo
+     * botão Play do player.
+     */
+
+    if (heroButton && playButton) {
+
+        heroButton.addEventListener(
+            "click",
+            function (evento) {
+
+                evento.preventDefault();
+
+                playButton.click();
+
+            }
+        );
+
+    }
+
+})();
 
 </script>
 
