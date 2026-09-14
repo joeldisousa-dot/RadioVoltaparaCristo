@@ -1,359 +1,128 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Rádio Onda Livre</title>
-
+<title>Onda Livre FM</title>
+<meta name="description" content="Onda Livre FM — rádio online, no ar todos os dias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="page">
-
-
-<!-- =====================================================
-     CABEÇALHO
-====================================================== -->
-
-<header class="topbar">
-
-    <div class="brand">
-
-        <div class="brand-icon" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="brand-text">
-            <h1>Onda Livre</h1>
-            <p>Rádio • Música • Informação</p>
-        </div>
-
-    </div>
-
-    <div class="live-indicator">
-        <span class="live-dot"></span>
-        <span>AO VIVO</span>
-    </div>
-
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="wordmark">
+      <span class="wordmark-dot" aria-hidden="true"></span>
+      Onda Livre <span class="wordmark-fm">FM</span>
+    </a>
+    <nav class="site-nav" aria-label="Navegação principal">
+      <a href="#player">Ouvir</a>
+      <a href="#programacao">Programação</a>
+      <a href="#pedidos">Pedidos</a>
+    </nav>
+  </div>
 </header>
 
+<main id="top">
 
-<!-- =====================================================
-     CONTEÚDO PRINCIPAL
-====================================================== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">transmissão contínua</p>
+      <h1 class="hero-title">A trilha sonora do seu dia,<br>direto do navegador.</h1>
+      <p class="hero-sub">Uma programação selecionada, sem precisar de aplicativo — toque agora e peça a próxima música.</p>
+      <a href="#player" class="hero-cta">Ouvir agora</a>
+    </div>
+  </section>
 
-<main class="content">
+  <section id="player" class="player-section" aria-label="Player de rádio">
+    <div class="console">
 
-    <!-- =================================================
-         PLAYER
-    ================================================== -->
-
-    <section class="player-card" aria-label="Player de rádio">
-
-        <div class="player-header">
-
-            <div>
-                <span class="section-label">SINTONIZADOR</span>
-                <h2>Onda Livre FM</h2>
-            </div>
-
-            <div class="signal">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
+      <div class="console-top">
+        <div class="status">
+          <span id="onair" class="status-dot">AGUARDANDO</span>
+          <span class="status-text">transmissão ao vivo por playlist</span>
         </div>
-
-
-        <!-- DISPLAY -->
-
-        <div class="radio-display">
-
-            <div class="display-top">
-                <span>FREQUÊNCIA</span>
-                <span id="onair" class="onair">NO AR</span>
-            </div>
-
-            <div class="frequency">
-
-                <span id="freq" class="freq">88.0</span>
-
-                <span class="freq-unit">FM</span>
-
-            </div>
-
-            <div class="frequency-line"></div>
-
-            <div class="frequency-info">
-                <span>ESTÉREO</span>
-                <span>88 — 108 MHz</span>
-            </div>
-
+        <div class="readout">
+          <span id="freq" class="freq">88.0</span>
+          <span class="freq-unit">MHz</span>
         </div>
+      </div>
 
+      <div class="dial" id="dial" role="img" aria-label="Sintonizador">
+        <div class="dial-ticks" id="dialTicks"></div>
+        <div class="dial-needle" id="dialNeedle"></div>
+      </div>
 
-        <!-- DIAL -->
+      <div class="now-playing">
+        <p class="eyebrow">tocando agora</p>
+        <p id="trackTitle" class="track-title">carregando playlist…</p>
+        <p id="trackArtist" class="track-artist">&nbsp;</p>
+      </div>
 
-        <div class="dial-area">
+      <div class="console-controls">
+        <button id="prevBtn" class="ctrl-btn" aria-label="Faixa anterior">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 3h2v10H4V3zm3 5 8-5v10z"/></svg>
+        </button>
+        <button id="playBtn" class="play-btn" aria-label="Tocar ou pausar">
+          <span id="playIcon" class="play-icon">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+          </span>
+        </button>
+        <button id="nextBtn" class="ctrl-btn" aria-label="Próxima faixa">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M10 3H8v10h2V3zM9 8 1 3v10z"/></svg>
+        </button>
+      </div>
 
-            <div class="dial" id="dial" role="img" aria-label="Sintonizador">
+      <div class="console-bottom">
+        <label class="volume-label" for="volume">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M9 2 4.5 5.5H1v5h3.5L9 14V2z"/></svg>
+          volume
+        </label>
+        <input type="range" id="volume" min="0" max="100" value="80">
+        <button id="shuffleBtn" class="toggle-btn" aria-pressed="false">aleatório</button>
+      </div>
 
-                <div class="dial-glow"></div>
+      <audio id="audio" preload="none"></audio>
+    </div>
+  </section>
 
-                <div class="dial-ticks" id="dialTicks"></div>
+  <section id="programacao" class="programming">
+    <div class="section-head">
+      <p class="eyebrow">programação</p>
+      <h2>Na fila agora</h2>
+    </div>
+    <ol id="playlist" class="playlist"></ol>
+  </section>
 
-                <div class="dial-needle" id="dialNeedle"></div>
-
-            </div>
-
+  <section id="pedidos" class="request-section">
+    <div class="request-card">
+      <div class="section-head">
+        <p class="eyebrow">interação</p>
+        <h2>Peça a próxima música</h2>
+      </div>
+      <form id="requestForm" class="request-form">
+        <div class="field">
+          <label for="reqName">Seu nome</label>
+          <input type="text" id="reqName" maxlength="40" required>
         </div>
-
-
-        <!-- AGORA TOCANDO -->
-
-        <div class="now-playing">
-
-            <span class="section-label">TOCANDO AGORA</span>
-
-            <div class="track-info">
-
-                <div class="track-cover">
-                    <span>♪</span>
-                </div>
-
-                <div class="track-text">
-
-                    <p id="trackTitle" class="track-title">
-                        carregando playlist…
-                    </p>
-
-                    <p id="trackArtist" class="track-artist">
-                        &nbsp;
-                    </p>
-
-                </div>
-
-            </div>
-
+        <div class="field">
+          <label for="reqSong">Música / artista</label>
+          <input type="text" id="reqSong" maxlength="80" required>
         </div>
-
-
-        <!-- CONTROLES -->
-
-        <div class="controls">
-
-            <button
-                id="prevBtn"
-                class="ctrl-btn"
-                aria-label="Faixa anterior">
-                &#9664;&#9664;
-            </button>
-
-            <button
-                id="playBtn"
-                class="play-btn"
-                aria-label="Tocar/Pausar">
-
-                <span id="playIcon">&#9654;</span>
-
-            </button>
-
-            <button
-                id="nextBtn"
-                class="ctrl-btn"
-                aria-label="Próxima faixa">
-                &#9654;&#9654;
-            </button>
-
-        </div>
-
-
-        <!-- VOLUME -->
-
-        <div class="volume-row">
-
-            <div class="volume-label">
-
-                <span class="volume-icon">🔊</span>
-
-                <label for="volume">
-                    volume
-                </label>
-
-            </div>
-
-            <input
-                type="range"
-                id="volume"
-                min="0"
-                max="100"
-                value="80">
-
-            <button
-                id="shuffleBtn"
-                class="toggle-btn"
-                aria-pressed="false">
-
-                <span>⤨</span>
-                aleatório
-
-            </button>
-
-        </div>
-
-
-        <audio id="audio" preload="none"></audio>
-
-    </section>
-
-
-    <!-- =================================================
-         PEDIDO MUSICAL
-    ================================================== -->
-
-    <section class="request-card" aria-label="Pedir uma música">
-
-        <div class="card-heading">
-
-            <div class="heading-icon">
-                ♪
-            </div>
-
-            <div>
-                <span class="section-label">
-                    PARTICIPE DA PROGRAMAÇÃO
-                </span>
-
-                <h2>
-                    Peça sua música
-                </h2>
-            </div>
-
-        </div>
-
-        <p class="card-description">
-            Envie seu pedido e participe da programação da Onda Livre.
-        </p>
-
-
-        <form id="requestForm">
-
-            <div class="input-group">
-
-                <label for="reqName">
-                    Seu nome
-                </label>
-
-                <input
-                    type="text"
-                    id="reqName"
-                    placeholder="Como podemos chamar você?"
-                    maxlength="40"
-                    required>
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label for="reqSong">
-                    Música ou artista
-                </label>
-
-                <input
-                    type="text"
-                    id="reqSong"
-                    placeholder="Digite sua música ou artista"
-                    maxlength="80"
-                    required>
-
-            </div>
-
-
-            <button type="submit" class="request-button">
-
-                <span>Enviar pedido</span>
-
-                <span class="button-arrow">→</span>
-
-            </button>
-
-        </form>
-
-        <p
-            id="requestStatus"
-            class="request-status"
-            aria-live="polite">
-        </p>
-
-    </section>
-
-
-    <!-- =================================================
-         PROGRAMAÇÃO
-    ================================================== -->
-
-    <section class="playlist-card">
-
-        <div class="playlist-header">
-
-            <div>
-
-                <span class="section-label">
-                    NO AR
-                </span>
-
-                <h2>
-                    Programação
-                </h2>
-
-            </div>
-
-            <span class="playlist-status">
-                AO VIVO
-            </span>
-
-        </div>
-
-
-        <ol id="playlist" class="playlist"></ol>
-
-    </section>
+        <button type="submit">Enviar pedido</button>
+      </form>
+      <p id="requestStatus" class="request-status" aria-live="polite"></p>
+    </div>
+  </section>
 
 </main>
 
-
-<!-- =====================================================
-     RODAPÉ
-====================================================== -->
-
-<footer class="footer">
-
-    <span>ONDA LIVRE FM</span>
-
-    <span>•</span>
-
-    <span>MÚSICA PARA TODOS</span>
-
+<footer class="site-footer">
+  <p>Onda Livre FM — transmissão via web, construída com GitHub Pages e Google Apps Script.</p>
 </footer>
 
-
-</div>
-
 <script src="script.js"></script>
-
 </body>
 </html>
