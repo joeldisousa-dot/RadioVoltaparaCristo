@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-
 
 <meta charset="UTF-8">
 
@@ -21,14 +19,7 @@
 
 <title>Onda Livre FM</title>
 
-
-<!-- =====================================================
-     FONTES
-====================================================== -->
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link
     rel="preconnect"
@@ -39,973 +30,989 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-
-<!-- =====================================================
-     ESTILOS
-====================================================== -->
-
 <style>
 
-    /* =================================================
-       RESET
-    ================================================= */
+/* =========================================================
+   RESET
+========================================================= */
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(37,99,235,.16),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 10% 40%,
+            rgba(14,165,233,.10),
+            transparent 30%
+        ),
+        #07111f;
+
+    color: #f8fafc;
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 9999;
+
+    height: 74px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(7,17,31,.78);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    transition:
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+header.scrolled {
+    background:
+        rgba(7,17,31,.94);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.20);
+}
+
+.header-inner {
+    width: min(1180px, calc(100% - 36px));
+
+    height: 100%;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: -.5px;
+}
+
+.logo-mark {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+
+    box-shadow:
+        0 8px 25px rgba(37,99,235,.25);
+}
+
+.logo-mark svg {
+    width: 19px;
+    height: 19px;
+}
+
+nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+nav a {
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition:
+        color .2s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 760px;
+
+    padding:
+        150px 20px 80px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.hero-inner {
+    width: min(1180px, 100%);
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        440px;
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+.eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 22px;
+
+    color: #38bdf8;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+.eyebrow-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 5px rgba(34,197,94,.10),
+        0 0 16px rgba(34,197,94,.7);
+
+    animation:
+        pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+
+    0% {
+        opacity: 1;
     }
 
-
-    html {
-        scroll-behavior: smooth;
+    50% {
+        opacity: .45;
     }
 
-
-    body {
-        min-height: 100vh;
-
-        background:
-            radial-gradient(
-                circle at 80% 10%,
-                rgba(37, 99, 235, .16),
-                transparent 32%
-            ),
-            radial-gradient(
-                circle at 10% 40%,
-                rgba(14, 165, 233, .10),
-                transparent 30%
-            ),
-            #07111f;
-
-        color: #f8fafc;
-
-        font-family:
-            "Space Grotesk",
-            sans-serif;
+    100% {
+        opacity: 1;
     }
+}
 
+.hero h1 {
+    max-width: 680px;
 
-    button,
-    input {
-        font: inherit;
-    }
+    margin-bottom: 24px;
 
+    font-size:
+        clamp(44px, 6vw, 76px);
 
-    button {
-        cursor: pointer;
-    }
+    line-height: .98;
 
+    letter-spacing: -3px;
+}
 
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
+.hero h1 span {
+    color: #38bdf8;
+}
 
+.hero-description {
+    max-width: 580px;
 
-    /* =================================================
-       HEADER FIXO
-    ================================================= */
+    margin-bottom: 34px;
 
-    header {
-        position: fixed;
+    color: #94a3b8;
 
-        top: 0;
-        left: 0;
-        right: 0;
+    font-size: 17px;
 
-        z-index: 9999;
+    line-height: 1.7;
+}
 
-        height: 74px;
+.hero-button {
+    display: inline-flex;
 
-        border-bottom:
-            1px solid rgba(255,255,255,.07);
+    align-items: center;
 
-        background:
-            rgba(7,17,31,.78);
+    gap: 10px;
 
-        backdrop-filter:
-            blur(18px);
+    padding: 14px 21px;
 
-        -webkit-backdrop-filter:
-            blur(18px);
+    border: 0;
 
-        transition:
-            background .25s ease,
-            box-shadow .25s ease;
-    }
+    border-radius: 12px;
 
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #0891b2
+        );
 
-    header.scrolled {
-        background:
-            rgba(7,17,31,.94);
+    color: #ffffff;
 
-        box-shadow:
-            0 10px 35px rgba(0,0,0,.20);
-    }
+    font-size: 14px;
 
+    font-weight: 600;
 
-    .header-inner {
-        width: min(1180px, calc(100% - 36px));
+    box-shadow:
+        0 12px 30px rgba(37,99,235,.25);
 
-        height: 100%;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
 
-        margin: auto;
+.hero-button:hover {
+    transform: translateY(-2px);
 
-        display: flex;
+    box-shadow:
+        0 16px 38px rgba(37,99,235,.35);
+}
 
-        align-items: center;
+.hero-button svg {
+    width: 17px;
+    height: 17px;
+}
 
-        justify-content: space-between;
-    }
+/* =========================================================
+   PLAYER
+========================================================= */
 
+.player {
+    position: relative;
 
-    .logo {
-        display: flex;
+    width: 100%;
 
-        align-items: center;
+    padding: 25px;
 
-        gap: 11px;
+    border:
+        1px solid rgba(255,255,255,.09);
 
-        font-size: 20px;
+    border-radius: 24px;
 
-        font-weight: 700;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.085),
+            rgba(255,255,255,.035)
+        );
 
-        letter-spacing: -.5px;
-    }
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.30);
 
+    backdrop-filter:
+        blur(20px);
 
-    .logo-mark {
-        width: 34px;
-        height: 34px;
+    -webkit-backdrop-filter:
+        blur(20px);
+}
 
-        display: grid;
+.player-top {
+    display: flex;
 
-        place-items: center;
+    align-items: center;
 
-        border-radius: 10px;
+    justify-content: space-between;
 
-        background:
-            linear-gradient(
-                135deg,
-                #2563eb,
-                #06b6d4
-            );
+    margin-bottom: 25px;
+}
 
-        box-shadow:
-            0 8px 25px rgba(37,99,235,.25);
-    }
+.player-live {
+    display: flex;
 
+    align-items: center;
 
-    .logo-mark svg {
-        width: 19px;
-        height: 19px;
-    }
+    gap: 8px;
 
+    color: #94a3b8;
 
-    nav {
-        display: flex;
+    font-family:
+        "IBM Plex Mono",
+        monospace;
 
-        align-items: center;
+    font-size: 10px;
 
-        gap: 30px;
-    }
+    letter-spacing: 1px;
 
+    text-transform: uppercase;
+}
 
-    nav a {
-        color: #94a3b8;
+.player-live-dot {
+    width: 7px;
+    height: 7px;
 
-        font-size: 14px;
+    border-radius: 50%;
 
-        font-weight: 500;
+    background: #22c55e;
 
-        transition:
-            color .2s ease;
-    }
+    box-shadow:
+        0 0 12px rgba(34,197,94,.7);
+}
 
+.frequency {
+    color: #64748b;
 
-    nav a:hover {
-        color: #ffffff;
-    }
+    font-family:
+        "IBM Plex Mono",
+        monospace;
 
+    font-size: 11px;
+}
 
-    @media (max-width: 680px) {
+.track {
+    display: flex;
 
-        nav {
-            gap: 14px;
-        }
+    align-items: center;
 
-        nav a {
-            font-size: 12px;
-        }
+    gap: 15px;
 
-        .logo {
-            font-size: 17px;
-        }
+    margin-bottom: 27px;
+}
 
-        .logo-mark {
-            width: 30px;
-            height: 30px;
-        }
-    }
+.album {
+    width: 54px;
+    height: 54px;
 
+    flex: 0 0 54px;
 
-    /* =================================================
-       HERO
-    ================================================= */
+    display: grid;
 
-    .hero {
-        min-height: 760px;
+    place-items: center;
 
-        padding:
-            150px 20px 80px;
+    border-radius: 15px;
 
-        display: flex;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
 
-        align-items: center;
-    }
+    box-shadow:
+        0 10px 30px rgba(37,99,235,.25);
+}
 
+.album svg {
+    width: 24px;
+    height: 24px;
+}
+
+.track-info {
+    min-width: 0;
+}
+
+.track-title {
+    overflow: hidden;
+
+    margin-bottom: 4px;
+
+    color: #f8fafc;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.track-artist {
+    overflow: hidden;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+/* =========================================================
+   CONTROLES
+========================================================= */
+
+.controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+.control-button {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 auto;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color: #94a3b8;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.control-button:hover {
+    color: #ffffff;
+
+    background:
+        rgba(255,255,255,.10);
+
+    transform: translateY(-1px);
+}
+
+.control-button.primary {
+    width: 52px;
+    height: 52px;
+
+    border: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #0891b2
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 28px rgba(37,99,235,.30);
+}
+
+.control-button.active {
+    color: #38bdf8;
+
+    background:
+        rgba(56,189,248,.10);
+}
+
+.control-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+.control-button.primary svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* =========================================================
+   VOLUME
+========================================================= */
+
+.volume-area {
+    flex: 1;
+
+    min-width: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-left: 7px;
+}
+
+.volume-icon {
+    width: 18px;
+    height: 18px;
+
+    display: grid;
+
+    place-items: center;
+
+    color: #64748b;
+}
+
+.volume-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+#volume {
+    width: 100%;
+
+    height: 4px;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,.10);
+}
+
+#volume::-webkit-slider-thumb {
+    width: 13px;
+    height: 13px;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #38bdf8;
+
+    cursor: pointer;
+}
+
+#volume::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #38bdf8;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   ÁUDIO
+========================================================= */
+
+#audio {
+    display: none;
+}
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+section.content-section {
+    width: min(1180px, calc(100% - 36px));
+
+    margin: auto;
+
+    padding: 80px 0;
+}
+
+.section-label {
+    margin-bottom: 10px;
+
+    color: #38bdf8;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.section-title {
+    margin-bottom: 30px;
+
+    font-size: 30px;
+
+    letter-spacing: -1px;
+}
+
+/* =========================================================
+   PROGRAMAÇÃO
+========================================================= */
+
+.playlist {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.program {
+    padding: 20px;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+.program-time {
+    margin-bottom: 8px;
+
+    color: #38bdf8;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    font-size: 11px;
+}
+
+.program-name {
+    color: #f8fafc;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+/* =========================================================
+   PEDIDOS
+========================================================= */
+
+.request-box {
+    max-width: 600px;
+
+    padding: 25px;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+.field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+.field input {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background:
+        rgba(0,0,0,.18);
+
+    color: #ffffff;
+}
+
+.field input:focus {
+    border-color:
+        rgba(56,189,248,.55);
+}
+
+.request-button {
+    padding: 12px 18px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.request-button:hover {
+    background: #1d4ed8;
+}
+
+#requestStatus {
+    margin-top: 12px;
+
+    color: #38bdf8;
+
+    font-size: 12px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    width: min(1180px, calc(100% - 36px));
+
+    margin: 30px auto 0;
+
+    padding: 25px 0 35px;
+
+    border-top:
+        1px solid rgba(255,255,255,.07);
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
 
     .hero-inner {
-        width: min(1180px, 100%);
+        grid-template-columns: 1fr;
 
-        margin: auto;
-
-        display: grid;
-
-        grid-template-columns:
-            minmax(0, 1fr)
-            440px;
-
-        gap: 80px;
-
-        align-items: center;
+        gap: 45px;
     }
 
-
-    @media (max-width: 900px) {
-
-        .hero-inner {
-            grid-template-columns: 1fr;
-
-            gap: 45px;
-        }
-
-        .hero {
-            padding-top: 120px;
-        }
+    .hero {
+        padding-top: 120px;
     }
+}
 
-
-    /* =================================================
-       HERO TEXTO
-    ================================================= */
-
-    .eyebrow {
-        display: inline-flex;
-
-        align-items: center;
-
-        gap: 9px;
-
-        margin-bottom: 22px;
-
-        color: #38bdf8;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        font-size: 11px;
-
-        font-weight: 600;
-
-        letter-spacing: 1.2px;
-
-        text-transform: uppercase;
-    }
-
-
-    .eyebrow-dot {
-        width: 8px;
-        height: 8px;
-
-        border-radius: 50%;
-
-        background: #22c55e;
-
-        box-shadow:
-            0 0 0 5px rgba(34,197,94,.10),
-            0 0 16px rgba(34,197,94,.7);
-
-        animation:
-            pulse 1.8s infinite;
-    }
-
-
-    @keyframes pulse {
-
-        0% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: .45;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-
-
-    .hero h1 {
-        max-width: 680px;
-
-        margin-bottom: 24px;
-
-        font-size:
-            clamp(44px, 6vw, 76px);
-
-        line-height: .98;
-
-        letter-spacing: -3px;
-    }
-
-
-    .hero h1 span {
-        color: #38bdf8;
-    }
-
-
-    .hero-description {
-        max-width: 580px;
-
-        margin-bottom: 34px;
-
-        color: #94a3b8;
-
-        font-size: 17px;
-
-        line-height: 1.7;
-    }
-
-
-    .hero-button {
-        display: inline-flex;
-
-        align-items: center;
-
-        gap: 10px;
-
-        padding: 14px 21px;
-
-        border: 0;
-
-        border-radius: 12px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #2563eb,
-                #0891b2
-            );
-
-        color: #ffffff;
-
-        font-size: 14px;
-
-        font-weight: 600;
-
-        box-shadow:
-            0 12px 30px rgba(37,99,235,.25);
-
-        transition:
-            transform .2s ease,
-            box-shadow .2s ease;
-    }
-
-
-    .hero-button:hover {
-        transform: translateY(-2px);
-
-        box-shadow:
-            0 16px 38px rgba(37,99,235,.35);
-    }
-
-
-    .hero-button svg {
-        width: 17px;
-        height: 17px;
-    }
-
-
-    /* =================================================
-       PLAYER
-    ================================================= */
-
-    .player {
-        position: relative;
-
-        width: 100%;
-
-        padding: 25px;
-
-        border:
-            1px solid rgba(255,255,255,.09);
-
-        border-radius: 24px;
-
-        background:
-            linear-gradient(
-                145deg,
-                rgba(255,255,255,.085),
-                rgba(255,255,255,.035)
-            );
-
-        box-shadow:
-            0 25px 80px rgba(0,0,0,.30);
-
-        backdrop-filter:
-            blur(20px);
-
-        -webkit-backdrop-filter:
-            blur(20px);
-    }
-
-
-    .player-top {
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        margin-bottom: 25px;
-    }
-
-
-    .player-live {
-        display: flex;
-
-        align-items: center;
-
-        gap: 8px;
-
-        color: #94a3b8;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        font-size: 10px;
-
-        letter-spacing: 1px;
-
-        text-transform: uppercase;
-    }
-
-
-    .player-live-dot {
-        width: 7px;
-        height: 7px;
-
-        border-radius: 50%;
-
-        background: #22c55e;
-
-        box-shadow:
-            0 0 12px rgba(34,197,94,.7);
-    }
-
-
-    .frequency {
-        color: #64748b;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        font-size: 11px;
-    }
-
-
-    .track {
-        display: flex;
-
-        align-items: center;
-
-        gap: 15px;
-
-        margin-bottom: 27px;
-    }
-
-
-    .album {
-        width: 54px;
-        height: 54px;
-
-        flex: 0 0 54px;
-
-        display: grid;
-
-        place-items: center;
-
-        border-radius: 15px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #2563eb,
-                #06b6d4
-            );
-
-        box-shadow:
-            0 10px 30px rgba(37,99,235,.25);
-    }
-
-
-    .album svg {
-        width: 24px;
-        height: 24px;
-    }
-
-
-    .track-info {
-        min-width: 0;
-    }
-
-
-    .track-title {
-        overflow: hidden;
-
-        margin-bottom: 4px;
-
-        color: #f8fafc;
-
-        font-size: 16px;
-
-        font-weight: 600;
-
-        text-overflow: ellipsis;
-
-        white-space: nowrap;
-    }
-
-
-    .track-artist {
-        overflow: hidden;
-
-        color: #64748b;
-
-        font-size: 13px;
-
-        text-overflow: ellipsis;
-
-        white-space: nowrap;
-    }
-
-
-    /* =================================================
-       CONTROLES
-    ================================================= */
-
-    .controls {
-        display: flex;
-
-        align-items: center;
-
-        gap: 11px;
-    }
-
-
-    .control-button {
-        width: 38px;
-        height: 38px;
-
-        display: grid;
-
-        place-items: center;
-
-        border: 1px solid
-            rgba(255,255,255,.08);
-
-        border-radius: 50%;
-
-        background:
-            rgba(255,255,255,.045);
-
-        color: #94a3b8;
-
-        transition:
-            background .2s ease,
-            color .2s ease,
-            transform .2s ease;
-    }
-
-
-    .control-button:hover {
-        color: #ffffff;
-
-        background:
-            rgba(255,255,255,.10);
-
-        transform: translateY(-1px);
-    }
-
-
-    .control-button.primary {
-        width: 52px;
-        height: 52px;
-
-        border: 0;
-
-        background:
-            linear-gradient(
-                135deg,
-                #2563eb,
-                #0891b2
-            );
-
-        color: #ffffff;
-
-        box-shadow:
-            0 10px 28px rgba(37,99,235,.30);
-    }
-
-
-    .control-button.active {
-        color: #38bdf8;
-
-        background:
-            rgba(56,189,248,.10);
-    }
-
-
-    .control-button svg {
-        width: 17px;
-        height: 17px;
-    }
-
-
-    .control-button.primary svg {
-        width: 20px;
-        height: 20px;
-    }
-
-
-    /* =================================================
-       VOLUME
-    ================================================= */
-
-    .volume-area {
-        flex: 1;
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 9px;
-
-        margin-left: 7px;
-    }
-
-
-    .volume-icon {
-        width: 18px;
-        height: 18px;
-
-        display: grid;
-
-        place-items: center;
-
-        color: #64748b;
-    }
-
-
-    .volume-icon svg {
-        width: 17px;
-        height: 17px;
-    }
-
-
-    #volume {
-        width: 100%;
-
-        height: 4px;
-
-        appearance: none;
-
-        -webkit-appearance: none;
-
-        border-radius: 10px;
-
-        outline: none;
-
-        background:
-            rgba(255,255,255,.10);
-    }
-
-
-    #volume::-webkit-slider-thumb {
-        width: 13px;
-        height: 13px;
-
-        appearance: none;
-
-        -webkit-appearance: none;
-
-        border: 0;
-
-        border-radius: 50%;
-
-        background: #38bdf8;
-
-        cursor: pointer;
-    }
-
-
-    #volume::-moz-range-thumb {
-        width: 13px;
-        height: 13px;
-
-        border: 0;
-
-        border-radius: 50%;
-
-        background: #38bdf8;
-
-        cursor: pointer;
-    }
-
-
-    /* =================================================
-       SEÇÕES
-    ================================================= */
-
-    section.content-section {
-        width: min(1180px, calc(100% - 36px));
-
-        margin: auto;
-
-        padding: 80px 0;
-    }
-
-
-    .section-label {
-        margin-bottom: 10px;
-
-        color: #38bdf8;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        font-size: 10px;
-
-        letter-spacing: 1.5px;
-
-        text-transform: uppercase;
-    }
-
-
-    .section-title {
-        margin-bottom: 30px;
-
-        font-size: 30px;
-
-        letter-spacing: -1px;
-    }
-
-
-    /* =================================================
-       PROGRAMAÇÃO
-    ================================================= */
+@media (max-width: 760px) {
 
     .playlist {
-        display: grid;
+        grid-template-columns: 1fr;
+    }
 
-        grid-template-columns:
-            repeat(3, 1fr);
+    .controls {
+        gap: 7px;
+    }
 
+    .control-button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .control-button.primary {
+        width: 48px;
+        height: 48px;
+    }
+
+    .volume-area {
+        min-width: 65px;
+        margin-left: 2px;
+    }
+}
+
+@media (max-width: 680px) {
+
+    nav {
         gap: 14px;
     }
 
-
-    @media (max-width: 760px) {
-
-        .playlist {
-            grid-template-columns: 1fr;
-        }
+    nav a {
+        font-size: 12px;
     }
 
+    .logo {
+        font-size: 17px;
+    }
 
-    .program {
+    .logo-mark {
+        width: 30px;
+        height: 30px;
+    }
+
+    .hero {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .player {
         padding: 20px;
-
-        border:
-            1px solid rgba(255,255,255,.07);
-
-        border-radius: 16px;
-
-        background:
-            rgba(255,255,255,.035);
     }
 
+    .track-title {
+        font-size: 15px;
+    }
 
-    .program-time {
-        margin-bottom: 8px;
+    .track-artist {
+        font-size: 12px;
+    }
 
-        color: #38bdf8;
+    .frequency {
+        display: none;
+    }
+}
 
-        font-family:
-            "IBM Plex Mono",
-            monospace;
+@media (max-width: 480px) {
 
+    .header-inner {
+        width: calc(100% - 24px);
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
         font-size: 11px;
     }
 
-
-    .program-name {
-        color: #f8fafc;
-
+    .logo {
+        gap: 7px;
         font-size: 15px;
-
-        font-weight: 600;
     }
 
-
-    /* =================================================
-       PEDIDOS
-    ================================================= */
-
-    .request-box {
-        max-width: 600px;
-
-        padding: 25px;
-
-        border:
-            1px solid rgba(255,255,255,.07);
-
-        border-radius: 18px;
-
-        background:
-            rgba(255,255,255,.035);
+    .logo-mark {
+        width: 28px;
+        height: 28px;
     }
 
-
-    .field {
-        margin-bottom: 15px;
+    .controls {
+        flex-wrap: wrap;
     }
 
+    .volume-area {
+        order: 5;
 
-    .field label {
-        display: block;
-
-        margin-bottom: 7px;
-
-        color: #94a3b8;
-
-        font-size: 12px;
-    }
-
-
-    .field input {
         width: 100%;
 
-        padding: 12px 13px;
-
-        border:
-            1px solid rgba(255,255,255,.08);
-
-        border-radius: 10px;
-
-        outline: none;
-
-        background:
-            rgba(0,0,0,.18);
-
-        color: #ffffff;
+        margin: 8px 0 0;
     }
 
-
-    .field input:focus {
-        border-color:
-            rgba(56,189,248,.55);
+    .hero h1 {
+        letter-spacing: -2px;
     }
-
-
-    .request-button {
-        padding: 12px 18px;
-
-        border: 0;
-
-        border-radius: 10px;
-
-        background: #2563eb;
-
-        color: #ffffff;
-
-        font-size: 13px;
-
-        font-weight: 600;
-    }
-
-
-    .request-button:hover {
-        background: #1d4ed8;
-    }
-
-
-    #requestStatus {
-        margin-top: 12px;
-
-        color: #38bdf8;
-
-        font-size: 12px;
-    }
-
-
-    /* =================================================
-       FOOTER
-    ================================================= */
-
-    footer {
-        width: min(1180px, calc(100% - 36px));
-
-        margin: 30px auto 0;
-
-        padding: 25px 0 35px;
-
-        border-top:
-            1px solid rgba(255,255,255,.07);
-
-        color: #64748b;
-
-        font-size: 12px;
-
-        text-align: center;
-    }
+}
 
 </style>
-
 
 </head>
 
 <body>
 
-
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-====================================================== -->
+========================================================= -->
 
 <header id="topHeader">
 
     <div class="header-inner">
 
-        <a
-            href="#player"
-            class="logo">
+        <a href="#player" class="logo">
 
             <span class="logo-mark">
 
@@ -1037,7 +1044,6 @@
 
         </a>
 
-
         <nav>
 
             <a href="#player">
@@ -1058,492 +1064,428 @@
 
 </header>
 
-
-<!-- =====================================================
+<!-- =========================================================
      HERO
-====================================================== -->
+========================================================= -->
 
 <main>
 
-    <section
-        class="hero"
-        id="player">
+<section
+    class="hero"
+    id="player">
 
-        <div class="hero-inner">
+    <div class="hero-inner">
 
+        <div>
 
-            <!-- =========================================
-                 TEXTO
-            ========================================== -->
+            <div class="eyebrow">
 
-            <div>
+                <span class="eyebrow-dot"></span>
 
-                <div class="eyebrow">
-
-                    <span class="eyebrow-dot"></span>
-
-                    Transmissão Onda Livre
-
-                </div>
-
-
-                <h1>
-
-                    Sua música.
-                    <br>
-
-                    <span>Sua onda.</span>
-
-                </h1>
-
-
-                <p class="hero-description">
-
-                    Música, informação e entretenimento
-                    para acompanhar você em todos os momentos.
-
-                </p>
-
-
-                <button
-                    type="button"
-                    class="hero-button"
-                    id="heroPlayBtn">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor">
-
-                        <path
-                            d="M8 5v14l11-7z">
-                        </path>
-
-                    </svg>
-
-                    Ouvir agora
-
-                </button>
+                Transmissão Onda Livre
 
             </div>
 
+            <h1>
 
-            <!-- =========================================
-                 PLAYER
-            ========================================== -->
+                Sua música.
+                <br>
 
-            <div class="player">
+                <span>Sua onda.</span>
 
+            </h1>
 
-                <div class="player-top">
+            <p class="hero-description">
 
-                    <div class="player-live">
+                Música, informação e entretenimento
+                para acompanhar você em todos os momentos.
 
-                        <span
-                            class="player-live-dot">
-                        </span>
+            </p>
 
-                        <span id="onair">
-                            OFFLINE
-                        </span>
+            <button
+                type="button"
+                class="hero-button"
+                id="heroPlayBtn">
 
-                    </div>
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor">
 
+                    <path d="M8 5v14l11-7z"></path>
 
-                    <span
-                        class="frequency"
-                        id="freq">
+                </svg>
 
-                        Onda Livre FM
+                Ouvir agora
 
+            </button>
+
+        </div>
+
+        <!-- PLAYER -->
+
+        <div class="player">
+
+            <div class="player-top">
+
+                <div class="player-live">
+
+                    <span class="player-live-dot"></span>
+
+                    <span id="onair">
+                        OFFLINE
                     </span>
 
                 </div>
 
+                <span
+                    class="frequency"
+                    id="freq">
 
-                <div class="track">
-
-                    <div class="album">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.7">
-
-                            <circle
-                                cx="12"
-                                cy="12"
-                                r="8">
-                            </circle>
-
-                            <circle
-                                cx="12"
-                                cy="12"
-                                r="2.5">
-                            </circle>
-
-                            <path
-                                d="M12 4v5">
-                            </path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div class="track-info">
-
-                        <div
-                            class="track-title"
-                            id="trackTitle">
-
-                            Onda Livre FM
-
-                        </div>
-
-
-                        <div
-                            class="track-artist"
-                            id="trackArtist">
-
-                            Ao vivo
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="controls">
-
-
-                    <!-- ANTERIOR -->
-
-                    <button
-                        type="button"
-                        class="control-button"
-                        id="prevBtn"
-                        aria-label="Anterior">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2">
-
-                            <path
-                                d="M19 20L9 12l10-8v16z">
-                            </path>
-
-                            <line
-                                x1="5"
-                                y1="19"
-                                x2="5"
-                                y2="5">
-                            </line>
-
-                        </svg>
-
-                    </button>
-
-
-                    <!-- PLAY -->
-
-                    <button
-                        type="button"
-                        class="control-button primary"
-                        id="playBtn"
-                        aria-label="Reproduzir">
-
-                        <span id="playIcon">
-
-                            <svg
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="currentColor">
-
-                                <path
-                                    d="M8 5v14l11-7z">
-                                </path>
-
-                            </svg>
-
-                        </span>
-
-                    </button>
-
-
-                    <!-- PRÓXIMA -->
-
-                    <button
-                        type="button"
-                        class="control-button"
-                        id="nextBtn"
-                        aria-label="Próxima">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2">
-
-                            <path
-                                d="M5 4l10 8-10 8V4z">
-                            </path>
-
-                            <line
-                                x1="19"
-                                y1="5"
-                                x2="19"
-                                y2="19">
-                            </line>
-
-                        </svg>
-
-                    </button>
-
-
-                    <!-- VOLUME -->
-
-                    <div class="volume-area">
-
-                        <span
-                            class="volume-icon"
-                            id="volumeIcon">
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2">
-
-                                <path
-                                    d="M11 5L6 9H2v6h4l5 4V5z">
-                                </path>
-
-                                <path
-                                    d="M15.5 8.5a5 5 0 0 1 0 7">
-                                </path>
-
-                                <path
-                                    d="M19 5a10 10 0 0 1 0 14">
-                                </path>
-
-                            </svg>
-
-                        </span>
-
-
-                        <input
-                            id="volume"
-                            type="range"
-                            min="0"
-                            max="100"
-                            value="100"
-                            aria-label="Volume">
-
-                    </div>
-
-
-                    <!-- SHUFFLE -->
-
-                    <button
-                        type="button"
-                        class="control-button"
-                        id="shuffleBtn"
-                        aria-label="Aleatório">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2">
-
-                            <path
-                                d="M17 3h4v4">
-                            </path>
-
-                            <path
-                                d="M3 7h4c4 0 6 10 10 10h4">
-                            </path>
-
-                            <path
-                                d="M17 17l4 4v-4">
-                            </path>
-
-                            <path
-                                d="M3 17h4c1.5 0 2.7-1.3 3.7-2.7">
-                            </path>
-
-                            <path
-                                d="M14.3 9.7C15.3 8.3 16.5 7 18 7h3">
-                            </path>
-
-                        </svg>
-
-                    </button>
-
-                </div>
-
-
-                <!-- ÁUDIO -->
-
-                <<audio
-    id="audio"
-    src="https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3"
-    preload="auto"
-    playsinline
-></audio>
-                    id="audio"
-                    preload="auto"
-                    playsinline
-                    autoplay>
-                </audio>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         PROGRAMAÇÃO
-    ================================================== -->
-
-    <section
-        class="content-section"
-        id="programacao">
-
-        <div class="section-label">
-            Na programação
-        </div>
-
-        <h2 class="section-title">
-            Programação
-        </h2>
-
-
-        <div id="playlist" class="playlist">
-
-            <div class="program">
-
-                <div class="program-time">
-                    AO VIVO
-                </div>
-
-                <div class="program-name">
                     Onda Livre FM
+
+                </span>
+
+            </div>
+
+            <div class="track">
+
+                <div class="album">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7">
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="8">
+                        </circle>
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="2.5">
+                        </circle>
+
+                        <path d="M12 4v5"></path>
+
+                    </svg>
+
+                </div>
+
+                <div class="track-info">
+
+                    <div
+                        class="track-title"
+                        id="trackTitle">
+
+                        Futuro do homem e o final dos tempos
+
+                    </div>
+
+                    <div
+                        class="track-artist"
+                        id="trackArtist">
+
+                        Onda Livre FM
+
+                    </div>
+
                 </div>
 
             </div>
 
+            <div class="controls">
 
-            <div class="program">
-
-                <div class="program-time">
-                    24 HORAS
-                </div>
-
-                <div class="program-name">
-                    Música e informação
-                </div>
-
-            </div>
-
-
-            <div class="program">
-
-                <div class="program-time">
-                    O DIA TODO
-                </div>
-
-                <div class="program-name">
-                    Tá na Onda, Tá com Tudo!
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         PEDIDOS
-    ================================================== -->
-
-    <section
-        class="content-section"
-        id="pedidos">
-
-        <div class="section-label">
-            Interaja
-        </div>
-
-        <h2 class="section-title">
-            Peça sua música
-        </h2>
-
-
-        <div class="request-box">
-
-            <form id="requestForm">
-
-                <div class="field">
-
-                    <label for="reqName">
-                        Seu nome
-                    </label>
-
-                    <input
-                        id="reqName"
-                        type="text"
-                        autocomplete="name"
-                        required>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label for="reqSong">
-                        Música ou artista
-                    </label>
-
-                    <input
-                        id="reqSong"
-                        type="text"
-                        required>
-
-                </div>
-
+                <!-- ANTERIOR -->
 
                 <button
-                    type="submit"
-                    class="request-button">
+                    type="button"
+                    class="control-button"
+                    id="prevBtn"
+                    aria-label="Anterior">
 
-                    Enviar pedido
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
+
+                        <path d="M19 20L9 12l10-8v16z"></path>
+
+                        <line
+                            x1="5"
+                            y1="19"
+                            x2="5"
+                            y2="5">
+                        </line>
+
+                    </svg>
 
                 </button>
 
+                <!-- PLAY -->
 
-                <div id="requestStatus"></div>
+                <button
+                    type="button"
+                    class="control-button primary"
+                    id="playBtn"
+                    aria-label="Reproduzir">
 
-            </form>
+                    <span id="playIcon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="currentColor">
+
+                            <path d="M8 5v14l11-7z"></path>
+
+                        </svg>
+
+                    </span>
+
+                </button>
+
+                <!-- PRÓXIMA -->
+
+                <button
+                    type="button"
+                    class="control-button"
+                    id="nextBtn"
+                    aria-label="Próxima">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
+
+                        <path d="M5 4l10 8-10 8V4z"></path>
+
+                        <line
+                            x1="19"
+                            y1="5"
+                            x2="19"
+                            y2="19">
+                        </line>
+
+                    </svg>
+
+                </button>
+
+                <!-- VOLUME -->
+
+                <div class="volume-area">
+
+                    <span
+                        class="volume-icon"
+                        id="volumeIcon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2">
+
+                            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+
+                            <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+
+                            <path d="M19 5a10 10 0 0 1 0 14"></path>
+
+                        </svg>
+
+                    </span>
+
+                    <input
+                        id="volume"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="100"
+                        aria-label="Volume">
+
+                </div>
+
+                <!-- ALEATÓRIO -->
+
+                <button
+                    type="button"
+                    class="control-button"
+                    id="shuffleBtn"
+                    aria-label="Aleatório">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
+
+                        <path d="M17 3h4v4"></path>
+
+                        <path d="M3 7h4c4 0 6 10 10 10h4"></path>
+
+                        <path d="M17 17l4 4v-4"></path>
+
+                        <path d="M3 17h4c1.5 0 2.7-1.3 3.7-2.7"></path>
+
+                        <path d="M14.3 9.7C15.3 8.3 16.5 7 18 7h3"></path>
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+            <!-- ÁUDIO
+                 IMPORTANTE:
+                 UMA ÚNICA TAG AUDIO
+            -->
+
+            <audio
+                id="audio"
+                src="https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3"
+                preload="auto"
+                playsinline
+                autoplay>
+            </audio>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
+<!-- =========================================================
+     PROGRAMAÇÃO
+========================================================= -->
+
+<section
+    class="content-section"
+    id="programacao">
+
+    <div class="section-label">
+        Na programação
+    </div>
+
+    <h2 class="section-title">
+        Programação
+    </h2>
+
+    <div
+        id="playlist"
+        class="playlist">
+
+        <div class="program">
+
+            <div class="program-time">
+                AO VIVO
+            </div>
+
+            <div class="program-name">
+                Onda Livre FM
+            </div>
+
+        </div>
+
+        <div class="program">
+
+            <div class="program-time">
+                24 HORAS
+            </div>
+
+            <div class="program-name">
+                Música e informação
+            </div>
+
+        </div>
+
+        <div class="program">
+
+            <div class="program-time">
+                O DIA TODO
+            </div>
+
+            <div class="program-name">
+                Tá na Onda, Tá com Tudo!
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================================
+     PEDIDOS
+========================================================= -->
+
+<section
+    class="content-section"
+    id="pedidos">
+
+    <div class="section-label">
+        Interaja
+    </div>
+
+    <h2 class="section-title">
+        Peça sua música
+    </h2>
+
+    <div class="request-box">
+
+        <form id="requestForm">
+
+            <div class="field">
+
+                <label for="reqName">
+                    Seu nome
+                </label>
+
+                <input
+                    id="reqName"
+                    type="text"
+                    autocomplete="name"
+                    required>
+
+            </div>
+
+            <div class="field">
+
+                <label for="reqSong">
+                    Música ou artista
+                </label>
+
+                <input
+                    id="reqSong"
+                    type="text"
+                    required>
+
+            </div>
+
+            <button
+                type="submit"
+                class="request-button">
+
+                Enviar pedido
+
+            </button>
+
+            <div id="requestStatus"></div>
+
+        </form>
+
+    </div>
+
+</section>
 
 </main>
 
-
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-====================================================== -->
+========================================================= -->
 
 <footer>
 
@@ -1553,94 +1495,11 @@
 
 </footer>
 
-
-<!-- =====================================================
-     SCRIPT PRINCIPAL
-====================================================== -->
+<!-- =========================================================
+     SCRIPT
+========================================================= -->
 
 <script src="script.js"></script>
-
-
-<!-- =====================================================
-     MENU FIXO + BOTÃO HERO
-====================================================== -->
-
-<script>
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
-
-            const header =
-                document.getElementById("topHeader");
-
-
-            function atualizarHeader() {
-
-                if (!header) {
-                    return;
-                }
-
-
-                if (window.scrollY > 20) {
-
-                    header.classList.add(
-                        "scrolled"
-                    );
-
-                } else {
-
-                    header.classList.remove(
-                        "scrolled"
-                    );
-                }
-            }
-
-
-            window.addEventListener(
-                "scroll",
-                atualizarHeader,
-                {
-                    passive: true
-                }
-            );
-
-
-            atualizarHeader();
-
-
-            const heroPlayBtn =
-                document.getElementById(
-                    "heroPlayBtn"
-                );
-
-
-            const playBtn =
-                document.getElementById(
-                    "playBtn"
-                );
-
-
-            if (
-                heroPlayBtn &&
-                playBtn
-            ) {
-
-                heroPlayBtn.addEventListener(
-                    "click",
-                    function () {
-
-                        playBtn.click();
-
-                    }
-                );
-            }
-
-        }
-    );
-
-</script>
-
 
 </body>
 
