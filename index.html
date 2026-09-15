@@ -4,1821 +4,1426 @@
 
 <head>
 
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="theme-color"
+    content="#07111f">
+
+<meta
+    name="description"
+    content="Onda Livre FM - Música, informação e programação">
 
 <title>Onda Livre FM</title>
 
-<meta
-name="description"
-content="Onda Livre FM — Rádio ao vivo, música e informação."
 
->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- =====================================================
+     FONTES
+====================================================== -->
 
 <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet"
->
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+
+<!-- =====================================================
+     ESTILOS
+====================================================== -->
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 82px;
-}
-
-body {
-    font-family: "DM Sans", sans-serif;
-    background: #f5f7fb;
-    color: #111827;
-    line-height: 1.5;
-    overflow-x: hidden;
-}
-
-button,
-input {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
-
-:root {
-
-    --blue: #1769e0;
-    --blue-dark: #0d4fb5;
-    --blue-light: #eaf2ff;
-
-    --green: #17a673;
-
-    --dark: #07111f;
-    --dark-2: #0b1728;
-
-    --text: #111827;
-    --muted: #6b7280;
-
-    --border: #e5e9f0;
-
-    --white: #ffffff;
-
-}
-
-
-/* =========================================================
-   HEADER FIXO
-========================================================= */
-
-header {
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    width: 100%;
-
-    z-index: 9999;
-
-    padding: 15px 5%;
-
-    background: rgba(6, 16, 29, .82);
-
-    border-bottom: 1px solid rgba(255,255,255,.08);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    transition:
-        background .25s ease,
-        box-shadow .25s ease;
-
-}
-
-header.scrolled {
-
-    background: rgba(6, 16, 29, .96);
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.18);
-
-}
-
-.navbar {
-
-    max-width: 1180px;
-
-    height: 50px;
-
-    margin: 0 auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-}
-
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 11px;
-
-    color: #ffffff;
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-    letter-spacing: -.5px;
-
-}
-
-.logo-mark {
-
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 11px;
-
-    background: linear-gradient(
-        135deg,
-        #2581ff,
-        #1557c5
-    );
-
-    box-shadow:
-        0 8px 25px rgba(23, 105, 224, .28);
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-}
-
-
-/* =========================================================
-   MENU
-========================================================= */
-
-nav {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 32px;
-
-}
-
-nav a {
-
-    position: relative;
-
-    color: rgba(255,255,255,.72);
-
-    font-size: 14px;
-
-    font-weight: 500;
-
-    transition: color .2s ease;
-
-}
-
-nav a::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -7px;
-
-    width: 0;
-    height: 2px;
-
-    border-radius: 10px;
-
-    background: #4e98ff;
-
-    transition: width .2s ease;
-
-}
-
-nav a:hover {
-
-    color: #ffffff;
-
-}
-
-nav a:hover::after {
-
-    width: 100%;
-
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-
-    min-height: 680px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-
-    padding:
-        145px 5%
-        80px;
-
-    background:
-
-        radial-gradient(
-            circle at 78% 35%,
-            rgba(35, 113, 231, .22),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 15% 90%,
-            rgba(20, 81, 164, .18),
-            transparent 30%
-        ),
-
-        linear-gradient(
-            135deg,
-            #06101d 0%,
-            #091727 50%,
-            #07111f 100%
-        );
-
-}
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 600px;
-    height: 600px;
-
-    right: -250px;
-    top: -250px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.06);
-
-}
-
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 900px;
-    height: 900px;
-
-    right: -400px;
-    top: -400px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.035);
-
-}
-
-.hero-container {
-
-    width: 100%;
-
-    max-width: 1180px;
-
-    margin: 0 auto;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        410px;
-
-    align-items: center;
-
-    gap: 80px;
-
-    position: relative;
-
-    z-index: 2;
-
-}
-
-
-/* =========================================================
-   HERO TEXT
-========================================================= */
-
-.hero-content {
-
-    max-width: 650px;
-
-}
-
-.live-label {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    margin-bottom: 22px;
-
-    color: #7eb4ff;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-
-}
-
-.live-dot {
-
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #20d49a;
-
-    box-shadow:
-        0 0 0 5px rgba(32,212,154,.1),
-        0 0 15px rgba(32,212,154,.45);
-
-}
-
-.hero h1 {
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: clamp(46px, 6vw, 76px);
-
-    line-height: .98;
-
-    letter-spacing: -3px;
-
-    color: #ffffff;
-
-    margin-bottom: 25px;
-
-}
-
-.hero h1 span {
-
-    color: #55a0ff;
-
-}
-
-.hero-description {
-
-    max-width: 570px;
-
-    color: rgba(255,255,255,.63);
-
-    font-size: 17px;
-
-    line-height: 1.7;
-
-    margin-bottom: 32px;
-
-}
-
-.hero-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 13px 20px;
-
-    border: 0;
-
-    border-radius: 11px;
-
-    background: #ffffff;
-
-    color: #101827;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    transition: .2s ease;
-
-}
-
-.hero-button:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.22);
-
-}
-
-
-/* =========================================================
-   PLAYER
-========================================================= */
-
-.player-card {
-
-    width: 100%;
-
-    max-width: 410px;
-
-    padding: 25px;
-
-    border-radius: 22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.105),
-            rgba(255,255,255,.045)
-        );
-
-    border: 1px solid rgba(255,255,255,.10);
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.32);
-
-    backdrop-filter: blur(20px);
-
-    -webkit-backdrop-filter: blur(20px);
-
-}
-
-
-/* =========================================================
-   PLAYER TOPO
-========================================================= */
-
-.player-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 23px;
-
-}
-
-.player-live {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    color: rgba(255,255,255,.6);
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.4px;
-
-}
-
-.player-live::before {
-
-    content: "";
-
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #20d49a;
-
-    box-shadow:
-        0 0 12px rgba(32,212,154,.8);
-
-}
-
-.player-frequency {
-
-    color: rgba(255,255,255,.45);
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 12px;
-
-}
-
-
-/* =========================================================
-   ÁREA DA CAPA
-========================================================= */
-
-.album-area {
-
-    width: 100%;
-
-    height: 125px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 20px;
-
-}
-
-.album-art {
-
-    width: 115px;
-    height: 115px;
-
-    border-radius: 20px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(74,148,255,.42),
-            transparent 28%
-        ),
-
-        linear-gradient(
-            145deg,
-            #0f3769,
-            #081c35
-        );
-
-    border: 1px solid rgba(255,255,255,.1);
-
-    box-shadow:
-        0 18px 45px rgba(0,0,0,.3);
-
-    position: relative;
-
-    overflow: hidden;
-
-}
-
-.album-art::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 75px;
-    height: 75px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.12);
-
-}
-
-.album-art::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 45px;
-    height: 45px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.12);
-
-}
-
-.album-logo {
-
-    position: relative;
-
-    z-index: 2;
-
-    font-family: "Space Grotesk", sans-serif;
-
-    color: #ffffff;
-
-    font-size: 18px;
-
-    font-weight: 700;
-
-    line-height: 1.05;
-
-    text-align: center;
-
-    letter-spacing: -1px;
-
-}
-
-
-/* =========================================================
-   MÚSICA
-========================================================= */
-
-.track-info {
-
-    text-align: center;
-
-    margin-bottom: 22px;
-
-}
-
-.track-title {
-
-    color: #ffffff;
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 17px;
-
-    font-weight: 600;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-}
-
-.track-artist {
-
-    margin-top: 4px;
-
-    color: rgba(255,255,255,.48);
-
-    font-size: 12px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-}
-
-
-/* =========================================================
-   CONTROLES
-========================================================= */
-
-.player-controls {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 13px;
-
-}
-
-.player-control {
-
-    width: 38px;
-    height: 38px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(255,255,255,.65);
-
-    background: rgba(255,255,255,.07);
-
-    transition: .2s ease;
-
-}
-
-.player-control:hover {
-
-    color: #ffffff;
-
-    background: rgba(255,255,255,.13);
-
-    transform: translateY(-1px);
-
-}
-
-.player-control.active {
-
-    color: #6eaeff;
-
-    background: rgba(23,105,224,.18);
-
-}
-
-.player-main {
-
-    width: 52px;
-    height: 52px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #ffffff;
-
-    background: #1769e0;
-
-    box-shadow:
-        0 8px 25px rgba(23,105,224,.4);
-
-    transition: .2s ease;
-
-}
-
-.player-main:hover {
-
-    background: #2778eb;
-
-    transform: scale(1.04);
-
-}
-
-.player-main:active {
-
-    transform: scale(.97);
-
-}
-
-
-/* =========================================================
-   VOLUME
-========================================================= */
-
-.volume-area {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-top: 22px;
-
-}
-
-.volume-icon {
-
-    width: 18px;
-    height: 18px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(255,255,255,.55);
-
-}
-
-#volume {
-
-    width: 100%;
-
-    height: 4px;
-
-    appearance: none;
-
-    -webkit-appearance: none;
-
-    border-radius: 10px;
-
-    background: rgba(255,255,255,.13);
-
-    outline: none;
-
-    cursor: pointer;
-
-}
-
-#volume::-webkit-slider-thumb {
-
-    appearance: none;
-
-    -webkit-appearance: none;
-
-    width: 13px;
-    height: 13px;
-
-    border-radius: 50%;
-
-    background: #ffffff;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,.3);
-
-}
-
-#volume::-moz-range-thumb {
-
-    width: 13px;
-    height: 13px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: #ffffff;
-
-    cursor: pointer;
-
-}
-
-
-/* =========================================================
-   ELEMENTOS LEGADOS
-   Mantidos para o script.js
-========================================================= */
-
-#dial,
-#dialTicks,
-#dialNeedle {
-
-    display: none !important;
-
-}
-
-
-/* =========================================================
-   ÁUDIO
-========================================================= */
-
-#audio {
-
-    display: none;
-
-}
-
-
-/* =========================================================
-   SEÇÕES
-========================================================= */
-
-.section {
-
-    padding: 95px 5%;
-
-}
-
-.section-container {
-
-    max-width: 1180px;
-
-    margin: 0 auto;
-
-}
-
-.section-header {
-
-    margin-bottom: 38px;
-
-}
-
-.section-label {
-
-    color: var(--blue);
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-
-    text-transform: uppercase;
-
-    margin-bottom: 9px;
-
-}
-
-.section-title {
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 34px;
-
-    line-height: 1.15;
-
-    letter-spacing: -1.2px;
-
-    color: var(--text);
-
-}
-
-
-/* =========================================================
-   PROGRAMAÇÃO
-========================================================= */
-
-#programacao {
-
-    background: #ffffff;
-
-}
-
-.playlist {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 16px;
-
-}
-
-.program-card {
-
-    padding: 22px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 15px;
-
-    background: #ffffff;
-
-    transition: .2s ease;
-
-}
-
-.program-card:hover {
-
-    border-color: #cbd8eb;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 35px rgba(15,35,65,.07);
-
-}
-
-.program-time {
-
-    color: var(--blue);
-
-    font-family: "Space Grotesk", sans-serif;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-
-}
-
-.program-name {
-
-    color: var(--text);
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-}
-
-.program-description {
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-    margin-top: 5px;
-
-}
-
-
-/* =========================================================
-   PEDIDOS
-========================================================= */
-
-#pedidos {
-
-    background: #f5f7fb;
-
-}
-
-.request-box {
-
-    max-width: 650px;
-
-    padding: 32px;
-
-    background: #ffffff;
-
-    border: 1px solid var(--border);
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 12px 35px rgba(15,35,65,.05);
-
-}
-
-.request-form {
-
-    display: grid;
-
-    gap: 15px;
-
-}
-
-.form-group {
-
-    display: grid;
-
-    gap: 7px;
-
-}
-
-.form-group label {
-
-    color: #374151;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-}
-
-.form-group input {
-
-    width: 100%;
-
-    height: 46px;
-
-    padding: 0 14px;
-
-    border: 1px solid #dfe4ec;
-
-    border-radius: 10px;
-
-    outline: none;
-
-    background: #ffffff;
-
-    color: #111827;
-
-    font-size: 14px;
-
-    transition: .2s ease;
-
-}
-
-.form-group input:focus {
-
-    border-color: var(--blue);
-
-    box-shadow:
-        0 0 0 3px rgba(23,105,224,.08);
-
-}
-
-.request-button {
-
-    height: 46px;
-
-    border: 0;
-
-    border-radius: 10px;
-
-    background: var(--blue);
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    transition: .2s ease;
-
-}
-
-.request-button:hover {
-
-    background: var(--blue-dark);
-
-    transform: translateY(-1px);
-
-}
-
-#requestStatus {
-
-    min-height: 20px;
-
-    margin-top: 2px;
-
-    color: var(--green);
-
-    font-size: 13px;
-
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    padding: 30px 5%;
-
-    background: #06101d;
-
-    color: rgba(255,255,255,.4);
-
-    font-size: 12px;
-
-}
-
-.footer-container {
-
-    max-width: 1180px;
-
-    margin: 0 auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-}
-
-.footer-brand {
-
-    color: rgba(255,255,255,.75);
-
-    font-weight: 600;
-
-}
-
-
-/* =========================================================
-   RESPONSIVO
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .hero {
-
-        padding-top: 135px;
-
+    /* =================================================
+       RESET
+    ================================================= */
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
-    .hero-container {
 
-        grid-template-columns: 1fr;
-
-        gap: 50px;
-
+    html {
+        scroll-behavior: smooth;
     }
 
-    .hero-content {
 
-        max-width: 700px;
+    body {
+        min-height: 100vh;
 
+        background:
+            radial-gradient(
+                circle at 80% 10%,
+                rgba(37, 99, 235, .16),
+                transparent 32%
+            ),
+            radial-gradient(
+                circle at 10% 40%,
+                rgba(14, 165, 233, .10),
+                transparent 30%
+            ),
+            #07111f;
+
+        color: #f8fafc;
+
+        font-family:
+            "Space Grotesk",
+            sans-serif;
     }
 
-    .player-card {
 
-        margin: 0 auto;
-
+    button,
+    input {
+        font: inherit;
     }
 
-    .playlist {
 
-        grid-template-columns:
-            repeat(2, 1fr);
-
+    button {
+        cursor: pointer;
     }
 
-}
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
 
 
-@media (max-width: 640px) {
+    /* =================================================
+       HEADER FIXO
+    ================================================= */
 
     header {
+        position: fixed;
 
-        padding:
-            10px 20px;
+        top: 0;
+        left: 0;
+        right: 0;
 
+        z-index: 9999;
+
+        height: 74px;
+
+        border-bottom:
+            1px solid rgba(255,255,255,.07);
+
+        background:
+            rgba(7,17,31,.78);
+
+        backdrop-filter:
+            blur(18px);
+
+        -webkit-backdrop-filter:
+            blur(18px);
+
+        transition:
+            background .25s ease,
+            box-shadow .25s ease;
     }
 
-    .navbar {
 
-        height: 48px;
+    header.scrolled {
+        background:
+            rgba(7,17,31,.94);
 
+        box-shadow:
+            0 10px 35px rgba(0,0,0,.20);
     }
+
+
+    .header-inner {
+        width: min(1180px, calc(100% - 36px));
+
+        height: 100%;
+
+        margin: auto;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+    }
+
 
     .logo {
+        display: flex;
 
-        font-size: 17px;
+        align-items: center;
 
+        gap: 11px;
+
+        font-size: 20px;
+
+        font-weight: 700;
+
+        letter-spacing: -.5px;
     }
 
-    .logo-mark {
 
+    .logo-mark {
         width: 34px;
         height: 34px;
 
-        border-radius: 9px;
+        display: grid;
 
+        place-items: center;
+
+        border-radius: 10px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #06b6d4
+            );
+
+        box-shadow:
+            0 8px 25px rgba(37,99,235,.25);
     }
+
+
+    .logo-mark svg {
+        width: 19px;
+        height: 19px;
+    }
+
 
     nav {
+        display: flex;
 
-        display: none;
+        align-items: center;
 
+        gap: 30px;
     }
+
+
+    nav a {
+        color: #94a3b8;
+
+        font-size: 14px;
+
+        font-weight: 500;
+
+        transition:
+            color .2s ease;
+    }
+
+
+    nav a:hover {
+        color: #ffffff;
+    }
+
+
+    @media (max-width: 680px) {
+
+        nav {
+            gap: 14px;
+        }
+
+        nav a {
+            font-size: 12px;
+        }
+
+        .logo {
+            font-size: 17px;
+        }
+
+        .logo-mark {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+
+    /* =================================================
+       HERO
+    ================================================= */
 
     .hero {
-
-        min-height: auto;
+        min-height: 760px;
 
         padding:
-            115px 20px
-            65px;
+            150px 20px 80px;
 
+        display: flex;
+
+        align-items: center;
     }
 
-    .hero-container {
 
-        gap: 42px;
+    .hero-inner {
+        width: min(1180px, 100%);
 
+        margin: auto;
+
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            440px;
+
+        gap: 80px;
+
+        align-items: center;
     }
+
+
+    @media (max-width: 900px) {
+
+        .hero-inner {
+            grid-template-columns: 1fr;
+
+            gap: 45px;
+        }
+
+        .hero {
+            padding-top: 120px;
+        }
+    }
+
+
+    /* =================================================
+       HERO TEXTO
+    ================================================= */
+
+    .eyebrow {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        margin-bottom: 22px;
+
+        color: #38bdf8;
+
+        font-family:
+            "IBM Plex Mono",
+            monospace;
+
+        font-size: 11px;
+
+        font-weight: 600;
+
+        letter-spacing: 1.2px;
+
+        text-transform: uppercase;
+    }
+
+
+    .eyebrow-dot {
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: #22c55e;
+
+        box-shadow:
+            0 0 0 5px rgba(34,197,94,.10),
+            0 0 16px rgba(34,197,94,.7);
+
+        animation:
+            pulse 1.8s infinite;
+    }
+
+
+    @keyframes pulse {
+
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: .45;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
 
     .hero h1 {
+        max-width: 680px;
 
-        font-size: 48px;
+        margin-bottom: 24px;
 
-        letter-spacing: -2px;
+        font-size:
+            clamp(44px, 6vw, 76px);
 
+        line-height: .98;
+
+        letter-spacing: -3px;
     }
+
+
+    .hero h1 span {
+        color: #38bdf8;
+    }
+
 
     .hero-description {
+        max-width: 580px;
 
-        font-size: 15px;
+        margin-bottom: 34px;
 
+        color: #94a3b8;
+
+        font-size: 17px;
+
+        line-height: 1.7;
     }
 
-    .player-card {
 
-        padding: 21px;
+    .hero-button {
+        display: inline-flex;
 
-        border-radius: 18px;
+        align-items: center;
 
+        gap: 10px;
+
+        padding: 14px 21px;
+
+        border: 0;
+
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #0891b2
+            );
+
+        color: #ffffff;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        box-shadow:
+            0 12px 30px rgba(37,99,235,.25);
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
     }
 
-    .album-area {
 
-        height: 110px;
+    .hero-button:hover {
+        transform: translateY(-2px);
 
+        box-shadow:
+            0 16px 38px rgba(37,99,235,.35);
     }
 
-    .album-art {
 
-        width: 100px;
-        height: 100px;
-
+    .hero-button svg {
+        width: 17px;
+        height: 17px;
     }
 
-    .section {
 
-        padding:
-            65px 20px;
+    /* =================================================
+       PLAYER
+    ================================================= */
 
+    .player {
+        position: relative;
+
+        width: 100%;
+
+        padding: 25px;
+
+        border:
+            1px solid rgba(255,255,255,.09);
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,255,255,.085),
+                rgba(255,255,255,.035)
+            );
+
+        box-shadow:
+            0 25px 80px rgba(0,0,0,.30);
+
+        backdrop-filter:
+            blur(20px);
+
+        -webkit-backdrop-filter:
+            blur(20px);
     }
 
-    .section-title {
 
-        font-size: 29px;
+    .player-top {
+        display: flex;
 
+        align-items: center;
+
+        justify-content: space-between;
+
+        margin-bottom: 25px;
     }
 
-    .playlist {
 
-        grid-template-columns: 1fr;
+    .player-live {
+        display: flex;
 
-    }
-
-    .request-box {
-
-        padding: 22px;
-
-    }
-
-    .footer-container {
-
-        flex-direction: column;
+        align-items: center;
 
         gap: 8px;
 
-        text-align: center;
+        color: #94a3b8;
 
+        font-family:
+            "IBM Plex Mono",
+            monospace;
+
+        font-size: 10px;
+
+        letter-spacing: 1px;
+
+        text-transform: uppercase;
     }
 
-}
+
+    .player-live-dot {
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background: #22c55e;
+
+        box-shadow:
+            0 0 12px rgba(34,197,94,.7);
+    }
 
 
-/* =========================================================
-   ACESSIBILIDADE
-========================================================= */
+    .frequency {
+        color: #64748b;
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
+        font-family:
+            "IBM Plex Mono",
+            monospace;
 
-    outline: 3px solid rgba(23,105,224,.35);
+        font-size: 11px;
+    }
 
-    outline-offset: 3px;
 
-}
+    .track {
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+
+        margin-bottom: 27px;
+    }
+
+
+    .album {
+        width: 54px;
+        height: 54px;
+
+        flex: 0 0 54px;
+
+        display: grid;
+
+        place-items: center;
+
+        border-radius: 15px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #06b6d4
+            );
+
+        box-shadow:
+            0 10px 30px rgba(37,99,235,.25);
+    }
+
+
+    .album svg {
+        width: 24px;
+        height: 24px;
+    }
+
+
+    .track-info {
+        min-width: 0;
+    }
+
+
+    .track-title {
+        overflow: hidden;
+
+        margin-bottom: 4px;
+
+        color: #f8fafc;
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+    }
+
+
+    .track-artist {
+        overflow: hidden;
+
+        color: #64748b;
+
+        font-size: 13px;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+    }
+
+
+    /* =================================================
+       CONTROLES
+    ================================================= */
+
+    .controls {
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+    }
+
+
+    .control-button {
+        width: 38px;
+        height: 38px;
+
+        display: grid;
+
+        place-items: center;
+
+        border: 1px solid
+            rgba(255,255,255,.08);
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,.045);
+
+        color: #94a3b8;
+
+        transition:
+            background .2s ease,
+            color .2s ease,
+            transform .2s ease;
+    }
+
+
+    .control-button:hover {
+        color: #ffffff;
+
+        background:
+            rgba(255,255,255,.10);
+
+        transform: translateY(-1px);
+    }
+
+
+    .control-button.primary {
+        width: 52px;
+        height: 52px;
+
+        border: 0;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #0891b2
+            );
+
+        color: #ffffff;
+
+        box-shadow:
+            0 10px 28px rgba(37,99,235,.30);
+    }
+
+
+    .control-button.active {
+        color: #38bdf8;
+
+        background:
+            rgba(56,189,248,.10);
+    }
+
+
+    .control-button svg {
+        width: 17px;
+        height: 17px;
+    }
+
+
+    .control-button.primary svg {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    /* =================================================
+       VOLUME
+    ================================================= */
+
+    .volume-area {
+        flex: 1;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        margin-left: 7px;
+    }
+
+
+    .volume-icon {
+        width: 18px;
+        height: 18px;
+
+        display: grid;
+
+        place-items: center;
+
+        color: #64748b;
+    }
+
+
+    .volume-icon svg {
+        width: 17px;
+        height: 17px;
+    }
+
+
+    #volume {
+        width: 100%;
+
+        height: 4px;
+
+        appearance: none;
+
+        -webkit-appearance: none;
+
+        border-radius: 10px;
+
+        outline: none;
+
+        background:
+            rgba(255,255,255,.10);
+    }
+
+
+    #volume::-webkit-slider-thumb {
+        width: 13px;
+        height: 13px;
+
+        appearance: none;
+
+        -webkit-appearance: none;
+
+        border: 0;
+
+        border-radius: 50%;
+
+        background: #38bdf8;
+
+        cursor: pointer;
+    }
+
+
+    #volume::-moz-range-thumb {
+        width: 13px;
+        height: 13px;
+
+        border: 0;
+
+        border-radius: 50%;
+
+        background: #38bdf8;
+
+        cursor: pointer;
+    }
+
+
+    /* =================================================
+       SEÇÕES
+    ================================================= */
+
+    section.content-section {
+        width: min(1180px, calc(100% - 36px));
+
+        margin: auto;
+
+        padding: 80px 0;
+    }
+
+
+    .section-label {
+        margin-bottom: 10px;
+
+        color: #38bdf8;
+
+        font-family:
+            "IBM Plex Mono",
+            monospace;
+
+        font-size: 10px;
+
+        letter-spacing: 1.5px;
+
+        text-transform: uppercase;
+    }
+
+
+    .section-title {
+        margin-bottom: 30px;
+
+        font-size: 30px;
+
+        letter-spacing: -1px;
+    }
+
+
+    /* =================================================
+       PROGRAMAÇÃO
+    ================================================= */
+
+    .playlist {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 14px;
+    }
+
+
+    @media (max-width: 760px) {
+
+        .playlist {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    .program {
+        padding: 20px;
+
+        border:
+            1px solid rgba(255,255,255,.07);
+
+        border-radius: 16px;
+
+        background:
+            rgba(255,255,255,.035);
+    }
+
+
+    .program-time {
+        margin-bottom: 8px;
+
+        color: #38bdf8;
+
+        font-family:
+            "IBM Plex Mono",
+            monospace;
+
+        font-size: 11px;
+    }
+
+
+    .program-name {
+        color: #f8fafc;
+
+        font-size: 15px;
+
+        font-weight: 600;
+    }
+
+
+    /* =================================================
+       PEDIDOS
+    ================================================= */
+
+    .request-box {
+        max-width: 600px;
+
+        padding: 25px;
+
+        border:
+            1px solid rgba(255,255,255,.07);
+
+        border-radius: 18px;
+
+        background:
+            rgba(255,255,255,.035);
+    }
+
+
+    .field {
+        margin-bottom: 15px;
+    }
+
+
+    .field label {
+        display: block;
+
+        margin-bottom: 7px;
+
+        color: #94a3b8;
+
+        font-size: 12px;
+    }
+
+
+    .field input {
+        width: 100%;
+
+        padding: 12px 13px;
+
+        border:
+            1px solid rgba(255,255,255,.08);
+
+        border-radius: 10px;
+
+        outline: none;
+
+        background:
+            rgba(0,0,0,.18);
+
+        color: #ffffff;
+    }
+
+
+    .field input:focus {
+        border-color:
+            rgba(56,189,248,.55);
+    }
+
+
+    .request-button {
+        padding: 12px 18px;
+
+        border: 0;
+
+        border-radius: 10px;
+
+        background: #2563eb;
+
+        color: #ffffff;
+
+        font-size: 13px;
+
+        font-weight: 600;
+    }
+
+
+    .request-button:hover {
+        background: #1d4ed8;
+    }
+
+
+    #requestStatus {
+        margin-top: 12px;
+
+        color: #38bdf8;
+
+        font-size: 12px;
+    }
+
+
+    /* =================================================
+       FOOTER
+    ================================================= */
+
+    footer {
+        width: min(1180px, calc(100% - 36px));
+
+        margin: 30px auto 0;
+
+        padding: 25px 0 35px;
+
+        border-top:
+            1px solid rgba(255,255,255,.07);
+
+        color: #64748b;
+
+        font-size: 12px;
+
+        text-align: center;
+    }
 
 </style>
+
 
 </head>
 
 <body>
 
-<!-- =======================================================
-     MENU SUPERIOR FIXO
-======================================================= -->
 
-<header id="siteHeader">
+<!-- =====================================================
+     HEADER
+====================================================== -->
 
-```
-<div class="navbar">
+<header id="topHeader">
 
-    <a
-        href="#player"
-        class="logo"
-        aria-label="Onda Livre FM"
-    >
+    <div class="header-inner">
 
-        <span class="logo-mark">
-            OL
-        </span>
+        <a
+            href="#player"
+            class="logo">
 
-        <span>
+            <span class="logo-mark">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2">
+
+                    <path d="M4 12h3"></path>
+
+                    <path d="M17 12h3"></path>
+
+                    <path d="M7 8a6 6 0 0 1 0 8"></path>
+
+                    <path d="M17 8a6 6 0 0 0 0 8"></path>
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="2">
+                    </circle>
+
+                </svg>
+
+            </span>
+
             Onda Livre FM
-        </span>
 
-    </a>
-
-
-    <nav>
-
-        <a href="#player">
-            Ouvir
         </a>
 
-        <a href="#programacao">
-            Programação
-        </a>
 
-        <a href="#pedidos">
-            Pedir música
-        </a>
+        <nav>
 
-    </nav>
+            <a href="#player">
+                Ouvir
+            </a>
 
-</div>
-```
+            <a href="#programacao">
+                Programação
+            </a>
+
+            <a href="#pedidos">
+                Pedidos
+            </a>
+
+        </nav>
+
+    </div>
 
 </header>
 
-<!-- =======================================================
+
+<!-- =====================================================
      HERO
-======================================================= -->
+====================================================== -->
 
-<main id="player">
+<main>
 
-```
-<section class="hero">
+    <section
+        class="hero"
+        id="player">
 
-    <div class="hero-container">
+        <div class="hero-inner">
 
 
-        <!-- TEXTO -->
+            <!-- =========================================
+                 TEXTO
+            ========================================== -->
 
-        <div class="hero-content">
+            <div>
 
-            <div class="live-label">
+                <div class="eyebrow">
 
-                <span class="live-dot"></span>
+                    <span class="eyebrow-dot"></span>
 
-                <span id="onair">
-                    AO VIVO
-                </span>
+                    Transmissão Onda Livre
+
+                </div>
+
+
+                <h1>
+
+                    Sua música.
+                    <br>
+
+                    <span>Sua onda.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Música, informação e entretenimento
+                    para acompanhar você em todos os momentos.
+
+                </p>
+
+
+                <button
+                    type="button"
+                    class="hero-button"
+                    id="heroPlayBtn">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="currentColor">
+
+                        <path
+                            d="M8 5v14l11-7z">
+                        </path>
+
+                    </svg>
+
+                    Ouvir agora
+
+                </button>
 
             </div>
 
 
-            <h1>
+            <!-- =========================================
+                 PLAYER
+            ========================================== -->
 
-                Sua música.
-                <br>
-
-                <span>Sua onda.</span>
-
-            </h1>
+            <div class="player">
 
 
-            <p class="hero-description">
+                <div class="player-top">
 
-                A Onda Livre FM leva música,
-                informação e companhia para
-                todos os momentos do seu dia.
+                    <div class="player-live">
 
-            </p>
+                        <span
+                            class="player-live-dot">
+                        </span>
 
+                        <span id="onair">
+                            OFFLINE
+                        </span>
 
-            <a
-                href="#player"
-                class="hero-button"
-                id="heroPlayButton"
-            >
-
-                <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                >
-
-                    <path d="M8 5v14l11-7z"></path>
-
-                </svg>
-
-                Ouvir agora
-
-            </a>
-
-        </div>
+                    </div>
 
 
-        <!-- =================================================
-             PLAYER
-        ================================================== -->
+                    <span
+                        class="frequency"
+                        id="freq">
 
-        <div class="player-card">
+                        Onda Livre FM
 
-
-            <div class="player-top">
-
-                <div class="player-live">
-
-                    <span>
-                        AO VIVO
                     </span>
 
                 </div>
 
 
-                <div
-                    class="player-frequency"
-                    id="freq"
-                >
-                    ONDA LIVRE FM
-                </div>
+                <div class="track">
 
-            </div>
+                    <div class="album">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7">
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="8">
+                            </circle>
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="2.5">
+                            </circle>
+
+                            <path
+                                d="M12 4v5">
+                            </path>
+
+                        </svg>
+
+                    </div>
 
 
-            <!-- Elementos preservados -->
+                    <div class="track-info">
 
-            <div id="dial" aria-hidden="true"></div>
+                        <div
+                            class="track-title"
+                            id="trackTitle">
 
-            <div id="dialTicks" aria-hidden="true"></div>
+                            Onda Livre FM
 
-            <div id="dialNeedle" aria-hidden="true"></div>
+                        </div>
 
 
-            <!-- CAPA -->
+                        <div
+                            class="track-artist"
+                            id="trackArtist">
 
-            <div class="album-area">
+                            Ao vivo
 
-                <div class="album-art">
+                        </div>
 
-                    <div class="album-logo">
-                        ONDA<br>LIVRE
                     </div>
 
                 </div>
 
-            </div>
+
+                <div class="controls">
 
 
-            <!-- MÚSICA -->
+                    <!-- ANTERIOR -->
 
-            <div class="track-info">
-
-                <div
-                    class="track-title"
-                    id="trackTitle"
-                >
-                    Onda Livre FM
-                </div>
-
-
-                <div
-                    class="track-artist"
-                    id="trackArtist"
-                >
-                    Ao vivo
-                </div>
-
-            </div>
-
-
-            <!-- CONTROLES -->
-
-            <div class="player-controls">
-
-
-                <button
-                    type="button"
-                    class="player-control"
-                    id="shuffleBtn"
-                    aria-label="Aleatório"
-                    title="Aleatório"
-                >
-
-                    <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        aria-hidden="true"
-                    >
-
-                        <path d="M3 7h3c4 0 5 10 10 10h5"></path>
-
-                        <path d="M18 14l3 3-3 3"></path>
-
-                        <path d="M3 17h3c1.4 0 2.4-1 3.1-2"></path>
-
-                        <path d="M15.9 9c.7-1 1.5-2 3.1-2H21"></path>
-
-                        <path d="M18 4l3 3-3 3"></path>
-
-                    </svg>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="player-control"
-                    id="prevBtn"
-                    aria-label="Anterior"
-                    title="Anterior"
-                >
-
-                    <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-
-                        <path d="M6 5h2v14H6z"></path>
-
-                        <path d="M19 5v14L9 12z"></path>
-
-                    </svg>
-
-                </button>
-
-
-                <!-- PLAY -->
-
-                <button
-                    type="button"
-                    class="player-main"
-                    id="playBtn"
-                    aria-label="Reproduzir"
-                    title="Reproduzir"
-                >
-
-                    <span id="playIcon">
+                    <button
+                        type="button"
+                        class="control-button"
+                        id="prevBtn"
+                        aria-label="Anterior">
 
                         <svg
-                            width="19"
-                            height="19"
                             viewBox="0 0 24 24"
-                            fill="currentColor"
-                            aria-hidden="true"
-                        >
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2">
 
-                            <path d="M8 5v14l11-7z"></path>
+                            <path
+                                d="M19 20L9 12l10-8v16z">
+                            </path>
+
+                            <line
+                                x1="5"
+                                y1="19"
+                                x2="5"
+                                y2="5">
+                            </line>
 
                         </svg>
 
-                    </span>
-
-                </button>
+                    </button>
 
 
-                <button
-                    type="button"
-                    class="player-control"
-                    id="nextBtn"
-                    aria-label="Próxima"
-                    title="Próxima"
-                >
+                    <!-- PLAY -->
 
-                    <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
+                    <button
+                        type="button"
+                        class="control-button primary"
+                        id="playBtn"
+                        aria-label="Reproduzir">
 
-                        <path d="M16 5h2v14h-2z"></path>
+                        <span id="playIcon">
 
-                        <path d="M5 5v14l10-7z"></path>
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="currentColor">
 
-                    </svg>
+                                <path
+                                    d="M8 5v14l11-7z">
+                                </path>
 
-                </button>
+                            </svg>
+
+                        </span>
+
+                    </button>
 
 
-            </div>
+                    <!-- PRÓXIMA -->
+
+                    <button
+                        type="button"
+                        class="control-button"
+                        id="nextBtn"
+                        aria-label="Próxima">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2">
+
+                            <path
+                                d="M5 4l10 8-10 8V4z">
+                            </path>
+
+                            <line
+                                x1="19"
+                                y1="5"
+                                x2="19"
+                                y2="19">
+                            </line>
+
+                        </svg>
+
+                    </button>
 
 
-            <!-- VOLUME -->
+                    <!-- VOLUME -->
 
-            <div class="volume-area">
+                    <div class="volume-area">
 
-                <div
-                    class="volume-icon"
-                    id="volumeIcon"
-                >
+                        <span
+                            class="volume-icon"
+                            id="volumeIcon">
 
-                    <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        aria-hidden="true"
-                    >
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2">
 
-                        <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                                <path
+                                    d="M11 5L6 9H2v6h4l5 4V5z">
+                                </path>
 
-                        <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+                                <path
+                                    d="M15.5 8.5a5 5 0 0 1 0 7">
+                                </path>
 
-                        <path d="M19 5a10 10 0 0 1 0 14"></path>
+                                <path
+                                    d="M19 5a10 10 0 0 1 0 14">
+                                </path>
 
-                    </svg>
+                            </svg>
+
+                        </span>
+
+
+                        <input
+                            id="volume"
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="100"
+                            aria-label="Volume">
+
+                    </div>
+
+
+                    <!-- SHUFFLE -->
+
+                    <button
+                        type="button"
+                        class="control-button"
+                        id="shuffleBtn"
+                        aria-label="Aleatório">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2">
+
+                            <path
+                                d="M17 3h4v4">
+                            </path>
+
+                            <path
+                                d="M3 7h4c4 0 6 10 10 10h4">
+                            </path>
+
+                            <path
+                                d="M17 17l4 4v-4">
+                            </path>
+
+                            <path
+                                d="M3 17h4c1.5 0 2.7-1.3 3.7-2.7">
+                            </path>
+
+                            <path
+                                d="M14.3 9.7C15.3 8.3 16.5 7 18 7h3">
+                            </path>
+
+                        </svg>
+
+                    </button>
 
                 </div>
 
 
-                <input
-                    type="range"
-                    id="volume"
-                    min="0"
-                    max="100"
-                    value="100"
-                    step="1"
-                    aria-label="Volume"
-                >
+                <!-- ÁUDIO -->
+
+                <audio
+                    id="audio"
+                    preload="auto"
+                    playsinline
+                    autoplay>
+                </audio>
 
             </div>
 
-
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =====================================================
-     PROGRAMAÇÃO
-====================================================== -->
+    <!-- =================================================
+         PROGRAMAÇÃO
+    ================================================== -->
 
-<section
-    class="section"
-    id="programacao"
->
+    <section
+        class="content-section"
+        id="programacao">
 
-    <div class="section-container">
-
-
-        <div class="section-header">
-
-            <div class="section-label">
-                Na Onda
-            </div>
-
-            <h2 class="section-title">
-                Programação
-            </h2>
-
+        <div class="section-label">
+            Na programação
         </div>
 
+        <h2 class="section-title">
+            Programação
+        </h2>
 
-        <div
-            class="playlist"
-            id="playlist"
-        >
 
-            <div class="program-card">
+        <div id="playlist" class="playlist">
+
+            <div class="program">
 
                 <div class="program-time">
                     AO VIVO
@@ -1828,269 +1433,210 @@ input:focus-visible {
                     Onda Livre FM
                 </div>
 
-                <div class="program-description">
-                    Música e companhia.
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-time">
+                    24 HORAS
+                </div>
+
+                <div class="program-name">
+                    Música e informação
                 </div>
 
             </div>
 
 
-            <div class="program-card">
+            <div class="program">
 
                 <div class="program-time">
-                    PROGRAMAÇÃO
+                    O DIA TODO
                 </div>
 
                 <div class="program-name">
-                    Em breve
-                </div>
-
-                <div class="program-description">
-                    Confira nossa programação.
-                </div>
-
-            </div>
-
-
-            <div class="program-card">
-
-                <div class="program-time">
-                    OUVINTES
-                </div>
-
-                <div class="program-name">
-                    Peça sua música
-                </div>
-
-                <div class="program-description">
-                    Envie seu pedido para a rádio.
+                    Tá na Onda, Tá com Tudo!
                 </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =====================================================
-     PEDIDOS
-====================================================== -->
+    <!-- =================================================
+         PEDIDOS
+    ================================================== -->
 
-<section
-    class="section"
-    id="pedidos"
->
+    <section
+        class="content-section"
+        id="pedidos">
 
-    <div class="section-container">
-
-
-        <div class="section-header">
-
-            <div class="section-label">
-                Participe
-            </div>
-
-            <h2 class="section-title">
-                Peça sua música
-            </h2>
-
+        <div class="section-label">
+            Interaja
         </div>
+
+        <h2 class="section-title">
+            Peça sua música
+        </h2>
 
 
         <div class="request-box">
 
-            <form
-                id="requestForm"
-                class="request-form"
-            >
+            <form id="requestForm">
 
-                <div class="form-group">
+                <div class="field">
 
                     <label for="reqName">
                         Seu nome
                     </label>
 
                     <input
-                        type="text"
                         id="reqName"
-                        name="name"
-                        placeholder="Digite seu nome"
+                        type="text"
                         autocomplete="name"
-                        required
-                    >
+                        required>
 
                 </div>
 
 
-                <div class="form-group">
+                <div class="field">
 
                     <label for="reqSong">
                         Música ou artista
                     </label>
 
                     <input
-                        type="text"
                         id="reqSong"
-                        name="song"
-                        placeholder="Qual música você quer ouvir?"
-                        required
-                    >
+                        type="text"
+                        required>
 
                 </div>
 
 
                 <button
                     type="submit"
-                    class="request-button"
-                >
+                    class="request-button">
+
                     Enviar pedido
+
                 </button>
 
 
-                <div
-                    id="requestStatus"
-                    aria-live="polite"
-                ></div>
+                <div id="requestStatus"></div>
 
             </form>
 
         </div>
 
-    </div>
-
-</section>
-```
+    </section>
 
 </main>
 
-<!-- =======================================================
-     ÁUDIO
-======================================================= -->
 
-<audio
-id="audio"
-autoplay
-playsinline
-preload="auto"
-
-> </audio>
-
-<!-- =======================================================
+<!-- =====================================================
      FOOTER
-======================================================= -->
+====================================================== -->
 
 <footer>
 
-```
-<div class="footer-container">
-
-    <div class="footer-brand">
-        Onda Livre FM
-    </div>
-
-    <div>
-        Música, informação e liberdade.
-    </div>
-
-</div>
-```
+    Onda Livre FM
+    &nbsp;•&nbsp;
+    Música, informação e entretenimento
 
 </footer>
 
-<!-- =======================================================
+
+<!-- =====================================================
      SCRIPT PRINCIPAL
-======================================================= -->
+====================================================== -->
 
 <script src="script.js"></script>
 
+
+<!-- =====================================================
+     MENU FIXO + BOTÃO HERO
+====================================================== -->
+
 <script>
-(function () {
-    "use strict";
 
-    const header = document.getElementById("siteHeader");
-    const heroButton = document.getElementById("heroPlayButton");
-    const playButton = document.getElementById("playBtn");
-    const audio = document.getElementById("audio");
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
 
-    /* Menu fixo */
-    function atualizarHeader() {
-        if (!header) return;
-        header.classList.toggle("scrolled", window.scrollY > 20);
-    }
-    window.addEventListener("scroll", atualizarHeader, { passive: true });
-    atualizarHeader();
+            const header =
+                document.getElementById("topHeader");
 
-    if (!audio) return;
 
-    /* Garante volume normal */
-    audio.volume = 1;
+            function atualizarHeader() {
 
-    /* Tenta reproduzir sem interferir no script.js principal.
-       Navegadores podem bloquear autoplay com som; nesse caso,
-       a primeira interação do visitante tenta novamente. */
-    let ultimaTentativa = 0;
+                if (!header) {
+                    return;
+                }
 
-    function iniciarAudioAutomaticamente() {
-        if (!audio.paused || !audio.src) return;
 
-        const agora = Date.now();
-        if (agora - ultimaTentativa < 700) return;
-        ultimaTentativa = agora;
+                if (window.scrollY > 20) {
 
-        const tentativa = audio.play();
-        if (tentativa && typeof tentativa.catch === "function") {
-            tentativa.catch(function (erro) {
-                console.info("Autoplay aguardando interação do usuário.", erro);
-            });
+                    header.classList.add(
+                        "scrolled"
+                    );
+
+                } else {
+
+                    header.classList.remove(
+                        "scrolled"
+                    );
+                }
+            }
+
+
+            window.addEventListener(
+                "scroll",
+                atualizarHeader,
+                {
+                    passive: true
+                }
+            );
+
+
+            atualizarHeader();
+
+
+            const heroPlayBtn =
+                document.getElementById(
+                    "heroPlayBtn"
+                );
+
+
+            const playBtn =
+                document.getElementById(
+                    "playBtn"
+                );
+
+
+            if (
+                heroPlayBtn &&
+                playBtn
+            ) {
+
+                heroPlayBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        playBtn.click();
+
+                    }
+                );
+            }
+
         }
-    }
+    );
 
-    /* Se o script.js ainda estiver configurando a URL, espera o áudio ficar pronto. */
-    audio.addEventListener("loadedmetadata", iniciarAudioAutomaticamente);
-    audio.addEventListener("canplay", iniciarAudioAutomaticamente);
-    audio.addEventListener("loadeddata", iniciarAudioAutomaticamente);
-
-    window.addEventListener("load", function () {
-        setTimeout(iniciarAudioAutomaticamente, 100);
-        setTimeout(iniciarAudioAutomaticamente, 800);
-        setTimeout(iniciarAudioAutomaticamente, 1800);
-        setTimeout(iniciarAudioAutomaticamente, 3500);
-    });
-
-    /* Primeira interação: tenta liberar o áudio caso o navegador tenha
-       bloqueado o autoplay. */
-    function liberarAudio() {
-        iniciarAudioAutomaticamente();
-        document.removeEventListener("pointerdown", liberarAudio);
-        document.removeEventListener("keydown", liberarAudio);
-        document.removeEventListener("touchstart", liberarAudio);
-    }
-    document.addEventListener("pointerdown", liberarAudio, { passive: true });
-    document.addEventListener("keydown", liberarAudio);
-    document.addEventListener("touchstart", liberarAudio, { passive: true });
-
-    /* O botão principal continua sendo controlado pelo script.js.
-       O botão hero apenas aciona o Play existente. */
-    if (heroButton && playButton) {
-        heroButton.addEventListener("click", function (evento) {
-            evento.preventDefault();
-            playButton.click();
-        });
-    }
-
-    /* Volume */
-    const volume = document.getElementById("volume");
-    if (volume) {
-        volume.addEventListener("input", function () {
-            audio.volume = Number(this.value) / 100;
-        });
-        audio.volume = Number(volume.value) / 100;
-    }
-})();
 </script>
+
+
 </body>
 
 </html>
