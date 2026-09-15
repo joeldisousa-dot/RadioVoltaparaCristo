@@ -55,7 +55,6 @@ const reqSong =
 const requestStatus =
     document.getElementById("requestStatus");
 
-
 /* ========================================================
    URL DO ÁUDIO
    ======================================================== */
