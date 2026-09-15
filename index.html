@@ -22,10 +22,6 @@
 
 <style>
 
-    /* =====================================================
-       RESET
-    ===================================================== */
-
     * {
         box-sizing: border-box;
         margin: 0;
@@ -93,22 +89,18 @@
 
 
     a {
-
         color: inherit;
-
         text-decoration: none;
     }
 
 
     button,
     input {
-
         font: inherit;
     }
 
 
     button {
-
         cursor: pointer;
     }
 
@@ -198,13 +190,11 @@
     .logo-mark {
 
         width: 36px;
-
         height: 36px;
 
         display: flex;
 
         align-items: center;
-
         justify-content: center;
 
         border-radius: 10px;
@@ -255,7 +245,6 @@
 
 
     nav a:hover {
-
         color: #ffffff;
     }
 
@@ -265,7 +254,6 @@
     ===================================================== */
 
     main {
-
         padding-top: 72px;
     }
 
@@ -305,7 +293,6 @@
 
 
     .hero-content {
-
         max-width: 650px;
     }
 
@@ -344,7 +331,6 @@
         content: "";
 
         width: 7px;
-
         height: 7px;
 
         border-radius: 50%;
@@ -553,7 +539,6 @@
         content: "";
 
         width: 7px;
-
         height: 7px;
 
         border-radius: 50%;
@@ -631,7 +616,6 @@
 
 
     .track-info {
-
         margin-bottom: 22px;
     }
 
@@ -674,7 +658,6 @@
     .control-btn {
 
         width: 42px;
-
         height: 42px;
 
         border-radius: 50%;
@@ -705,7 +688,6 @@
     .play-btn {
 
         width: 58px;
-
         height: 58px;
 
         justify-self: center;
@@ -800,7 +782,6 @@
     ===================================================== */
 
     #audio {
-
         display: none;
     }
 
@@ -810,13 +791,11 @@
     ===================================================== */
 
     .section {
-
         padding: 75px 0;
     }
 
 
     .section-header {
-
         margin-bottom: 30px;
     }
 
@@ -1038,14 +1017,11 @@
 
 
         .player-card {
-
-            margin:
-                0 auto;
+            margin: 0 auto;
         }
 
 
         .program-grid {
-
             grid-template-columns: 1fr;
         }
     }
@@ -1057,19 +1033,16 @@
 
             height: 64px;
 
-            padding:
-                0 20px;
+            padding: 0 20px;
         }
 
 
         main {
-
             padding-top: 64px;
         }
 
 
         .logo {
-
             font-size: 16px;
         }
 
@@ -1077,19 +1050,16 @@
         .logo-mark {
 
             width: 32px;
-
             height: 32px;
         }
 
 
         nav {
-
             gap: 10px;
         }
 
 
         nav a {
-
             font-size: 10px;
         }
 
@@ -1115,7 +1085,6 @@
 
 
         .hero p {
-
             font-size: 15px;
         }
 
@@ -1129,26 +1098,21 @@
 
 
         .hero-actions button {
-
             width: 100%;
         }
 
 
         .section {
-
-            padding:
-                55px 0;
+            padding: 55px 0;
         }
 
 
         .form-grid {
-
             grid-template-columns: 1fr;
         }
 
 
         .player-card {
-
             padding: 20px;
         }
     }
@@ -1206,15 +1170,11 @@
 
 
 <!-- =====================================================
-     MAIN
+     CONTEÚDO
 ====================================================== -->
 
 <main>
 
-
-    <!-- =================================================
-         HERO
-    ================================================== -->
 
     <section
         id="player"
@@ -1310,9 +1270,7 @@
             <div class="album">
 
                 <div class="album-icon">
-
                     ♪
-
                 </div>
 
             </div>
@@ -1435,11 +1393,9 @@
 
         <div class="section-header">
 
-
             <h2>
                 Programação
             </h2>
-
 
             <p>
                 Confira os momentos da Onda Livre FM.
@@ -1453,16 +1409,13 @@
 
             <div class="program-card">
 
-
                 <div class="program-time">
                     08:00 — 10:00
                 </div>
 
-
                 <h3>
                     Manhã Livre
                 </h3>
-
 
                 <p>
                     Música e informação para começar
@@ -1474,16 +1427,13 @@
 
             <div class="program-card">
 
-
                 <div class="program-time">
                     10:00 — 12:00
                 </div>
 
-
                 <h3>
                     Onda Musical
                 </h3>
-
 
                 <p>
                     Os melhores sons para acompanhar
@@ -1495,16 +1445,13 @@
 
             <div class="program-card">
 
-
                 <div class="program-time">
                     12:00 — 14:00
                 </div>
 
-
                 <h3>
                     Onda Livre
                 </h3>
-
 
                 <p>
                     Música, companhia e muita informação.
@@ -1529,11 +1476,9 @@
 
         <div class="section-header">
 
-
             <h2>
                 Peça sua música
             </h2>
-
 
             <p>
                 Envie seu pedido para a Onda Livre FM.
@@ -1553,11 +1498,9 @@
 
                     <div class="field">
 
-
                         <label for="reqName">
                             Seu nome
                         </label>
-
 
                         <input
                             id="reqName"
@@ -1571,11 +1514,9 @@
 
                     <div class="field">
 
-
                         <label for="reqSong">
                             Música
                         </label>
-
 
                         <input
                             id="reqSong"
@@ -1614,12 +1555,18 @@
 
 
 <!-- =====================================================
-     ÚNICO ELEMENTO DE ÁUDIO
+     ÚNICO ÁUDIO
+     
+     O autoplay fica diretamente no elemento.
+     O endereço é exatamente o que você confirmou
+     que toca diretamente no navegador.
 ====================================================== -->
 
 <audio
     id="audio"
+    src="https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3"
     preload="auto"
+    autoplay
     playsinline
 ></audio>
 
@@ -1637,7 +1584,7 @@
 
 
 <!-- =====================================================
-     ÚNICO JAVASCRIPT
+     ÚNICO SCRIPT
 ====================================================== -->
 
 <script src="script.js"></script>
