@@ -1974,7 +1974,7 @@ input:focus-visible {
 id="audio"
 autoplay
 playsinline
-preload="none"
+preload="auto"
 
 > </audio>
 
@@ -2006,80 +2006,91 @@ preload="none"
 
 <script src="script.js"></script>
 
-<!-- =======================================================
-     COMPORTAMENTO DO MENU E BOTÃO "OUVIR AGORA"
-======================================================= -->
-
 <script>
-
 (function () {
+    "use strict";
 
-    const header =
-        document.getElementById("siteHeader");
+    const header = document.getElementById("siteHeader");
+    const heroButton = document.getElementById("heroPlayButton");
+    const playButton = document.getElementById("playBtn");
+    const audio = document.getElementById("audio");
 
-    const heroButton =
-        document.getElementById("heroPlayButton");
-
-    const playButton =
-        document.getElementById("playBtn");
-
-    /*
-     * Menu fica mais sólido quando a página é rolada.
-     */
-
+    /* Menu fixo */
     function atualizarHeader() {
-
-        if (!header) {
-            return;
-        }
-
-        if (window.scrollY > 20) {
-
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
-        }
-
+        if (!header) return;
+        header.classList.toggle("scrolled", window.scrollY > 20);
     }
-
-    window.addEventListener(
-        "scroll",
-        atualizarHeader,
-        {
-            passive: true
-        }
-    );
-
+    window.addEventListener("scroll", atualizarHeader, { passive: true });
     atualizarHeader();
 
+    if (!audio) return;
 
-    /*
-     * "Ouvir agora" aciona exatamente o mesmo
-     * botão Play do player.
-     */
+    /* Garante volume normal */
+    audio.volume = 1;
 
-    if (heroButton && playButton) {
+    /* Tenta reproduzir sem interferir no script.js principal.
+       Navegadores podem bloquear autoplay com som; nesse caso,
+       a primeira interação do visitante tenta novamente. */
+    let ultimaTentativa = 0;
 
-        heroButton.addEventListener(
-            "click",
-            function (evento) {
+    function iniciarAudioAutomaticamente() {
+        if (!audio.paused || !audio.src) return;
 
-                evento.preventDefault();
+        const agora = Date.now();
+        if (agora - ultimaTentativa < 700) return;
+        ultimaTentativa = agora;
 
-                playButton.click();
-
-            }
-        );
-
+        const tentativa = audio.play();
+        if (tentativa && typeof tentativa.catch === "function") {
+            tentativa.catch(function (erro) {
+                console.info("Autoplay aguardando interação do usuário.", erro);
+            });
+        }
     }
 
+    /* Se o script.js ainda estiver configurando a URL, espera o áudio ficar pronto. */
+    audio.addEventListener("loadedmetadata", iniciarAudioAutomaticamente);
+    audio.addEventListener("canplay", iniciarAudioAutomaticamente);
+    audio.addEventListener("loadeddata", iniciarAudioAutomaticamente);
+
+    window.addEventListener("load", function () {
+        setTimeout(iniciarAudioAutomaticamente, 100);
+        setTimeout(iniciarAudioAutomaticamente, 800);
+        setTimeout(iniciarAudioAutomaticamente, 1800);
+        setTimeout(iniciarAudioAutomaticamente, 3500);
+    });
+
+    /* Primeira interação: tenta liberar o áudio caso o navegador tenha
+       bloqueado o autoplay. */
+    function liberarAudio() {
+        iniciarAudioAutomaticamente();
+        document.removeEventListener("pointerdown", liberarAudio);
+        document.removeEventListener("keydown", liberarAudio);
+        document.removeEventListener("touchstart", liberarAudio);
+    }
+    document.addEventListener("pointerdown", liberarAudio, { passive: true });
+    document.addEventListener("keydown", liberarAudio);
+    document.addEventListener("touchstart", liberarAudio, { passive: true });
+
+    /* O botão principal continua sendo controlado pelo script.js.
+       O botão hero apenas aciona o Play existente. */
+    if (heroButton && playButton) {
+        heroButton.addEventListener("click", function (evento) {
+            evento.preventDefault();
+            playButton.click();
+        });
+    }
+
+    /* Volume */
+    const volume = document.getElementById("volume");
+    if (volume) {
+        volume.addEventListener("input", function () {
+            audio.volume = Number(this.value) / 100;
+        });
+        audio.volume = Number(volume.value) / 100;
+    }
 })();
-
 </script>
-
 </body>
 
 </html>
