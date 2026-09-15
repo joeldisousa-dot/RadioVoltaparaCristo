@@ -1,46 +1,88 @@
+/* ============================================================
+   ONDA LIVRE
+   Plataforma de Evangelização
+============================================================ */
+
+
+/* ============================================================
+   CONFIGURAÇÃO DO ÁUDIO
+============================================================ */
+
 const STREAM_URL =
     "https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3";
 
 const VOLUME_INICIAL = 1.0;
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    const audio = document.getElementById("audio");
+/* ============================================================
+   ELEMENTOS
+============================================================ */
 
-    const playBtn = document.getElementById("playBtn");
-    const playIcon = document.getElementById("playIcon");
+const audio = document.getElementById("audio");
 
-    const heroPlayBtn =
-        document.getElementById("heroPlayBtn");
+const playBtn = document.getElementById("playBtn");
+const playIcon = document.getElementById("playIcon");
 
-    const volume =
-        document.getElementById("volume");
+const heroPlayBtn =
+    document.getElementById("heroPlayBtn");
 
-    const prevBtn =
-        document.getElementById("prevBtn");
+const heroMainPlayBtn =
+    document.getElementById("heroMainPlayBtn");
 
-    const nextBtn =
-        document.getElementById("nextBtn");
+const prevBtn =
+    document.getElementById("prevBtn");
 
-    const album =
-        document.getElementById("album");
+const volume =
+    document.getElementById("volume");
 
-    const onair =
-        document.getElementById("onair");
+const trackTitle =
+    document.getElementById("trackTitle");
+
+const trackArtist =
+    document.getElementById("trackArtist");
+
+const miniTrackTitle =
+    document.getElementById("miniTrackTitle");
+
+const miniTrackArtist =
+    document.getElementById("miniTrackArtist");
+
+const cover =
+    document.getElementById("cover");
+
+const requestForm =
+    document.getElementById("requestForm");
+
+const requestStatus =
+    document.getElementById("requestStatus");
+
+const siteHeader =
+    document.getElementById("siteHeader");
+
+
+/* ============================================================
+   ESTADO
+============================================================ */
+
+let primeiraInteracaoResolvida = false;
+
+
+/* ============================================================
+   CONFIGURAÇÃO INICIAL
+============================================================ */
+
+function configurarAudio() {
 
     if (!audio) {
-        console.error("Áudio não encontrado.");
+        console.error(
+            "Elemento de áudio não encontrado."
+        );
+
         return;
     }
 
 
-    /* =====================================================
-       CONFIGURAÇÃO
-    ===================================================== */
-
     audio.src = STREAM_URL;
-
-    audio.preload = "auto";
 
     audio.autoplay = true;
 
@@ -56,536 +98,610 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =====================================================
-       INTERFACE
-    ===================================================== */
+    atualizarInformacoesFaixa();
 
-    function atualizarInterface() {
+}
 
-        const tocando =
-            !audio.paused &&
-            !audio.ended;
 
-        if (playIcon) {
-            playIcon.textContent =
-                tocando ? "❚❚" : "▶";
-        }
+/* ============================================================
+   INFORMAÇÕES DA FAIXA
+============================================================ */
 
-        if (playBtn) {
+function atualizarInformacoesFaixa() {
 
-            playBtn.setAttribute(
-                "aria-label",
-                tocando
-                    ? "Pausar"
-                    : "Reproduzir"
-            );
-        }
+    const titulo =
+        "Futuro do homem e o final dos tempos";
 
-        if (album) {
+    const artista =
+        "Onda Livre";
 
-            album.classList.toggle(
-                "album-playing",
-                tocando
-            );
-        }
 
-        if (onair) {
+    if (trackTitle) {
+        trackTitle.textContent = titulo;
+    }
 
-            onair.classList.toggle(
-                "active",
-                tocando
-            );
-        }
+    if (trackArtist) {
+        trackArtist.textContent = artista;
+    }
+
+    if (miniTrackTitle) {
+        miniTrackTitle.textContent = titulo;
+    }
+
+    if (miniTrackArtist) {
+        miniTrackArtist.textContent = artista;
+    }
+
+}
+
+
+/* ============================================================
+   ATUALIZAÇÃO DOS BOTÕES
+============================================================ */
+
+function atualizarEstadoPlayer() {
+
+    const tocando =
+        audio &&
+        !audio.paused &&
+        !audio.ended;
+
+
+    if (playIcon) {
+        playIcon.textContent =
+            tocando ? "❚❚" : "▶";
     }
 
 
-    /* =====================================================
-       DESBLOQUEIO PELO PRIMEIRO CLIQUE
-    ===================================================== */
+    if (heroMainPlayBtn) {
 
-    let autoplayBloqueado = false;
+        heroMainPlayBtn.textContent =
+            tocando ? "❚❚" : "▶";
 
-    let aguardandoClique = false;
-
-
-    async function iniciarAudio() {
-
-        try {
-
-            audio.muted = false;
-
-            audio.volume = VOLUME_INICIAL;
-
-            await audio.play();
-
-            autoplayBloqueado = false;
-
-            aguardandoClique = false;
-
-            removerCliqueGlobal();
-
-            atualizarInterface();
-
-            console.log(
-                "Onda Livre FM: áudio iniciado."
-            );
-
-        } catch (erro) {
-
-            autoplayBloqueado = true;
-
-            aguardandoClique = true;
-
-            adicionarCliqueGlobal();
-
-            atualizarInterface();
-
-            console.log(
-                "O navegador bloqueou o autoplay. " +
-                "Aguardando interação do usuário."
-            );
-        }
-    }
-
-
-    async function primeiroClique() {
-
-        if (!aguardandoClique) {
-            return;
-        }
-
-        try {
-
-            audio.muted = false;
-
-            audio.volume = VOLUME_INICIAL;
-
-            await audio.play();
-
-            autoplayBloqueado = false;
-
-            aguardandoClique = false;
-
-            removerCliqueGlobal();
-
-            atualizarInterface();
-
-        } catch (erro) {
-
-            console.error(
-                "Não foi possível iniciar o áudio:",
-                erro
-            );
-        }
-    }
-
-
-    function adicionarCliqueGlobal() {
-
-        document.addEventListener(
-            "click",
-            primeiroClique,
-            true
-        );
-
-        document.addEventListener(
-            "touchstart",
-            primeiroClique,
-            true
+        heroMainPlayBtn.setAttribute(
+            "aria-label",
+            tocando
+                ? "Pausar"
+                : "Reproduzir"
         );
     }
 
 
-    function removerCliqueGlobal() {
+    if (cover) {
 
-        document.removeEventListener(
-            "click",
-            primeiroClique,
-            true
-        );
-
-        document.removeEventListener(
-            "touchstart",
-            primeiroClique,
-            true
-        );
-    }
-
-
-    /* =====================================================
-       PLAY / PAUSE
-    ===================================================== */
-
-    async function alternarAudio() {
-
-        if (audio.paused) {
-
-            try {
-
-                audio.muted = false;
-
-                if (
-                    audio.volume === 0
-                ) {
-                    audio.volume =
-                        VOLUME_INICIAL;
-
-                    if (volume) {
-                        volume.value =
-                            VOLUME_INICIAL;
-                    }
-                }
-
-                await audio.play();
-
-            } catch (erro) {
-
-                console.error(
-                    "Erro ao reproduzir:",
-                    erro
-                );
-            }
-
+        if (tocando) {
+            cover.classList.add("playing");
         } else {
-
-            audio.pause();
+            cover.classList.remove("playing");
         }
 
-        atualizarInterface();
+    }
+
+}
+
+
+/* ============================================================
+   INICIAR ÁUDIO
+============================================================ */
+
+async function iniciarAudio() {
+
+    if (!audio) {
+        return false;
     }
 
 
-    /* =====================================================
-       BOTÃO PLAY
-    ===================================================== */
+    try {
 
-    if (playBtn) {
+        audio.muted = false;
 
-        playBtn.addEventListener(
-            "click",
-            function (event) {
+        audio.volume =
+            volume
+                ? Number(volume.value)
+                : VOLUME_INICIAL;
 
-                event.stopPropagation();
 
-                alternarAudio();
-            }
+        const promessa =
+            audio.play();
+
+
+        if (promessa !== undefined) {
+            await promessa;
+        }
+
+
+        primeiraInteracaoResolvida = true;
+
+        removerFallbackAutoplay();
+
+        atualizarEstadoPlayer();
+
+        return true;
+
+    } catch (erro) {
+
+        /*
+         * O navegador pode bloquear autoplay
+         * com áudio. Isso não é erro do código.
+         */
+
+        console.log(
+            "Autoplay bloqueado pelo navegador.",
+            erro
         );
+
+        atualizarEstadoPlayer();
+
+        return false;
+    }
+
+}
+
+
+/* ============================================================
+   TENTATIVA AUTOMÁTICA
+============================================================ */
+
+function tentarAutoplay() {
+
+    if (!audio) {
+        return;
     }
 
 
-    /* =====================================================
-       BOTÃO HERO
-    ===================================================== */
+    /*
+     * Tentamos iniciar imediatamente.
+     */
 
-    if (heroPlayBtn) {
+    iniciarAudio();
 
-        heroPlayBtn.addEventListener(
-            "click",
-            function (event) {
+}
 
-                event.stopPropagation();
 
-                alternarAudio();
+/* ============================================================
+   PRIMEIRO CLIQUE/TOQUE
+============================================================ */
+
+async function desbloquearAudio() {
+
+    if (primeiraInteracaoResolvida) {
+        return;
+    }
+
+
+    if (!audio) {
+        return;
+    }
+
+
+    const iniciou =
+        await iniciarAudio();
+
+
+    if (iniciou) {
+
+        primeiraInteracaoResolvida = true;
+
+        removerFallbackAutoplay();
+
+    }
+
+}
+
+
+/* ============================================================
+   FALLBACK PARA AUTOPLAY
+============================================================ */
+
+function ativarFallbackAutoplay() {
+
+    document.addEventListener(
+        "click",
+        desbloquearAudio,
+        true
+    );
+
+    document.addEventListener(
+        "touchstart",
+        desbloquearAudio,
+        true
+    );
+
+    document.addEventListener(
+        "pointerdown",
+        desbloquearAudio,
+        true
+    );
+
+}
+
+
+/* ============================================================
+   REMOVER FALLBACK
+============================================================ */
+
+function removerFallbackAutoplay() {
+
+    document.removeEventListener(
+        "click",
+        desbloquearAudio,
+        true
+    );
+
+    document.removeEventListener(
+        "touchstart",
+        desbloquearAudio,
+        true
+    );
+
+    document.removeEventListener(
+        "pointerdown",
+        desbloquearAudio,
+        true
+    );
+
+}
+
+
+/* ============================================================
+   PLAY / PAUSE
+============================================================ */
+
+async function alternarAudio() {
+
+    if (!audio) {
+        return;
+    }
+
+
+    if (audio.paused || audio.ended) {
+
+        await iniciarAudio();
+
+    } else {
+
+        audio.pause();
+
+    }
+
+
+    atualizarEstadoPlayer();
+
+}
+
+
+/* ============================================================
+   BOTÃO PRINCIPAL
+============================================================ */
+
+if (playBtn) {
+
+    playBtn.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            alternarAudio();
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   BOTÃO HERO
+============================================================ */
+
+if (heroPlayBtn) {
+
+    heroPlayBtn.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            alternarAudio();
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   BOTÃO HERO PLAYER
+============================================================ */
+
+if (heroMainPlayBtn) {
+
+    heroMainPlayBtn.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            alternarAudio();
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   VOLUME
+============================================================ */
+
+if (volume) {
+
+    volume.addEventListener(
+        "input",
+        function() {
+
+            const valor =
+                Number(this.value);
+
+            audio.volume = valor;
+
+            /*
+             * Se o usuário colocar volume maior que zero
+             * depois de uma tentativa bloqueada,
+             * tentamos iniciar novamente.
+             */
+
+            if (
+                valor > 0 &&
+                audio.paused
+            ) {
+
+                iniciarAudio();
+
             }
-        );
-    }
+
+        }
+    );
+
+}
 
 
-    /* =====================================================
-       VOLUME
-    ===================================================== */
+/* ============================================================
+   BOTÃO ANTERIOR
+============================================================ */
 
-    if (volume) {
+if (prevBtn) {
 
-        volume.addEventListener(
-            "input",
-            function () {
+    prevBtn.addEventListener(
+        "click",
+        function(event) {
 
-                audio.volume =
-                    Number(this.value);
+            event.stopPropagation();
 
-                if (
-                    audio.volume > 0
-                ) {
-                    audio.muted = false;
-                }
-            }
-        );
-    }
+            /*
+             * Como neste momento existe apenas uma faixa,
+             * o botão anterior reinicia a faixa atual.
+             */
 
-
-    /* =====================================================
-       BOTÃO ANTERIOR
-    ===================================================== */
-
-    if (prevBtn) {
-
-        prevBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
+            if (audio) {
 
                 audio.currentTime = 0;
 
-                if (audio.paused) {
-                    alternarAudio();
-                }
+                iniciarAudio();
+
             }
-        );
-    }
+
+        }
+    );
+
+}
 
 
-    /* =====================================================
-       BOTÃO PRÓXIMO
-    ===================================================== */
+/* ============================================================
+   EVENTOS DO ÁUDIO
+============================================================ */
 
-    if (nextBtn) {
+if (audio) {
 
-        nextBtn.addEventListener(
-            "click",
-            function (event) {
+    audio.addEventListener(
+        "play",
+        atualizarEstadoPlayer
+    );
 
-                event.stopPropagation();
-
-                audio.currentTime = 0;
-
-                if (audio.paused) {
-                    alternarAudio();
-                }
-            }
-        );
-    }
-
-
-    /* =====================================================
-       EVENTOS
-    ===================================================== */
 
     audio.addEventListener(
         "playing",
-        function () {
-
-            autoplayBloqueado = false;
-
-            aguardandoClique = false;
-
-            removerCliqueGlobal();
-
-            atualizarInterface();
-        }
+        atualizarEstadoPlayer
     );
 
 
     audio.addEventListener(
         "pause",
-        atualizarInterface
+        atualizarEstadoPlayer
     );
 
 
     audio.addEventListener(
-        "play",
-        atualizarInterface
-    );
+        "ended",
+        function() {
 
+            /*
+             * Quando a playlist de músicas for adicionada,
+             * aqui será chamado o próximo áudio.
+             */
 
-    audio.addEventListener(
-        "canplay",
-        function () {
+            atualizarEstadoPlayer();
 
-            if (
-                audio.paused &&
-                !autoplayBloqueado
-            ) {
-                iniciarAudio();
-            }
         }
     );
 
 
     audio.addEventListener(
         "error",
-        function () {
+        function() {
 
             console.error(
-                "Erro no áudio:",
+                "Erro ao reproduzir o áudio.",
                 audio.error
             );
 
-            atualizarInterface();
+            atualizarEstadoPlayer();
+
         }
     );
 
-
-    /* =====================================================
-       TENTATIVA AUTOMÁTICA
-    ===================================================== */
-
-    iniciarAudio();
+}
 
 
-    setTimeout(
-        function () {
+/* ============================================================
+   FORMULÁRIO DE ORAÇÃO
+============================================================ */
 
-            if (
-                audio.paused &&
-                !audio.ended
-            ) {
-                iniciarAudio();
+if (requestForm) {
+
+    requestForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const nome =
+                document.getElementById(
+                    "reqName"
+                ).value.trim();
+
+
+            const pedido =
+                document.getElementById(
+                    "reqSong"
+                ).value.trim();
+
+
+            if (!nome || !pedido) {
+
+                requestStatus.textContent =
+                    "Preencha seu nome e seu pedido de oração.";
+
+                return;
+
             }
 
-        },
-        1000
+
+            /*
+             * Neste primeiro modelo o formulário funciona
+             * localmente. O ponto de integração com Google
+             * Sheets / Apps Script poderá ser colocado aqui.
+             */
+
+            requestStatus.textContent =
+                "Seu pedido foi preparado. Que Deus fortaleça seu coração. 🙏";
+
+
+            requestForm.reset();
+
+
+            setTimeout(
+                function() {
+
+                    requestStatus.textContent = "";
+
+                },
+                7000
+            );
+
+        }
     );
 
+}
 
-    /* =====================================================
-       CABEÇALHO
-    ===================================================== */
 
-    const header =
-        document.getElementById("siteHeader");
+/* ============================================================
+   HEADER AO ROLAR
+============================================================ */
 
-    if (header) {
+window.addEventListener(
+    "scroll",
+    function() {
 
-        window.addEventListener(
-            "scroll",
-            function () {
+        if (!siteHeader) {
+            return;
+        }
 
-                if (
-                    window.scrollY > 15
-                ) {
-                    header.classList.add(
-                        "scrolled"
-                    );
-                } else {
-                    header.classList.remove(
-                        "scrolled"
-                    );
-                }
-            }
-        );
+
+        if (window.scrollY > 30) {
+
+            siteHeader.classList.add(
+                "scrolled"
+            );
+
+        } else {
+
+            siteHeader.classList.remove(
+                "scrolled"
+            );
+
+        }
+
     }
+);
 
 
-    /* =====================================================
-       FORMULÁRIO
-    ===================================================== */
+/* ============================================================
+   TECLA ESPAÇO
+============================================================ */
 
-    const requestForm =
-        document.getElementById(
-            "requestForm"
-        );
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-    const requestStatus =
-        document.getElementById(
-            "requestStatus"
-        );
+        /*
+         * Não interfere quando o usuário está digitando.
+         */
 
-
-    if (requestForm) {
-
-        requestForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                if (requestStatus) {
-
-                    requestStatus.textContent =
-                        "Pedido enviado com sucesso!";
-
-                    requestStatus.classList.add(
-                        "show"
-                    );
-                }
-
-                requestForm.reset();
+        const tag =
+            document.activeElement
+                ? document.activeElement.tagName
+                : "";
 
 
-                setTimeout(
-                    function () {
-
-                        if (requestStatus) {
-
-                            requestStatus.classList.remove(
-                                "show"
-                            );
-                        }
-
-                    },
-                    4000
-                );
-            }
-        );
-    }
-
-
-    /* =====================================================
-       TECLA ESPAÇO
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.code !== "Space"
-            ) {
-                return;
-            }
-
-            const elemento =
-                document.activeElement;
-
-            if (
-                elemento &&
-                (
-                    elemento.tagName === "INPUT" ||
-                    elemento.tagName === "TEXTAREA" ||
-                    elemento.tagName === "SELECT"
-                )
-            ) {
-                return;
-            }
+        if (
+            event.code === "Space" &&
+            tag !== "INPUT" &&
+            tag !== "TEXTAREA"
+        ) {
 
             event.preventDefault();
 
             alternarAudio();
+
         }
-    );
+
+    }
+);
 
 
-    /* =====================================================
-       INFORMAÇÕES DA FAIXA
-    ===================================================== */
+/* ============================================================
+   INICIALIZAÇÃO
+============================================================ */
 
-    const trackTitle =
-        document.getElementById(
-            "trackTitle"
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        configurarAudio();
+
+        ativarFallbackAutoplay();
+
+        /*
+         * Pequeno atraso para dar tempo ao navegador
+         * de preparar o elemento de áudio.
+         */
+
+        setTimeout(
+            tentarAutoplay,
+            250
         );
 
-    const trackArtist =
-        document.getElementById(
-            "trackArtist"
-        );
-
-
-    if (trackTitle) {
-
-        trackTitle.textContent =
-            "Futuro do homem e o final dos tempos";
     }
-
-
-    if (trackArtist) {
-
-        trackArtist.textContent =
-            "Onda Livre FM";
-    }
-
-
-    atualizarInterface();
-
-});
+);
