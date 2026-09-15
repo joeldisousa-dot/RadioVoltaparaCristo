@@ -1,10 +1,10 @@
 /* =========================================================
-ONDA LIVRE
-PLAYER + AUTOPLAY + EVANGELIZAÇÃO
+DE VOLTA PARA CRISTO
+PLAYER DE LOUVORES E MENSAGENS
 ========================================================= */
 
 /* =========================================================
-CONFIGURAÇÃO
+CONFIGURAÇÃO DO ÁUDIO
 ========================================================= */
 
 const STREAM_URL =
@@ -14,16 +14,20 @@ const VOLUME_INICIAL = 1.0;
 
 /* =========================================================
 PLAYLIST
-Posteriormente você poderá colocar os 500 MP3 aqui.
 ========================================================= */
 
 const playlist = [
 
 
 {
-    title: "Futuro do homem e o final dos tempos",
-    artist: "Onda Livre",
-    url: STREAM_URL
+    title:
+        "Futuro do homem e o final dos tempos",
+
+    artist:
+        "De Volta para Cristo",
+
+    url:
+        STREAM_URL
 }
 
 
@@ -57,14 +61,14 @@ document.getElementById("playIcon");
 const heroPlayBtn =
 document.getElementById("heroPlayBtn");
 
-const volume =
-document.getElementById("volume");
-
 const prevBtn =
 document.getElementById("prevBtn");
 
 const nextBtn =
 document.getElementById("nextBtn");
+
+const volume =
+document.getElementById("volume");
 
 const shuffleBtn =
 document.getElementById("shuffleBtn");
@@ -100,21 +104,7 @@ const requestStatus =
 document.getElementById("requestStatus");
 
 /* =========================================================
-VERIFICAÇÃO
-========================================================= */
-
-if (!audio) {
-
-
-console.error(
-    "Onda Livre: elemento #audio não encontrado."
-);
-
-
-}
-
-/* =========================================================
-CONFIGURAÇÃO INICIAL DO ÁUDIO
+CONFIGURAR ÁUDIO
 ========================================================= */
 
 function configurarAudio() {
@@ -124,11 +114,17 @@ audio.autoplay = true;
 
 audio.muted = false;
 
-audio.volume = VOLUME_INICIAL;
+audio.volume =
+    VOLUME_INICIAL;
 
 audio.playsInline = true;
 
-volume.value = VOLUME_INICIAL;
+if (volume) {
+
+    volume.value =
+        VOLUME_INICIAL;
+
+}
 
 
 }
@@ -137,31 +133,51 @@ volume.value = VOLUME_INICIAL;
 CARREGAR MÚSICA
 ========================================================= */
 
-function carregarMusica(index, tocar = false) {
+function carregarMusica(
+index,
+tocar = false
+) {
 
 
 if (!playlist.length) {
     return;
 }
 
+
 if (index < 0) {
-    index = playlist.length - 1;
+
+    index =
+        playlist.length - 1;
+
 }
 
-if (index >= playlist.length) {
+
+if (
+    index >= playlist.length
+) {
+
     index = 0;
+
 }
 
-currentIndex = index;
+
+currentIndex =
+    index;
+
 
 const musica =
     playlist[currentIndex];
 
-audio.src = musica.url;
+
+audio.src =
+    musica.url;
+
 
 audio.load();
 
+
 atualizarInformacoes();
+
 
 if (tocar) {
 
@@ -182,35 +198,40 @@ function atualizarInformacoes() {
 const musica =
     playlist[currentIndex];
 
+
 if (!musica) {
     return;
 }
 
+
 if (trackTitle) {
 
     trackTitle.textContent =
-        musica.title || "Onda Livre";
+        musica.title;
 
 }
+
 
 if (trackArtist) {
 
     trackArtist.textContent =
-        musica.artist || "Onda Livre";
+        musica.artist;
 
 }
+
 
 if (bottomTrackTitle) {
 
     bottomTrackTitle.textContent =
-        musica.title || "Onda Livre";
+        musica.title;
 
 }
+
 
 if (bottomTrackArtist) {
 
     bottomTrackArtist.textContent =
-        musica.artist || "Onda Livre";
+        musica.artist;
 
 }
 
@@ -228,15 +249,31 @@ if (!audio) {
     return false;
 }
 
+
 try {
 
     audio.muted = false;
 
-    audio.volume =
-        Number(volume?.value || VOLUME_INICIAL);
+
+    if (
+        volume &&
+        Number(volume.value) >= 0
+    ) {
+
+        audio.volume =
+            Number(volume.value);
+
+    } else {
+
+        audio.volume =
+            VOLUME_INICIAL;
+
+    }
+
 
     const promessa =
         audio.play();
+
 
     if (promessa !== undefined) {
 
@@ -244,20 +281,26 @@ try {
 
     }
 
+
     atualizarBotoes(true);
+
 
     removerDetectorPrimeiroClique();
 
+
     return true;
 
-} catch (erro) {
+}
+
+catch (erro) {
 
     console.log(
-        "O navegador bloqueou o autoplay:",
-        erro
+        "Autoplay bloqueado pelo navegador."
     );
 
+
     atualizarBotoes(false);
+
 
     return false;
 
@@ -267,7 +310,7 @@ try {
 }
 
 /* =========================================================
-TENTAR AUTOPLAY
+AUTOPLAY
 ========================================================= */
 
 function tentarAutoplay() {
@@ -277,9 +320,13 @@ if (autoplayTentado) {
     return;
 }
 
-autoplayTentado = true;
+
+autoplayTentado =
+    true;
+
 
 configurarAudio();
+
 
 iniciarAudio();
 
@@ -287,17 +334,20 @@ iniciarAudio();
 }
 
 /* =========================================================
-PRIMEIRA INTERAÇÃO
+PRIMEIRO CLIQUE/TOQUE
 ========================================================= */
 
-function ativarNoPrimeiroClique(evento) {
+function ativarNoPrimeiroClique() {
 
 
 if (primeiroCliqueAtivado) {
     return;
 }
 
-primeiroCliqueAtivado = true;
+
+primeiroCliqueAtivado =
+    true;
+
 
 iniciarAudio();
 
@@ -305,7 +355,7 @@ iniciarAudio();
 }
 
 /* =========================================================
-DETECTOR DE PRIMEIRO CLIQUE
+ATIVAR DETECTOR
 ========================================================= */
 
 function adicionarDetectorPrimeiroClique() {
@@ -319,6 +369,7 @@ document.addEventListener(
         passive: true
     }
 );
+
 
 document.addEventListener(
     "touchstart",
@@ -345,6 +396,7 @@ document.removeEventListener(
     true
 );
 
+
 document.removeEventListener(
     "touchstart",
     ativarNoPrimeiroClique,
@@ -358,22 +410,32 @@ document.removeEventListener(
 ATUALIZAR BOTÕES
 ========================================================= */
 
-function atualizarBotoes(tocando) {
+function atualizarBotoes(
+tocando
+) {
+
+
+const simbolo =
+    tocando
+        ? "❚❚"
+        : "▶";
 
 
 if (playIcon) {
 
     playIcon.textContent =
-        tocando ? "❚❚" : "▶";
+        simbolo;
 
 }
+
 
 if (bottomPlayIcon) {
 
     bottomPlayIcon.textContent =
-        tocando ? "❚❚" : "▶";
+        simbolo;
 
 }
+
 
 if (playBtn) {
 
@@ -385,6 +447,7 @@ if (playBtn) {
     );
 
 }
+
 
 if (bottomPlayBtn) {
 
@@ -411,7 +474,9 @@ if (audio.paused) {
 
     iniciarAudio();
 
-} else {
+}
+
+else {
 
     audio.pause();
 
@@ -423,7 +488,7 @@ if (audio.paused) {
 }
 
 /* =========================================================
-PRÓXIMA
+PRÓXIMA MÚSICA
 ========================================================= */
 
 function proximaMusica() {
@@ -433,9 +498,14 @@ if (!playlist.length) {
     return;
 }
 
-if (shuffleEnabled && playlist.length > 1) {
+
+if (
+    shuffleEnabled &&
+    playlist.length > 1
+) {
 
     let novoIndex;
+
 
     do {
 
@@ -445,18 +515,26 @@ if (shuffleEnabled && playlist.length > 1) {
                 playlist.length
             );
 
-    } while (
+    }
+
+    while (
         novoIndex === currentIndex
     );
 
-    currentIndex = novoIndex;
 
-} else {
+    currentIndex =
+        novoIndex;
+
+}
+
+else {
 
     currentIndex++;
 
+
     if (
-        currentIndex >= playlist.length
+        currentIndex >=
+        playlist.length
     ) {
 
         currentIndex = 0;
@@ -464,6 +542,7 @@ if (shuffleEnabled && playlist.length > 1) {
     }
 
 }
+
 
 carregarMusica(
     currentIndex,
@@ -484,7 +563,10 @@ if (!playlist.length) {
     return;
 }
 
-if (audio.currentTime > 5) {
+
+if (
+    audio.currentTime > 5
+) {
 
     audio.currentTime = 0;
 
@@ -492,7 +574,9 @@ if (audio.currentTime > 5) {
 
 }
 
+
 currentIndex--;
+
 
 if (currentIndex < 0) {
 
@@ -500,6 +584,7 @@ if (currentIndex < 0) {
         playlist.length - 1;
 
 }
+
 
 carregarMusica(
     currentIndex,
@@ -510,7 +595,7 @@ carregarMusica(
 }
 
 /* =========================================================
-EVENTOS DOS BOTÕES
+BOTÕES
 ========================================================= */
 
 if (playBtn) {
@@ -604,10 +689,12 @@ shuffleBtn.addEventListener(
         shuffleEnabled =
             !shuffleEnabled;
 
+
         shuffleBtn.style.opacity =
             shuffleEnabled
                 ? "1"
-                : "0.55";
+                : ".55";
+
 
         shuffleBtn.title =
             shuffleEnabled
@@ -633,15 +720,6 @@ volume.addEventListener(
 
         audio.volume =
             Number(volume.value);
-
-        if (
-            audio.paused &&
-            Number(volume.value) > 0
-        ) {
-
-            iniciarAudio();
-
-        }
 
     }
 );
@@ -695,7 +773,7 @@ audio.addEventListener(
 
 
     console.error(
-        "Erro ao carregar o áudio."
+        "Não foi possível carregar o áudio."
     );
 
     atualizarBotoes(false);
@@ -706,140 +784,7 @@ audio.addEventListener(
 );
 
 /* =========================================================
-PRIMEIRO CLIQUE
-========================================================= */
-
-adicionarDetectorPrimeiroClique();
-
-/* =========================================================
-CARREGAMENTO INICIAL
-========================================================= */
-
-document.addEventListener(
-"DOMContentLoaded",
-() => {
-
-
-    configurarAudio();
-
-    carregarMusica(
-        0,
-        false
-    );
-
-    setTimeout(
-        tentarAutoplay,
-        150
-    );
-
-}
-
-
-);
-
-/* =========================================================
-FORMULÁRIO DE ORAÇÃO
-========================================================= */
-
-if (requestForm) {
-
-
-requestForm.addEventListener(
-    "submit",
-    function(event) {
-
-        event.preventDefault();
-
-        const nome =
-            document
-                .getElementById("reqName")
-                ?.value
-                .trim();
-
-        const assunto =
-            document
-                .getElementById("reqSong")
-                ?.value
-                .trim();
-
-        const mensagem =
-            document
-                .getElementById("reqMessage")
-                ?.value
-                .trim();
-
-        if (
-            !nome ||
-            !assunto ||
-            !mensagem
-        ) {
-
-            requestStatus.textContent =
-                "Preencha todos os campos.";
-
-            return;
-
-        }
-
-        /*
-         * Neste momento o formulário funciona
-         * localmente.
-         *
-         * Posteriormente podemos conectar este
-         * formulário ao Google Sheets / Apps Script
-         * para armazenar os pedidos de oração.
-         */
-
-        requestStatus.textContent =
-            "Seu pedido foi preparado com carinho. Deus abençoe você!";
-
-        requestForm.reset();
-
-    }
-);
-
-
-}
-
-/* =========================================================
-ATALHO DE TECLADO
-Espaço = Play / Pause
-========================================================= */
-
-document.addEventListener(
-"keydown",
-(event) => {
-
-
-    const elemento =
-        event.target;
-
-    const digitando =
-        elemento &&
-        (
-            elemento.tagName === "INPUT" ||
-            elemento.tagName === "TEXTAREA"
-        );
-
-    if (digitando) {
-        return;
-    }
-
-    if (event.code === "Space") {
-
-        event.preventDefault();
-
-        alternarPlay();
-
-    }
-
-}
-
-
-);
-
-/* =========================================================
-BOTÕES "OUVIR AGORA" DOS CARDS
+CARDS DE LOUVORES
 ========================================================= */
 
 document
@@ -847,7 +792,7 @@ document
 "[data-play-index]"
 )
 .forEach(
-(botao) => {
+botao => {
 
 
         botao.addEventListener(
@@ -859,15 +804,18 @@ document
                         botao.dataset.playIndex
                     );
 
+
                 carregarMusica(
                     index,
                     true
                 );
 
+
                 const player =
                     document.querySelector(
-                        ".listen-section"
+                        ".player-card"
                     );
+
 
                 if (player) {
 
@@ -886,6 +834,146 @@ document
 
 
 /* =========================================================
+FORMULÁRIO DE ORAÇÃO
+========================================================= */
+
+if (requestForm) {
+
+
+requestForm.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+
+        const nome =
+            document
+                .getElementById("reqName")
+                .value
+                .trim();
+
+
+        const assunto =
+            document
+                .getElementById("reqSong")
+                .value
+                .trim();
+
+
+        const mensagem =
+            document
+                .getElementById("reqMessage")
+                .value
+                .trim();
+
+
+        if (
+            !nome ||
+            !assunto ||
+            !mensagem
+        ) {
+
+            requestStatus.textContent =
+                "Preencha todos os campos.";
+
+            return;
+
+        }
+
+
+        /*
+         * Formulário preparado para futura
+         * integração com Google Sheets /
+         * Apps Script.
+         */
+
+
+        requestStatus.textContent =
+            "Seu pedido foi recebido. Deus abençoe você!";
+
+
+        requestForm.reset();
+
+    }
+);
+
+
+}
+
+/* =========================================================
+TECLA ESPAÇO
+========================================================= */
+
+document.addEventListener(
+"keydown",
+event => {
+
+
+    const elemento =
+        event.target;
+
+
+    const digitando =
+        elemento &&
+        (
+            elemento.tagName === "INPUT" ||
+            elemento.tagName === "TEXTAREA"
+        );
+
+
+    if (digitando) {
+        return;
+    }
+
+
+    if (
+        event.code === "Space"
+    ) {
+
+        event.preventDefault();
+
+        alternarPlay();
+
+    }
+
+}
+
+
+);
+
+/* =========================================================
+INICIALIZAÇÃO
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+() => {
+
+
+    configurarAudio();
+
+
+    carregarMusica(
+        0,
+        false
+    );
+
+
+    adicionarDetectorPrimeiroClique();
+
+
+    setTimeout(
+        tentarAutoplay,
+        150
+    );
+
+}
+
+
+);
+
+/* =========================================================
 GARANTIR VOLUME
 ========================================================= */
 
@@ -896,6 +984,7 @@ window.addEventListener(
 
     audio.volume =
         VOLUME_INICIAL;
+
 
     if (volume) {
 
@@ -910,11 +999,11 @@ window.addEventListener(
 );
 
 /* =========================================================
-FINAL
+INFORMAÇÃO NO CONSOLE
 ========================================================= */
 
 console.log(
-"Onda Livre carregada."
+"De Volta para Cristo carregado."
 );
 
 console.log(
