@@ -1,1356 +1,1226 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
 
-
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="description"
-    content="Onda Livre FM — Sua música. Sua onda."
->
+<meta name="theme-color" content="#07111f">
 
 <title>Onda Livre FM</title>
 
-
 <style>
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(30, 115, 255, .20),
+            transparent 38%
+        ),
+        #07111f;
+
+    color: #f5f8ff;
+
+    min-height: 100vh;
+
+    line-height: 1.5;
+
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,.025),
+            transparent 35%,
+            rgba(255,255,255,.015)
+        );
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background: rgba(5, 14, 27, .72);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    z-index: 1000;
+
+    transition: .25s ease;
+}
+
+header.scrolled {
+    background: rgba(4, 11, 21, .94);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.22);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    letter-spacing: -.3px;
+}
+
+.logo-mark {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2387ff,
+            #1654d9
+        );
+
+    box-shadow:
+        0 8px 25px rgba(27,113,255,.28);
+
+    font-size: 18px;
+}
+
+.logo span:last-child {
+    color: #ffffff;
+}
+
+.logo strong {
+    color: #5ba2ff;
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+nav a {
+    color: #aebbd0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: .2s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+.nav-live {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #ff7272 !important;
+}
+
+.nav-live-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ff5252;
+
+    box-shadow:
+        0 0 10px rgba(255,82,82,.8);
+
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 
-
-    html {
-        scroll-behavior: smooth;
+    50% {
+        opacity: .45;
+        transform: scale(.75);
     }
+}
 
 
-    body {
+/* =========================================================
+   MAIN
+========================================================= */
 
-        font-family:
-            Inter,
-            system-ui,
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            sans-serif;
+main {
+    padding-top: 76px;
+}
 
-        background:
-            linear-gradient(
-                180deg,
-                #07111f 0%,
-                #0b1728 45%,
-                #07111f 100%
-            );
 
-        color: #ffffff;
+/* =========================================================
+   HERO
+========================================================= */
 
-        min-height: 100vh;
+.hero {
+    max-width: 1180px;
 
-        overflow-x: hidden;
+    margin: auto;
+
+    min-height: 470px;
+
+    padding:
+        90px 5%
+        55px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        460px;
+
+    align-items: center;
+
+    gap: 60px;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: rgba(48, 133, 255, .10);
+
+    border: 1px solid rgba(82, 151, 255, .20);
+
+    color: #67aaff;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 20px;
+}
+
+.eyebrow::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #43e58c;
+
+    box-shadow:
+        0 0 10px rgba(67,229,140,.7);
+}
+
+.hero h1 {
+    font-size:
+        clamp(42px, 6vw, 72px);
+
+    line-height: .98;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 24px;
+}
+
+.hero h1 span {
+    color: #5ca6ff;
+}
+
+.hero p {
+    max-width: 560px;
+
+    color: #9aa9bf;
+
+    font-size: 17px;
+
+    line-height: 1.75;
+
+    margin-bottom: 32px;
+}
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    border: 0;
+
+    border-radius: 12px;
+
+    padding: 13px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #318cff,
+            #1e5edc
+        );
+
+    color: #fff;
+
+    font-weight: 750;
+
+    box-shadow:
+        0 12px 28px rgba(29,106,232,.25);
+
+    transition: .2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 34px rgba(29,106,232,.35);
+}
+
+.btn-secondary {
+    border: 1px solid rgba(255,255,255,.10);
+
+    border-radius: 12px;
+
+    padding: 12px 19px;
+
+    color: #c5d0df;
+
+    background: rgba(255,255,255,.035);
+
+    font-weight: 650;
+
+    transition: .2s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,.07);
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player-shell {
+    position: relative;
+}
+
+.player-card {
+    position: relative;
+
+    padding: 24px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24,42,68,.96),
+            rgba(10,23,40,.96)
+        );
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.35);
+
+    overflow: hidden;
+}
+
+.player-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    top: -100px;
+    right: -90px;
+
+    border-radius: 50%;
+
+    background: rgba(48,139,255,.14);
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+.player-top {
+    position: relative;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.station-name {
+    color: #8fa5c1;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.onair {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(255,82,82,.09);
+
+    border: 1px solid rgba(255,82,82,.18);
+
+    color: #ff7777;
+
+    font-size: 10px;
+
+    font-weight: 850;
+
+    letter-spacing: 1px;
+}
+
+.onair::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #ff5555;
+
+    box-shadow:
+        0 0 9px rgba(255,85,85,.8);
+
+    animation: pulse 1.5s infinite;
+}
+
+
+/* =========================================================
+   ALBUM
+========================================================= */
+
+.album {
+    width: 150px;
+    height: 150px;
+
+    margin: 10px auto 22px;
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #192c46 0 23%,
+            #0a1728 24% 30%,
+            #13283f 31% 48%,
+            #081321 49% 100%
+        );
+
+    border: 1px solid rgba(255,255,255,.09);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.42);
+
+    position: relative;
+}
+
+.album::after {
+    content: "";
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #0b1727;
+
+    border: 4px solid #5b9fff;
+
+    box-shadow:
+        0 0 20px rgba(66,145,255,.45);
+}
+
+.album-playing {
+    animation: rotateDisc 7s linear infinite;
+}
+
+@keyframes rotateDisc {
+    to {
+        transform: rotate(360deg);
     }
+}
 
 
-    body::before {
+/* =========================================================
+   MÚSICA
+========================================================= */
 
-        content: "";
+.track {
+    text-align: center;
 
-        position: fixed;
+    margin-bottom: 20px;
+}
 
-        inset: 0;
+.track-title {
+    font-size: 19px;
 
-        background:
+    font-weight: 750;
 
-            radial-gradient(
-                circle at 15% 15%,
-                rgba(29,111,255,0.14),
-                transparent 30%
-            ),
+    color: #ffffff;
 
-            radial-gradient(
-                circle at 85% 30%,
-                rgba(0,214,143,0.08),
-                transparent 28%
-            );
+    white-space: nowrap;
 
-        pointer-events: none;
+    overflow: hidden;
 
-        z-index: -1;
-    }
+    text-overflow: ellipsis;
+}
 
+.track-artist {
+    margin-top: 5px;
 
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
+    color: #8fa0b7;
 
+    font-size: 13px;
+}
 
-    button,
-    input {
-        font: inherit;
-    }
 
+/* =========================================================
+   CONTROLES
+========================================================= */
 
-    button {
-        cursor: pointer;
-    }
+.controls {
+    display: flex;
 
+    align-items: center;
 
-    /* =====================================================
-       HEADER
-    ===================================================== */
+    justify-content: center;
 
-    header {
+    gap: 15px;
 
-        position: fixed;
+    margin-bottom: 20px;
+}
 
-        top: 0;
-        left: 0;
-        right: 0;
+.control-btn {
+    width: 40px;
+    height: 40px;
 
-        height: 72px;
+    border-radius: 50%;
 
-        display: flex;
+    border: 1px solid rgba(255,255,255,.08);
 
-        align-items: center;
+    background: rgba(255,255,255,.045);
 
-        padding: 0 5%;
+    color: #bdc9d9;
 
-        background:
-            rgba(5,13,24,0.86);
+    display: grid;
 
-        border-bottom:
-            1px solid rgba(255,255,255,0.07);
+    place-items: center;
 
-        backdrop-filter:
-            blur(18px);
+    transition: .2s ease;
+}
 
-        -webkit-backdrop-filter:
-            blur(18px);
+.control-btn:hover {
+    background: rgba(255,255,255,.10);
 
-        z-index: 1000;
+    color: #ffffff;
 
-        transition:
-            background 0.25s ease,
-            box-shadow 0.25s ease;
-    }
+    transform: translateY(-1px);
+}
 
+.play-btn {
+    width: 54px;
+    height: 54px;
 
-    header.scrolled {
+    border: 0;
 
-        background:
-            rgba(4,11,20,0.96);
+    border-radius: 50%;
 
-        box-shadow:
-            0 8px 30px rgba(0,0,0,0.25);
-    }
+    display: grid;
 
+    place-items: center;
 
-    .header-inner {
+    background:
+        linear-gradient(
+            135deg,
+            #318cff,
+            #1d5bd4
+        );
 
-        width: 100%;
+    color: #fff;
 
-        max-width: 1180px;
+    font-size: 18px;
 
-        margin: auto;
+    box-shadow:
+        0 10px 28px rgba(37,119,255,.32);
 
-        display: flex;
+    transition: .2s ease;
+}
 
-        align-items: center;
+.play-btn:hover {
+    transform: scale(1.06);
 
-        justify-content: space-between;
-    }
+    box-shadow:
+        0 14px 35px rgba(37,119,255,.44);
+}
 
 
-    .logo {
+/* =========================================================
+   VOLUME
+========================================================= */
 
-        display: flex;
+.volume-row {
+    display: flex;
 
-        align-items: center;
+    align-items: center;
 
-        gap: 10px;
+    gap: 10px;
 
-        font-weight: 800;
+    color: #71849d;
+}
 
-        font-size: 19px;
+.volume-row span {
+    font-size: 13px;
+}
 
-        letter-spacing: -0.4px;
-    }
+.volume-row input {
+    flex: 1;
 
+    height: 4px;
 
-    .logo-mark {
+    accent-color: #318cff;
 
-        width: 36px;
-        height: 36px;
+    cursor: pointer;
+}
 
-        display: flex;
 
-        align-items: center;
-        justify-content: center;
+/* =========================================================
+   SEÇÕES
+========================================================= */
 
-        border-radius: 10px;
+.section {
+    max-width: 1180px;
 
-        background:
-            linear-gradient(
-                135deg,
-                #1683ff,
-                #00c98b
-            );
+    margin: auto;
 
-        box-shadow:
-            0 8px 24px rgba(22,131,255,0.22);
-    }
+    padding:
+        80px 5%;
+}
 
+.section-heading {
+    display: flex;
 
-    .logo-mark::before {
+    align-items: end;
 
-        content: "♪";
+    justify-content: space-between;
 
-        font-size: 20px;
+    gap: 20px;
 
-        font-weight: 800;
-    }
+    margin-bottom: 28px;
+}
 
+.section-heading h2 {
+    font-size: 30px;
 
-    nav {
+    letter-spacing: -.8px;
+}
 
-        display: flex;
+.section-heading p {
+    color: #8192aa;
 
-        align-items: center;
+    font-size: 14px;
+}
 
-        gap: 28px;
-    }
 
+/* =========================================================
+   PROGRAMAÇÃO
+========================================================= */
 
-    nav a {
+.program-grid {
+    display: grid;
 
-        color: #aebbd0;
+    grid-template-columns:
+        repeat(3, 1fr);
 
-        font-size: 14px;
+    gap: 16px;
+}
 
-        font-weight: 600;
+.program-card {
+    padding: 22px;
 
-        transition:
-            color 0.2s ease;
-    }
+    border-radius: 18px;
 
+    background: rgba(255,255,255,.035);
 
-    nav a:hover {
-        color: #ffffff;
-    }
+    border: 1px solid rgba(255,255,255,.075);
 
+    transition: .2s ease;
+}
 
-    /* =====================================================
-       MAIN
-    ===================================================== */
+.program-card:hover {
+    transform: translateY(-3px);
 
-    main {
-        padding-top: 72px;
-    }
+    background: rgba(255,255,255,.055);
 
+    border-color: rgba(75,145,255,.25);
+}
 
-    section {
+.program-time {
+    color: #5fa7ff;
 
-        width: 90%;
+    font-size: 12px;
 
-        max-width: 1180px;
+    font-weight: 800;
 
-        margin: auto;
-    }
+    margin-bottom: 10px;
+}
 
+.program-card h3 {
+    font-size: 17px;
 
-    /* =====================================================
-       HERO
-    ===================================================== */
+    margin-bottom: 6px;
+}
+
+.program-card p {
+    color: #8191a7;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PEDIDOS
+========================================================= */
+
+.request-box {
+    max-width: 700px;
+
+    padding: 28px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,39,64,.80),
+            rgba(9,20,35,.80)
+        );
+
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 14px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: #91a2b8;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(255,255,255,.09);
+
+    background: rgba(0,0,0,.18);
+
+    color: #fff;
+
+    outline: none;
+
+    transition: .2s ease;
+}
+
+.form-group input:focus {
+    border-color: rgba(60,143,255,.65);
+
+    box-shadow:
+        0 0 0 3px rgba(60,143,255,.08);
+}
+
+.request-submit {
+    margin-top: 18px;
+}
+
+#requestStatus {
+    margin-top: 12px;
+
+    color: #50df91;
+
+    font-size: 13px;
+
+    opacity: 0;
+
+    transition: .2s ease;
+}
+
+#requestStatus.show {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    border-top: 1px solid rgba(255,255,255,.07);
+
+    padding: 30px 5%;
+
+    text-align: center;
+
+    color: #667891;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ÁUDIO OCULTO
+========================================================= */
+
+#audio {
+    display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
 
     .hero {
-
-        min-height: 600px;
-
-        display: grid;
-
-        grid-template-columns:
-            minmax(0,1.15fr)
-            minmax(350px,0.85fr);
-
-        align-items: center;
-
-        gap: 60px;
-
-        padding-top: 70px;
-
-        padding-bottom: 60px;
-    }
-
-
-    .hero-content {
-        max-width: 650px;
-    }
-
-
-    .eyebrow {
-
-        display: inline-flex;
-
-        align-items: center;
-
-        gap: 8px;
-
-        padding:
-            7px 12px;
-
-        border-radius: 999px;
-
-        background:
-            rgba(0,214,143,0.08);
-
-        border:
-            1px solid rgba(0,214,143,0.16);
-
-        color: #54e5ae;
-
-        font-size: 12px;
-
-        font-weight: 700;
-
-        margin-bottom: 22px;
-    }
-
-
-    .eyebrow::before {
-
-        content: "";
-
-        width: 7px;
-        height: 7px;
-
-        border-radius: 50%;
-
-        background: #00d68f;
-
-        box-shadow:
-            0 0 12px rgba(0,214,143,0.8);
-    }
-
-
-    .hero h1 {
-
-        font-size:
-            clamp(46px,7vw,82px);
-
-        line-height: 0.98;
-
-        letter-spacing: -4px;
-
-        margin-bottom: 24px;
-    }
-
-
-    .hero h1 span {
-
-        display: block;
-
-        background:
-            linear-gradient(
-                90deg,
-                #ffffff,
-                #7bbaff
-            );
-
-        -webkit-background-clip: text;
-
-        background-clip: text;
-
-        color: transparent;
-    }
-
-
-    .hero p {
-
-        max-width: 550px;
-
-        color: #91a0b6;
-
-        font-size: 17px;
-
-        line-height: 1.7;
-
-        margin-bottom: 30px;
-    }
-
-
-    .hero-actions {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 14px;
-    }
-
-
-    .primary-btn {
-
-        border: 0;
-
-        padding:
-            13px 20px;
-
-        border-radius: 11px;
-
-        color: #ffffff;
-
-        background:
-            linear-gradient(
-                135deg,
-                #1683ff,
-                #0967d9
-            );
-
-        box-shadow:
-            0 10px 25px rgba(22,131,255,0.2);
-
-        font-size: 14px;
-
-        font-weight: 700;
-
-        transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
-    }
-
-
-    .primary-btn:hover {
-
-        transform:
-            translateY(-2px);
-
-        box-shadow:
-            0 14px 30px rgba(22,131,255,0.28);
-    }
-
-
-    .secondary-btn {
-
-        border:
-            1px solid rgba(255,255,255,0.1);
-
-        padding:
-            13px 20px;
-
-        border-radius: 11px;
-
-        color: #d6dfeb;
-
-        background:
-            rgba(255,255,255,0.04);
-
-        font-size: 14px;
-
-        font-weight: 700;
-    }
-
-
-    .secondary-btn:hover {
-
-        background:
-            rgba(255,255,255,0.07);
-    }
-
-
-    /* =====================================================
-       PLAYER
-    ===================================================== */
-
-    .player-card {
-
-        width: 100%;
-
-        max-width: 430px;
-
-        margin-left: auto;
-
-        padding: 25px;
-
-        border-radius: 24px;
-
-        background:
-            linear-gradient(
-                145deg,
-                rgba(255,255,255,0.085),
-                rgba(255,255,255,0.035)
-            );
-
-        border:
-            1px solid rgba(255,255,255,0.09);
-
-        box-shadow:
-            0 25px 80px rgba(0,0,0,0.28);
-
-        backdrop-filter:
-            blur(18px);
-
-        -webkit-backdrop-filter:
-            blur(18px);
-    }
-
-
-    .player-top {
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        margin-bottom: 24px;
-    }
-
-
-    .onair {
-
-        display: inline-flex;
-
-        align-items: center;
-
-        gap: 7px;
-
-        color: #8290a4;
-
-        font-size: 11px;
-
-        font-weight: 800;
-
-        letter-spacing: 0.7px;
-    }
-
-
-    .onair::before {
-
-        content: "";
-
-        width: 7px;
-        height: 7px;
-
-        border-radius: 50%;
-
-        background: #8290a4;
-    }
-
-
-    .onair.active {
-
-        color: #00d68f;
-    }
-
-
-    .onair.active::before {
-
-        background: #00d68f;
-
-        box-shadow:
-            0 0 12px rgba(0,214,143,0.8);
-    }
-
-
-    .frequency {
-
-        color: #8290a4;
-
-        font-size: 12px;
-
-        font-weight: 600;
-    }
-
-
-    .album {
-
-        width: 100%;
-
-        aspect-ratio: 1 / 1;
-
-        border-radius: 18px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        margin-bottom: 22px;
-
-        background:
-
-            radial-gradient(
-                circle at 35% 30%,
-                rgba(47,143,255,0.5),
-                transparent 35%
-            ),
-
-            linear-gradient(
-                135deg,
-                #0b5ec8,
-                #06244b
-            );
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.08);
-    }
-
-
-    .album-icon {
-
-        font-size: 72px;
-
-        opacity: 0.9;
-    }
-
-
-    .track-info {
-        margin-bottom: 22px;
-    }
-
-
-    .track-title {
-
-        font-size: 18px;
-
-        font-weight: 800;
-
-        line-height: 1.25;
-
-        margin-bottom: 6px;
-    }
-
-
-    .track-artist {
-
-        color: #8492a7;
-
-        font-size: 13px;
-    }
-
-
-    .player-controls {
-
-        display: grid;
-
-        grid-template-columns:
-            42px 1fr 42px;
-
-        align-items: center;
-
-        gap: 12px;
-
-        margin-bottom: 20px;
-    }
-
-
-    .control-btn {
-
-        width: 42px;
-        height: 42px;
-
-        border-radius: 50%;
-
-        border:
-            1px solid rgba(255,255,255,0.08);
-
-        background:
-            rgba(255,255,255,0.045);
-
-        color: #ffffff;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-    }
-
-
-    .control-btn:hover {
-
-        background:
-            rgba(255,255,255,0.09);
-    }
-
-
-    .play-btn {
-
-        width: 58px;
-        height: 58px;
-
-        justify-self: center;
-
-        border: 0;
-
-        border-radius: 50%;
-
-        color: #ffffff;
-
-        background:
-            linear-gradient(
-                135deg,
-                #1683ff,
-                #0066db
-            );
-
-        box-shadow:
-            0 12px 30px rgba(22,131,255,0.3);
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        font-size: 18px;
-
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease;
-    }
-
-
-    .play-btn:hover {
-
-        transform:
-            scale(1.04);
-
-        box-shadow:
-            0 15px 35px rgba(22,131,255,0.4);
-    }
-
-
-    .play-btn:active {
-
-        transform:
-            scale(0.96);
-    }
-
-
-    .volume-area {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 10px;
-    }
-
-
-    .volume-icon {
-
-        color: #8d9bb0;
-
-        font-size: 14px;
-    }
-
-
-    #volume {
-
-        width: 100%;
-
-        accent-color: #1683ff;
-    }
-
-
-    .shuffle-btn.active {
-
-        color: #54e5ae;
-
-        border-color:
-            rgba(0,214,143,0.3);
-
-        background:
-            rgba(0,214,143,0.08);
-    }
-
-
-    /* =====================================================
-       ÁUDIO
-    ===================================================== */
-
-    #audio {
-        display: none;
-    }
-
-
-    /* =====================================================
-       SEÇÕES
-    ===================================================== */
-
-    .section {
-        padding: 75px 0;
-    }
-
-
-    .section-header {
-        margin-bottom: 30px;
-    }
-
-
-    .section-header h2 {
-
-        font-size: 30px;
-
-        letter-spacing: -1px;
-
-        margin-bottom: 8px;
-    }
-
-
-    .section-header p {
-
-        color: #8290a4;
-
-        font-size: 14px;
-    }
-
-
-    /* =====================================================
-       PROGRAMAÇÃO
-    ===================================================== */
-
-    .program-grid {
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(3,1fr);
-
-        gap: 18px;
-    }
-
-
-    .program-card {
-
-        padding: 22px;
-
-        border-radius: 18px;
-
-        background:
-            rgba(255,255,255,0.04);
-
-        border:
-            1px solid rgba(255,255,255,0.07);
-    }
-
-
-    .program-time {
-
-        color: #54e5ae;
-
-        font-size: 12px;
-
-        font-weight: 800;
-
-        margin-bottom: 10px;
-    }
-
-
-    .program-card h3 {
-
-        font-size: 17px;
-
-        margin-bottom: 7px;
-    }
-
-
-    .program-card p {
-
-        color: #8290a4;
-
-        font-size: 13px;
-
-        line-height: 1.5;
-    }
-
-
-    /* =====================================================
-       PEDIDOS
-    ===================================================== */
-
-    .request-box {
-
-        max-width: 650px;
-
-        padding: 25px;
-
-        border-radius: 20px;
-
-        background:
-            rgba(255,255,255,0.04);
-
-        border:
-            1px solid rgba(255,255,255,0.07);
-    }
-
-
-    .form-grid {
-
-        display: grid;
-
-        grid-template-columns:
-            1fr 1fr;
-
-        gap: 14px;
-
-        margin-bottom: 14px;
-    }
-
-
-    .field {
-
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 7px;
-    }
-
-
-    .field label {
-
-        color: #9ba8ba;
-
-        font-size: 12px;
-
-        font-weight: 700;
-    }
-
-
-    .field input {
-
-        width: 100%;
-
-        padding:
-            12px 13px;
-
-        border-radius: 10px;
-
-        border:
-            1px solid rgba(255,255,255,0.08);
-
-        outline: none;
-
-        color: #ffffff;
-
-        background:
-            rgba(0,0,0,0.18);
-    }
-
-
-    .field input:focus {
-
-        border-color:
-            rgba(22,131,255,0.6);
-    }
-
-
-    .request-status {
-
-        display: none;
-
-        margin-top: 14px;
-
-        color: #54e5ae;
-
-        font-size: 13px;
-
-        font-weight: 700;
-    }
-
-
-    /* =====================================================
-       FOOTER
-    ===================================================== */
-
-    footer {
-
-        padding:
-            35px 5%;
-
-        border-top:
-            1px solid rgba(255,255,255,0.06);
-
-        color: #66758a;
+        grid-template-columns: 1fr;
 
         text-align: center;
 
-        font-size: 12px;
+        padding-top: 65px;
     }
 
-
-    /* =====================================================
-       RESPONSIVO
-    ===================================================== */
-
-    @media (max-width: 850px) {
-
-        nav {
-            gap: 15px;
-        }
-
-
-        nav a {
-            font-size: 12px;
-        }
-
-
-        .hero {
-
-            grid-template-columns: 1fr;
-
-            padding-top: 50px;
-        }
-
-
-        .player-card {
-            margin: 0 auto;
-        }
-
-
-        .program-grid {
-            grid-template-columns: 1fr;
-        }
+    .hero-content {
+        margin: auto;
     }
 
-
-    @media (max-width: 600px) {
-
-        header {
-
-            height: 64px;
-
-            padding: 0 20px;
-        }
-
-
-        main {
-            padding-top: 64px;
-        }
-
-
-        .logo {
-            font-size: 16px;
-        }
-
-
-        .logo-mark {
-
-            width: 32px;
-            height: 32px;
-        }
-
-
-        nav {
-            gap: 10px;
-        }
-
-
-        nav a {
-            font-size: 10px;
-        }
-
-
-        .hero {
-
-            min-height: auto;
-
-            padding-top: 50px;
-
-            padding-bottom: 30px;
-
-            gap: 40px;
-        }
-
-
-        .hero h1 {
-
-            font-size: 50px;
-
-            letter-spacing: -3px;
-        }
-
-
-        .hero p {
-            font-size: 15px;
-        }
-
-
-        .hero-actions {
-
-            flex-direction: column;
-
-            align-items: stretch;
-        }
-
-
-        .hero-actions button {
-            width: 100%;
-        }
-
-
-        .section {
-            padding: 55px 0;
-        }
-
-
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
-
-
-        .player-card {
-            padding: 20px;
-        }
+    .hero-actions {
+        justify-content: center;
     }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .player-shell {
+        max-width: 480px;
+
+        width: 100%;
+
+        margin: auto;
+    }
+
+    .program-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+
+    header {
+        padding: 0 20px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .hero h1 {
+        font-size: 44px;
+
+        letter-spacing: -2px;
+    }
+
+    .section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .section-heading p {
+        margin-top: 6px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .player-card {
+        padding: 20px;
+    }
+}
 
 </style>
 
-
 </head>
+
 
 <body>
 
 
-<!-- =====================================================
+<!-- =======================================================
      HEADER
-====================================================== -->
+======================================================== -->
 
-<header id="header">
+<header id="siteHeader">
 
-    <div class="header-inner">
+    <a href="#player" class="logo">
 
+        <span class="logo-mark">♪</span>
 
-        <a
-            href="#player"
-            class="logo"
-        >
+        <span>
+            Onda <strong>Livre</strong> FM
+        </span>
 
-            <span class="logo-mark"></span>
+    </a>
 
-            <span>
-                Onda Livre FM
-            </span>
+    <nav>
 
+        <a href="#player">Rádio</a>
+
+        <a href="#programacao">Programação</a>
+
+        <a href="#pedidos">Pedidos</a>
+
+        <a href="#player" class="nav-live">
+            <span class="nav-live-dot"></span>
+            AO VIVO
         </a>
 
-
-        <nav>
-
-            <a href="#player">
-                Rádio
-            </a>
-
-            <a href="#programacao">
-                Programação
-            </a>
-
-            <a href="#pedidos">
-                Pedidos
-            </a>
-
-        </nav>
-
-    </div>
+    </nav>
 
 </header>
 
 
-<!-- =====================================================
-     CONTEÚDO
-====================================================== -->
+<!-- =======================================================
+     MAIN
+======================================================== -->
 
 <main>
 
 
-    <section
-        id="player"
-        class="hero"
-    >
+<!-- =======================================================
+     HERO + PLAYER
+======================================================== -->
+
+<section class="hero" id="player">
 
 
-        <div class="hero-content">
+    <div class="hero-content">
 
+        <div class="eyebrow">
+            Onda Livre FM
+        </div>
 
-            <div class="eyebrow">
-                Onda Livre FM
-            </div>
+        <h1>
+            Sua música.
+            <br>
+            <span>Sua onda.</span>
+        </h1>
 
+        <p>
+            Música, informação e companhia para todos
+            os momentos. Aperte o play e fique com a
+            Onda Livre FM.
+        </p>
 
-            <h1>
+        <div class="hero-actions">
 
-                Sua música.
+            <button
+                type="button"
+                id="heroPlayBtn"
+                class="btn-primary">
+                ▶ Ouvir agora
+            </button>
 
-                <span>
-                    Sua onda.
-                </span>
-
-            </h1>
-
-
-            <p>
-
-                Uma experiência musical feita para
-                acompanhar você. Dê o play e deixe a
-                Onda Livre FM fazer parte do seu momento.
-
-            </p>
-
-
-            <div class="hero-actions">
-
-
-                <button
-                    type="button"
-                    id="heroPlayBtn"
-                    class="primary-btn"
-                >
-
-                    ▶ Ouvir agora
-
-                </button>
-
-
-                <a
-                    href="#programacao"
-                    class="secondary-btn"
-                >
-
-                    Ver programação
-
-                </a>
-
-            </div>
+            <a
+                href="#programacao"
+                class="btn-secondary">
+                Ver programação
+            </a>
 
         </div>
 
+    </div>
 
-        <!-- =================================================
-             PLAYER
-        ================================================== -->
+
+    <!-- ===================================================
+         PLAYER
+    ==================================================== -->
+
+    <div class="player-shell">
 
         <div class="player-card">
 
-
             <div class="player-top">
 
-
-                <div
-                    id="onair"
-                    class="onair"
-                >
-
-                    OFF AIR
-
-                </div>
-
-
-                <div class="frequency">
-
+                <span class="station-name">
                     ONDA LIVRE FM
+                </span>
 
-                </div>
-
-            </div>
-
-
-            <div class="album">
-
-                <div class="album-icon">
-                    ♪
-                </div>
+                <span
+                    id="onair"
+                    class="onair">
+                    AO VIVO
+                </span>
 
             </div>
 
 
-            <div class="track-info">
+            <div
+                id="album"
+                class="album">
 
+                <span style="
+                    position:absolute;
+                    font-size:0;
+                ">.</span>
+
+            </div>
+
+
+            <div class="track">
 
                 <div
                     id="trackTitle"
-                    class="track-title"
-                >
-
+                    class="track-title">
                     Futuro do homem e o final dos tempos
-
                 </div>
-
 
                 <div
                     id="trackArtist"
-                    class="track-artist"
-                >
-
+                    class="track-artist">
                     Onda Livre FM
-
                 </div>
 
             </div>
 
 
-            <div class="player-controls">
-
+            <div class="controls">
 
                 <button
-                    type="button"
                     id="prevBtn"
                     class="control-btn"
-                    aria-label="Anterior"
-                >
-
+                    type="button"
+                    aria-label="Anterior">
                     ↶
-
                 </button>
 
-
                 <button
-                    type="button"
                     id="playBtn"
                     class="play-btn"
-                    aria-label="Tocar ou pausar"
-                >
+                    type="button"
+                    aria-label="Reproduzir">
 
-                    <span id="playIcon">
-                        ▶
-                    </span>
+                    <span id="playIcon">▶</span>
 
                 </button>
 
-
                 <button
-                    type="button"
                     id="nextBtn"
                     class="control-btn"
-                    aria-label="Próximo"
-                >
-
+                    type="button"
+                    aria-label="Próxima">
                     ↷
-
                 </button>
 
             </div>
 
 
-            <div class="volume-area">
+            <div class="volume-row">
 
-
-                <span class="volume-icon">
-                    🔊
-                </span>
-
+                <span>🔊</span>
 
                 <input
                     id="volume"
@@ -1358,127 +1228,110 @@
                     min="0"
                     max="1"
                     step="0.01"
-                    value="1"
-                    aria-label="Volume"
-                >
-
-
-                <button
-                    type="button"
-                    id="shuffleBtn"
-                    class="control-btn shuffle-btn"
-                    aria-label="Aleatório"
-                >
-
-                    🔀
-
-                </button>
+                    value="1">
 
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- =================================================
-         PROGRAMAÇÃO
-    ================================================== -->
+<!-- =======================================================
+     PROGRAMAÇÃO
+======================================================== -->
 
-    <section
-        id="programacao"
-        class="section"
-    >
+<section
+    class="section"
+    id="programacao">
 
+    <div class="section-heading">
 
-        <div class="section-header">
+        <div>
 
-            <h2>
-                Programação
-            </h2>
+            <h2>Programação</h2>
 
             <p>
-                Confira os momentos da Onda Livre FM.
+                Confira os principais momentos da Onda Livre FM.
             </p>
 
         </div>
 
+    </div>
 
-        <div class="program-grid">
 
+    <div class="program-grid">
 
-            <div class="program-card">
+        <article class="program-card">
 
-                <div class="program-time">
-                    08:00 — 10:00
-                </div>
-
-                <h3>
-                    Manhã Livre
-                </h3>
-
-                <p>
-                    Música e informação para começar
-                    bem o dia.
-                </p>
-
+            <div class="program-time">
+                06:00 — 09:00
             </div>
 
+            <h3>
+                Manhã Onda Livre
+            </h3>
 
-            <div class="program-card">
+            <p>
+                Música e informação para começar o dia.
+            </p>
 
-                <div class="program-time">
-                    10:00 — 12:00
-                </div>
+        </article>
 
-                <h3>
-                    Onda Musical
-                </h3>
 
-                <p>
-                    Os melhores sons para acompanhar
-                    sua manhã.
-                </p>
+        <article class="program-card">
 
+            <div class="program-time">
+                09:00 — 12:00
             </div>
 
+            <h3>
+                Onda Livre
+            </h3>
 
-            <div class="program-card">
+            <p>
+                Os melhores momentos da programação.
+            </p>
 
-                <div class="program-time">
-                    12:00 — 14:00
-                </div>
+        </article>
 
-                <h3>
-                    Onda Livre
-                </h3>
 
-                <p>
-                    Música, companhia e muita informação.
-                </p>
+        <article class="program-card">
 
+            <div class="program-time">
+                12:00 — 18:00
             </div>
 
-        </div>
+            <h3>
+                Tarde Onda Livre
+            </h3>
 
-    </section>
+            <p>
+                Música para acompanhar sua tarde.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
 
 
-    <!-- =================================================
-         PEDIDOS
-    ================================================== -->
+<!-- =======================================================
+     PEDIDOS
+======================================================== -->
 
-    <section
-        id="pedidos"
-        class="section"
-    >
+<section
+    class="section"
+    id="pedidos">
 
+    <div class="section-heading">
 
-        <div class="section-header">
+        <div>
 
-            <h2>
-                Peça sua música
-            </h2>
+            <h2>Peça sua música</h2>
 
             <p>
                 Envie seu pedido para a Onda Livre FM.
@@ -1486,109 +1339,92 @@
 
         </div>
 
-
-        <div class="request-box">
-
-
-            <form id="requestForm">
+    </div>
 
 
-                <div class="form-grid">
+    <div class="request-box">
 
+        <form id="requestForm">
 
-                    <div class="field">
+            <div class="form-grid">
 
-                        <label for="reqName">
-                            Seu nome
-                        </label>
+                <div class="form-group">
 
-                        <input
-                            id="reqName"
-                            type="text"
-                            placeholder="Digite seu nome"
-                            required
-                        >
+                    <label for="reqName">
+                        Seu nome
+                    </label>
 
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="reqSong">
-                            Música
-                        </label>
-
-                        <input
-                            id="reqSong"
-                            type="text"
-                            placeholder="Nome da música"
-                            required
-                        >
-
-                    </div>
+                    <input
+                        id="reqName"
+                        type="text"
+                        placeholder="Digite seu nome"
+                        required>
 
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="primary-btn"
-                >
+                <div class="form-group">
 
-                    Enviar pedido
+                    <label for="reqSong">
+                        Música
+                    </label>
 
-                </button>
+                    <input
+                        id="reqSong"
+                        type="text"
+                        placeholder="Nome da música"
+                        required>
+
+                </div>
+
+            </div>
 
 
-                <div
-                    id="requestStatus"
-                    class="request-status"
-                ></div>
+            <button
+                type="submit"
+                class="btn-primary request-submit">
 
-            </form>
+                Enviar pedido
 
-        </div>
+            </button>
 
-    </section>
+
+            <div id="requestStatus"></div>
+
+        </form>
+
+    </div>
+
+</section>
 
 </main>
 
 
-<!-- =====================================================
-     ÚNICO ÁUDIO
-     
-     O autoplay fica diretamente no elemento.
-     O endereço é exatamente o que você confirmou
-     que toca diretamente no navegador.
-====================================================== -->
+<!-- =======================================================
+     ÁUDIO
+======================================================== -->
 
 <audio
     id="audio"
     src="https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3"
     preload="auto"
     autoplay
-    playsinline
-></audio>
+    playsinline>
+</audio>
 
 
-<!-- =====================================================
+<!-- =======================================================
      FOOTER
-====================================================== -->
+======================================================== -->
 
 <footer>
 
-    © Onda Livre FM —
-    Sua música. Sua onda.
+    © Onda Livre FM — Todos os direitos reservados.
 
 </footer>
 
 
-<!-- =====================================================
-     ÚNICO SCRIPT
-====================================================== -->
-
 <script src="script.js"></script>
-
 
 </body>
 
