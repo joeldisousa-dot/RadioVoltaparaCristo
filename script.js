@@ -69,7 +69,7 @@ const header =
 if (!audio) {
 
     console.error(
-        "Onda Livre FM: elemento de áudio não encontrado."
+        "Onda Livre FM: elemento #audio não encontrado."
     );
 
     return;
@@ -84,6 +84,10 @@ audio.src = STREAM_URL;
 
 audio.preload = "auto";
 
+audio.autoplay = true;
+
+audio.playsInline = true;
+
 audio.volume = VOLUME_INICIAL;
 
 
@@ -95,7 +99,7 @@ if (volume) {
 
 
 /* =========================================================
-   INFORMAÇÕES DA MÚSICA
+   INFORMAÇÕES DA FAIXA
 ========================================================= */
 
 if (trackTitle) {
@@ -113,12 +117,17 @@ if (trackArtist) {
 
 
 /* =========================================================
-   ATUALIZAR VISUAL DO PLAYER
+   ATUALIZAR PLAYER
 ========================================================= */
 
 function atualizarPlayer() {
 
-    if (!audio.paused && !audio.ended) {
+    const tocando =
+        !audio.paused &&
+        !audio.ended;
+
+
+    if (tocando) {
 
 
         if (playIcon) {
@@ -164,7 +173,7 @@ function atualizarPlayer() {
 
 
 /* =========================================================
-   PLAY
+   TOCAR
 ========================================================= */
 
 async function tocarAudio() {
@@ -172,7 +181,7 @@ async function tocarAudio() {
     try {
 
         /*
-         * Garante volume audível.
+         * O volume deve estar acima de zero.
          */
         if (audio.volume <= 0) {
 
@@ -187,12 +196,6 @@ async function tocarAudio() {
         }
 
 
-        /*
-         * IMPORTANTE:
-         *
-         * O navegador recebe diretamente
-         * a chamada play() do elemento <audio>.
-         */
         await audio.play();
 
 
@@ -200,38 +203,34 @@ async function tocarAudio() {
 
 
         console.log(
-            "Onda Livre FM: reprodução iniciada."
+            "Onda Livre FM: áudio reproduzindo."
         );
 
 
     } catch (erro) {
 
-        console.error(
-            "Onda Livre FM: não foi possível reproduzir o áudio.",
-            erro
+        /*
+         * Se aparecer aqui ao abrir a página,
+         * normalmente é somente o bloqueio de
+         * autoplay do navegador.
+         *
+         * O botão Play continua funcionando.
+         */
+
+        console.warn(
+            "Onda Livre FM: autoplay bloqueado pelo navegador."
         );
+
+        console.warn(erro);
 
 
         atualizarPlayer();
-
-
-        /*
-         * Mostra uma mensagem no console
-         * para facilitar o diagnóstico.
-         */
-        if (erro && erro.name) {
-
-            console.error(
-                "Tipo do erro:",
-                erro.name
-            );
-        }
     }
 }
 
 
 /* =========================================================
-   PAUSE
+   PAUSAR
 ========================================================= */
 
 function pausarAudio() {
@@ -260,7 +259,7 @@ async function alternarAudio() {
 
 
 /* =========================================================
-   BOTÃO PLAY PRINCIPAL
+   BOTÃO PLAY
 ========================================================= */
 
 if (playBtn) {
@@ -281,7 +280,7 @@ if (playBtn) {
 
 
 /* =========================================================
-   BOTÃO "OUVIR AGORA"
+   BOTÃO OUVIR AGORA
 ========================================================= */
 
 if (heroPlayBtn) {
@@ -309,12 +308,8 @@ if (volume) {
         "input",
         function () {
 
-            const novoVolume =
-                Number(this.value);
-
-
             audio.volume =
-                novoVolume;
+                Number(this.value);
 
         }
     );
@@ -322,7 +317,7 @@ if (volume) {
 
 
 /* =========================================================
-   BOTÃO ANTERIOR
+   ANTERIOR
 ========================================================= */
 
 if (prevBtn) {
@@ -330,11 +325,6 @@ if (prevBtn) {
     prevBtn.addEventListener(
         "click",
         async function () {
-
-            /*
-             * Como atualmente temos uma única música,
-             * o botão retorna ao início.
-             */
 
             audio.currentTime = 0;
 
@@ -351,7 +341,7 @@ if (prevBtn) {
 
 
 /* =========================================================
-   BOTÃO PRÓXIMO
+   PRÓXIMO
 ========================================================= */
 
 if (nextBtn) {
@@ -359,13 +349,6 @@ if (nextBtn) {
     nextBtn.addEventListener(
         "click",
         async function () {
-
-            /*
-             * Atualmente temos uma única faixa.
-             *
-             * Quando as 500 músicas forem adicionadas,
-             * este botão será ligado à playlist.
-             */
 
             audio.currentTime = 0;
 
@@ -405,42 +388,6 @@ if (shuffleBtn) {
 ========================================================= */
 
 audio.addEventListener(
-    "loadstart",
-    function () {
-
-        console.log(
-            "Onda Livre FM: carregando áudio..."
-        );
-
-    }
-);
-
-
-audio.addEventListener(
-    "loadedmetadata",
-    function () {
-
-        console.log(
-            "Onda Livre FM: informações do áudio carregadas."
-        );
-
-    }
-);
-
-
-audio.addEventListener(
-    "canplay",
-    function () {
-
-        console.log(
-            "Onda Livre FM: áudio pronto."
-        );
-
-    }
-);
-
-
-audio.addEventListener(
     "play",
     function () {
 
@@ -470,10 +417,6 @@ audio.addEventListener(
 
         atualizarPlayer();
 
-        console.log(
-            "Onda Livre FM: pausado."
-        );
-
     }
 );
 
@@ -493,14 +436,22 @@ audio.addEventListener(
 
 
 audio.addEventListener(
+    "canplay",
+    function () {
+
+        console.log(
+            "Onda Livre FM: áudio pronto."
+        );
+
+    }
+);
+
+
+audio.addEventListener(
     "ended",
     function () {
 
         atualizarPlayer();
-
-        console.log(
-            "Onda Livre FM: música terminou."
-        );
 
     }
 );
@@ -514,19 +465,19 @@ audio.addEventListener(
 
 
         console.error(
-            "Onda Livre FM: ERRO AO CARREGAR O ÁUDIO."
+            "Onda Livre FM: erro ao carregar o MP3."
         );
 
 
         if (audio.error) {
 
             console.error(
-                "Código do erro:",
+                "Código:",
                 audio.error.code
             );
 
             console.error(
-                "Detalhes:",
+                "Mensagem:",
                 audio.error.message
             );
         }
@@ -540,13 +491,14 @@ audio.addEventListener(
 ========================================================= */
 
 /*
- * Fazemos apenas uma tentativa.
+ * Tenta tocar logo após o carregamento.
  *
- * Se o navegador permitir autoplay,
- * a música começa automaticamente.
+ * Se o navegador permitir:
+ *      começa automaticamente.
  *
- * Se bloquear, o botão Play continua
- * funcionando normalmente.
+ * Se bloquear:
+ *      o player continua normal e o
+ *      botão Play fica disponível.
  */
 
 setTimeout(
@@ -559,7 +511,7 @@ setTimeout(
         }
 
     },
-    500
+    300
 );
 
 
@@ -628,10 +580,6 @@ if (requestForm) {
 document.addEventListener(
     "keydown",
     function (event) {
-
-        /*
-         * Não interfere em campos de texto.
-         */
 
         if (
             event.code === "Space" &&
