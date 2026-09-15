@@ -1,1972 +1,2190 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#071a33">
-    <meta name="description"
-          content="Onda Livre — Louvores, mensagens, Palavra de Deus e oração para acompanhar você onde estiver.">
-
-    <title>Onda Livre — Uma mensagem para o seu coração</title>
-
-    <style>
-
-        /* =========================================================
-           RESET
-        ========================================================= */
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Arial,
-                sans-serif;
-
-            background:
-                radial-gradient(
-                    circle at 20% 0%,
-                    rgba(30, 100, 180, .20),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 90% 20%,
-                    rgba(207, 169, 83, .10),
-                    transparent 30%
-                ),
-                #061426;
-
-            color: #f5f8fc;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        textarea {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-
-        /* =========================================================
-           HEADER
-        ========================================================= */
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-
-            height: 76px;
-
-            display: flex;
-            align-items: center;
-
-            z-index: 1000;
-
-            background: rgba(5, 19, 37, .82);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border-bottom: 1px solid rgba(255,255,255,.08);
-
-            transition: .3s ease;
-        }
-
-        header.scrolled {
-            background: rgba(4, 15, 29, .96);
-            box-shadow: 0 10px 30px rgba(0,0,0,.18);
-        }
-
-        .header-container {
-            width: min(1180px, calc(100% - 40px));
-            margin: auto;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+<meta charset="UTF-8">
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .brand-icon {
-            width: 42px;
-            height: 42px;
+<meta name="theme-color" content="#071426">
 
-            border-radius: 13px;
+<meta name="description"
+content="Onda Livre — Louvores, mensagens, Palavra de Deus e oração para levar esperança ao seu coração.">
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+<title>Onda Livre — Uma mensagem para o seu coração</title>
 
-            background:
-                linear-gradient(
-                    145deg,
-                    #1e78d4,
-                    #0c3f78
-                );
+<style>
 
-            box-shadow:
-                0 8px 25px rgba(30,120,212,.28);
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
-        .brand-icon span {
-            font-size: 21px;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .brand-text strong {
-            display: block;
+html {
+    scroll-behavior: smooth;
+}
 
-            font-size: 17px;
-            letter-spacing: .8px;
-            line-height: 1.1;
-        }
+body {
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-        .brand-text small {
-            color: #8fa5bd;
-            font-size: 10px;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-        }
+    background:
+        radial-gradient(
+            circle at 80% 10%,
+            rgba(42, 113, 194, 0.18),
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #061222 0%,
+            #08182b 45%,
+            #f6f8fb 45.1%,
+            #f6f8fb 100%
+        );
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
+    color: #172033;
 
-        nav a {
-            color: #b9c8d8;
-            font-size: 14px;
-            transition: .2s ease;
-        }
+    min-height: 100vh;
 
-        nav a:hover {
-            color: #fff;
-        }
+    padding-bottom: 105px;
+}
 
-        .nav-listen {
-            padding: 10px 18px;
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-            border-radius: 10px;
+button,
+input,
+textarea {
+    font: inherit;
+}
 
-            background: #1976d2;
-            color: white;
+button {
+    cursor: pointer;
+}
 
-            font-weight: 600;
+/* =========================================================
+   HEADER
+========================================================= */
 
-            box-shadow:
-                0 8px 20px rgba(25,118,210,.22);
-        }
+.site-header {
 
-        .nav-listen:hover {
-            background: #2283e6;
-            color: white;
-        }
+    position: fixed;
 
+    top: 0;
+    left: 0;
+    right: 0;
 
-        /* =========================================================
-           HERO
-        ========================================================= */
+    height: 74px;
 
-        .hero {
-            position: relative;
+    z-index: 1000;
 
-            min-height: 760px;
+    background: rgba(5, 17, 32, 0.88);
 
-            display: flex;
-            align-items: center;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-            padding:
-                130px 20px
-                180px;
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
 
-            overflow: hidden;
-        }
+}
 
-        .hero::before {
-            content: "";
+.header-inner {
 
-            position: absolute;
+    width: min(1180px, calc(100% - 40px));
 
-            width: 620px;
-            height: 620px;
+    height: 100%;
 
-            right: -250px;
-            top: 80px;
+    margin: auto;
 
-            border-radius: 50%;
+    display: flex;
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(29,116,204,.20),
-                    transparent 68%
-                );
-        }
+    align-items: center;
 
-        .hero-container {
-            width: min(1180px, 100%);
-            margin: auto;
+    justify-content: space-between;
 
-            display: grid;
-            grid-template-columns: 1.05fr .95fr;
+    gap: 30px;
+}
 
-            align-items: center;
+.brand {
 
-            gap: 70px;
+    display: flex;
 
-            position: relative;
-            z-index: 2;
-        }
+    align-items: center;
 
-        .hero-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
+    gap: 12px;
 
-            padding: 7px 13px;
+    color: white;
 
-            border-radius: 30px;
+    min-width: max-content;
+}
 
-            background: rgba(255,255,255,.055);
-            border: 1px solid rgba(255,255,255,.09);
+.brand-icon {
 
-            color: #c8d7e8;
+    width: 40px;
+    height: 40px;
 
-            font-size: 12px;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
+    border-radius: 12px;
 
-            margin-bottom: 25px;
-        }
+    display: grid;
+    place-items: center;
 
-        .live-dot {
-            width: 8px;
-            height: 8px;
+    background:
+        linear-gradient(
+            135deg,
+            #d8b76a,
+            #f1d99a
+        );
 
-            border-radius: 50%;
+    color: #071426;
 
-            background: #44d17b;
+    font-size: 20px;
 
-            box-shadow:
-                0 0 0 5px rgba(68,209,123,.10);
-        }
+    box-shadow:
+        0 8px 25px rgba(216,183,106,0.18);
+}
 
-        .hero h1 {
-            max-width: 680px;
+.brand-text strong {
 
-            font-size:
-                clamp(42px, 6vw, 72px);
+    display: block;
 
-            line-height: 1.04;
+    font-size: 17px;
 
-            letter-spacing: -2.8px;
+    letter-spacing: 1.4px;
+}
 
-            margin-bottom: 24px;
-        }
+.brand-text span {
 
-        .hero h1 span {
-            color: #6db8ff;
-        }
+    display: block;
 
-        .hero-description {
-            max-width: 610px;
+    margin-top: 1px;
 
-            color: #a9b9ca;
+    color: #9eafc5;
 
-            font-size: 18px;
+    font-size: 10px;
 
-            line-height: 1.75;
+    letter-spacing: 1.8px;
 
-            margin-bottom: 34px;
-        }
+    text-transform: uppercase;
+}
 
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+.main-nav {
 
-        .btn {
-            border: 0;
+    display: flex;
 
-            padding: 14px 22px;
+    align-items: center;
 
-            border-radius: 12px;
+    gap: 5px;
+}
 
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
+.main-nav a {
 
-            font-weight: 650;
+    color: #b9c6d6;
 
-            transition:
-                transform .2s ease,
-                background .2s ease,
-                box-shadow .2s ease;
-        }
+    font-size: 13px;
 
-        .btn:hover {
-            transform: translateY(-2px);
-        }
+    padding: 10px 13px;
 
-        .btn-primary {
-            background: #1976d2;
-            color: white;
+    border-radius: 10px;
 
-            box-shadow:
-                0 12px 28px rgba(25,118,210,.28);
-        }
+    transition: 0.2s ease;
+}
 
-        .btn-primary:hover {
-            background: #2283e6;
-        }
+.main-nav a:hover {
 
-        .btn-secondary {
-            background: rgba(255,255,255,.055);
-            border: 1px solid rgba(255,255,255,.10);
-            color: #e9f0f7;
-        }
+    color: white;
 
-        .btn-secondary:hover {
-            background: rgba(255,255,255,.09);
-        }
+    background:
+        rgba(255,255,255,0.07);
+}
 
-        .hero-verse {
-            margin-top: 34px;
+.nav-highlight {
 
-            max-width: 590px;
+    color: #071426 !important;
 
-            padding-left: 18px;
+    background: #e2c57d !important;
 
-            border-left: 2px solid #c9a45a;
-        }
+    font-weight: 700;
+}
 
-        .hero-verse p {
-            color: #dbe5ef;
+/* =========================================================
+   HERO
+========================================================= */
 
-            font-family: Georgia, serif;
+.hero {
 
-            font-size: 18px;
+    position: relative;
 
-            font-style: italic;
-        }
+    min-height: 680px;
 
-        .hero-verse small {
-            display: block;
+    padding-top: 145px;
 
-            margin-top: 7px;
+    overflow: hidden;
+}
 
-            color: #91a5bb;
+.hero::before {
 
-            font-size: 12px;
-        }
+    content: "";
 
+    position: absolute;
 
-        /* =========================================================
-           HERO PLAYER
-        ========================================================= */
+    width: 520px;
+    height: 520px;
 
-        .hero-player {
-            position: relative;
+    right: -160px;
+    top: 90px;
 
-            padding: 32px;
+    border-radius: 50%;
 
-            border-radius: 28px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(62, 139, 220, 0.22),
+            transparent 68%
+        );
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.095),
-                    rgba(255,255,255,.035)
-                );
+    pointer-events: none;
+}
 
-            border: 1px solid rgba(255,255,255,.10);
+.hero::after {
 
-            box-shadow:
-                0 35px 80px rgba(0,0,0,.30);
+    content: "";
 
-            overflow: hidden;
-        }
+    position: absolute;
 
-        .hero-player::before {
-            content: "";
+    width: 300px;
+    height: 300px;
 
-            position: absolute;
+    left: -120px;
+    bottom: -100px;
 
-            width: 300px;
-            height: 300px;
+    border-radius: 50%;
 
-            right: -120px;
-            top: -120px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(216,183,106,0.12),
+            transparent 70%
+        );
 
-            border-radius: 50%;
+    pointer-events: none;
+}
 
-            background:
-                rgba(36,130,224,.18);
+.hero-inner {
 
-            filter: blur(10px);
-        }
+    position: relative;
 
-        .player-label {
-            position: relative;
+    z-index: 2;
 
-            color: #8fa7bf;
+    width: min(1180px, calc(100% - 40px));
 
-            font-size: 11px;
+    margin: auto;
 
-            text-transform: uppercase;
+    display: grid;
 
-            letter-spacing: 1.7px;
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(380px, 0.9fr);
 
-            margin-bottom: 20px;
-        }
+    gap: 70px;
 
-        .cover {
-            width: 190px;
-            height: 190px;
+    align-items: center;
+}
 
-            margin: 0 auto 27px;
+.hero-content {
 
-            border-radius: 50%;
+    color: white;
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+.eyebrow {
 
-            background:
-                radial-gradient(
-                    circle at center,
-                    #e5eef8 0 8%,
-                    #193f66 9% 12%,
-                    #09243f 13% 35%,
-                    #145e9f 36% 52%,
-                    #07192e 53% 67%,
-                    #1b70b9 68% 69%,
-                    #061426 70%
-                );
+    display: inline-flex;
 
-            border: 7px solid rgba(255,255,255,.08);
+    align-items: center;
 
-            box-shadow:
-                0 20px 45px rgba(0,0,0,.35);
+    gap: 8px;
 
-            animation: discRotate 9s linear infinite;
-            animation-play-state: paused;
-        }
+    padding: 7px 12px;
 
-        .cover.playing {
-            animation-play-state: running;
-        }
+    border-radius: 999px;
 
-        .cover::after {
-            content: "✦";
+    border:
+        1px solid rgba(255,255,255,0.12);
 
-            width: 48px;
-            height: 48px;
+    background:
+        rgba(255,255,255,0.05);
 
-            border-radius: 50%;
+    color: #d9c181;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    font-size: 11px;
 
-            background: #07192e;
+    font-weight: 700;
 
-            color: #e0bf76;
+    letter-spacing: 1.5px;
 
-            font-size: 20px;
+    text-transform: uppercase;
 
-            border: 2px solid rgba(255,255,255,.1);
-        }
+    margin-bottom: 23px;
+}
 
-        @keyframes discRotate {
-            from {
-                transform: rotate(0);
-            }
+.live-dot {
 
-            to {
-                transform: rotate(360deg);
-            }
-        }
+    width: 7px;
+    height: 7px;
 
-        .current-info {
-            text-align: center;
+    border-radius: 50%;
 
-            position: relative;
-        }
+    background: #65d391;
 
-        .current-info h2 {
-            font-size: 21px;
+    box-shadow:
+        0 0 0 5px rgba(101,211,145,0.08);
 
-            line-height: 1.3;
+    animation: pulse 2s infinite;
+}
 
-            margin-bottom: 5px;
-        }
+@keyframes pulse {
 
-        .current-info p {
-            color: #8fa5bc;
+    0%, 100% {
+        opacity: 1;
+    }
 
-            font-size: 14px;
-        }
+    50% {
+        opacity: .45;
+    }
+}
 
-        .hero-main-play {
-            width: 64px;
-            height: 64px;
+.hero h1 {
 
-            margin: 25px auto 0;
+    max-width: 690px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    font-size:
+        clamp(42px, 6vw, 72px);
 
-            border: 0;
-            border-radius: 50%;
+    line-height: 1.02;
 
-            background: #fff;
+    letter-spacing: -2.8px;
 
-            color: #09213a;
+    font-weight: 760;
 
-            font-size: 22px;
+    margin-bottom: 25px;
+}
 
-            box-shadow:
-                0 12px 35px rgba(0,0,0,.28);
+.hero h1 span {
 
-            transition: .2s ease;
-        }
+    color: #dfc27a;
+}
 
-        .hero-main-play:hover {
-            transform: scale(1.06);
-        }
+.hero-description {
 
+    max-width: 610px;
 
-        /* =========================================================
-           SECTIONS
-        ========================================================= */
+    color: #aebdce;
 
-        section {
-            scroll-margin-top: 95px;
-        }
+    font-size: 17px;
 
-        .section {
-            padding: 95px 20px;
-        }
+    line-height: 1.75;
 
-        .section-container {
-            width: min(1180px, 100%);
-            margin: auto;
-        }
+    margin-bottom: 32px;
+}
 
-        .section-heading {
-            max-width: 680px;
+.hero-buttons {
 
-            margin-bottom: 42px;
-        }
+    display: flex;
 
-        .section-heading span {
-            display: block;
+    flex-wrap: wrap;
 
-            color: #62aff5;
+    gap: 12px;
+}
 
-            text-transform: uppercase;
+.btn {
 
-            font-size: 11px;
+    border: 0;
 
-            font-weight: 700;
+    border-radius: 13px;
 
-            letter-spacing: 2px;
+    padding: 14px 21px;
 
-            margin-bottom: 9px;
-        }
+    display: inline-flex;
 
-        .section-heading h2 {
-            font-size: clamp(30px, 4vw, 44px);
+    align-items: center;
 
-            line-height: 1.12;
+    justify-content: center;
 
-            letter-spacing: -1.2px;
+    gap: 9px;
 
-            margin-bottom: 12px;
-        }
+    font-size: 14px;
 
-        .section-heading p {
-            color: #92a7bc;
-        }
+    font-weight: 700;
 
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
 
-        /* =========================================================
-           PALAVRA
-        ========================================================= */
+.btn:hover {
 
-        .word-section {
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(255,255,255,.018),
-                    rgba(255,255,255,.035)
-                );
-        }
+    transform: translateY(-2px);
+}
 
-        .word-grid {
-            display: grid;
+.btn-primary {
 
-            grid-template-columns:
-                1.3fr .7fr;
+    background:
+        linear-gradient(
+            135deg,
+            #e3c77f,
+            #caa95d
+        );
 
-            gap: 22px;
-        }
+    color: #071426;
 
-        .word-card,
-        .mission-card,
-        .prayer-card,
-        .message-card,
-        .music-card {
-            border: 1px solid rgba(255,255,255,.08);
+    box-shadow:
+        0 12px 30px rgba(202,169,93,0.20);
+}
 
-            background:
-                rgba(255,255,255,.045);
+.btn-secondary {
 
-            border-radius: 22px;
+    background:
+        rgba(255,255,255,0.07);
 
-            box-shadow:
-                0 20px 50px rgba(0,0,0,.12);
-        }
+    border:
+        1px solid rgba(255,255,255,0.13);
 
-        .word-card {
-            padding: 40px;
+    color: white;
+}
 
-            position: relative;
-            overflow: hidden;
-        }
+.hero-verse {
 
-        .word-card::after {
-            content: "“";
+    margin-top: 38px;
 
-            position: absolute;
+    padding-left: 18px;
 
-            right: 30px;
-            top: -10px;
+    border-left:
+        2px solid #d5b96f;
 
-            font-family: Georgia, serif;
+    max-width: 560px;
+}
 
-            font-size: 150px;
+.hero-verse p {
 
-            color: rgba(201,164,90,.08);
-        }
+    color: #dce5ef;
 
-        .word-card h3 {
-            position: relative;
+    font-family:
+        Georgia,
+        serif;
 
-            font-family: Georgia, serif;
+    font-size: 17px;
 
-            font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.7;
 
-            line-height: 1.45;
+    font-style: italic;
+}
 
-            font-weight: 400;
+.hero-verse span {
 
-            margin-bottom: 25px;
-        }
+    display: block;
 
-        .word-reference {
-            color: #d3b46e;
+    margin-top: 7px;
 
-            font-size: 14px;
+    color: #9aabc0;
 
-            font-weight: 650;
-        }
+    font-size: 12px;
 
-        .word-side {
-            padding: 30px;
-        }
+    font-family: inherit;
 
-        .word-side-icon {
-            width: 46px;
-            height: 46px;
+    font-style: normal;
+}
 
-            border-radius: 14px;
+/* =========================================================
+   HERO VISUAL
+========================================================= */
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+.hero-visual {
 
-            background: rgba(201,164,90,.10);
+    display: flex;
 
-            font-size: 21px;
+    justify-content: center;
 
-            margin-bottom: 20px;
-        }
+    align-items: center;
+}
 
-        .word-side h3 {
-            margin-bottom: 9px;
-        }
+.heart-card {
 
-        .word-side p {
-            color: #92a7bc;
-            font-size: 14px;
-        }
+    width: min(390px, 100%);
 
+    min-height: 440px;
 
-        /* =========================================================
-           ORAÇÃO
-        ========================================================= */
+    padding: 34px;
 
-        .prayer-grid {
-            display: grid;
+    border-radius: 28px;
 
-            grid-template-columns:
-                .8fr 1.2fr;
+    position: relative;
 
-            gap: 30px;
+    overflow: hidden;
 
-            align-items: stretch;
-        }
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.10),
+            rgba(255,255,255,0.035)
+        );
 
-        .prayer-card {
-            padding: 38px;
-        }
+    border:
+        1px solid rgba(255,255,255,0.12);
 
-        .prayer-card h2 {
-            font-size: 31px;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.28);
 
-            margin-bottom: 13px;
-        }
+    backdrop-filter: blur(18px);
+}
 
-        .prayer-card > p {
-            color: #9aadc0;
+.heart-card::before {
 
-            margin-bottom: 25px;
-        }
+    content: "";
 
-        .prayer-points {
-            list-style: none;
+    position: absolute;
 
-            display: grid;
+    width: 250px;
+    height: 250px;
 
-            gap: 13px;
-        }
+    border-radius: 50%;
 
-        .prayer-points li {
-            display: flex;
-            gap: 11px;
+    right: -90px;
+    top: -80px;
 
-            color: #cbd7e3;
+    background:
+        radial-gradient(
+            circle,
+            rgba(216,183,106,0.20),
+            transparent 68%
+        );
+}
 
-            font-size: 14px;
-        }
+.heart-symbol {
 
-        .prayer-points li::before {
-            content: "✓";
+    position: relative;
 
-            color: #63d38a;
+    width: 110px;
+    height: 110px;
 
-            font-weight: bold;
-        }
+    margin: 25px auto 35px;
 
-        form {
-            display: grid;
-            gap: 14px;
-        }
+    border-radius: 50%;
 
-        label {
-            display: block;
+    display: grid;
 
-            color: #aebfd0;
+    place-items: center;
 
-            font-size: 12px;
+    font-size: 45px;
 
-            margin-bottom: 6px;
-        }
+    background:
+        radial-gradient(
+            circle,
+            rgba(221,195,126,0.18),
+            rgba(221,195,126,0.03)
+        );
 
-        input,
-        textarea {
-            width: 100%;
+    border:
+        1px solid rgba(221,195,126,0.30);
 
-            border: 1px solid rgba(255,255,255,.09);
+    box-shadow:
+        0 0 60px rgba(221,195,126,0.10);
+}
 
-            border-radius: 11px;
+.heart-card h3 {
 
-            padding: 13px 14px;
+    position: relative;
 
-            background: rgba(0,0,0,.18);
+    color: white;
 
-            color: #fff;
+    text-align: center;
 
-            outline: none;
+    font-size: 25px;
 
-            transition: .2s ease;
-        }
+    margin-bottom: 13px;
+}
 
-        input:focus,
-        textarea:focus {
-            border-color: rgba(62,151,226,.7);
+.heart-card p {
 
-            box-shadow:
-                0 0 0 3px rgba(62,151,226,.10);
-        }
+    position: relative;
 
-        textarea {
-            min-height: 125px;
+    color: #aebdce;
 
-            resize: vertical;
-        }
+    text-align: center;
 
-        .form-status {
-            min-height: 20px;
+    line-height: 1.7;
 
-            color: #6dd68e;
+    font-size: 14px;
+}
 
-            font-size: 13px;
-        }
+.heart-card-line {
 
+    width: 50px;
+    height: 2px;
 
-        /* =========================================================
-           LOUVORES
-        ========================================================= */
+    background: #d9bc72;
 
-        .music-grid {
-            display: grid;
+    margin: 23px auto;
+}
 
-            grid-template-columns:
-                repeat(3, 1fr);
+.heart-card-footer {
 
-            gap: 18px;
-        }
+    position: relative;
 
-        .music-card {
-            padding: 25px;
+    display: flex;
 
-            transition:
-                transform .2s ease,
-                border-color .2s ease;
-        }
+    justify-content: center;
 
-        .music-card:hover {
-            transform: translateY(-4px);
+    gap: 8px;
 
-            border-color:
-                rgba(90,164,228,.28);
-        }
+    color: #8799ae;
 
-        .music-icon {
-            width: 50px;
-            height: 50px;
+    font-size: 11px;
 
-            border-radius: 15px;
+    text-transform: uppercase;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    letter-spacing: 1.3px;
+}
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(35,125,207,.30),
-                    rgba(24,63,103,.45)
-                );
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
 
-            font-size: 22px;
+.section {
 
-            margin-bottom: 20px;
-        }
+    width: min(1180px, calc(100% - 40px));
 
-        .music-card h3 {
-            margin-bottom: 7px;
-        }
+    margin: auto;
 
-        .music-card p {
-            color: #8fa5ba;
+    padding: 85px 0;
+}
 
-            font-size: 13px;
-        }
+.section-header {
 
+    display: flex;
 
-        /* =========================================================
-           MENSAGEM
-        ========================================================= */
+    justify-content: space-between;
 
-        .message-section {
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(16,69,116,.30),
-                    rgba(255,255,255,.015)
-                );
-        }
+    align-items: end;
 
-        .message-card {
-            padding: 50px;
+    gap: 25px;
 
-            display: grid;
+    margin-bottom: 32px;
+}
 
-            grid-template-columns:
-                1fr .7fr;
+.section-label {
 
-            gap: 50px;
+    color: #477bb0;
 
-            align-items: center;
-        }
+    font-size: 11px;
 
-        .message-card h2 {
-            font-size: clamp(30px, 4vw, 46px);
+    font-weight: 800;
 
-            line-height: 1.12;
+    letter-spacing: 1.8px;
 
-            margin-bottom: 18px;
-        }
+    text-transform: uppercase;
 
-        .message-card p {
-            color: #9db0c4;
+    margin-bottom: 8px;
+}
 
-            max-width: 620px;
-        }
+.section h2 {
 
-        .message-highlight {
-            padding: 28px;
+    color: #101b2c;
 
-            border-radius: 18px;
+    font-size: clamp(29px, 4vw, 40px);
 
-            background: rgba(0,0,0,.16);
+    letter-spacing: -1px;
+}
 
-            border: 1px solid rgba(255,255,255,.06);
-        }
+.section-intro {
 
-        .message-highlight strong {
-            display: block;
+    color: #6d7b8e;
 
-            color: #d4b66d;
+    max-width: 570px;
 
-            margin-bottom: 8px;
-        }
+    line-height: 1.7;
 
-        .message-highlight p {
-            font-family: Georgia, serif;
+    font-size: 14px;
+}
 
-            font-size: 18px;
+/* =========================================================
+   PALAVRA DO DIA
+========================================================= */
 
-            color: #dce6ef;
-        }
+.word-grid {
 
+    display: grid;
 
-        /* =========================================================
-           MISSÃO
-        ========================================================= */
+    grid-template-columns:
+        1.3fr
+        .7fr;
 
-        .mission-card {
-            padding: 45px;
+    gap: 20px;
+}
 
-            text-align: center;
-        }
+.word-card {
 
-        .mission-symbol {
-            width: 62px;
-            height: 62px;
+    border-radius: 24px;
 
-            margin: 0 auto 22px;
+    padding: 35px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    background: white;
 
-            border-radius: 20px;
+    border:
+        1px solid #e8edf3;
 
-            background: rgba(201,164,90,.10);
+    box-shadow:
+        0 15px 45px rgba(17,39,64,0.06);
+}
 
-            font-size: 27px;
-        }
+.word-main {
 
-        .mission-card h2 {
-            font-size: 35px;
+    background:
+        linear-gradient(
+            135deg,
+            #0b2441,
+            #102f52
+        );
 
-            margin-bottom: 13px;
-        }
+    color: white;
 
-        .mission-card p {
-            max-width: 700px;
+    border: 0;
 
-            margin: auto;
+    position: relative;
 
-            color: #9aadc0;
-        }
+    overflow: hidden;
+}
 
+.word-main::after {
 
-        /* =========================================================
-           PLAYER FIXO
-        ========================================================= */
+    content: "“";
 
-        .bottom-player {
-            position: fixed;
+    position: absolute;
 
-            left: 0;
-            right: 0;
-            bottom: 0;
+    right: 25px;
+    top: -15px;
 
-            z-index: 1100;
+    font-family: Georgia, serif;
 
-            padding: 10px 20px;
+    font-size: 180px;
 
-            background:
-                rgba(4,15,28,.92);
+    line-height: 1;
 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+    color: rgba(255,255,255,0.045);
+}
 
-            border-top:
-                1px solid rgba(255,255,255,.09);
-        }
+.word-tag {
 
-        .bottom-player-inner {
-            width: min(1180px, 100%);
-            margin: auto;
+    color: #e0c681;
 
-            display: grid;
+    font-size: 11px;
 
-            grid-template-columns:
-                1fr auto auto auto;
+    text-transform: uppercase;
 
-            align-items: center;
+    letter-spacing: 1.5px;
 
-            gap: 18px;
-        }
+    font-weight: 800;
 
-        .mini-track {
-            min-width: 0;
-        }
+    margin-bottom: 22px;
+}
 
-        .mini-label {
-            color: #6fb8f8;
+.word-main blockquote {
 
-            font-size: 9px;
+    position: relative;
 
-            letter-spacing: 1.5px;
+    font-family: Georgia, serif;
 
-            text-transform: uppercase;
-        }
+    font-size: 26px;
 
-        .mini-title {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+    line-height: 1.55;
 
-            font-weight: 650;
+    font-style: italic;
 
-            font-size: 14px;
-        }
+    margin-bottom: 22px;
 
-        .mini-artist {
-            color: #7e95ab;
+    max-width: 700px;
+}
 
-            font-size: 11px;
-        }
+.word-reference {
 
-        .player-button {
-            width: 39px;
-            height: 39px;
+    color: #a9bdd2;
 
-            border-radius: 50%;
+    font-size: 13px;
+}
 
-            border: 1px solid rgba(255,255,255,.08);
+.word-side {
 
-            background: rgba(255,255,255,.055);
+    display: flex;
 
-            color: #fff;
+    flex-direction: column;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    justify-content: center;
+}
 
-            transition: .2s ease;
-        }
+.word-side-icon {
 
-        .player-button:hover {
-            background: rgba(255,255,255,.12);
-        }
+    width: 48px;
+    height: 48px;
 
-        .player-button.main {
-            width: 46px;
-            height: 46px;
+    display: grid;
+    place-items: center;
 
-            background: #fff;
+    border-radius: 14px;
 
-            color: #09213a;
+    background: #eef4fa;
 
-            border: 0;
-        }
+    font-size: 22px;
 
-        .volume-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    margin-bottom: 18px;
+}
 
-        #volume {
-            width: 90px;
-        }
+.word-side h3 {
 
-        input[type="range"] {
-            accent-color: #4d9ce1;
-        }
+    font-size: 20px;
 
+    margin-bottom: 9px;
+}
 
-        /* =========================================================
-           FOOTER
-        ========================================================= */
+.word-side p {
 
-        footer {
-            padding:
-                70px 20px
-                125px;
+    color: #6e7c8e;
 
-            border-top: 1px solid rgba(255,255,255,.06);
-        }
+    line-height: 1.7;
 
-        .footer-container {
-            width: min(1180px, 100%);
-            margin: auto;
+    font-size: 14px;
+}
 
-            display: flex;
+/* =========================================================
+   PLAYER SECTION
+========================================================= */
 
-            justify-content: space-between;
+.listen-section {
 
-            gap: 30px;
-        }
+    padding-top: 15px;
+}
 
-        .footer-brand {
-            max-width: 500px;
-        }
+.player-card {
 
-        .footer-brand strong {
-            display: block;
+    border-radius: 26px;
 
-            font-size: 18px;
+    padding: 24px;
 
-            margin-bottom: 8px;
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #0b223d,
+            #09192e
+        );
 
-        .footer-brand p {
-            color: #7f96ac;
+    color: white;
 
-            font-size: 13px;
-        }
+    display: grid;
 
-        .footer-verse {
-            color: #91a7bb;
+    grid-template-columns:
+        auto
+        minmax(0,1fr)
+        auto;
 
-            font-size: 12px;
+    gap: 22px;
 
-            text-align: right;
-        }
+    align-items: center;
 
+    box-shadow:
+        0 25px 60px rgba(6,25,47,0.18);
+}
 
-        /* =========================================================
-           RESPONSIVO
-        ========================================================= */
+.player-cover {
 
-        @media (max-width: 900px) {
+    width: 68px;
+    height: 68px;
 
-            nav {
-                gap: 15px;
-            }
+    border-radius: 19px;
 
-            nav a:not(.nav-listen) {
-                display: none;
-            }
+    display: grid;
+    place-items: center;
 
-            .hero {
-                padding-top: 120px;
-            }
+    background:
+        linear-gradient(
+            145deg,
+            #e2c37b,
+            #b9964b
+        );
 
-            .hero-container,
-            .word-grid,
-            .prayer-grid,
-            .message-card {
-                grid-template-columns: 1fr;
-            }
+    color: #071426;
 
-            .hero-player {
-                max-width: 600px;
-                width: 100%;
-                margin: auto;
-            }
+    font-size: 27px;
 
-            .music-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.18);
+}
 
-            .message-card {
-                gap: 25px;
-            }
-        }
+.player-info {
 
-        @media (max-width: 600px) {
+    min-width: 0;
+}
 
-            .header-container {
-                width: min(100% - 25px, 1180px);
-            }
+.player-label {
 
-            .brand-text small {
-                display: none;
-            }
+    display: flex;
 
-            .brand-icon {
-                width: 38px;
-                height: 38px;
-            }
+    align-items: center;
 
-            .nav-listen {
-                padding: 9px 13px;
+    gap: 7px;
 
-                font-size: 12px;
-            }
+    color: #d9bf7b;
 
-            .hero {
-                min-height: auto;
+    font-size: 10px;
 
-                padding:
-                    115px 18px
-                    150px;
-            }
+    font-weight: 800;
 
-            .hero h1 {
-                font-size: 43px;
+    letter-spacing: 1.4px;
 
-                letter-spacing: -1.9px;
-            }
+    text-transform: uppercase;
 
-            .hero-description {
-                font-size: 16px;
-            }
+    margin-bottom: 5px;
+}
 
-            .hero-buttons {
-                flex-direction: column;
-            }
+.player-live {
 
-            .btn {
-                width: 100%;
-            }
+    width: 6px;
+    height: 6px;
 
-            .hero-player {
-                padding: 25px 20px;
-            }
+    border-radius: 50%;
 
-            .cover {
-                width: 160px;
-                height: 160px;
-            }
+    background: #64d18d;
+}
 
-            .section {
-                padding: 70px 18px;
-            }
+#trackTitle {
 
-            .word-card,
-            .word-side,
-            .prayer-card,
-            .message-card,
-            .mission-card {
-                padding: 28px 23px;
-            }
+    white-space: nowrap;
 
-            .music-grid {
-                grid-template-columns: 1fr;
-            }
+    overflow: hidden;
 
-            .bottom-player {
-                padding: 8px 12px;
-            }
+    text-overflow: ellipsis;
 
-            .bottom-player-inner {
-                grid-template-columns:
-                    1fr auto auto;
+    font-size: 17px;
 
-                gap: 9px;
-            }
+    font-weight: 750;
+}
 
-            .volume-container {
-                display: none;
-            }
+#trackArtist {
 
-            .mini-title {
-                font-size: 12px;
-            }
+    color: #91a5bb;
 
-            .mini-artist {
-                font-size: 10px;
-            }
+    font-size: 12px;
 
-            .footer-container {
-                flex-direction: column;
-            }
+    margin-top: 4px;
+}
 
-            .footer-verse {
-                text-align: left;
-            }
-        }
+.player-controls {
 
-    </style>
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.player-button {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color: white;
+
+    display: grid;
+
+    place-items: center;
+
+    transition: .2s ease;
+}
+
+.player-button:hover {
+
+    background:
+        rgba(255,255,255,0.12);
+
+    transform: translateY(-1px);
+}
+
+.player-button-main {
+
+    width: 49px;
+    height: 49px;
+
+    background: #e0c27a;
+
+    color: #071426;
+
+    border: 0;
+
+    font-size: 17px;
+}
+
+.player-button-main:hover {
+
+    background: #edd493;
+}
+
+.player-extra {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-left: 10px;
+}
+
+.volume {
+
+    width: 80px;
+}
+
+/* =========================================================
+   LOUVORES
+========================================================= */
+
+.music-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.music-card {
+
+    background: white;
+
+    border:
+        1px solid #e7edf3;
+
+    border-radius: 21px;
+
+    padding: 23px;
+
+    box-shadow:
+        0 10px 30px rgba(21,48,78,0.045);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.music-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 38px rgba(21,48,78,0.09);
+}
+
+.music-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 23px;
+}
+
+.music-icon {
+
+    width: 49px;
+    height: 49px;
+
+    border-radius: 15px;
+
+    display: grid;
+    place-items: center;
+
+    background: #edf4fb;
+
+    font-size: 22px;
+}
+
+.music-number {
+
+    color: #a5b2c1;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.music-card h3 {
+
+    font-size: 17px;
+
+    margin-bottom: 6px;
+}
+
+.music-card p {
+
+    color: #758294;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    margin-bottom: 18px;
+}
+
+.music-play {
+
+    border: 0;
+
+    background: transparent;
+
+    color: #477bb0;
+
+    font-weight: 750;
+
+    font-size: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+/* =========================================================
+   ORAÇÃO
+========================================================= */
+
+.prayer-section {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef4f9,
+            #f8fafc
+        );
+
+    border-top:
+        1px solid #e5ebf1;
+
+    border-bottom:
+        1px solid #e5ebf1;
+}
+
+.prayer-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        .85fr
+        1.15fr;
+
+    gap: 45px;
+
+    align-items: center;
+}
+
+.prayer-text h2 {
+
+    margin-bottom: 15px;
+}
+
+.prayer-text p {
+
+    color: #68778a;
+
+    line-height: 1.75;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+}
+
+.prayer-quote {
+
+    color: #304a67;
+
+    font-family: Georgia, serif;
+
+    font-style: italic;
+
+    line-height: 1.7;
+
+    font-size: 16px;
+}
+
+.prayer-form {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 24px;
+
+    border:
+        1px solid #e3eaf1;
+
+    box-shadow:
+        0 18px 45px rgba(20,48,77,0.07);
+}
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 14px;
+}
+
+.form-group {
+
+    margin-bottom: 15px;
+}
+
+.form-group label {
+
+    display: block;
+
+    color: #415267;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #dce4ec;
+
+    background: #f9fbfd;
+
+    color: #1c2a3b;
+
+    border-radius: 11px;
+
+    padding: 12px 13px;
+
+    outline: none;
+
+    transition: .2s ease;
+}
+
+.form-group textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color: #7ca3c9;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px rgba(74,126,179,0.08);
+}
+
+.form-button {
+
+    width: 100%;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    padding: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #174d7d,
+            #286a9f
+        );
+
+    color: white;
+
+    font-weight: 750;
+}
+
+.request-status {
+
+    min-height: 18px;
+
+    margin-top: 10px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: #477b59;
+}
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+.message-card {
+
+    display: grid;
+
+    grid-template-columns:
+        .9fr
+        1.1fr;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    background:
+        #0b223d;
+
+    color: white;
+
+    box-shadow:
+        0 22px 55px rgba(9,31,55,0.12);
+}
+
+.message-image {
+
+    min-height: 340px;
+
+    background:
+        radial-gradient(
+            circle at 40% 40%,
+            rgba(224,194,122,0.20),
+            transparent 25%
+        ),
+        linear-gradient(
+            145deg,
+            #173b61,
+            #08192d
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+.message-image-symbol {
+
+    width: 125px;
+    height: 125px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(224,194,122,0.35);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 48px;
+
+    box-shadow:
+        0 0 80px rgba(224,194,122,0.08);
+}
+
+.message-content {
+
+    padding: 48px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.message-content .section-label {
+
+    color: #ddc07b;
+}
+
+.message-content h2 {
+
+    color: white;
+
+    margin-bottom: 16px;
+}
+
+.message-content p {
+
+    color: #a9bacc;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+
+    margin-bottom: 23px;
+}
+
+.message-link {
+
+    color: #e1c47c;
+
+    font-size: 13px;
+
+    font-weight: 750;
+}
+
+/* =========================================================
+   MISSÃO
+========================================================= */
+
+.mission {
+
+    text-align: center;
+
+    max-width: 800px;
+}
+
+.mission .section-label {
+
+    text-align: center;
+}
+
+.mission h2 {
+
+    margin-bottom: 17px;
+}
+
+.mission p {
+
+    color: #68778a;
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+.mission-mark {
+
+    margin-top: 23px;
+
+    color: #45617c;
+
+    font-family: Georgia, serif;
+
+    font-style: italic;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    background: #061426;
+
+    color: white;
+
+    padding: 48px 20px;
+
+}
+
+.footer-inner {
+
+    width: min(1180px, 100%);
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.footer-brand strong {
+
+    font-size: 16px;
+
+    letter-spacing: 1px;
+}
+
+.footer-brand p {
+
+    color: #8194aa;
+
+    margin-top: 6px;
+
+    font-size: 12px;
+}
+
+.footer-right {
+
+    color: #8194aa;
+
+    font-size: 11px;
+
+    text-align: right;
+
+    line-height: 1.6;
+}
+
+/* =========================================================
+   PLAYER FIXO
+========================================================= */
+
+.bottom-player {
+
+    position: fixed;
+
+    z-index: 1100;
+
+    left: 20px;
+    right: 20px;
+    bottom: 16px;
+
+    width: min(1120px, calc(100% - 40px));
+
+    margin: auto;
+
+    border-radius: 19px;
+
+    background:
+        rgba(7,21,38,0.95);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,0.28);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    padding: 10px 13px;
+
+    display: grid;
+
+    grid-template-columns:
+        auto
+        minmax(0,1fr)
+        auto;
+
+    gap: 13px;
+
+    align-items: center;
+}
+
+.bottom-cover {
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e2c37c,
+            #b8974e
+        );
+
+    display: grid;
+
+    place-items: center;
+
+    color: #071426;
+}
+
+.bottom-info {
+
+    min-width: 0;
+}
+
+.bottom-info-title {
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.bottom-info-artist {
+
+    color: #8599ae;
+
+    font-size: 10px;
+
+    margin-top: 2px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.bottom-controls {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.bottom-button {
+
+    width: 33px;
+    height: 33px;
+
+    border-radius: 50%;
+
+    border: 0;
+
+    background: rgba(255,255,255,0.06);
+
+    color: white;
+
+    display: grid;
+
+    place-items: center;
+}
+
+.bottom-play {
+
+    width: 38px;
+    height: 38px;
+
+    background: #e1c47d;
+
+    color: #071426;
+}
+
+/* =========================================================
+   AUDIO
+========================================================= */
+
+#audio {
+
+    display: none;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .main-nav {
+        display: none;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: 125px;
+        padding-bottom: 70px;
+    }
+
+    .hero-inner {
+
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .hero h1 {
+
+        font-size: clamp(40px, 10vw, 58px);
+
+        letter-spacing: -2px;
+    }
+
+    .hero-visual {
+
+        justify-content: flex-start;
+    }
+
+    .heart-card {
+
+        max-width: 430px;
+    }
+
+    .word-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .music-grid {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .prayer-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+    .message-card {
+
+        grid-template-columns: 1fr;
+    }
+
+    .message-image {
+
+        min-height: 230px;
+    }
+
+}
+
+@media (max-width: 620px) {
+
+    body {
+        padding-bottom: 85px;
+    }
+
+    .header-inner,
+    .section,
+    .hero-inner {
+
+        width: min(100% - 28px, 1180px);
+    }
+
+    .site-header {
+        height: 66px;
+    }
+
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .brand-text strong {
+        font-size: 15px;
+    }
+
+    .brand-text span {
+        font-size: 8px;
+    }
+
+    .hero {
+        padding-top: 105px;
+    }
+
+    .hero-description {
+        font-size: 15px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .heart-card {
+        min-height: 380px;
+        padding: 27px;
+    }
+
+    .section {
+        padding: 65px 0;
+    }
+
+    .section-header {
+        display: block;
+    }
+
+    .section-intro {
+        margin-top: 10px;
+    }
+
+    .word-card {
+        padding: 25px;
+    }
+
+    .word-main blockquote {
+        font-size: 21px;
+    }
+
+    .player-card {
+
+        grid-template-columns: auto 1fr;
+
+        gap: 14px;
+    }
+
+    .player-controls {
+
+        grid-column: 1 / -1;
+
+        justify-content: center;
+    }
+
+    .music-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .prayer-form {
+        padding: 21px;
+    }
+
+    .message-content {
+        padding: 30px 24px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-right {
+        text-align: left;
+    }
+
+    .bottom-player {
+
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+
+        width: calc(100% - 16px);
+
+        padding: 8px;
+
+        border-radius: 15px;
+    }
+
+    .bottom-controls .extra {
+        display: none;
+    }
+
+    .bottom-button {
+        width: 31px;
+        height: 31px;
+    }
+
+    .bottom-play {
+        width: 37px;
+        height: 37px;
+    }
+
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+
+    outline:
+        3px solid rgba(224,194,122,0.55);
+
+    outline-offset: 3px;
+}
+
+</style>
+
 </head>
-
 
 <body>
 
-
-<!-- =========================================================
+<!-- =====================================================
      HEADER
-========================================================= -->
+===================================================== -->
 
-<header id="siteHeader">
+<header class="site-header">
 
-    <div class="header-container">
 
-        <a href="#inicio" class="brand">
+<div class="header-inner">
 
-            <div class="brand-icon">
-                <span>✦</span>
-            </div>
+    <a href="#inicio" class="brand">
 
-            <div class="brand-text">
-                <strong>ONDA LIVRE</strong>
-                <small>Uma mensagem para o seu coração</small>
-            </div>
+        <div class="brand-icon">
+            ♪
+        </div>
 
+        <div class="brand-text">
+
+            <strong>ONDA LIVRE</strong>
+
+            <span>Uma mensagem para o coração</span>
+
+        </div>
+
+    </a>
+
+    <nav class="main-nav">
+
+        <a href="#inicio">Início</a>
+
+        <a href="#louvores">Louvores</a>
+
+        <a href="#palavra">Palavra</a>
+
+        <a href="#oracao">Oração</a>
+
+        <a href="#sobre">Sobre</a>
+
+        <a href="#oracao" class="nav-highlight">
+            Pedir oração
         </a>
 
+    </nav>
 
-        <nav>
+</div>
 
-            <a href="#louvores">Louvores</a>
-
-            <a href="#palavra">Palavra</a>
-
-            <a href="#oracao">Oração</a>
-
-            <a href="#sobre">Sobre</a>
-
-            <a href="#player" class="nav-listen">
-                ▶ Ouvir
-            </a>
-
-        </nav>
-
-    </div>
 
 </header>
 
-
-
-<!-- =========================================================
+<!-- =====================================================
      HERO
-========================================================= -->
+===================================================== -->
 
 <main>
 
 <section class="hero" id="inicio">
 
-    <div class="hero-container">
 
+<div class="hero-inner">
 
-        <div>
+    <div class="hero-content">
 
-            <div class="hero-label">
+        <div class="eyebrow">
 
-                <span class="live-dot"></span>
+            <span class="live-dot"></span>
 
-                Onda Livre
-
-            </div>
-
-
-            <h1>
-                Uma mensagem de
-                <span>esperança</span>
-                para o seu coração.
-            </h1>
-
-
-            <p class="hero-description">
-
-                Louvores, mensagens, Palavra de Deus e momentos
-                de oração para acompanhar você onde estiver.
-
-                <br><br>
-
-                Nossa missão é levar uma mensagem de fé,
-                esperança e amor através da internet.
-
-            </p>
-
-
-            <div class="hero-buttons">
-
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    id="heroPlayBtn">
-
-                    ▶ Ouvir agora
-
-                </button>
-
-
-                <a
-                    href="#palavra"
-                    class="btn btn-secondary">
-
-                    📖 Palavra do dia
-
-                </a>
-
-            </div>
-
-
-            <div class="hero-verse">
-
-                <p>
-                    “Entrega o teu caminho ao Senhor;
-                    confia nele, e ele tudo fará.”
-                </p>
-
-                <small>
-                    Salmos 37:5
-                </small>
-
-            </div>
+            Onda Livre
 
         </div>
 
+        <h1>
 
+            Uma mensagem de
+            <span>esperança</span>
+            para o seu coração.
 
-        <!-- PLAYER PRINCIPAL -->
+        </h1>
 
-        <div
-            class="hero-player"
-            id="player">
+        <p class="hero-description">
 
-            <div class="player-label">
-                Ouvindo agora
-            </div>
+            Louvores, mensagens e a Palavra de Deus
+            para acompanhar você onde estiver.
+            Um espaço para ouvir, refletir, orar
+            e encontrar esperança.
 
+        </p>
 
-            <div
-                class="cover"
-                id="cover">
-
-            </div>
-
-
-            <div class="current-info">
-
-                <h2 id="trackTitle">
-                    Onda Livre
-                </h2>
-
-                <p id="trackArtist">
-                    Uma mensagem para o seu coração
-                </p>
-
-            </div>
-
+        <div class="hero-buttons">
 
             <button
-                type="button"
-                class="hero-main-play"
-                id="heroMainPlayBtn"
-                aria-label="Reproduzir">
+                class="btn btn-primary"
+                id="heroPlayBtn"
+                type="button">
 
                 ▶
+                Ouvir agora
 
             </button>
 
-        </div>
+            <a
+                href="#palavra"
+                class="btn btn-secondary">
 
-    </div>
+                📖
+                Palavra do dia
 
-</section>
-
-
-
-<!-- =========================================================
-     PALAVRA DO DIA
-========================================================= -->
-
-<section
-    class="section word-section"
-    id="palavra">
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <span>Palavra do dia</span>
-
-            <h2>
-                Um momento para ouvir Deus.
-            </h2>
-
-            <p>
-                Separe alguns minutos do seu dia para
-                refletir, meditar e fortalecer sua fé.
-            </p>
+            </a>
 
         </div>
 
-
-        <div class="word-grid">
-
-
-            <article class="word-card">
-
-                <h3>
-                    “Entrega o teu caminho ao Senhor;
-                    confia nele, e ele tudo fará.”
-                </h3>
-
-                <div class="word-reference">
-                    Salmos 37:5
-                </div>
-
-            </article>
-
-
-            <article class="word-card word-side">
-
-                <div class="word-side-icon">
-                    📖
-                </div>
-
-                <h3>
-                    Para hoje
-                </h3>
-
-                <p>
-                    Nem sempre conseguimos enxergar
-                    o caminho inteiro. Mas podemos
-                    confiar naquele que conhece o
-                    caminho.
-                </p>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     ORAÇÃO
-========================================================= -->
-
-<section
-    class="section"
-    id="oracao">
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <span>Estamos em oração</span>
-
-            <h2>
-                Você não precisa enfrentar tudo sozinho.
-            </h2>
-
-            <p>
-                Envie seu pedido de oração.
-                Vamos apresentar sua vida diante de Deus.
-            </p>
-
-        </div>
-
-
-        <div class="prayer-grid">
-
-
-            <article class="prayer-card">
-
-                <h2>
-                    🙏 Pedido de oração
-                </h2>
-
-                <p>
-                    Compartilhe conosco aquilo que está
-                    em seu coração.
-                </p>
-
-
-                <ul class="prayer-points">
-
-                    <li>
-                        Saúde e restauração
-                    </li>
-
-                    <li>
-                        Família
-                    </li>
-
-                    <li>
-                        Trabalho e vida financeira
-                    </li>
-
-                    <li>
-                        Direção para decisões
-                    </li>
-
-                    <li>
-                        Fortalecimento espiritual
-                    </li>
-
-                </ul>
-
-            </article>
-
-
-
-            <article class="prayer-card">
-
-                <form id="requestForm">
-
-                    <div>
-
-                        <label for="reqName">
-                            Seu nome
-                        </label>
-
-                        <input
-                            type="text"
-                            id="reqName"
-                            name="nome"
-                            placeholder="Como podemos chamar você?"
-                            required>
-
-                    </div>
-
-
-                    <div>
-
-                        <label for="reqSong">
-                            Seu pedido
-                        </label>
-
-                        <textarea
-                            id="reqSong"
-                            name="pedido"
-                            placeholder="Escreva seu pedido de oração..."
-                            required></textarea>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary">
-
-                        🙏 Enviar pedido
-
-                    </button>
-
-
-                    <div
-                        id="requestStatus"
-                        class="form-status">
-                    </div>
-
-                </form>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     LOUVORES
-========================================================= -->
-
-<section
-    class="section word-section"
-    id="louvores">
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <span>Louvores</span>
-
-            <h2>
-                Música que aproxima o coração de Deus.
-            </h2>
-
-            <p>
-                Uma seleção de louvores para acompanhar
-                seus momentos de oração, trabalho,
-                descanso e reflexão.
-            </p>
-
-        </div>
-
-
-        <div class="music-grid">
-
-
-            <article class="music-card">
-
-                <div class="music-icon">
-                    🎵
-                </div>
-
-                <h3>
-                    Louvores
-                </h3>
-
-                <p>
-                    Canções de adoração e esperança
-                    para o seu dia.
-                </p>
-
-            </article>
-
-
-            <article class="music-card">
-
-                <div class="music-icon">
-                    🎧
-                </div>
-
-                <h3>
-                    Ouvindo agora
-                </h3>
-
-                <p>
-                    Acompanhe o áudio atual através
-                    do player da Onda Livre.
-                </p>
-
-            </article>
-
-
-            <article class="music-card">
-
-                <div class="music-icon">
-                    ❤️
-                </div>
-
-                <h3>
-                    Compartilhe
-                </h3>
-
-                <p>
-                    Leve uma mensagem de esperança
-                    para alguém que precisa ouvir.
-                </p>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     MENSAGEM
-========================================================= -->
-
-<section
-    class="section message-section">
-
-    <div class="section-container">
-
-
-        <div class="message-card">
-
-
-            <div>
-
-                <span class="hero-label">
-                    💙 Mensagem
-                </span>
-
-
-                <h2>
-                    Talvez esta mensagem
-                    tenha chegado até você
-                    no momento certo.
-                </h2>
-
-
-                <p>
-
-                    Há dias em que precisamos apenas
-                    parar, respirar e lembrar que
-                    não estamos sozinhos.
-
-                    <br><br>
-
-                    A Onda Livre nasceu para levar
-                    palavras que tragam fé,
-                    esperança e consolo.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="message-highlight">
-
-                <strong>
-                    Uma palavra para guardar
-                </strong>
-
-                <p>
-                    “O Senhor é o meu pastor;
-                    nada me faltará.”
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     SOBRE / MISSÃO
-========================================================= -->
-
-<section
-    class="section"
-    id="sobre">
-
-    <div class="section-container">
-
-        <div class="mission-card">
-
-            <div class="mission-symbol">
-                ✝
-            </div>
-
-            <h2>
-                Nossa missão
-            </h2>
+        <div class="hero-verse">
 
             <p>
 
-                Levar a Palavra de Deus através da internet,
-                alcançando pessoas através de louvores,
-                mensagens, oração e conteúdo que fortaleça
-                a fé.
-
-                <br><br>
-
-                Que cada pessoa que passar pela Onda Livre
-                encontre uma palavra de esperança.
+                “Entrega o teu caminho ao Senhor;
+                confia nele, e ele tudo fará.”
 
             </p>
+
+            <span>
+                Salmos 37:5
+            </span>
 
         </div>
 
     </div>
 
-</section>
 
-</main>
+    <div class="hero-visual">
 
+        <div class="heart-card">
 
-
-<!-- =========================================================
-     PLAYER FIXO
-========================================================= -->
-
-<div class="bottom-player">
-
-    <div class="bottom-player-inner">
-
-
-        <div class="mini-track">
-
-            <div class="mini-label">
-                Ouvindo agora
+            <div class="heart-symbol">
+                ♡
             </div>
 
-            <div
-                class="mini-title"
-                id="miniTrackTitle">
+            <h3>
+                Você não está sozinho.
+            </h3>
 
-                Onda Livre
+            <div class="heart-card-line"></div>
 
-            </div>
+            <p>
 
-            <div
-                class="mini-artist"
-                id="miniTrackArtist">
+                Que cada louvor, cada palavra
+                e cada mensagem encontre um lugar
+                especial no seu coração.
 
-                Uma mensagem para o seu coração
+            </p>
+
+            <div class="heart-card-footer">
+
+                <span>Louvor</span>
+                <span>•</span>
+                <span>Palavra</span>
+                <span>•</span>
+                <span>Oração</span>
 
             </div>
 
         </div>
 
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     PLAYER PRINCIPAL
+===================================================== -->
+
+<section class="section listen-section">
+
+
+<div class="section-header">
+
+    <div>
+
+        <div class="section-label">
+            Agora
+        </div>
+
+        <h2>
+            O que está tocando
+        </h2>
+
+    </div>
+
+    <p class="section-intro">
+
+        Deixe o som acompanhar o seu momento.
+        Você pode continuar navegando pelo site
+        enquanto ouve.
+
+    </p>
+
+</div>
+
+
+<div class="player-card">
+
+    <div class="player-cover">
+        ♪
+    </div>
+
+    <div class="player-info">
+
+        <div class="player-label">
+
+            <span class="player-live"></span>
+
+            Tocando agora
+
+        </div>
+
+        <div id="trackTitle">
+            Futuro do homem e o final dos tempos
+        </div>
+
+        <div id="trackArtist">
+            Onda Livre
+        </div>
+
+    </div>
+
+
+    <div class="player-controls">
 
         <button
-            type="button"
-            class="player-button"
             id="prevBtn"
+            class="player-button"
+            type="button"
             aria-label="Anterior">
 
             ⏮
 
         </button>
 
-
         <button
-            type="button"
-            class="player-button main"
             id="playBtn"
+            class="player-button player-button-main"
+            type="button"
             aria-label="Reproduzir">
 
             <span id="playIcon">
@@ -1975,16 +2193,24 @@
 
         </button>
 
+        <button
+            id="nextBtn"
+            class="player-button"
+            type="button"
+            aria-label="Próximo">
 
-        <div class="volume-container">
+            ⏭
 
-            <span>
-                🔊
-            </span>
+        </button>
+
+        <div class="player-extra">
+
+            <span>🔊</span>
 
             <input
-                type="range"
                 id="volume"
+                class="volume"
+                type="range"
                 min="0"
                 max="1"
                 step="0.01"
@@ -1993,65 +2219,593 @@
 
         </div>
 
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     PALAVRA DO DIA
+===================================================== -->
+
+<section class="section" id="palavra">
+
+
+<div class="section-header">
+
+    <div>
+
+        <div class="section-label">
+            Palavra do Dia
+        </div>
+
+        <h2>
+            Uma palavra para hoje
+        </h2>
+
+    </div>
+
+    <p class="section-intro">
+
+        Reserve alguns minutos para parar,
+        respirar e permitir que a Palavra
+        fale ao seu coração.
+
+    </p>
+
+</div>
+
+
+<div class="word-grid">
+
+    <article class="word-card word-main">
+
+        <div class="word-tag">
+            Versículo do dia
+        </div>
+
+        <blockquote>
+
+            “Entrega o teu caminho ao Senhor;
+            confia nele, e ele tudo fará.”
+
+        </blockquote>
+
+        <div class="word-reference">
+            Salmos 37:5
+        </div>
+
+    </article>
+
+
+    <article class="word-card word-side">
+
+        <div class="word-side-icon">
+            📖
+        </div>
+
+        <h3>
+            Confie o seu caminho a Deus.
+        </h3>
+
+        <p>
+
+            Nem sempre conseguimos enxergar
+            o que está à frente. Mas podemos
+            continuar caminhando confiando
+            naquele que conhece o caminho.
+
+        </p>
+
+    </article>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     LOUVORES
+===================================================== -->
+
+<section class="section" id="louvores">
+
+
+<div class="section-header">
+
+    <div>
+
+        <div class="section-label">
+            Louvores
+        </div>
+
+        <h2>
+            Música para a alma
+        </h2>
+
+    </div>
+
+    <p class="section-intro">
+
+        Uma seleção de louvores e mensagens
+        para diferentes momentos do seu dia.
+
+    </p>
+
+</div>
+
+
+<div class="music-grid">
+
+    <article class="music-card">
+
+        <div class="music-top">
+
+            <div class="music-icon">
+                🎵
+            </div>
+
+            <span class="music-number">
+                01
+            </span>
+
+        </div>
+
+        <h3>
+            Louvores
+        </h3>
+
+        <p>
+            Canções para adorar,
+            agradecer e renovar a fé.
+        </p>
+
+        <button
+            class="music-play"
+            type="button"
+            data-play-index="0">
+
+            ▶ Ouvir agora
+
+        </button>
+
+    </article>
+
+
+    <article class="music-card">
+
+        <div class="music-top">
+
+            <div class="music-icon">
+                🙏
+            </div>
+
+            <span class="music-number">
+                02
+            </span>
+
+        </div>
+
+        <h3>
+            Momento de oração
+        </h3>
+
+        <p>
+            Sons e mensagens para acompanhar
+            seu momento de oração.
+        </p>
+
+        <a
+            href="#oracao"
+            class="music-play">
+
+            ✦ Ir para oração
+
+        </a>
+
+    </article>
+
+
+    <article class="music-card">
+
+        <div class="music-top">
+
+            <div class="music-icon">
+                ❤️
+            </div>
+
+            <span class="music-number">
+                03
+            </span>
+
+        </div>
+
+        <h3>
+            Mensagens
+        </h3>
+
+        <p>
+            Reflexões para fortalecer
+            a esperança e a fé.
+        </p>
+
+        <a
+            href="#mensagem"
+            class="music-play">
+
+            ✦ Ouvir mensagem
+
+        </a>
+
+    </article>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     ORAÇÃO
+===================================================== -->
+
+<section class="prayer-section" id="oracao">
+
+
+<div class="section prayer-layout">
+
+    <div class="prayer-text">
+
+        <div class="section-label">
+            Oração
+        </div>
+
+        <h2>
+            Podemos orar por você?
+        </h2>
+
+        <p>
+
+            Existem momentos em que tudo o que
+            precisamos é saber que alguém está
+            orando conosco.
+
+        </p>
+
+        <p>
+
+            Envie seu pedido de oração.
+            Compartilhe apenas aquilo que
+            você desejar.
+
+        </p>
+
+        <div class="prayer-quote">
+
+            “Clama a mim, e responder-te-ei.”
+
+            <br>
+
+            Jeremias 33:3
+
+        </div>
+
+    </div>
+
+
+    <form
+        class="prayer-form"
+        id="requestForm">
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="reqName">
+                    Seu nome
+                </label>
+
+                <input
+                    id="reqName"
+                    name="nome"
+                    type="text"
+                    placeholder="Como podemos chamar você?"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="reqSong">
+                    Assunto
+                </label>
+
+                <input
+                    id="reqSong"
+                    name="assunto"
+                    type="text"
+                    placeholder="Ex.: família, trabalho..."
+                    required>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="reqMessage">
+                Pedido de oração
+            </label>
+
+            <textarea
+                id="reqMessage"
+                name="mensagem"
+                placeholder="Escreva seu pedido de oração..."
+                required></textarea>
+
+        </div>
+
+
+        <button
+            class="form-button"
+            type="submit">
+
+            🙏 Enviar pedido de oração
+
+        </button>
+
+        <div
+            id="requestStatus"
+            class="request-status">
+        </div>
+
+    </form>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     MENSAGEM
+===================================================== -->
+
+<section class="section" id="mensagem">
+
+
+<div class="message-card">
+
+    <div class="message-image">
+
+        <div class="message-image-symbol">
+            ✝
+        </div>
+
+    </div>
+
+
+    <div class="message-content">
+
+        <div class="section-label">
+            Mensagem
+        </div>
+
+        <h2>
+            Há esperança para você.
+        </h2>
+
+        <p>
+
+            Talvez hoje você esteja cansado,
+            preocupado ou sem saber qual caminho
+            seguir. Pare por alguns instantes.
+
+            Respire.
+
+            Entregue suas preocupações a Deus
+            e continue caminhando.
+
+            A sua história ainda está sendo escrita.
+
+        </p>
+
+        <a
+            href="#palavra"
+            class="message-link">
+
+            Ler a Palavra do Dia →
+            
+        </a>
 
     </div>
 
 </div>
 
 
+</section>
 
-<!-- =========================================================
-     AUDIO
-========================================================= -->
+<!-- =====================================================
+     SOBRE / MISSÃO
+===================================================== -->
 
-<audio
-    id="audio"
-    preload="auto"
-    autoplay
-    playsinline
-    crossorigin="anonymous">
-</audio>
+<section
+    class="section mission"
+    id="sobre">
 
 
+<div class="section-label">
+    Nossa missão
+</div>
 
-<!-- =========================================================
+<h2>
+    Levar uma mensagem de esperança.
+</h2>
+
+<p>
+
+    A Onda Livre nasceu com um propósito simples:
+    utilizar a internet para levar louvores,
+    mensagens, oração e a Palavra de Deus
+    até pessoas que talvez estejam precisando
+    ouvir uma palavra de esperança.
+
+</p>
+
+<div class="mission-mark">
+
+    “Ide por todo o mundo e pregai o evangelho
+    a toda criatura.”
+
+    <br>
+
+    Marcos 16:15
+
+</div>
+
+
+</section>
+
+</main>
+
+<!-- =====================================================
      FOOTER
-========================================================= -->
+===================================================== -->
 
-<footer>
-
-    <div class="footer-container">
-
-        <div class="footer-brand">
-
-            <strong>
-                ONDA LIVRE
-            </strong>
-
-            <p>
-                Louvores, mensagens, Palavra e oração.
-                Uma mensagem de esperança para o seu coração.
-            </p>
-
-        </div>
+<footer class="footer">
 
 
-        <div class="footer-verse">
+<div class="footer-inner">
 
-            “Ide por todo o mundo,
-            pregai o evangelho a toda criatura.”
+    <div class="footer-brand">
 
-            <br>
+        <strong>
+            ONDA LIVRE
+        </strong>
 
-            Marcos 16:15
-
-        </div>
+        <p>
+            Louvor • Palavra • Oração • Esperança
+        </p>
 
     </div>
 
+
+    <div class="footer-right">
+
+        Uma mensagem para o seu coração.<br>
+
+        © 2026 Onda Livre
+
+    </div>
+
+</div>
+
+
 </footer>
 
+<!-- =====================================================
+     PLAYER FIXO
+===================================================== -->
 
+<div class="bottom-player">
+
+
+<div class="bottom-cover">
+    ♪
+</div>
+
+
+<div class="bottom-info">
+
+    <div
+        id="bottomTrackTitle"
+        class="bottom-info-title">
+
+        Futuro do homem e o final dos tempos
+
+    </div>
+
+    <div
+        id="bottomTrackArtist"
+        class="bottom-info-artist">
+
+        Onda Livre
+
+    </div>
+
+</div>
+
+
+<div class="bottom-controls">
+
+    <button
+        id="shuffleBtn"
+        class="bottom-button extra"
+        type="button"
+        aria-label="Aleatório">
+
+        🔀
+
+    </button>
+
+    <button
+        id="bottomPrevBtn"
+        class="bottom-button extra"
+        type="button"
+        aria-label="Anterior">
+
+        ⏮
+
+    </button>
+
+    <button
+        id="bottomPlayBtn"
+        class="bottom-button bottom-play"
+        type="button"
+        aria-label="Reproduzir">
+
+        <span id="bottomPlayIcon">
+            ▶
+        </span>
+
+    </button>
+
+    <button
+        id="bottomNextBtn"
+        class="bottom-button extra"
+        type="button"
+        aria-label="Próximo">
+
+        ⏭
+
+    </button>
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     AUDIO
+===================================================== -->
+
+<audio
+ id="audio"
+ preload="auto"
+ autoplay
+ playsinline>
+
+
+Seu navegador não suporta áudio.
+
+
+</audio>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script src="script.js"></script>
 
