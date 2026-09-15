@@ -1,502 +1,437 @@
 /* ============================================================
-   ONDA LIVRE FM
-   SCRIPT PRINCIPAL DO PLAYER
-   ============================================================ */
+ONDA LIVRE FM
+SCRIPT PRINCIPAL DO PLAYER
+============================================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* ========================================================
-       ELEMENTOS
-    ======================================================== */
+```
+/* ========================================================
+   ELEMENTOS
+======================================================== */
 
-    const audio = document.getElementById("audio");
+const audio = document.getElementById("audio");
 
-    const playBtn = document.getElementById("playBtn");
-    const playIcon = document.getElementById("playIcon");
+const playBtn = document.getElementById("playBtn");
+const playIcon = document.getElementById("playIcon");
 
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
 
-    const volumeControl = document.getElementById("volume");
+const volumeControl = document.getElementById("volume");
 
-    const trackTitle = document.getElementById("trackTitle");
-    const trackArtist = document.getElementById("trackArtist");
+const trackTitle = document.getElementById("trackTitle");
+const trackArtist = document.getElementById("trackArtist");
 
-    const onair = document.getElementById("onair");
-    const freq = document.getElementById("freq");
+const onair = document.getElementById("onair");
 
-    const shuffleBtn = document.getElementById("shuffleBtn");
+const shuffleBtn = document.getElementById("shuffleBtn");
 
-    /* ========================================================
-       CONFIGURAÇÃO DA RÁDIO
-       ======================================================== */
+
+/* ========================================================
+   VERIFICAÇÃO
+   ======================================================== */
+
+if (!audio) {
+    console.error("ERRO: elemento #audio não encontrado.");
+    return;
+}
+
+
+/* ========================================================
+   CONFIGURAÇÃO DA TRANSMISSÃO
+   ======================================================== */
+
+/*
+ * ATENÇÃO:
+ *
+ * Esta variável PRECISA conter a URL REAL DO STREAM
+ * DE ÁUDIO da Onda Livre FM.
+ *
+ * A URL anterior do Google Apps Script NÃO deve ser usada
+ * aqui, pois ela não é uma transmissão de áudio.
+ */
+
+const STREAM_URL = "";
+
+
+/* ========================================================
+   CONFIGURAÇÕES
+   ======================================================== */
+
+const VOLUME_INICIAL = 1.0;
+
+let tentandoReproduzir = false;
+let usuarioInteragiu = false;
+
+
+/* ========================================================
+   CONFIGURAÇÃO INICIAL
+   ======================================================== */
+
+audio.autoplay = true;
+audio.playsInline = true;
+audio.preload = "auto";
+audio.volume = VOLUME_INICIAL;
+
+
+if (volumeControl) {
+    volumeControl.value = 100;
+}
+
+
+/* ========================================================
+   CONFIGURAR STREAM
+   ======================================================== */
+
+function configurarStream() {
+
+    if (!STREAM_URL) {
+
+        console.error(
+            "A URL REAL da transmissão não foi configurada."
+        );
+
+        atualizarStatus(false);
+
+        return false;
+    }
+
 
     /*
-     * IMPORTANTE:
-     *
-     * Coloque aqui a URL REAL da transmissão da Onda Livre FM.
-     *
-     * Exemplo:
-     *
-     * const STREAM_URL =
-     * "https://servidor.com:8000/stream";
-     *
-     * Se a URL já estiver sendo definida pelo seu HTML ou
-     * por outro código, este valor poderá ser alterado.
+     * Evita recarregar o mesmo endereço várias vezes.
      */
 
-    const STREAM_URL = "https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec";
+    if (audio.src !== STREAM_URL) {
+        audio.src = STREAM_URL;
+    }
 
-    /* ========================================================
-       CONFIGURAÇÕES
-       ======================================================== */
 
-    const VOLUME_INICIAL = 1.0;
+    try {
+        audio.load();
+    } catch (erro) {
 
-    /*
-     * Ganho adicional do Web Audio.
-     *
-     * 1.0 = normal
-     * 1.5 = aproximadamente +3,5 dB
-     * 2.0 = aproximadamente +6 dB
-     * 2.5 = aproximadamente +8 dB
-     *
-     * Começamos em 2.0.
-     */
+        console.error(
+            "Erro ao carregar transmissão:",
+            erro
+        );
 
-    const GANHO_AUDIO = 2.0;
+        return false;
+    }
 
-    let audioContext = null;
-    let gainNode = null;
-    let mediaSource = null;
 
-    let tentandoReproduzir = false;
-    let usuarioInteragiu = false;
+    return true;
+}
 
-    /* ========================================================
-       CONFIGURAÇÃO INICIAL
-       ======================================================== */
 
-    if (!audio) {
-        console.error("Elemento #audio não encontrado.");
+/* ========================================================
+   ÍCONE PLAY / PAUSE
+   ======================================================== */
+
+function atualizarBotao(tocando) {
+
+    if (!playIcon) {
         return;
     }
 
-    audio.volume = VOLUME_INICIAL;
-    audio.autoplay = true;
-    audio.playsInline = true;
 
-    if (volumeControl) {
-        volumeControl.value = 100;
+    if (tocando) {
+
+        playIcon.innerHTML = `
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true">
+
+                <rect
+                    x="6"
+                    y="5"
+                    width="4"
+                    height="14"
+                    rx="1">
+                </rect>
+
+                <rect
+                    x="14"
+                    y="5"
+                    width="4"
+                    height="14"
+                    rx="1">
+                </rect>
+
+            </svg>
+        `;
+
+    } else {
+
+        playIcon.innerHTML = `
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true">
+
+                <path d="M8 5v14l11-7z"></path>
+
+            </svg>
+        `;
+    }
+}
+
+
+/* ========================================================
+   STATUS DA RÁDIO
+   ======================================================== */
+
+function atualizarStatus(tocando) {
+
+    if (!onair) {
+        return;
     }
 
-    /* ========================================================
-       URL DA TRANSMISSÃO
-       ======================================================== */
 
-    function configurarStream() {
+    if (tocando) {
 
-        /*
-         * Não substitui uma URL que já tenha sido configurada
-         * externamente.
-         */
+        onair.textContent = "AO VIVO";
 
-        if (
-            STREAM_URL &&
-            !STREAM_URL.includes("COLOQUE_AQUI") &&
-            audio.src !== STREAM_URL
-        ) {
+        onair.classList.add("active");
 
-            audio.src = STREAM_URL;
+    } else {
 
-        }
+        onair.textContent = "OFFLINE";
 
-        /*
-         * Força carregamento da transmissão.
-         */
+        onair.classList.remove("active");
+    }
+}
 
-        try {
-            audio.load();
-        } catch (erro) {
-            console.warn("Não foi possível carregar o stream:", erro);
-        }
+
+/* ========================================================
+   PLAY
+   ======================================================== */
+
+async function tocar() {
+
+    if (tentandoReproduzir) {
+        return;
     }
 
-    /* ========================================================
-       WEB AUDIO
-       ======================================================== */
 
-    function ativarAudioAmplificado() {
+    tentandoReproduzir = true;
+
+
+    try {
 
         /*
-         * O Web Audio é criado somente uma vez.
+         * Se ainda não existe uma fonte de áudio,
+         * tenta configurar.
          */
 
-        if (audioContext) {
+        if (!audio.src) {
 
-            if (audioContext.state === "suspended") {
-                audioContext.resume().catch(() => {});
-            }
-
-            return;
-        }
-
-        try {
-
-            const AudioContextClass =
-                window.AudioContext ||
-                window.webkitAudioContext;
-
-            if (!AudioContextClass) {
-                console.warn(
-                    "Web Audio API não disponível neste navegador."
+            if (!configurarStream()) {
+                throw new Error(
+                    "URL da transmissão não configurada."
                 );
-                return;
             }
-
-            audioContext = new AudioContextClass();
-
-            mediaSource =
-                audioContext.createMediaElementSource(audio);
-
-            gainNode =
-                audioContext.createGain();
-
-            /*
-             * Ganho adicional.
-             */
-
-            gainNode.gain.value = GANHO_AUDIO;
-
-            /*
-             * Fluxo:
-             *
-             * áudio
-             *   ↓
-             * ganho
-             *   ↓
-             * caixas de som
-             */
-
-            mediaSource.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            if (audioContext.state === "suspended") {
-                audioContext.resume().catch(() => {});
-            }
-
-            console.log(
-                "Amplificação de áudio ativada. Ganho:",
-                GANHO_AUDIO
-            );
-
-        } catch (erro) {
-
-            /*
-             * Alguns streams externos podem bloquear
-             * processamento via Web Audio por CORS.
-             *
-             * Nesse caso o player continua funcionando
-             * normalmente sem amplificação.
-             */
-
-            console.warn(
-                "Não foi possível ativar amplificação:",
-                erro
-            );
-
-            audioContext = null;
-            gainNode = null;
-            mediaSource = null;
-
-            audio.volume = 1.0;
-        }
-    }
-
-    /* ========================================================
-       PLAY
-       ======================================================== */
-
-    async function tocar() {
-
-        if (tentandoReproduzir) {
-            return;
         }
 
-        tentandoReproduzir = true;
 
-        try {
+        /*
+         * Volume máximo do elemento.
+         */
 
-            ativarAudioAmplificado();
+        audio.volume = 1.0;
 
-            /*
-             * Garante volume máximo do elemento.
-             */
 
-            audio.volume = 1.0;
+        /*
+         * Inicia a transmissão.
+         */
 
-            /*
-             * Se o contexto estiver suspenso, tenta liberar.
-             */
+        await audio.play();
 
-            if (
-                audioContext &&
-                audioContext.state === "suspended"
-            ) {
-                await audioContext.resume();
-            }
 
-            await audio.play();
+        atualizarBotao(true);
+        atualizarStatus(true);
 
-            atualizarBotao(true);
-            atualizarStatus(true);
 
-            console.log("Onda Livre FM reproduzindo.");
+        console.log(
+            "Onda Livre FM: transmissão iniciada."
+        );
 
-        } catch (erro) {
 
-            console.warn(
-                "Autoplay bloqueado ou stream indisponível:",
-                erro
-            );
-
-            atualizarBotao(false);
-            atualizarStatus(false);
-
-        } finally {
-
-            tentandoReproduzir = false;
-
-        }
-    }
-
-    /* ========================================================
-       PAUSE
-       ======================================================== */
-
-    function pausar() {
-
-        try {
-            audio.pause();
-        } catch (erro) {
-            console.warn("Erro ao pausar:", erro);
-        }
+    } catch (erro) {
 
         atualizarBotao(false);
         atualizarStatus(false);
-    }
 
-    /* ========================================================
-       PLAY / PAUSE
-       ======================================================== */
 
-    function alternarPlay() {
+        console.error(
+            "Não foi possível iniciar a transmissão:",
+            erro
+        );
 
-        usuarioInteragiu = true;
-
-        ativarAudioAmplificado();
-
-        if (audio.paused) {
-            tocar();
-        } else {
-            pausar();
-        }
-    }
-
-    /* ========================================================
-       BOTÃO PLAY
-       ======================================================== */
-
-    function atualizarBotao(tocando) {
-
-        if (!playIcon) {
-            return;
-        }
 
         /*
-         * Se o seu HTML utiliza SVG dentro do botão,
-         * podemos trocar o conteúdo.
+         * Mensagens específicas para facilitar diagnóstico.
          */
 
-        if (tocando) {
+        if (erro.name === "NotAllowedError") {
 
-            playIcon.innerHTML = `
-                <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true">
-                    <rect x="6" y="5" width="4" height="14" rx="1"></rect>
-                    <rect x="14" y="5" width="4" height="14" rx="1"></rect>
-                </svg>
-            `;
+            console.warn(
+                "O navegador bloqueou o autoplay. " +
+                "Clique no botão Play."
+            );
+
+        } else if (erro.name === "NotSupportedError") {
+
+            console.error(
+                "O navegador não suporta o formato " +
+                "ou a URL informada não é um stream de áudio."
+            );
 
         } else {
 
-            playIcon.innerHTML = `
-                <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true">
-                    <path d="M8 5v14l11-7z"></path>
-                </svg>
-            `;
-
+            console.error(
+                "Verifique se a URL da transmissão está correta."
+            );
         }
 
+
+    } finally {
+
+        tentandoReproduzir = false;
+    }
+}
+
+
+/* ========================================================
+   PAUSE
+   ======================================================== */
+
+function pausar() {
+
+    try {
+        audio.pause();
+    } catch (erro) {
+
+        console.error(
+            "Erro ao pausar áudio:",
+            erro
+        );
     }
 
-    /* ========================================================
-       STATUS
-       ======================================================== */
 
-    function atualizarStatus(tocando) {
+    atualizarBotao(false);
+    atualizarStatus(false);
+}
 
-        if (!onair) {
-            return;
-        }
 
-        if (tocando) {
+/* ========================================================
+   PLAY / PAUSE
+   ======================================================== */
 
-            onair.textContent = "AO VIVO";
-            onair.classList.add("active");
+function alternarPlay(event) {
 
-        } else {
-
-            onair.textContent = "OFFLINE";
-            onair.classList.remove("active");
-
-        }
-
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
 
-    /* ========================================================
-       VOLUME
-       ======================================================== */
 
-    function alterarVolume(valor) {
+    usuarioInteragiu = true;
 
-        let nivel = Number(valor);
 
-        if (isNaN(nivel)) {
-            nivel = 100;
-        }
+    if (audio.paused) {
 
-        nivel = Math.max(0, Math.min(100, nivel));
+        tocar();
 
-        audio.volume = nivel / 100;
+    } else {
 
-        /*
-         * O ganho adicional permanece no Web Audio.
-         */
-
-        if (gainNode) {
-            gainNode.gain.value = GANHO_AUDIO;
-        }
-
-        atualizarIconeVolume(nivel);
-
+        pausar();
     }
+}
 
-    /* ========================================================
-       ÍCONE DO VOLUME
-       ======================================================== */
 
-    function atualizarIconeVolume(nivel) {
+/* ========================================================
+   BOTÃO PLAY
+   ======================================================== */
 
-        /*
-         * Não depende de um elemento específico.
-         *
-         * Se existir um elemento com #volumeIcon,
-         * atualiza automaticamente.
-         */
+if (playBtn) {
 
-        const volumeIcon =
-            document.getElementById("volumeIcon");
+    playBtn.addEventListener(
+        "click",
+        alternarPlay
+    );
 
-        if (!volumeIcon) {
-            return;
-        }
+} else {
 
-        if (nivel === 0) {
+    console.warn(
+        "Botão #playBtn não encontrado."
+    );
+}
 
-            volumeIcon.innerHTML = `
-                <svg width="18" height="18"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                </svg>
-            `;
 
-        } else if (nivel < 50) {
+/* ========================================================
+   BOTÃO ANTERIOR
+   ======================================================== */
 
-            volumeIcon.innerHTML = `
-                <svg width="18" height="18"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                    <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
-                </svg>
-            `;
+if (prevBtn) {
 
-        } else {
+    prevBtn.addEventListener(
+        "click",
+        function (event) {
 
-            volumeIcon.innerHTML = `
-                <svg width="18" height="18"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                    <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
-                    <path d="M19 5a10 10 0 0 1 0 14"></path>
-                </svg>
-            `;
+            event.preventDefault();
+
+            console.log(
+                "Rádio ao vivo: não é possível voltar a faixa."
+            );
 
         }
+    );
+}
 
-    }
 
-    /* ========================================================
-       BOTÕES ANTERIOR / PRÓXIMA
-       ======================================================== */
+/* ========================================================
+   BOTÃO PRÓXIMA
+   ======================================================== */
 
-    function anterior() {
+if (nextBtn) {
 
-        /*
-         * Rádio ao vivo normalmente não permite voltar faixa.
-         *
-         * Mantemos os botões funcionais sem quebrar o player.
-         */
+    nextBtn.addEventListener(
+        "click",
+        function (event) {
 
-        console.log("Função anterior acionada.");
-    }
+            event.preventDefault();
 
-    function proxima() {
+            console.log(
+                "Rádio ao vivo: próxima faixa controlada pela emissora."
+            );
 
-        console.log("Função próxima acionada.");
-    }
+        }
+    );
+}
 
-    /* ========================================================
-       SHUFFLE
-       ======================================================== */
 
-    let shuffleAtivo = false;
+/* ========================================================
+   SHUFFLE
+   ======================================================== */
 
-    function alternarShuffle() {
+let shuffleAtivo = false;
 
-        shuffleAtivo = !shuffleAtivo;
 
-        if (shuffleBtn) {
+if (shuffleBtn) {
+
+    shuffleBtn.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            shuffleAtivo = !shuffleAtivo;
 
             shuffleBtn.classList.toggle(
                 "active",
@@ -504,318 +439,466 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         }
+    );
+}
 
+
+/* ========================================================
+   VOLUME
+   ======================================================== */
+
+function alterarVolume(valor) {
+
+    let nivel = Number(valor);
+
+
+    if (Number.isNaN(nivel)) {
+        nivel = 100;
     }
 
-    /* ========================================================
-       EVENTOS DO PLAYER
-       ======================================================== */
 
-    if (playBtn) {
+    nivel = Math.max(
+        0,
+        Math.min(100, nivel)
+    );
 
-        playBtn.addEventListener(
-            "click",
-            alternarPlay
+
+    audio.volume = nivel / 100;
+
+
+    atualizarIconeVolume(nivel);
+}
+
+
+if (volumeControl) {
+
+    volumeControl.addEventListener(
+        "input",
+        function () {
+
+            alterarVolume(this.value);
+
+        }
+    );
+}
+
+
+/* ========================================================
+   ÍCONE DO VOLUME
+   ======================================================== */
+
+function atualizarIconeVolume(nivel) {
+
+    const volumeIcon =
+        document.getElementById("volumeIcon");
+
+
+    if (!volumeIcon) {
+        return;
+    }
+
+
+    if (nivel === 0) {
+
+        volumeIcon.innerHTML = `
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+
+                <path
+                    d="M11 5L6 9H2v6h4l5 4V5z">
+                </path>
+
+                <line
+                    x1="23"
+                    y1="9"
+                    x2="17"
+                    y2="15">
+                </line>
+
+                <line
+                    x1="17"
+                    y1="9"
+                    x2="23"
+                    y2="15">
+                </line>
+
+            </svg>
+        `;
+
+    } else if (nivel < 50) {
+
+        volumeIcon.innerHTML = `
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+
+                <path
+                    d="M11 5L6 9H2v6h4l5 4V5z">
+                </path>
+
+                <path
+                    d="M15.5 8.5a5 5 0 0 1 0 7">
+                </path>
+
+            </svg>
+        `;
+
+    } else {
+
+        volumeIcon.innerHTML = `
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+
+                <path
+                    d="M11 5L6 9H2v6h4l5 4V5z">
+                </path>
+
+                <path
+                    d="M15.5 8.5a5 5 0 0 1 0 7">
+                </path>
+
+                <path
+                    d="M19 5a10 10 0 0 1 0 14">
+                </path>
+
+            </svg>
+        `;
+    }
+}
+
+
+/* ========================================================
+   EVENTOS DO ÁUDIO
+   ======================================================== */
+
+audio.addEventListener(
+    "play",
+    function () {
+
+        atualizarBotao(true);
+        atualizarStatus(true);
+
+    }
+);
+
+
+audio.addEventListener(
+    "playing",
+    function () {
+
+        atualizarBotao(true);
+        atualizarStatus(true);
+
+        console.log(
+            "Onda Livre FM: áudio tocando."
         );
 
     }
+);
 
-    if (prevBtn) {
 
-        prevBtn.addEventListener(
-            "click",
-            anterior
+audio.addEventListener(
+    "pause",
+    function () {
+
+        atualizarBotao(false);
+
+        /*
+         * Não altera imediatamente para OFFLINE se
+         * o usuário simplesmente pausou.
+         */
+
+    }
+);
+
+
+audio.addEventListener(
+    "waiting",
+    function () {
+
+        console.log(
+            "Aguardando transmissão..."
+        );
+    }
+);
+
+
+audio.addEventListener(
+    "stalled",
+    function () {
+
+        console.warn(
+            "A transmissão foi interrompida temporariamente."
+        );
+    }
+);
+
+
+audio.addEventListener(
+    "canplay",
+    function () {
+
+        console.log(
+            "Stream disponível para reprodução."
         );
 
-    }
 
-    if (nextBtn) {
+        /*
+         * Se o usuário já interagiu, inicia.
+         */
 
-        nextBtn.addEventListener(
-            "click",
-            proxima
-        );
+        if (
+            usuarioInteragiu &&
+            audio.paused
+        ) {
 
-    }
-
-    if (shuffleBtn) {
-
-        shuffleBtn.addEventListener(
-            "click",
-            alternarShuffle
-        );
-
-    }
-
-    if (volumeControl) {
-
-        volumeControl.addEventListener(
-            "input",
-            function () {
-
-                alterarVolume(this.value);
-
-            }
-        );
-
-    }
-
-    /* ========================================================
-       EVENTOS DO ÁUDIO
-       ======================================================== */
-
-    audio.addEventListener(
-        "play",
-        function () {
-
-            atualizarBotao(true);
-            atualizarStatus(true);
-
-            ativarAudioAmplificado();
-
-        }
-    );
-
-    audio.addEventListener(
-        "playing",
-        function () {
-
-            atualizarBotao(true);
-            atualizarStatus(true);
-
-        }
-    );
-
-    audio.addEventListener(
-        "pause",
-        function () {
-
-            atualizarBotao(false);
-
-        }
-    );
-
-    audio.addEventListener(
-        "waiting",
-        function () {
-
-            console.log(
-                "Aguardando transmissão..."
-            );
-
-        }
-    );
-
-    audio.addEventListener(
-        "stalled",
-        function () {
-
-            console.warn(
-                "Transmissão temporariamente interrompida."
-            );
-
-        }
-    );
-
-    audio.addEventListener(
-        "error",
-        function () {
-
-            console.error(
-                "Erro no áudio:",
-                audio.error
-            );
-
-            atualizarStatus(false);
-
-        }
-    );
-
-    audio.addEventListener(
-        "canplay",
-        function () {
-
-            console.log(
-                "Transmissão disponível."
-            );
-
-            /*
-             * Tenta iniciar automaticamente.
-             */
-
-            if (audio.paused) {
-                tocar();
-            }
-
-        }
-    );
-
-    /* ========================================================
-       METADADOS
-       ======================================================== */
-
-    function atualizarMusica(titulo, artista) {
-
-        if (trackTitle && titulo) {
-            trackTitle.textContent = titulo;
-        }
-
-        if (trackArtist && artista) {
-            trackArtist.textContent = artista;
-        }
-
-    }
-
-    /*
-     * Informação inicial.
-     */
-
-    atualizarMusica(
-        "Onda Livre FM",
-        "Ao vivo"
-    );
-
-    /* ========================================================
-       TENTATIVAS DE AUTOPLAY
-       ======================================================== */
-
-    function tentarAutoplay() {
-
-        if (!audio.paused) {
-            return;
-        }
-
-        tocar();
-
-    }
-
-    /*
-     * Primeira tentativa.
-     */
-
-    setTimeout(
-        tentarAutoplay,
-        300
-    );
-
-    /*
-     * Segunda tentativa.
-     */
-
-    setTimeout(
-        tentarAutoplay,
-        1000
-    );
-
-    /*
-     * Terceira tentativa.
-     */
-
-    setTimeout(
-        tentarAutoplay,
-        2500
-    );
-
-    /*
-     * Quarta tentativa.
-     */
-
-    setTimeout(
-        tentarAutoplay,
-        5000
-    );
-
-    /* ========================================================
-       INTERAÇÃO DO USUÁRIO
-       ======================================================== */
-
-    /*
-     * O navegador pode bloquear autoplay com som.
-     *
-     * Assim que o usuário tocar/clicar na página,
-     * liberamos o áudio imediatamente.
-     */
-
-    function primeiraInteracao() {
-
-        usuarioInteragiu = true;
-
-        ativarAudioAmplificado();
-
-        if (audio.paused) {
             tocar();
         }
 
     }
+);
 
-    document.addEventListener(
-        "click",
-        primeiraInteracao,
-        {
-            once: true
-        }
-    );
 
-    document.addEventListener(
-        "touchstart",
-        primeiraInteracao,
-        {
-            once: true,
-            passive: true
-        }
-    );
+audio.addEventListener(
+    "error",
+    function () {
 
-    document.addEventListener(
-        "keydown",
-        primeiraInteracao,
-        {
-            once: true
-        }
-    );
+        atualizarBotao(false);
+        atualizarStatus(false);
 
-    /* ========================================================
-       VISIBILIDADE DA PÁGINA
-       ======================================================== */
 
-    document.addEventListener(
-        "visibilitychange",
-        function () {
-
-            if (
-                document.visibilityState === "visible" &&
-                audio.paused
-            ) {
-
-                setTimeout(
-                    tentarAutoplay,
-                    300
-                );
-
-            }
-
-        }
-    );
-
-    /* ========================================================
-       INICIALIZAÇÃO
-       ======================================================== */
-
-    if (
-        STREAM_URL &&
-        !STREAM_URL.includes("COLOQUE_AQUI")
-    ) {
-
-        configurarStream();
-
-    } else {
-
-        console.warn(
-            "A URL da transmissão ainda não foi configurada."
+        console.error(
+            "ERRO NO ÁUDIO:",
+            audio.error
         );
 
+
+        if (audio.error) {
+
+            console.error(
+                "Código do erro:",
+                audio.error.code
+            );
+        }
+    }
+);
+
+
+/* ========================================================
+   METADADOS
+   ======================================================== */
+
+if (trackTitle) {
+
+    trackTitle.textContent =
+        "Onda Livre FM";
+}
+
+
+if (trackArtist) {
+
+    trackArtist.textContent =
+        "Ao vivo";
+}
+
+
+/* ========================================================
+   AUTOPLAY
+   ======================================================== */
+
+function tentarAutoplay() {
+
+    /*
+     * Não tenta novamente se o usuário já estiver
+     * ouvindo a rádio.
+     */
+
+    if (!audio.paused) {
+        return;
     }
 
-    atualizarBotao(false);
-    atualizarStatus(false);
+
+    /*
+     * Se não houver URL, não há o que tocar.
+     */
+
+    if (!audio.src) {
+
+        if (!configurarStream()) {
+            return;
+        }
+    }
+
+
+    tocar();
+}
+
+
+/*
+ * Primeira tentativa.
+ */
+
+setTimeout(
+    tentarAutoplay,
+    300
+);
+
+
+/*
+ * Segunda tentativa.
+ */
+
+setTimeout(
+    tentarAutoplay,
+    1500
+);
+
+
+/*
+ * Terceira tentativa.
+ */
+
+setTimeout(
+    tentarAutoplay,
+    3000
+);
+
+
+/*
+ * Quarta tentativa.
+ */
+
+setTimeout(
+    tentarAutoplay,
+    5000
+);
+
+
+/* ========================================================
+   PRIMEIRA INTERAÇÃO
+   ======================================================== */
+
+function primeiraInteracao() {
+
+    usuarioInteragiu = true;
+
+
+    /*
+     * Se o áudio estiver parado,
+     * aproveita a interação para iniciar.
+     */
+
+    if (audio.paused) {
+
+        tocar();
+    }
+}
+
+
+document.addEventListener(
+    "click",
+    primeiraInteracao,
+    {
+        once: true
+    }
+);
+
+
+document.addEventListener(
+    "touchstart",
+    primeiraInteracao,
+    {
+        once: true,
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    primeiraInteracao,
+    {
+        once: true
+    }
+);
+
+
+/* ========================================================
+   VISIBILIDADE DA PÁGINA
+   ======================================================== */
+
+document.addEventListener(
+    "visibilitychange",
+    function () {
+
+        if (
+            document.visibilityState === "visible" &&
+            usuarioInteragiu &&
+            audio.paused
+        ) {
+
+            setTimeout(
+                tocar,
+                300
+            );
+        }
+    }
+);
+
+
+/* ========================================================
+   INICIALIZAÇÃO
+   ======================================================== */
+
+atualizarBotao(false);
+atualizarStatus(false);
+
+
+/*
+ * Configura o stream somente se existir
+ * uma URL real.
+ */
+
+if (STREAM_URL) {
+
+    configurarStream();
+
+} else {
+
+    console.error(
+        "================================================"
+    );
+
+    console.error(
+        "ONDA LIVRE FM"
+    );
+
+    console.error(
+        "URL DO STREAM NÃO CONFIGURADA."
+    );
+
+    console.error(
+        "Informe a URL REAL da transmissão em STREAM_URL."
+    );
+
+    console.error(
+        "================================================"
+    );
+}
+```
 
 });
