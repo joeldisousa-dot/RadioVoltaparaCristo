@@ -1,1053 +1,1072 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0">
-
-<meta
-    name="theme-color"
-    content="#07111f">
+    content="width=device-width, initial-scale=1.0"
+>
 
 <meta
     name="description"
-    content="Onda Livre FM - Música, informação e programação">
+    content="Onda Livre FM — Sua música. Sua onda."
+>
 
 <title>Onda Livre FM</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 80% 10%,
-            rgba(37,99,235,.16),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 10% 40%,
-            rgba(14,165,233,.10),
-            transparent 30%
-        ),
-        #07111f;
-
-    color: #f8fafc;
-
-    font-family:
-        "Space Grotesk",
-        sans-serif;
-}
-
-button,
-input {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header {
-    position: fixed;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    z-index: 9999;
-
-    height: 74px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.07);
-
-    background:
-        rgba(7,17,31,.78);
-
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
-
-    transition:
-        background .25s ease,
-        box-shadow .25s ease;
-}
-
-header.scrolled {
-    background:
-        rgba(7,17,31,.94);
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.20);
-}
-
-.header-inner {
-    width: min(1180px, calc(100% - 36px));
-
-    height: 100%;
-
-    margin: auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-}
-
-.logo {
-    display: flex;
-
-    align-items: center;
-
-    gap: 11px;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-    letter-spacing: -.5px;
-}
-
-.logo-mark {
-    width: 34px;
-    height: 34px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #06b6d4
-        );
-
-    box-shadow:
-        0 8px 25px rgba(37,99,235,.25);
-}
-
-.logo-mark svg {
-    width: 19px;
-    height: 19px;
-}
-
-nav {
-    display: flex;
-
-    align-items: center;
-
-    gap: 30px;
-}
-
-nav a {
-    color: #94a3b8;
-
-    font-size: 14px;
-
-    font-weight: 500;
-
-    transition:
-        color .2s ease;
-}
-
-nav a:hover {
-    color: #ffffff;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    min-height: 760px;
-
-    padding:
-        150px 20px 80px;
-
-    display: flex;
-
-    align-items: center;
-}
-
-.hero-inner {
-    width: min(1180px, 100%);
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        440px;
-
-    gap: 80px;
-
-    align-items: center;
-}
-
-.eyebrow {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    margin-bottom: 22px;
-
-    color: #38bdf8;
-
-    font-family:
-        "IBM Plex Mono",
-        monospace;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    letter-spacing: 1.2px;
-
-    text-transform: uppercase;
-}
-
-.eyebrow-dot {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #22c55e;
-
-    box-shadow:
-        0 0 0 5px rgba(34,197,94,.10),
-        0 0 16px rgba(34,197,94,.7);
-
-    animation:
-        pulse 1.8s infinite;
-}
-
-@keyframes pulse {
-
-    0% {
-        opacity: 1;
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
-    50% {
-        opacity: .45;
+    html {
+        scroll-behavior: smooth;
     }
 
-    100% {
-        opacity: 1;
-    }
-}
-
-.hero h1 {
-    max-width: 680px;
-
-    margin-bottom: 24px;
-
-    font-size:
-        clamp(44px, 6vw, 76px);
-
-    line-height: .98;
-
-    letter-spacing: -3px;
-}
-
-.hero h1 span {
-    color: #38bdf8;
-}
-
-.hero-description {
-    max-width: 580px;
-
-    margin-bottom: 34px;
-
-    color: #94a3b8;
-
-    font-size: 17px;
-
-    line-height: 1.7;
-}
-
-.hero-button {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 14px 21px;
-
-    border: 0;
-
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #0891b2
-        );
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    box-shadow:
-        0 12px 30px rgba(37,99,235,.25);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-.hero-button:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 16px 38px rgba(37,99,235,.35);
-}
-
-.hero-button svg {
-    width: 17px;
-    height: 17px;
-}
-
-/* =========================================================
-   PLAYER
-========================================================= */
-
-.player {
-    position: relative;
-
-    width: 100%;
-
-    padding: 25px;
-
-    border:
-        1px solid rgba(255,255,255,.09);
-
-    border-radius: 24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.085),
-            rgba(255,255,255,.035)
-        );
-
-    box-shadow:
-        0 25px 80px rgba(0,0,0,.30);
-
-    backdrop-filter:
-        blur(20px);
-
-    -webkit-backdrop-filter:
-        blur(20px);
-}
-
-.player-top {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 25px;
-}
-
-.player-live {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    color: #94a3b8;
-
-    font-family:
-        "IBM Plex Mono",
-        monospace;
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-}
-
-.player-live-dot {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #22c55e;
-
-    box-shadow:
-        0 0 12px rgba(34,197,94,.7);
-}
-
-.frequency {
-    color: #64748b;
-
-    font-family:
-        "IBM Plex Mono",
-        monospace;
-
-    font-size: 11px;
-}
-
-.track {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 27px;
-}
-
-.album {
-    width: 54px;
-    height: 54px;
-
-    flex: 0 0 54px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #06b6d4
-        );
-
-    box-shadow:
-        0 10px 30px rgba(37,99,235,.25);
-}
-
-.album svg {
-    width: 24px;
-    height: 24px;
-}
-
-.track-info {
-    min-width: 0;
-}
-
-.track-title {
-    overflow: hidden;
-
-    margin-bottom: 4px;
-
-    color: #f8fafc;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-}
-
-.track-artist {
-    overflow: hidden;
-
-    color: #64748b;
-
-    font-size: 13px;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-}
-
-/* =========================================================
-   CONTROLES
-========================================================= */
-
-.controls {
-    display: flex;
-
-    align-items: center;
-
-    gap: 11px;
-}
-
-.control-button {
-    width: 38px;
-    height: 38px;
-
-    flex: 0 0 auto;
-
-    display: grid;
-
-    place-items: center;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.045);
-
-    color: #94a3b8;
-
-    transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-.control-button:hover {
-    color: #ffffff;
-
-    background:
-        rgba(255,255,255,.10);
-
-    transform: translateY(-1px);
-}
-
-.control-button.primary {
-    width: 52px;
-    height: 52px;
-
-    border: 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #0891b2
-        );
-
-    color: #ffffff;
-
-    box-shadow:
-        0 10px 28px rgba(37,99,235,.30);
-}
-
-.control-button.active {
-    color: #38bdf8;
-
-    background:
-        rgba(56,189,248,.10);
-}
-
-.control-button svg {
-    width: 17px;
-    height: 17px;
-}
-
-.control-button.primary svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* =========================================================
-   VOLUME
-========================================================= */
-
-.volume-area {
-    flex: 1;
-
-    min-width: 80px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    margin-left: 7px;
-}
-
-.volume-icon {
-    width: 18px;
-    height: 18px;
-
-    display: grid;
-
-    place-items: center;
-
-    color: #64748b;
-}
-
-.volume-icon svg {
-    width: 17px;
-    height: 17px;
-}
-
-#volume {
-    width: 100%;
-
-    height: 4px;
-
-    appearance: none;
-
-    -webkit-appearance: none;
-
-    border-radius: 10px;
-
-    outline: none;
-
-    background:
-        rgba(255,255,255,.10);
-}
-
-#volume::-webkit-slider-thumb {
-    width: 13px;
-    height: 13px;
-
-    appearance: none;
-
-    -webkit-appearance: none;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: #38bdf8;
-
-    cursor: pointer;
-}
-
-#volume::-moz-range-thumb {
-    width: 13px;
-    height: 13px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: #38bdf8;
-
-    cursor: pointer;
-}
-
-/* =========================================================
-   ÁUDIO
-========================================================= */
-
-#audio {
-    display: none;
-}
-
-/* =========================================================
-   SEÇÕES
-========================================================= */
-
-section.content-section {
-    width: min(1180px, calc(100% - 36px));
-
-    margin: auto;
-
-    padding: 80px 0;
-}
-
-.section-label {
-    margin-bottom: 10px;
-
-    color: #38bdf8;
-
-    font-family:
-        "IBM Plex Mono",
-        monospace;
-
-    font-size: 10px;
-
-    letter-spacing: 1.5px;
-
-    text-transform: uppercase;
-}
-
-.section-title {
-    margin-bottom: 30px;
-
-    font-size: 30px;
-
-    letter-spacing: -1px;
-}
-
-/* =========================================================
-   PROGRAMAÇÃO
-========================================================= */
-
-.playlist {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 14px;
-}
-
-.program {
-    padding: 20px;
-
-    border:
-        1px solid rgba(255,255,255,.07);
-
-    border-radius: 16px;
-
-    background:
-        rgba(255,255,255,.035);
-}
-
-.program-time {
-    margin-bottom: 8px;
-
-    color: #38bdf8;
-
-    font-family:
-        "IBM Plex Mono",
-        monospace;
-
-    font-size: 11px;
-}
-
-.program-name {
-    color: #f8fafc;
-
-    font-size: 15px;
-
-    font-weight: 600;
-}
-
-/* =========================================================
-   PEDIDOS
-========================================================= */
-
-.request-box {
-    max-width: 600px;
-
-    padding: 25px;
-
-    border:
-        1px solid rgba(255,255,255,.07);
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.035);
-}
-
-.field {
-    margin-bottom: 15px;
-}
-
-.field label {
-    display: block;
-
-    margin-bottom: 7px;
-
-    color: #94a3b8;
-
-    font-size: 12px;
-}
-
-.field input {
-    width: 100%;
-
-    padding: 12px 13px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius: 10px;
-
-    outline: none;
-
-    background:
-        rgba(0,0,0,.18);
-
-    color: #ffffff;
-}
-
-.field input:focus {
-    border-color:
-        rgba(56,189,248,.55);
-}
-
-.request-button {
-    padding: 12px 18px;
-
-    border: 0;
-
-    border-radius: 10px;
-
-    background: #2563eb;
-
-    color: #ffffff;
-
-    font-size: 13px;
-
-    font-weight: 600;
-}
-
-.request-button:hover {
-    background: #1d4ed8;
-}
-
-#requestStatus {
-    margin-top: 12px;
-
-    color: #38bdf8;
-
-    font-size: 12px;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    width: min(1180px, calc(100% - 36px));
-
-    margin: 30px auto 0;
-
-    padding: 25px 0 35px;
-
-    border-top:
-        1px solid rgba(255,255,255,.07);
-
-    color: #64748b;
-
-    font-size: 12px;
-
-    text-align: center;
-}
-
-/* =========================================================
-   RESPONSIVO
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .hero-inner {
-        grid-template-columns: 1fr;
-
-        gap: 45px;
+    body {
+        font-family:
+            Inter,
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        background:
+            linear-gradient(
+                180deg,
+                #07111f 0%,
+                #0b1728 45%,
+                #07111f 100%
+            );
+
+        color: #ffffff;
+        min-height: 100vh;
+        overflow-x: hidden;
     }
 
-    .hero {
-        padding-top: 120px;
-    }
-}
-
-@media (max-width: 760px) {
-
-    .playlist {
-        grid-template-columns: 1fr;
+    body.modal-open {
+        overflow: hidden;
     }
 
-    .controls {
-        gap: 7px;
+    a {
+        color: inherit;
+        text-decoration: none;
     }
 
-    .control-button {
-        width: 35px;
-        height: 35px;
+    button,
+    input {
+        font: inherit;
     }
 
-    .control-button.primary {
-        width: 48px;
-        height: 48px;
+    button {
+        cursor: pointer;
     }
 
-    .volume-area {
-        min-width: 65px;
-        margin-left: 2px;
-    }
-}
+    /* =====================================================
+       FUNDO
+    ===================================================== */
 
-@media (max-width: 680px) {
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
 
-    nav {
-        gap: 14px;
-    }
+        background:
+            radial-gradient(
+                circle at 15% 15%,
+                rgba(29, 111, 255, 0.14),
+                transparent 30%
+            ),
+            radial-gradient(
+                circle at 85% 30%,
+                rgba(0, 214, 143, 0.08),
+                transparent 28%
+            );
 
-    nav a {
-        font-size: 12px;
-    }
-
-    .logo {
-        font-size: 17px;
-    }
-
-    .logo-mark {
-        width: 30px;
-        height: 30px;
-    }
-
-    .hero {
-        padding-left: 18px;
-        padding-right: 18px;
+        pointer-events: none;
+        z-index: -1;
     }
 
-    .player {
-        padding: 20px;
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: 72px;
+
+        display: flex;
+        align-items: center;
+
+        padding: 0 5%;
+
+        background: rgba(5, 13, 24, 0.82);
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        z-index: 1000;
+
+        transition:
+            background 0.25s ease,
+            box-shadow 0.25s ease;
     }
 
-    .track-title {
-        font-size: 15px;
-    }
+    header.scrolled {
+        background: rgba(4, 11, 20, 0.96);
 
-    .track-artist {
-        font-size: 12px;
+        box-shadow:
+            0 8px 30px rgba(0,0,0,0.25);
     }
-
-    .frequency {
-        display: none;
-    }
-}
-
-@media (max-width: 480px) {
 
     .header-inner {
-        width: calc(100% - 24px);
-    }
+        width: 100%;
+        max-width: 1180px;
+        margin: auto;
 
-    nav {
-        gap: 10px;
-    }
-
-    nav a {
-        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .logo {
-        gap: 7px;
-        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        font-weight: 800;
+        font-size: 19px;
+        letter-spacing: -0.4px;
     }
 
     .logo-mark {
-        width: 28px;
-        height: 28px;
+        width: 36px;
+        height: 36px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1683ff,
+                #00c98b
+            );
+
+        box-shadow:
+            0 8px 24px rgba(22,131,255,0.22);
     }
 
-    .controls {
-        flex-wrap: wrap;
+    .logo-mark::before {
+        content: "♪";
+        font-size: 20px;
+        font-weight: 800;
     }
 
-    .volume-area {
-        order: 5;
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+    }
 
-        width: 100%;
+    nav a {
+        color: #aebbd0;
+        font-size: 14px;
+        font-weight: 600;
 
-        margin: 8px 0 0;
+        transition:
+            color 0.2s ease;
+    }
+
+    nav a:hover {
+        color: #ffffff;
+    }
+
+    /* =====================================================
+       CONTEÚDO
+    ===================================================== */
+
+    main {
+        padding-top: 72px;
+    }
+
+    section {
+        width: 90%;
+        max-width: 1180px;
+        margin: auto;
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+        min-height: 600px;
+
+        display: grid;
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(350px, 0.85fr);
+
+        align-items: center;
+        gap: 60px;
+
+        padding-top: 70px;
+        padding-bottom: 60px;
+    }
+
+    .hero-content {
+        max-width: 650px;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        padding: 7px 12px;
+
+        border-radius: 999px;
+
+        background: rgba(0, 214, 143, 0.08);
+        border: 1px solid rgba(0, 214, 143, 0.16);
+
+        color: #54e5ae;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+        content: "";
+
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background: #00d68f;
+
+        box-shadow:
+            0 0 12px rgba(0,214,143,0.8);
     }
 
     .hero h1 {
-        letter-spacing: -2px;
+        font-size: clamp(46px, 7vw, 82px);
+        line-height: 0.98;
+        letter-spacing: -4px;
+
+        margin-bottom: 24px;
     }
-}
+
+    .hero h1 span {
+        display: block;
+
+        background:
+            linear-gradient(
+                90deg,
+                #ffffff,
+                #7bbaff
+            );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+    }
+
+    .hero p {
+        max-width: 550px;
+
+        color: #91a0b6;
+
+        font-size: 17px;
+        line-height: 1.7;
+
+        margin-bottom: 30px;
+    }
+
+    .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .primary-btn {
+        border: 0;
+
+        padding: 13px 20px;
+
+        border-radius: 11px;
+
+        color: #ffffff;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1683ff,
+                #0967d9
+            );
+
+        box-shadow:
+            0 10px 25px rgba(22,131,255,0.2);
+
+        font-size: 14px;
+        font-weight: 700;
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .primary-btn:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 14px 30px rgba(22,131,255,0.28);
+    }
+
+    .secondary-btn {
+        border: 1px solid rgba(255,255,255,0.1);
+
+        padding: 13px 20px;
+
+        border-radius: 11px;
+
+        color: #d6dfeb;
+
+        background: rgba(255,255,255,0.04);
+
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .secondary-btn:hover {
+        background: rgba(255,255,255,0.07);
+    }
+
+    /* =====================================================
+       PLAYER
+    ===================================================== */
+
+    .player-card {
+        width: 100%;
+        max-width: 430px;
+        margin-left: auto;
+
+        padding: 25px;
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,255,255,0.085),
+                rgba(255,255,255,0.035)
+            );
+
+        border:
+            1px solid rgba(255,255,255,0.09);
+
+        box-shadow:
+            0 25px 80px rgba(0,0,0,0.28);
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+    }
+
+    .player-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 24px;
+    }
+
+    .onair {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+
+        color: #00d68f;
+
+        font-size: 11px;
+        font-weight: 800;
+
+        letter-spacing: 0.7px;
+    }
+
+    .onair::before {
+        content: "";
+
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background: #00d68f;
+
+        box-shadow:
+            0 0 12px rgba(0,214,143,0.8);
+    }
+
+    .onair:not(.active) {
+        color: #8290a4;
+    }
+
+    .onair:not(.active)::before {
+        background: #8290a4;
+        box-shadow: none;
+    }
+
+    .frequency {
+        color: #8290a4;
+
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .album {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+
+        border-radius: 18px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 22px;
+
+        background:
+            radial-gradient(
+                circle at 35% 30%,
+                rgba(47,143,255,0.5),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                #0b5ec8,
+                #06244b
+            );
+
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .album-icon {
+        font-size: 72px;
+        opacity: 0.9;
+    }
+
+    .track-info {
+        margin-bottom: 22px;
+    }
+
+    .track-title {
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1.25;
+
+        margin-bottom: 6px;
+    }
+
+    .track-artist {
+        color: #8492a7;
+        font-size: 13px;
+    }
+
+    .player-controls {
+        display: grid;
+        grid-template-columns: 42px 1fr 42px;
+
+        align-items: center;
+        gap: 12px;
+
+        margin-bottom: 20px;
+    }
+
+    .control-btn {
+        width: 42px;
+        height: 42px;
+
+        border-radius: 50%;
+
+        border: 1px solid rgba(255,255,255,0.08);
+
+        background: rgba(255,255,255,0.045);
+
+        color: #ffffff;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .control-btn:hover {
+        background: rgba(255,255,255,0.09);
+    }
+
+    .play-btn {
+        width: 58px;
+        height: 58px;
+
+        justify-self: center;
+
+        border: 0;
+
+        border-radius: 50%;
+
+        color: #ffffff;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1683ff,
+                #0066db
+            );
+
+        box-shadow:
+            0 12px 30px rgba(22,131,255,0.3);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 18px;
+    }
+
+    .volume-area {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .volume-icon {
+        color: #8d9bb0;
+        font-size: 14px;
+    }
+
+    #volume {
+        width: 100%;
+        accent-color: #1683ff;
+    }
+
+    .shuffle-btn.active {
+        color: #54e5ae;
+
+        border-color:
+            rgba(0,214,143,0.3);
+
+        background:
+            rgba(0,214,143,0.08);
+    }
+
+    /* Áudio invisível */
+    #audio {
+        display: none;
+    }
+
+    /* =====================================================
+       SEÇÕES
+    ===================================================== */
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .section-header {
+        margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+        font-size: 30px;
+        letter-spacing: -1px;
+
+        margin-bottom: 8px;
+    }
+
+    .section-header p {
+        color: #8290a4;
+        font-size: 14px;
+    }
+
+    /* =====================================================
+       PROGRAMAÇÃO
+    ===================================================== */
+
+    .program-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 18px;
+    }
+
+    .program-card {
+        padding: 22px;
+
+        border-radius: 18px;
+
+        background: rgba(255,255,255,0.04);
+
+        border:
+            1px solid rgba(255,255,255,0.07);
+    }
+
+    .program-time {
+        color: #54e5ae;
+
+        font-size: 12px;
+        font-weight: 800;
+
+        margin-bottom: 10px;
+    }
+
+    .program-card h3 {
+        font-size: 17px;
+        margin-bottom: 7px;
+    }
+
+    .program-card p {
+        color: #8290a4;
+
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* =====================================================
+       PEDIDOS
+    ===================================================== */
+
+    .request-box {
+        max-width: 650px;
+
+        padding: 25px;
+
+        border-radius: 20px;
+
+        background: rgba(255,255,255,0.04);
+
+        border:
+            1px solid rgba(255,255,255,0.07);
+    }
+
+    .form-grid {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 14px;
+
+        margin-bottom: 14px;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .field label {
+        color: #9ba8ba;
+
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .field input {
+        width: 100%;
+
+        padding: 12px 13px;
+
+        border-radius: 10px;
+
+        border:
+            1px solid rgba(255,255,255,0.08);
+
+        outline: none;
+
+        color: #ffffff;
+
+        background:
+            rgba(0,0,0,0.18);
+    }
+
+    .field input:focus {
+        border-color:
+            rgba(22,131,255,0.6);
+    }
+
+    .request-status {
+        display: none;
+
+        margin-top: 14px;
+
+        color: #54e5ae;
+
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+        padding: 35px 5%;
+
+        border-top:
+            1px solid rgba(255,255,255,0.06);
+
+        color: #66758a;
+
+        text-align: center;
+
+        font-size: 12px;
+    }
+
+    /* =====================================================
+       MODAL DE ENTRADA
+    ===================================================== */
+
+    #autoplayOverlay {
+        position: fixed;
+        inset: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background:
+            radial-gradient(
+                circle at center,
+                rgba(22,131,255,0.16),
+                rgba(3,9,18,0.97) 58%
+            );
+
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        z-index: 9999;
+
+        opacity: 1;
+        visibility: visible;
+
+        transition:
+            opacity 0.35s ease,
+            visibility 0.35s ease;
+    }
+
+    #autoplayOverlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .autoplay-box {
+        width: 100%;
+        max-width: 420px;
+
+        padding: 38px 30px;
+
+        text-align: center;
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,255,255,0.1),
+                rgba(255,255,255,0.045)
+            );
+
+        border:
+            1px solid rgba(255,255,255,0.1);
+
+        box-shadow:
+            0 30px 100px rgba(0,0,0,0.45);
+    }
+
+    .autoplay-logo {
+        width: 70px;
+        height: 70px;
+
+        margin: 0 auto 22px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 20px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1683ff,
+                #00c98b
+            );
+
+        font-size: 34px;
+
+        box-shadow:
+            0 18px 45px rgba(22,131,255,0.25);
+    }
+
+    .autoplay-box h2 {
+        font-size: 28px;
+        letter-spacing: -1px;
+
+        margin-bottom: 10px;
+    }
+
+    .autoplay-box p {
+        color: #8f9caf;
+
+        font-size: 14px;
+        line-height: 1.6;
+
+        margin-bottom: 25px;
+    }
+
+    .autoplay-button {
+        width: 100%;
+
+        padding: 15px 20px;
+
+        border: 0;
+        border-radius: 12px;
+
+        color: #ffffff;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1683ff,
+                #0066db
+            );
+
+        font-size: 14px;
+        font-weight: 800;
+
+        box-shadow:
+            0 12px 30px rgba(22,131,255,0.25);
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .autoplay-button:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 16px 35px rgba(22,131,255,0.35);
+    }
+
+    .autoplay-note {
+        margin-top: 15px;
+
+        color: #627086;
+
+        font-size: 11px;
+    }
+
+    /* =====================================================
+       RESPONSIVO
+    ===================================================== */
+
+    @media (max-width: 850px) {
+
+        nav {
+            gap: 15px;
+        }
+
+        nav a {
+            font-size: 12px;
+        }
+
+        .hero {
+            grid-template-columns: 1fr;
+
+            padding-top: 50px;
+        }
+
+        .player-card {
+            margin: 0 auto;
+        }
+
+        .program-grid {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        header {
+            height: 64px;
+            padding: 0 20px;
+        }
+
+        main {
+            padding-top: 64px;
+        }
+
+        .logo {
+            font-size: 16px;
+        }
+
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+        }
+
+        nav {
+            gap: 11px;
+        }
+
+        nav a {
+            font-size: 11px;
+        }
+
+        .hero {
+            min-height: auto;
+
+            padding-top: 50px;
+            padding-bottom: 30px;
+
+            gap: 40px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            letter-spacing: -3px;
+        }
+
+        .hero p {
+            font-size: 15px;
+        }
+
+        .hero-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .hero-actions button {
+            width: 100%;
+        }
+
+        .section {
+            padding: 55px 0;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .player-card {
+            padding: 20px;
+        }
+
+    }
 
 </style>
+
 
 </head>
 
 <body>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
 
-<header id="topHeader">
+<!-- =====================================================
+     TELA INICIAL PARA AUTOPLAY
+====================================================== -->
+
+<div id="autoplayOverlay">
+
+    <div class="autoplay-box">
+
+        <div class="autoplay-logo">
+            ♪
+        </div>
+
+        <h2>Onda Livre FM</h2>
+
+        <p>
+            Sua música. Sua onda.<br>
+            Clique abaixo para começar a ouvir.
+        </p>
+
+        <button
+            type="button"
+            id="autoplayButton"
+            class="autoplay-button"
+        >
+            ▶ OUVIR AGORA
+        </button>
+
+        <div class="autoplay-note">
+            O áudio será iniciado automaticamente.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header id="header">
 
     <div class="header-inner">
 
-        <a href="#player" class="logo">
+        <a
+            href="#player"
+            class="logo"
+        >
 
-            <span class="logo-mark">
+            <span class="logo-mark"></span>
 
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2">
-
-                    <path d="M4 12h3"></path>
-
-                    <path d="M17 12h3"></path>
-
-                    <path d="M7 8a6 6 0 0 1 0 8"></path>
-
-                    <path d="M17 8a6 6 0 0 0 0 8"></path>
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="2">
-                    </circle>
-
-                </svg>
-
+            <span>
+                Onda Livre FM
             </span>
 
-            Onda Livre FM
-
         </a>
+
 
         <nav>
 
             <a href="#player">
-                Ouvir
+                Rádio
             </a>
 
             <a href="#programacao">
@@ -1064,442 +1083,378 @@ footer {
 
 </header>
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
 
 <main>
 
-<section
-    class="hero"
-    id="player">
+    <!-- =================================================
+         HERO
+    ================================================== -->
 
-    <div class="hero-inner">
+    <section
+        id="player"
+        class="hero"
+    >
 
-        <div>
+        <div class="hero-content">
 
             <div class="eyebrow">
-
-                <span class="eyebrow-dot"></span>
-
-                Transmissão Onda Livre
-
-            </div>
-
-            <h1>
-
-                Sua música.
-                <br>
-
-                <span>Sua onda.</span>
-
-            </h1>
-
-            <p class="hero-description">
-
-                Música, informação e entretenimento
-                para acompanhar você em todos os momentos.
-
-            </p>
-
-            <button
-                type="button"
-                class="hero-button"
-                id="heroPlayBtn">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor">
-
-                    <path d="M8 5v14l11-7z"></path>
-
-                </svg>
-
-                Ouvir agora
-
-            </button>
-
-        </div>
-
-        <!-- PLAYER -->
-
-        <div class="player">
-
-            <div class="player-top">
-
-                <div class="player-live">
-
-                    <span class="player-live-dot"></span>
-
-                    <span id="onair">
-                        OFFLINE
-                    </span>
-
-                </div>
-
-                <span
-                    class="frequency"
-                    id="freq">
-
-                    Onda Livre FM
-
-                </span>
-
-            </div>
-
-            <div class="track">
-
-                <div class="album">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7">
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="8">
-                        </circle>
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="2.5">
-                        </circle>
-
-                        <path d="M12 4v5"></path>
-
-                    </svg>
-
-                </div>
-
-                <div class="track-info">
-
-                    <div
-                        class="track-title"
-                        id="trackTitle">
-
-                        Futuro do homem e o final dos tempos
-
-                    </div>
-
-                    <div
-                        class="track-artist"
-                        id="trackArtist">
-
-                        Onda Livre FM
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="controls">
-
-                <!-- ANTERIOR -->
-
-                <button
-                    type="button"
-                    class="control-button"
-                    id="prevBtn"
-                    aria-label="Anterior">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2">
-
-                        <path d="M19 20L9 12l10-8v16z"></path>
-
-                        <line
-                            x1="5"
-                            y1="19"
-                            x2="5"
-                            y2="5">
-                        </line>
-
-                    </svg>
-
-                </button>
-
-                <!-- PLAY -->
-
-                <button
-                    type="button"
-                    class="control-button primary"
-                    id="playBtn"
-                    aria-label="Reproduzir">
-
-                    <span id="playIcon">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="currentColor">
-
-                            <path d="M8 5v14l11-7z"></path>
-
-                        </svg>
-
-                    </span>
-
-                </button>
-
-                <!-- PRÓXIMA -->
-
-                <button
-                    type="button"
-                    class="control-button"
-                    id="nextBtn"
-                    aria-label="Próxima">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2">
-
-                        <path d="M5 4l10 8-10 8V4z"></path>
-
-                        <line
-                            x1="19"
-                            y1="5"
-                            x2="19"
-                            y2="19">
-                        </line>
-
-                    </svg>
-
-                </button>
-
-                <!-- VOLUME -->
-
-                <div class="volume-area">
-
-                    <span
-                        class="volume-icon"
-                        id="volumeIcon">
-
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2">
-
-                            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-
-                            <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
-
-                            <path d="M19 5a10 10 0 0 1 0 14"></path>
-
-                        </svg>
-
-                    </span>
-
-                    <input
-                        id="volume"
-                        type="range"
-                        min="0"
-                        max="100"
-                        value="100"
-                        aria-label="Volume">
-
-                </div>
-
-                <!-- ALEATÓRIO -->
-
-                <button
-                    type="button"
-                    class="control-button"
-                    id="shuffleBtn"
-                    aria-label="Aleatório">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2">
-
-                        <path d="M17 3h4v4"></path>
-
-                        <path d="M3 7h4c4 0 6 10 10 10h4"></path>
-
-                        <path d="M17 17l4 4v-4"></path>
-
-                        <path d="M3 17h4c1.5 0 2.7-1.3 3.7-2.7"></path>
-
-                        <path d="M14.3 9.7C15.3 8.3 16.5 7 18 7h3"></path>
-
-                    </svg>
-
-                </button>
-
-            </div>
-
-            <!-- ÁUDIO
-                 IMPORTANTE:
-                 UMA ÚNICA TAG AUDIO
-            -->
-
-            <audio
-                id="audio"
-                src="https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3"
-                preload="auto"
-                playsinline
-                autoplay>
-            </audio>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================================================
-     PROGRAMAÇÃO
-========================================================= -->
-
-<section
-    class="content-section"
-    id="programacao">
-
-    <div class="section-label">
-        Na programação
-    </div>
-
-    <h2 class="section-title">
-        Programação
-    </h2>
-
-    <div
-        id="playlist"
-        class="playlist">
-
-        <div class="program">
-
-            <div class="program-time">
-                AO VIVO
-            </div>
-
-            <div class="program-name">
                 Onda Livre FM
             </div>
 
+            <h1>
+                Sua música.
+                <span>Sua onda.</span>
+            </h1>
+
+            <p>
+                Uma experiência musical feita para
+                acompanhar você. Dê o play e deixe a
+                Onda Livre FM fazer parte do seu momento.
+            </p>
+
+            <div class="hero-actions">
+
+                <button
+                    type="button"
+                    id="heroPlayBtn"
+                    class="primary-btn"
+                >
+                    ▶ Ouvir agora
+                </button>
+
+                <a
+                    href="#programacao"
+                    class="secondary-btn"
+                >
+                    Ver programação
+                </a>
+
+            </div>
+
         </div>
 
-        <div class="program">
 
-            <div class="program-time">
-                24 HORAS
+        <!-- =============================================
+             PLAYER
+        ============================================== -->
+
+        <div class="player-card">
+
+            <div class="player-top">
+
+                <div
+                    id="onair"
+                    class="onair"
+                >
+                    OFF AIR
+                </div>
+
+                <div class="frequency">
+                    ONDA LIVRE FM
+                </div>
+
             </div>
 
-            <div class="program-name">
-                Música e informação
+
+            <div class="album">
+
+                <div class="album-icon">
+                    ♪
+                </div>
+
             </div>
 
-        </div>
 
-        <div class="program">
+            <div class="track-info">
 
-            <div class="program-time">
-                O DIA TODO
+                <div
+                    id="trackTitle"
+                    class="track-title"
+                >
+                    Futuro do homem e o final dos tempos
+                </div>
+
+                <div
+                    id="trackArtist"
+                    class="track-artist"
+                >
+                    Onda Livre FM
+                </div>
+
             </div>
 
-            <div class="program-name">
-                Tá na Onda, Tá com Tudo!
+
+            <div class="player-controls">
+
+                <button
+                    type="button"
+                    id="prevBtn"
+                    class="control-btn"
+                    aria-label="Anterior"
+                >
+                    ↶
+                </button>
+
+
+                <button
+                    type="button"
+                    id="playBtn"
+                    class="play-btn"
+                    aria-label="Tocar ou pausar"
+                >
+
+                    <span id="playIcon">
+                        ▶
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="nextBtn"
+                    class="control-btn"
+                    aria-label="Próximo"
+                >
+                    ↷
+                </button>
+
             </div>
 
-        </div>
 
-    </div>
+            <div class="volume-area">
 
-</section>
-
-<!-- =========================================================
-     PEDIDOS
-========================================================= -->
-
-<section
-    class="content-section"
-    id="pedidos">
-
-    <div class="section-label">
-        Interaja
-    </div>
-
-    <h2 class="section-title">
-        Peça sua música
-    </h2>
-
-    <div class="request-box">
-
-        <form id="requestForm">
-
-            <div class="field">
-
-                <label for="reqName">
-                    Seu nome
-                </label>
+                <span class="volume-icon">
+                    🔊
+                </span>
 
                 <input
-                    id="reqName"
-                    type="text"
-                    autocomplete="name"
-                    required>
+                    id="volume"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="1"
+                    aria-label="Volume"
+                >
+
+                <button
+                    type="button"
+                    id="shuffleBtn"
+                    class="control-btn"
+                    aria-label="Aleatório"
+                    style="width:34px;height:34px;"
+                >
+                    🔀
+                </button>
 
             </div>
 
-            <div class="field">
+        </div>
 
-                <label for="reqSong">
-                    Música ou artista
-                </label>
+    </section>
 
-                <input
-                    id="reqSong"
-                    type="text"
-                    required>
+
+    <!-- =================================================
+         PROGRAMAÇÃO
+    ================================================== -->
+
+    <section
+        id="programacao"
+        class="section"
+    >
+
+        <div class="section-header">
+
+            <h2>
+                Programação
+            </h2>
+
+            <p>
+                Confira os momentos da Onda Livre FM.
+            </p>
+
+        </div>
+
+
+        <div class="program-grid">
+
+            <div class="program-card">
+
+                <div class="program-time">
+                    08:00 — 10:00
+                </div>
+
+                <h3>
+                    Manhã Livre
+                </h3>
+
+                <p>
+                    Música e informação para começar
+                    bem o dia.
+                </p>
 
             </div>
 
-            <button
-                type="submit"
-                class="request-button">
 
-                Enviar pedido
+            <div class="program-card">
 
-            </button>
+                <div class="program-time">
+                    10:00 — 12:00
+                </div>
 
-            <div id="requestStatus"></div>
+                <h3>
+                    Onda Musical
+                </h3>
 
-        </form>
+                <p>
+                    Os melhores sons para acompanhar
+                    sua manhã.
+                </p>
 
-    </div>
+            </div>
 
-</section>
+
+            <div class="program-card">
+
+                <div class="program-time">
+                    12:00 — 14:00
+                </div>
+
+                <h3>
+                    Onda Livre
+                </h3>
+
+                <p>
+                    Música, companhia e muita informação.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PEDIDOS
+    ================================================== -->
+
+    <section
+        id="pedidos"
+        class="section"
+    >
+
+        <div class="section-header">
+
+            <h2>
+                Peça sua música
+            </h2>
+
+            <p>
+                Envie seu pedido para a Onda Livre FM.
+            </p>
+
+        </div>
+
+
+        <div class="request-box">
+
+            <form id="requestForm">
+
+                <div class="form-grid">
+
+                    <div class="field">
+
+                        <label for="reqName">
+                            Seu nome
+                        </label>
+
+                        <input
+                            id="reqName"
+                            type="text"
+                            placeholder="Digite seu nome"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="reqSong">
+                            Música
+                        </label>
+
+                        <input
+                            id="reqSong"
+                            type="text"
+                            placeholder="Nome da música"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Enviar pedido
+                </button>
+
+
+                <div
+                    id="requestStatus"
+                    class="request-status"
+                ></div>
+
+            </form>
+
+        </div>
+
+    </section>
 
 </main>
 
-<!-- =========================================================
+
+<!-- =====================================================
+     AUDIO
+====================================================== -->
+
+<audio
+    id="audio"
+    src="https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3"
+    preload="auto"
+    playsinline
+    autoplay
+></audio>
+
+
+<!-- =====================================================
      FOOTER
-========================================================= -->
+====================================================== -->
 
 <footer>
 
-    Onda Livre FM
-    &nbsp;•&nbsp;
-    Música, informação e entretenimento
+    © Onda Livre FM —
+    Sua música. Sua onda.
 
 </footer>
 
-<!-- =========================================================
+
+<!-- =====================================================
      SCRIPT
-========================================================= -->
+====================================================== -->
 
 <script src="script.js"></script>
+
 
 </body>
 
