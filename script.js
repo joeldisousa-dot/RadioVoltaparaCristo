@@ -1,4 +1,3 @@
-```javascript
 /* ============================================================
    ONDA LIVRE FM
    SCRIPT PRINCIPAL DO PLAYER
@@ -820,4 +819,3 @@ document.addEventListener("DOMContentLoaded", function () {
     atualizarStatus(false);
 
 });
-```
