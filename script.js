@@ -58,6 +58,8 @@ let carregandoPlaylist = false;
 
 let tentandoReproduzir = false;
 
+let aguardandoReproducao = false;
+
 
 /* =========================================================
    ELEMENTOS
