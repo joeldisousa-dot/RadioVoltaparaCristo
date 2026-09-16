@@ -1,37 +1,77 @@
 /* =========================================================
 DE VOLTA PARA CRISTO
 PLAYER DE LOUVORES E MENSAGENS
-========================================================= */
+
+PLAYLIST CARREGADA DO GOOGLE APPS SCRIPT
+
+SUPORTE:
+
+* Até 500 músicas
+* Play / Pause
+* Próxima
+* Anterior
+* Aleatório
+* Volume
+* Autoplay
+* Primeiro clique para desbloquear áudio
+* Cards dinâmicos
+* Pedidos enviados para Google Sheets
+  ========================================================= */
 
 /* =========================================================
-CONFIGURAÇÃO DO ÁUDIO
+CONFIGURAÇÃO
 ========================================================= */
 
-const STREAM_URL =
-"https://archive.org/download/futuro-do-homem-e-o-final-dos-tempos_202609/Futuro%20do%20homem%20e%20o%20final%20dos%20tempos.mp3";
+/*
+
+* COLOQUE AQUI A URL DA IMPLANTAÇÃO DO APPS SCRIPT.
+*
+* Exemplo:
+*
+* https://script.google.com/macros/s/XXXXXXXXXXXX/exec
+*
+
+*/
+
+const SCRIPT_URL =
+"COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+
+/*
+
+* Quantidade máxima de músicas.
+*
+* O Apps Script também limita em 500.
+  */
+
+const MAX_TRACKS = 500;
+
+/*
+
+* Volume inicial.
+  */
 
 const VOLUME_INICIAL = 1.0;
+
+/*
+
+* Tenta atualizar a playlist novamente
+* caso ocorra alguma falha.
+  */
+
+const TENTATIVAS_PLAYLIST = 3;
 
 /* =========================================================
 PLAYLIST
 ========================================================= */
 
-const playlist = [
+/*
 
+* Começa vazia.
+*
+* As músicas serão carregadas da planilha.
+  */
 
-{
-    title:
-        "Futuro do homem e o final dos tempos",
-
-    artist:
-        "De Volta para Cristo",
-
-    url:
-        STREAM_URL
-}
-
-
-];
+let playlist = [];
 
 /* =========================================================
 VARIÁVEIS
@@ -44,6 +84,10 @@ let shuffleEnabled = false;
 let autoplayTentado = false;
 
 let primeiroCliqueAtivado = false;
+
+let playlistCarregada = false;
+
+let carregandoPlaylist = false;
 
 /* =========================================================
 ELEMENTOS
@@ -92,22 +136,55 @@ const bottomNextBtn =
 document.getElementById("bottomNextBtn");
 
 const bottomTrackTitle =
-document.getElementById("bottomTrackTitle");
+document.getElementById(
+"bottomTrackTitle"
+);
 
 const bottomTrackArtist =
-document.getElementById("bottomTrackArtist");
+document.getElementById(
+"bottomTrackArtist"
+);
 
 const requestForm =
-document.getElementById("requestForm");
+document.getElementById(
+"requestForm"
+);
 
 const requestStatus =
-document.getElementById("requestStatus");
+document.getElementById(
+"requestStatus"
+);
+
+/* =========================================================
+UTILITÁRIOS
+========================================================= */
+
+function scriptConfigurado() {
+
+
+return (
+    SCRIPT_URL &&
+    SCRIPT_URL.trim() !== "" &&
+    !SCRIPT_URL.includes(
+        "COLE_AQUI"
+    )
+);
+
+
+}
 
 /* =========================================================
 CONFIGURAR ÁUDIO
 ========================================================= */
 
 function configurarAudio() {
+
+
+if (!audio) {
+
+    return;
+
+}
 
 
 audio.autoplay = true;
@@ -119,12 +196,302 @@ audio.volume =
 
 audio.playsInline = true;
 
+
 if (volume) {
 
     volume.value =
         VOLUME_INICIAL;
 
 }
+
+
+}
+
+/* =========================================================
+CARREGAR PLAYLIST DO APPS SCRIPT
+========================================================= */
+
+async function carregarPlaylistDaPlanilha() {
+
+
+if (
+    !scriptConfigurado()
+) {
+
+    console.error(
+        "SCRIPT_URL não configurada."
+    );
+
+    mostrarErroPlaylist(
+        "Configure a URL do Apps Script no script.js."
+    );
+
+    return false;
+
+}
+
+
+if (
+    carregandoPlaylist
+) {
+
+    return false;
+
+}
+
+
+carregandoPlaylist =
+    true;
+
+
+for (
+    let tentativa = 1;
+    tentativa <=
+    TENTATIVAS_PLAYLIST;
+    tentativa++
+) {
+
+    try {
+
+        const separador =
+            SCRIPT_URL.includes("?")
+                ? "&"
+                : "?";
+
+
+        const url =
+            SCRIPT_URL +
+            separador +
+            "action=playlist" +
+            "&t=" +
+            Date.now();
+
+
+        const resposta =
+            await fetch(
+                url,
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        if (
+            !resposta.ok
+        ) {
+
+            throw new Error(
+                "HTTP " +
+                resposta.status
+            );
+
+        }
+
+
+        const dados =
+            await resposta.json();
+
+
+        if (
+            !dados ||
+            dados.ok !== true
+        ) {
+
+            throw new Error(
+                dados &&
+                dados.error
+                    ? dados.error
+                    : "Resposta inválida."
+            );
+
+        }
+
+
+        const tracks =
+            Array.isArray(
+                dados.tracks
+            )
+                ? dados.tracks
+                : [];
+
+
+        /*
+         * Limita novamente no navegador
+         * por segurança.
+         */
+
+        playlist =
+            tracks
+                .filter(
+                    musica =>
+                        musica &&
+                        musica.url
+                )
+                .slice(
+                    0,
+                    MAX_TRACKS
+                )
+                .map(
+                    (musica, index) => ({
+
+                        id:
+                            musica.id ??
+                            index,
+
+                        title:
+                            musica.title ||
+                            "Sem título",
+
+                        artist:
+                            musica.artist ||
+                            "",
+
+                        url:
+                            musica.url
+
+                    })
+                );
+
+
+        playlistCarregada =
+            true;
+
+
+        carregandoPlaylist =
+            false;
+
+
+        console.log(
+            "Playlist carregada:",
+            playlist.length,
+            "músicas."
+        );
+
+
+        if (
+            playlist.length > 0
+        ) {
+
+            currentIndex = 0;
+
+            carregarMusica(
+                0,
+                false
+            );
+
+            renderizarPlaylist();
+
+        } else {
+
+            mostrarErroPlaylist(
+                "Nenhuma música cadastrada na planilha."
+            );
+
+        }
+
+
+        return true;
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar playlist. Tentativa " +
+            tentativa +
+            ":",
+            erro
+        );
+
+
+        if (
+            tentativa <
+            TENTATIVAS_PLAYLIST
+        ) {
+
+            await esperar(
+                800 * tentativa
+            );
+
+        }
+
+    }
+
+}
+
+
+carregandoPlaylist =
+    false;
+
+
+mostrarErroPlaylist(
+    "Não foi possível carregar a playlist."
+);
+
+
+return false;
+
+
+}
+
+/* =========================================================
+ESPERAR
+========================================================= */
+
+function esperar(
+milissegundos
+) {
+
+
+return new Promise(
+    resolve =>
+        setTimeout(
+            resolve,
+            milissegundos
+        )
+);
+
+
+}
+
+/* =========================================================
+MENSAGEM DE ERRO DA PLAYLIST
+========================================================= */
+
+function mostrarErroPlaylist(
+mensagem
+) {
+
+
+const elementos = [
+
+    document.getElementById(
+        "playlistStatus"
+    ),
+
+    document.getElementById(
+        "playlistMessage"
+    )
+
+];
+
+
+elementos.forEach(
+    elemento => {
+
+        if (elemento) {
+
+            elemento.textContent =
+                mensagem;
+
+        }
+
+    }
+);
+
+
+console.warn(
+    mensagem
+);
 
 
 }
@@ -139,12 +506,19 @@ tocar = false
 ) {
 
 
-if (!playlist.length) {
+if (
+    !audio ||
+    !playlist.length
+) {
+
     return;
+
 }
 
 
-if (index < 0) {
+if (
+    index < 0
+) {
 
     index =
         playlist.length - 1;
@@ -153,7 +527,8 @@ if (index < 0) {
 
 
 if (
-    index >= playlist.length
+    index >=
+    playlist.length
 ) {
 
     index = 0;
@@ -166,7 +541,26 @@ currentIndex =
 
 
 const musica =
-    playlist[currentIndex];
+    playlist[
+        currentIndex
+    ];
+
+
+if (
+    !musica ||
+    !musica.url
+) {
+
+    return;
+
+}
+
+
+/*
+ * Pausa antes de trocar.
+ */
+
+audio.pause();
 
 
 audio.src =
@@ -177,6 +571,9 @@ audio.load();
 
 
 atualizarInformacoes();
+
+
+atualizarCardAtivo();
 
 
 if (tocar) {
@@ -196,11 +593,15 @@ function atualizarInformacoes() {
 
 
 const musica =
-    playlist[currentIndex];
+    playlist[
+        currentIndex
+    ];
 
 
 if (!musica) {
+
     return;
+
 }
 
 
@@ -245,14 +646,20 @@ INICIAR ÁUDIO
 async function iniciarAudio() {
 
 
-if (!audio) {
+if (
+    !audio ||
+    !playlist.length
+) {
+
     return false;
+
 }
 
 
 try {
 
-    audio.muted = false;
+    audio.muted =
+        false;
 
 
     if (
@@ -261,7 +668,9 @@ try {
     ) {
 
         audio.volume =
-            Number(volume.value);
+            Number(
+                volume.value
+            );
 
     } else {
 
@@ -275,14 +684,22 @@ try {
         audio.play();
 
 
-    if (promessa !== undefined) {
+    if (
+        promessa !== undefined
+    ) {
 
         await promessa;
 
     }
 
 
-    atualizarBotoes(true);
+    atualizarBotoes(
+        true
+    );
+
+
+    primeiroCliqueAtivado =
+        true;
 
 
     removerDetectorPrimeiroClique();
@@ -290,16 +707,16 @@ try {
 
     return true;
 
-}
-
-catch (erro) {
+} catch (erro) {
 
     console.log(
         "Autoplay bloqueado pelo navegador."
     );
 
 
-    atualizarBotoes(false);
+    atualizarBotoes(
+        false
+    );
 
 
     return false;
@@ -316,8 +733,12 @@ AUTOPLAY
 function tentarAutoplay() {
 
 
-if (autoplayTentado) {
+if (
+    autoplayTentado
+) {
+
     return;
+
 }
 
 
@@ -328,25 +749,40 @@ autoplayTentado =
 configurarAudio();
 
 
-iniciarAudio();
+if (
+    playlist.length
+) {
+
+    iniciarAudio();
+
+}
 
 
 }
 
 /* =========================================================
-PRIMEIRO CLIQUE/TOQUE
+PRIMEIRO CLIQUE / TOQUE
 ========================================================= */
 
 function ativarNoPrimeiroClique() {
 
 
-if (primeiroCliqueAtivado) {
+if (
+    primeiroCliqueAtivado
+) {
+
     return;
+
 }
 
 
-primeiroCliqueAtivado =
-    true;
+if (
+    !playlist.length
+) {
+
+    return;
+
+}
 
 
 iniciarAudio();
@@ -470,17 +906,28 @@ PLAY / PAUSE
 function alternarPlay() {
 
 
-if (audio.paused) {
+if (
+    !playlist.length
+) {
 
-    iniciarAudio();
+    return;
 
 }
 
-else {
+
+if (
+    audio.paused
+) {
+
+    iniciarAudio();
+
+} else {
 
     audio.pause();
 
-    atualizarBotoes(false);
+    atualizarBotoes(
+        false
+    );
 
 }
 
@@ -494,8 +941,12 @@ PRÓXIMA MÚSICA
 function proximaMusica() {
 
 
-if (!playlist.length) {
+if (
+    !playlist.length
+) {
+
     return;
+
 }
 
 
@@ -515,19 +966,16 @@ if (
                 playlist.length
             );
 
-    }
-
-    while (
-        novoIndex === currentIndex
+    } while (
+        novoIndex ===
+        currentIndex
     );
 
 
     currentIndex =
         novoIndex;
 
-}
-
-else {
+} else {
 
     currentIndex++;
 
@@ -559,16 +1007,26 @@ MÚSICA ANTERIOR
 function musicaAnterior() {
 
 
-if (!playlist.length) {
+if (
+    !playlist.length
+) {
+
     return;
+
 }
 
+
+/*
+ * Se já passou de 5 segundos,
+ * volta para o início da música.
+ */
 
 if (
     audio.currentTime > 5
 ) {
 
-    audio.currentTime = 0;
+    audio.currentTime =
+        0;
 
     return;
 
@@ -578,7 +1036,9 @@ if (
 currentIndex--;
 
 
-if (currentIndex < 0) {
+if (
+    currentIndex < 0
+) {
 
     currentIndex =
         playlist.length - 1;
@@ -718,8 +1178,14 @@ volume.addEventListener(
     "input",
     () => {
 
-        audio.volume =
-            Number(volume.value);
+        if (audio) {
+
+            audio.volume =
+                Number(
+                    volume.value
+                );
+
+        }
 
     }
 );
@@ -731,79 +1197,182 @@ volume.addEventListener(
 EVENTOS DO ÁUDIO
 ========================================================= */
 
-audio.addEventListener(
-"play",
-() => {
+if (audio) {
 
-
-    atualizarBotoes(true);
-
-}
-
-
-);
 
 audio.addEventListener(
-"pause",
-() => {
+    "play",
+    () => {
 
+        atualizarBotoes(
+            true
+        );
 
-    atualizarBotoes(false);
-
-}
-
-
+    }
 );
+
 
 audio.addEventListener(
-"ended",
-() => {
+    "pause",
+    () => {
 
+        atualizarBotoes(
+            false
+        );
 
-    proximaMusica();
-
-}
-
-
+    }
 );
+
 
 audio.addEventListener(
-"error",
-() => {
+    "ended",
+    () => {
+
+        proximaMusica();
+
+    }
+);
 
 
-    console.error(
-        "Não foi possível carregar o áudio."
-    );
+audio.addEventListener(
+    "error",
+    () => {
 
-    atualizarBotoes(false);
+        console.error(
+            "Não foi possível carregar o áudio:",
+            audio.src
+        );
+
+
+        atualizarBotoes(
+            false
+        );
+
+    }
+);
+
 
 }
-
-
-);
 
 /* =========================================================
 CARDS DE LOUVORES
 ========================================================= */
 
-document
-.querySelectorAll(
-"[data-play-index]"
-)
-.forEach(
-botao => {
+/*
+
+* Primeiro procura um container existente.
+*
+* Você pode usar qualquer um destes IDs:
+*
+* playlistContainer
+* louvoresGrid
+* playlist
+*
+
+*/
+
+function encontrarContainerPlaylist() {
 
 
-        botao.addEventListener(
+return (
+
+    document.getElementById(
+        "playlistContainer"
+    ) ||
+
+    document.getElementById(
+        "louvoresGrid"
+    ) ||
+
+    document.getElementById(
+        "playlist"
+    ) ||
+
+    document.querySelector(
+        ".louvores-grid"
+    )
+
+);
+
+
+}
+
+/* =========================================================
+RENDERIZAR PLAYLIST
+========================================================= */
+
+function renderizarPlaylist() {
+
+
+const container =
+    encontrarContainerPlaylist();
+
+
+/*
+ * Se o HTML não possuir container,
+ * o player continua funcionando normalmente.
+ */
+
+if (!container) {
+
+    return;
+
+}
+
+
+container.innerHTML =
+    "";
+
+
+playlist.forEach(
+    (musica, index) => {
+
+        const card =
+            document.createElement(
+                "button"
+            );
+
+
+        card.type =
+            "button";
+
+
+        card.className =
+            "louvor-card";
+
+
+        card.dataset.playIndex =
+            index;
+
+
+        card.innerHTML = `
+
+            <span class="louvor-card-icon">
+                ▶
+            </span>
+
+            <span class="louvor-card-info">
+
+                <strong>
+                    ${escaparHTML(
+                        musica.title
+                    )}
+                </strong>
+
+                <small>
+                    ${escaparHTML(
+                        musica.artist
+                    )}
+                </small>
+
+            </span>
+
+        `;
+
+
+        card.addEventListener(
             "click",
             () => {
-
-                const index =
-                    Number(
-                        botao.dataset.playIndex
-                    );
-
 
                 carregarMusica(
                     index,
@@ -820,8 +1389,10 @@ botao => {
                 if (player) {
 
                     player.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center"
+                        behavior:
+                            "smooth",
+                        block:
+                            "center"
                     });
 
                 }
@@ -829,12 +1400,198 @@ botao => {
             }
         );
 
+
+        container.appendChild(
+            card
+        );
+
     }
 );
 
 
+atualizarCardAtivo();
+
+
+}
+
 /* =========================================================
-FORMULÁRIO DE ORAÇÃO
+ATUALIZAR CARD ATIVO
+========================================================= */
+
+function atualizarCardAtivo() {
+
+
+const container =
+    encontrarContainerPlaylist();
+
+
+if (!container) {
+
+    return;
+
+}
+
+
+const cards =
+    container.querySelectorAll(
+        "[data-play-index]"
+    );
+
+
+cards.forEach(
+    card => {
+
+        const index =
+            Number(
+                card.dataset.playIndex
+            );
+
+
+        card.classList.toggle(
+            "tocando",
+            index ===
+            currentIndex
+        );
+
+    }
+);
+
+
+}
+
+/* =========================================================
+ESCAPAR HTML
+========================================================= */
+
+function escaparHTML(
+texto
+) {
+
+
+return String(
+    texto ?? ""
+)
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+
+}
+
+/* =========================================================
+COMPATIBILIDADE COM CARDS EXISTENTES
+========================================================= */
+
+function ativarCardsExistentes() {
+
+
+document
+    .querySelectorAll(
+        "[data-play-index]"
+    )
+    .forEach(
+        botao => {
+
+            /*
+             * Evita cadastrar o mesmo evento
+             * duas vezes.
+             */
+
+            if (
+                botao.dataset.playerBound ===
+                "true"
+            ) {
+
+                return;
+
+            }
+
+
+            botao.dataset.playerBound =
+                "true";
+
+
+            botao.addEventListener(
+                "click",
+                () => {
+
+                    const index =
+                        Number(
+                            botao.dataset.playIndex
+                        );
+
+
+                    if (
+                        Number.isNaN(
+                            index
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !playlist[index]
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    carregarMusica(
+                        index,
+                        true
+                    );
+
+
+                    const player =
+                        document.querySelector(
+                            ".player-card"
+                        );
+
+
+                    if (player) {
+
+                        player.scrollIntoView({
+                            behavior:
+                                "smooth",
+                            block:
+                                "center"
+                        });
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+}
+
+/* =========================================================
+FORMULÁRIO DE PEDIDOS
 ========================================================= */
 
 if (requestForm) {
@@ -842,58 +1599,240 @@ if (requestForm) {
 
 requestForm.addEventListener(
     "submit",
-    event => {
+    async event => {
 
         event.preventDefault();
 
 
+        const campoNome =
+            document.getElementById(
+                "reqName"
+            );
+
+
+        const campoMusica =
+            document.getElementById(
+                "reqSong"
+            );
+
+
+        const campoMensagem =
+            document.getElementById(
+                "reqMessage"
+            );
+
+
         const nome =
-            document
-                .getElementById("reqName")
-                .value
-                .trim();
+            campoNome
+                ? campoNome.value.trim()
+                : "";
 
 
-        const assunto =
-            document
-                .getElementById("reqSong")
-                .value
-                .trim();
+        const musica =
+            campoMusica
+                ? campoMusica.value.trim()
+                : "";
 
 
         const mensagem =
-            document
-                .getElementById("reqMessage")
-                .value
-                .trim();
+            campoMensagem
+                ? campoMensagem.value.trim()
+                : "";
 
 
         if (
             !nome ||
-            !assunto ||
+            !musica ||
             !mensagem
         ) {
 
-            requestStatus.textContent =
-                "Preencha todos os campos.";
+            if (requestStatus) {
+
+                requestStatus.textContent =
+                    "Preencha todos os campos.";
+
+            }
 
             return;
 
         }
 
 
-        /*
-         * Formulário preparado para futura
-         * integração com Google Sheets /
-         * Apps Script.
-         */
+        if (
+            !scriptConfigurado()
+        ) {
+
+            if (requestStatus) {
+
+                requestStatus.textContent =
+                    "Sistema de pedidos não configurado.";
+
+            }
+
+            return;
+
+        }
 
 
-        requestStatus.textContent =
-            "Seu pedido foi recebido. Deus abençoe você!";
+        if (requestStatus) {
+
+            requestStatus.textContent =
+                "Enviando pedido...";
+
+        }
 
 
-        requestForm.reset();
+        try {
+
+            /*
+             * Usa URLSearchParams.
+             *
+             * Isso evita problemas de CORS
+             * que podem ocorrer com POST JSON.
+             */
+
+            const dados =
+                new URLSearchParams();
+
+
+            dados.append(
+                "action",
+                "pedido"
+            );
+
+
+            dados.append(
+                "nome",
+                nome
+            );
+
+
+            /*
+             * Mantemos a coluna "musica"
+             * da planilha.
+             *
+             * O assunto/mensagem também é
+             * enviado junto para não perder
+             * a informação do pedido.
+             */
+
+            dados.append(
+                "musica",
+                musica +
+                " — " +
+                mensagem
+            );
+
+
+            /*
+             * POST em modo no-cors.
+             *
+             * O Apps Script recebe a solicitação.
+             */
+
+            await fetch(
+                SCRIPT_URL,
+                {
+                    method:
+                        "POST",
+
+                    mode:
+                        "no-cors",
+
+                    body:
+                        dados
+                }
+            );
+
+
+            if (requestStatus) {
+
+                requestStatus.textContent =
+                    "Seu pedido foi recebido. Deus abençoe você!";
+
+            }
+
+
+            requestForm.reset();
+
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao enviar pedido:",
+                erro
+            );
+
+
+            /*
+             * Fallback:
+             * tenta enviar por GET.
+             */
+
+            try {
+
+                const url =
+                    SCRIPT_URL +
+                    (
+                        SCRIPT_URL.includes(
+                            "?"
+                        )
+                            ? "&"
+                            : "?"
+                    ) +
+                    "action=pedido" +
+                    "&nome=" +
+                    encodeURIComponent(
+                        nome
+                    ) +
+                    "&musica=" +
+                    encodeURIComponent(
+                        musica +
+                        " — " +
+                        mensagem
+                    );
+
+
+                await fetch(
+                    url,
+                    {
+                        method:
+                            "GET",
+                        mode:
+                            "no-cors"
+                    }
+                );
+
+
+                if (requestStatus) {
+
+                    requestStatus.textContent =
+                        "Seu pedido foi recebido. Deus abençoe você!";
+
+                }
+
+
+                requestForm.reset();
+
+
+            } catch (erro2) {
+
+                console.error(
+                    "Falha no envio:",
+                    erro2
+                );
+
+
+                if (requestStatus) {
+
+                    requestStatus.textContent =
+                        "Não foi possível enviar o pedido. Tente novamente.";
+
+                    }
+
+            }
+
+        }
 
     }
 );
@@ -917,18 +1856,27 @@ event => {
     const digitando =
         elemento &&
         (
-            elemento.tagName === "INPUT" ||
-            elemento.tagName === "TEXTAREA"
+            elemento.tagName ===
+            "INPUT" ||
+
+            elemento.tagName ===
+            "TEXTAREA" ||
+
+            elemento.tagName ===
+            "SELECT"
         );
 
 
     if (digitando) {
+
         return;
+
     }
 
 
     if (
-        event.code === "Space"
+        event.code ===
+        "Space"
     ) {
 
         event.preventDefault();
@@ -948,25 +1896,48 @@ INICIALIZAÇÃO
 
 document.addEventListener(
 "DOMContentLoaded",
-() => {
+async () => {
 
 
     configurarAudio();
 
 
-    carregarMusica(
-        0,
-        false
-    );
-
+    /*
+     * Ativa imediatamente o detector
+     * de primeiro clique.
+     */
 
     adicionarDetectorPrimeiroClique();
 
 
-    setTimeout(
-        tentarAutoplay,
-        150
-    );
+    /*
+     * Ativa cards antigos, caso existam.
+     */
+
+    ativarCardsExistentes();
+
+
+    /*
+     * Carrega a playlist da planilha.
+     */
+
+    const carregou =
+        await carregarPlaylistDaPlanilha();
+
+
+    /*
+     * Se carregou corretamente,
+     * tenta iniciar o áudio.
+     */
+
+    if (carregou) {
+
+        setTimeout(
+            tentarAutoplay,
+            150
+        );
+
+    }
 
 }
 
@@ -980,6 +1951,13 @@ GARANTIR VOLUME
 window.addEventListener(
 "load",
 () => {
+
+
+    if (!audio) {
+
+        return;
+
+    }
 
 
     audio.volume =
@@ -999,13 +1977,13 @@ window.addEventListener(
 );
 
 /* =========================================================
-INFORMAÇÃO NO CONSOLE
+LOG
 ========================================================= */
 
 console.log(
-"De Volta para Cristo carregado."
+"De Volta para Cristo — Player carregado."
 );
 
 console.log(
-"Tentando iniciar o áudio automaticamente..."
+"Playlist será carregada pelo Google Apps Script."
 );
