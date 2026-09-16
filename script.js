@@ -1,27 +1,7 @@
 /* =========================================================
    DE VOLTA PARA CRISTO
    PLAYER DE LOUVORES E MENSAGENS
-
-   PLAYLIST CARREGADA DO GOOGLE APPS SCRIPT
-
-   SUPORTE:
-
-   * Até 500 músicas
-   * Play / Pause
-   * Próxima
-   * Anterior
-   * Aleatório
-   * Volume
-   * Autoplay
-   * Primeiro clique para desbloquear áudio
-   * Cards dinâmicos
-   * Pedidos enviados para Google Sheets
    ========================================================= */
-
-
-/* =========================================================
-   CONFIGURAÇÃO
-========================================================= */
 
 const SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec";
@@ -39,11 +19,6 @@ const TENTATIVAS_PLAYLIST = 3;
 
 let playlist = [];
 
-
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
-
 let currentIndex = 0;
 
 let shuffleEnabled = false;
@@ -56,9 +31,7 @@ let playlistCarregada = false;
 
 let carregandoPlaylist = false;
 
-let tentandoReproduzir = false;
-
-let aguardandoReproducao = false;
+let trocandoMusica = false;
 
 
 /* =========================================================
@@ -129,7 +102,7 @@ const requestStatus =
 
 
 /* =========================================================
-   UTILITÁRIOS
+   CONFIGURAÇÃO
 ========================================================= */
 
 function scriptConfigurado() {
@@ -174,19 +147,29 @@ function configurarAudio() {
 
 
 /* =========================================================
-   CARREGAR PLAYLIST DO APPS SCRIPT
+   ESPERAR
+========================================================= */
+
+function esperar(ms) {
+
+    return new Promise(
+        resolve =>
+            setTimeout(resolve, ms)
+    );
+
+}
+
+
+/* =========================================================
+   CARREGAR PLAYLIST
 ========================================================= */
 
 async function carregarPlaylistDaPlanilha() {
 
     if (!scriptConfigurado()) {
 
-        console.error(
-            "SCRIPT_URL não configurada."
-        );
-
         mostrarErroPlaylist(
-            "Configure a URL do Apps Script no script.js."
+            "Configure a URL do Apps Script."
         );
 
         return false;
@@ -195,9 +178,7 @@ async function carregarPlaylistDaPlanilha() {
 
 
     if (carregandoPlaylist) {
-
         return false;
-
     }
 
 
@@ -224,11 +205,6 @@ async function carregarPlaylistDaPlanilha() {
                 "action=playlist" +
                 "&t=" +
                 Date.now();
-
-
-            console.log(
-                "Carregando playlist..."
-            );
 
 
             const resposta =
@@ -261,19 +237,15 @@ async function carregarPlaylistDaPlanilha() {
             ) {
 
                 throw new Error(
-                    dados &&
-                    dados.error
-                        ? dados.error
-                        : "Resposta inválida."
+                    dados?.error ||
+                    "Resposta inválida."
                 );
 
             }
 
 
             const tracks =
-                Array.isArray(
-                    dados.tracks
-                )
+                Array.isArray(dados.tracks)
                     ? dados.tracks
                     : [];
 
@@ -305,7 +277,9 @@ async function carregarPlaylistDaPlanilha() {
                                 "",
 
                             url:
-                                musica.url
+                                String(
+                                    musica.url
+                                ).trim()
 
                         })
                     );
@@ -318,59 +292,48 @@ async function carregarPlaylistDaPlanilha() {
 
             console.log(
                 "Playlist carregada:",
-                playlist.length,
-                "músicas."
+                playlist.length
             );
 
 
-            if (
-                playlist.length > 0
-            ) {
-
-                currentIndex = 0;
-
-
-                /*
-                 * IMPORTANTE:
-                 *
-                 * Primeiro carregamos a música.
-                 * Depois tentamos reproduzir.
-                 *
-                 * Isso evita tentar autoplay
-                 * antes de o src existir.
-                 */
-
-                carregarMusica(
-                    0,
-                    false
-                );
-
-
-                renderizarPlaylist();
-
-
-                /*
-                 * Pequeno atraso para garantir
-                 * que o navegador recebeu o src.
-                 */
-
-                setTimeout(
-                    () => {
-
-                        tentarAutoplay();
-
-                    },
-                    100
-                );
-
-
-            } else {
+            if (!playlist.length) {
 
                 mostrarErroPlaylist(
                     "Nenhuma música cadastrada na planilha."
                 );
 
+                return true;
+
             }
+
+
+            currentIndex = 0;
+
+
+            /*
+             * Carrega a primeira música.
+             */
+
+            prepararMusica(
+                currentIndex
+            );
+
+
+            renderizarPlaylist();
+
+
+            /*
+             * Tenta iniciar automaticamente.
+             */
+
+            setTimeout(
+                () => {
+
+                    iniciarAudio();
+
+                },
+                300
+            );
 
 
             return true;
@@ -379,9 +342,7 @@ async function carregarPlaylistDaPlanilha() {
         } catch (erro) {
 
             console.error(
-                "Erro ao carregar playlist. Tentativa " +
-                tentativa +
-                ":",
+                "Erro ao carregar playlist:",
                 erro
             );
 
@@ -416,34 +377,14 @@ async function carregarPlaylistDaPlanilha() {
 
 
 /* =========================================================
-   ESPERAR
-========================================================= */
-
-function esperar(
-    milissegundos
-) {
-
-    return new Promise(
-        resolve =>
-            setTimeout(
-                resolve,
-                milissegundos
-            )
-    );
-
-}
-
-
-/* =========================================================
-   MENSAGEM DE ERRO DA PLAYLIST
+   MENSAGEM DE ERRO
 ========================================================= */
 
 function mostrarErroPlaylist(
     mensagem
 ) {
 
-    const elementos = [
-
+    [
         document.getElementById(
             "playlistStatus"
         ),
@@ -452,10 +393,7 @@ function mostrarErroPlaylist(
             "playlistMessage"
         )
 
-    ];
-
-
-    elementos.forEach(
+    ].forEach(
         elemento => {
 
             if (elemento) {
@@ -469,35 +407,28 @@ function mostrarErroPlaylist(
     );
 
 
-    console.warn(
-        mensagem
-    );
+    console.warn(mensagem);
 
 }
 
 
 /* =========================================================
-   CARREGAR MÚSICA
+   PREPARAR MÚSICA
 ========================================================= */
 
-function carregarMusica(
-    index,
-    tocar = false
-) {
+function prepararMusica(index) {
 
     if (
         !audio ||
         !playlist.length
     ) {
 
-        return;
+        return false;
 
     }
 
 
-    if (
-        index < 0
-    ) {
+    if (index < 0) {
 
         index =
             playlist.length - 1;
@@ -515,14 +446,11 @@ function carregarMusica(
     }
 
 
-    currentIndex =
-        index;
+    currentIndex = index;
 
 
     const musica =
-        playlist[
-            currentIndex
-        ];
+        playlist[currentIndex];
 
 
     if (
@@ -530,20 +458,20 @@ function carregarMusica(
         !musica.url
     ) {
 
-        return;
+        return false;
 
     }
 
 
     /*
-     * Para a música atual.
+     * Para completamente a música anterior.
      */
 
     audio.pause();
 
 
     /*
-     * Limpa o src anterior.
+     * Remove a fonte anterior.
      */
 
     audio.removeAttribute(
@@ -552,7 +480,7 @@ function carregarMusica(
 
 
     /*
-     * Define a nova música.
+     * Define a nova fonte.
      */
 
     audio.src =
@@ -560,36 +488,124 @@ function carregarMusica(
 
 
     /*
-     * Garante as configurações
-     * do áudio.
+     * Mantém o volume atual.
      */
 
-    audio.autoplay = true;
+    if (volume) {
+
+        audio.volume =
+            Number(volume.value);
+
+    } else {
+
+        audio.volume =
+            VOLUME_INICIAL;
+
+    }
+
 
     audio.muted = false;
 
-    audio.volume =
-        volume
-            ? Number(volume.value)
-            : VOLUME_INICIAL;
+    audio.preload = "auto";
+
+    audio.playsInline = true;
 
 
-    audio.load();
-
+    /*
+     * Atualiza título/artista.
+     */
 
     atualizarInformacoes();
+
 
     atualizarCardAtivo();
 
 
     /*
-     * Se foi solicitado tocar,
-     * inicia imediatamente.
+     * Inicia carregamento.
      */
 
-    if (tocar) {
+    audio.load();
 
-        iniciarAudio();
+
+    console.log(
+        "Música preparada:",
+        musica.title
+    );
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   CARREGAR E TOCAR MÚSICA
+========================================================= */
+
+async function carregarMusica(
+    index,
+    tocar = false
+) {
+
+    if (
+        !playlist.length ||
+        !audio
+    ) {
+
+        return false;
+
+    }
+
+
+    if (trocandoMusica) {
+
+        return false;
+
+    }
+
+
+    trocandoMusica = true;
+
+
+    try {
+
+        const preparada =
+            prepararMusica(index);
+
+
+        if (!preparada) {
+
+            return false;
+
+        }
+
+
+        if (!tocar) {
+
+            return true;
+
+        }
+
+
+        /*
+         * Espera o navegador começar a
+         * carregar o novo arquivo.
+         */
+
+        await esperarAudioPronto();
+
+
+        /*
+         * Agora sim chama play().
+         */
+
+        return await executarPlay();
+
+
+    } finally {
+
+        trocandoMusica = false;
 
     }
 
@@ -597,63 +613,93 @@ function carregarMusica(
 
 
 /* =========================================================
-   ATUALIZAR INFORMAÇÕES
+   ESPERAR ÁUDIO FICAR PRONTO
 ========================================================= */
 
-function atualizarInformacoes() {
+function esperarAudioPronto() {
 
-    const musica =
-        playlist[
-            currentIndex
-        ];
+    return new Promise(
+        resolve => {
 
+            if (
+                audio.readyState >= 2
+            ) {
 
-    if (!musica) {
+                resolve();
 
-        return;
+                return;
 
-    }
-
-
-    if (trackTitle) {
-
-        trackTitle.textContent =
-            musica.title;
-
-    }
+            }
 
 
-    if (trackArtist) {
-
-        trackArtist.textContent =
-            musica.artist;
-
-    }
+            let resolvido = false;
 
 
-    if (bottomTrackTitle) {
+            const finalizar = () => {
 
-        bottomTrackTitle.textContent =
-            musica.title;
+                if (resolvido) {
+                    return;
+                }
 
-    }
+                resolvido = true;
 
 
-    if (bottomTrackArtist) {
+                audio.removeEventListener(
+                    "canplay",
+                    finalizar
+                );
 
-        bottomTrackArtist.textContent =
-            musica.artist;
 
-    }
+                audio.removeEventListener(
+                    "loadedmetadata",
+                    finalizar
+                );
+
+
+                resolve();
+
+            };
+
+
+            audio.addEventListener(
+                "canplay",
+                finalizar,
+                {
+                    once: true
+                }
+            );
+
+
+            audio.addEventListener(
+                "loadedmetadata",
+                finalizar,
+                {
+                    once: true
+                }
+            );
+
+
+            /*
+             * Segurança caso o navegador
+             * não dispare o evento rapidamente.
+             */
+
+            setTimeout(
+                finalizar,
+                5000
+            );
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   INICIAR ÁUDIO
+   EXECUTAR PLAY
 ========================================================= */
 
-async function iniciarAudio() {
+async function executarPlay() {
 
     if (
         !audio ||
@@ -665,89 +711,20 @@ async function iniciarAudio() {
     }
 
 
-    if (
-        tentandoReproduzir
-    ) {
-
-        return false;
-
-    }
-
-
-    tentandoReproduzir =
-        true;
-
-
     try {
-
-        /*
-         * Garante que existe uma música
-         * carregada.
-         */
-
-        if (
-            !audio.src
-        ) {
-
-            const musica =
-                playlist[
-                    currentIndex
-                ];
-
-
-            if (
-                !musica ||
-                !musica.url
-            ) {
-
-                tentandoReproduzir =
-                    false;
-
-                return false;
-
-            }
-
-
-            audio.src =
-                musica.url;
-
-            audio.load();
-
-        }
-
-
-        /*
-         * Garante volume.
-         */
 
         audio.muted = false;
 
 
-        if (
-            volume &&
-            !Number.isNaN(
-                Number(
-                    volume.value
-                )
-            )
-        ) {
+        if (volume) {
 
             audio.volume =
                 Number(
                     volume.value
                 );
 
-        } else {
-
-            audio.volume =
-                VOLUME_INICIAL;
-
         }
 
-
-        /*
-         * Tenta iniciar a reprodução.
-         */
 
         const promessa =
             audio.play();
@@ -762,30 +739,20 @@ async function iniciarAudio() {
         }
 
 
-        /*
-         * Se chegou aqui,
-         * o navegador permitiu.
-         */
-
-        atualizarBotoes(
-            true
-        );
-
-
         primeiroCliqueAtivado =
             true;
+
+
+        atualizarBotoes(true);
 
 
         removerDetectorPrimeiroClique();
 
 
         console.log(
-            "Reprodução iniciada."
+            "Tocando:",
+            playlist[currentIndex].title
         );
-
-
-        tentandoReproduzir =
-            false;
 
 
         return true;
@@ -793,24 +760,67 @@ async function iniciarAudio() {
 
     } catch (erro) {
 
-        console.log(
-            "Autoplay bloqueado pelo navegador. "
-            + "Aguardando interação do usuário."
+        console.warn(
+            "Play bloqueado:",
+            erro
         );
 
 
-        atualizarBotoes(
-            false
-        );
-
-
-        tentandoReproduzir =
-            false;
+        atualizarBotoes(false);
 
 
         return false;
 
     }
+
+}
+
+
+/* =========================================================
+   INICIAR ÁUDIO
+========================================================= */
+
+async function iniciarAudio() {
+
+    if (
+        !playlist.length ||
+        !audio
+    ) {
+
+        return false;
+
+    }
+
+
+    /*
+     * Se não existe src,
+     * prepara a música atual.
+     */
+
+    if (!audio.src) {
+
+        prepararMusica(
+            currentIndex
+        );
+
+    }
+
+
+    /*
+     * Se já está tocando,
+     * não faz nada.
+     */
+
+    if (
+        !audio.paused
+    ) {
+
+        return true;
+
+    }
+
+
+    return await executarPlay();
 
 }
 
@@ -830,48 +840,30 @@ function tentarAutoplay() {
     }
 
 
-    autoplayTentado =
-        true;
+    autoplayTentado = true;
 
 
     configurarAudio();
 
 
     if (
-        !playlist.length
+        playlist.length
     ) {
 
-        return;
+        iniciarAudio();
 
     }
-
-
-    /*
-     * Primeira tentativa automática.
-     */
-
-    iniciarAudio();
-
 
 }
 
 
 /* =========================================================
-   PRIMEIRO CLIQUE / TOQUE
+   PRIMEIRA INTERAÇÃO
 ========================================================= */
 
 function ativarNoPrimeiroClique() {
 
     if (
-        primeiroCliqueAtivado
-    ) {
-
-        return;
-
-    }
-
-
-    if (
         !playlist.length
     ) {
 
@@ -880,18 +872,13 @@ function ativarNoPrimeiroClique() {
     }
 
 
-    /*
-     * A interação do usuário
-     * normalmente desbloqueia o áudio.
-     */
-
     iniciarAudio();
 
 }
 
 
 /* =========================================================
-   ATIVAR DETECTOR
+   DETECTOR DE INTERAÇÃO
 ========================================================= */
 
 function adicionarDetectorPrimeiroClique() {
@@ -958,7 +945,7 @@ function removerDetectorPrimeiroClique() {
 
 
 /* =========================================================
-   ATUALIZAR BOTÕES
+   BOTÕES
 ========================================================= */
 
 function atualizarBotoes(
@@ -1038,10 +1025,7 @@ function alternarPlay() {
 
         audio.pause();
 
-
-        atualizarBotoes(
-            false
-        );
+        atualizarBotoes(false);
 
     }
 
@@ -1052,7 +1036,7 @@ function alternarPlay() {
    PRÓXIMA MÚSICA
 ========================================================= */
 
-function proximaMusica() {
+async function proximaMusica() {
 
     if (
         !playlist.length
@@ -1063,13 +1047,13 @@ function proximaMusica() {
     }
 
 
+    let novoIndex;
+
+
     if (
         shuffleEnabled &&
         playlist.length > 1
     ) {
-
-        let novoIndex;
-
 
         do {
 
@@ -1084,29 +1068,32 @@ function proximaMusica() {
             currentIndex
         );
 
-
-        currentIndex =
-            novoIndex;
-
     } else {
 
-        currentIndex++;
+        novoIndex =
+            currentIndex + 1;
 
 
         if (
-            currentIndex >=
+            novoIndex >=
             playlist.length
         ) {
 
-            currentIndex = 0;
+            novoIndex = 0;
 
         }
 
     }
 
 
-    carregarMusica(
-        currentIndex,
+    console.log(
+        "Próxima música:",
+        novoIndex
+    );
+
+
+    await carregarMusica(
+        novoIndex,
         true
     );
 
@@ -1117,7 +1104,7 @@ function proximaMusica() {
    MÚSICA ANTERIOR
 ========================================================= */
 
-function musicaAnterior() {
+async function musicaAnterior() {
 
     if (
         !playlist.length
@@ -1128,38 +1115,33 @@ function musicaAnterior() {
     }
 
 
-    /*
-     * Se já passou de 5 segundos,
-     * volta para o início da música.
-     */
-
     if (
         audio.currentTime > 5
     ) {
 
-        audio.currentTime =
-            0;
+        audio.currentTime = 0;
 
         return;
 
     }
 
 
-    currentIndex--;
+    let novoIndex =
+        currentIndex - 1;
 
 
     if (
-        currentIndex < 0
+        novoIndex < 0
     ) {
 
-        currentIndex =
+        novoIndex =
             playlist.length - 1;
 
     }
 
 
-    carregarMusica(
-        currentIndex,
+    await carregarMusica(
+        novoIndex,
         true
     );
 
@@ -1167,7 +1149,7 @@ function musicaAnterior() {
 
 
 /* =========================================================
-   BOTÕES
+   BOTÕES DE CONTROLE
 ========================================================= */
 
 if (playBtn) {
@@ -1281,27 +1263,29 @@ if (volume) {
         "input",
         () => {
 
-            if (audio) {
+            if (!audio) {
+                return;
+            }
 
-                audio.volume =
-                    Number(
-                        volume.value
-                    );
 
-                /*
-                 * Se o usuário mexer no volume,
-                 * aproveitamos a interação para
-                 * tentar desbloquear o áudio.
-                 */
+            audio.volume =
+                Number(
+                    volume.value
+                );
 
-                if (
-                    audio.paused &&
-                    playlist.length
-                ) {
 
-                    iniciarAudio();
+            /*
+             * Interação do usuário.
+             * Aproveita para tentar iniciar
+             * caso esteja parado.
+             */
 
-                }
+            if (
+                audio.paused &&
+                playlist.length
+            ) {
+
+                iniciarAudio();
 
             }
 
@@ -1321,9 +1305,7 @@ if (audio) {
         "play",
         () => {
 
-            atualizarBotoes(
-                true
-            );
+            atualizarBotoes(true);
 
         }
     );
@@ -1333,19 +1315,31 @@ if (audio) {
         "pause",
         () => {
 
-            atualizarBotoes(
-                false
-            );
+            atualizarBotoes(false);
 
         }
     );
 
 
+    /*
+     * =====================================================
+     * PRINCIPAL CORREÇÃO
+     *
+     * Quando a música termina, espera a troca
+     * do src e inicia a próxima.
+     * =====================================================
+     */
+
     audio.addEventListener(
         "ended",
-        () => {
+        async () => {
 
-            proximaMusica();
+            console.log(
+                "Música terminou."
+            );
+
+
+            await proximaMusica();
 
         }
     );
@@ -1356,38 +1350,12 @@ if (audio) {
         () => {
 
             console.error(
-                "Não foi possível carregar o áudio:",
+                "Erro no áudio:",
                 audio.src
             );
 
 
-            atualizarBotoes(
-                false
-            );
-
-        }
-    );
-
-
-    audio.addEventListener(
-        "canplay",
-        () => {
-
-            /*
-             * Se o áudio já está carregado,
-             * mas ainda não iniciou, fazemos
-             * uma nova tentativa.
-             */
-
-            if (
-                playlistCarregada &&
-                audio.paused &&
-                !primeiroCliqueAtivado
-            ) {
-
-                iniciarAudio();
-
-            }
+            atualizarBotoes(false);
 
         }
     );
@@ -1396,7 +1364,7 @@ if (audio) {
 
 
 /* =========================================================
-   CARDS DE LOUVORES
+   CARDS
 ========================================================= */
 
 function encontrarContainerPlaylist() {
@@ -1441,8 +1409,7 @@ function renderizarPlaylist() {
     }
 
 
-    container.innerHTML =
-        "";
+    container.innerHTML = "";
 
 
     playlist.forEach(
@@ -1536,7 +1503,7 @@ function renderizarPlaylist() {
 
 
 /* =========================================================
-   ATUALIZAR CARD ATIVO
+   CARD ATIVO
 ========================================================= */
 
 function atualizarCardAtivo() {
@@ -1552,29 +1519,27 @@ function atualizarCardAtivo() {
     }
 
 
-    const cards =
-        container.querySelectorAll(
+    container
+        .querySelectorAll(
             "[data-play-index]"
-        );
+        )
+        .forEach(
+            card => {
+
+                const index =
+                    Number(
+                        card.dataset.playIndex
+                    );
 
 
-    cards.forEach(
-        card => {
-
-            const index =
-                Number(
-                    card.dataset.playIndex
+                card.classList.toggle(
+                    "tocando",
+                    index ===
+                    currentIndex
                 );
 
-
-            card.classList.toggle(
-                "tocando",
-                index ===
-                currentIndex
-            );
-
-        }
-    );
+            }
+        );
 
 }
 
@@ -1615,7 +1580,7 @@ function escaparHTML(
 
 
 /* =========================================================
-   COMPATIBILIDADE COM CARDS EXISTENTES
+   CARDS EXISTENTES
 ========================================================= */
 
 function ativarCardsExistentes() {
@@ -1652,9 +1617,7 @@ function ativarCardsExistentes() {
 
 
                         if (
-                            Number.isNaN(
-                                index
-                            )
+                            Number.isNaN(index)
                         ) {
 
                             return;
@@ -1675,24 +1638,6 @@ function ativarCardsExistentes() {
                             index,
                             true
                         );
-
-
-                        const player =
-                            document.querySelector(
-                                ".player-card"
-                            );
-
-
-                        if (player) {
-
-                            player.scrollIntoView({
-                                behavior:
-                                    "smooth",
-                                block:
-                                    "center"
-                            });
-
-                        }
 
                     }
                 );
@@ -1946,9 +1891,7 @@ document.addEventListener(
 
 
         if (digitando) {
-
             return;
-
         }
 
 
@@ -1974,54 +1917,16 @@ document.addEventListener(
     "DOMContentLoaded",
     async () => {
 
-        console.log(
-            "Inicializando player..."
-        );
-
-
-        /*
-         * Configura o áudio primeiro.
-         */
-
         configurarAudio();
 
-
-        /*
-         * Instala imediatamente o detector
-         * de interação.
-         */
 
         adicionarDetectorPrimeiroClique();
 
 
-        /*
-         * Ativa cards existentes.
-         */
-
         ativarCardsExistentes();
 
 
-        /*
-         * Carrega a playlist.
-         */
-
-        const carregou =
-            await carregarPlaylistDaPlanilha();
-
-
-        /*
-         * A função carregarPlaylistDaPlanilha()
-         * já faz a primeira tentativa de autoplay
-         * depois de definir o src.
-         */
-
-        if (carregou) {
-
-            console.log(
-                "Player pronto."
-            );
-
-        }
+        await carregarPlaylistDaPlanilha();
 
     }
 );
@@ -2036,9 +1941,7 @@ window.addEventListener(
     () => {
 
         if (!audio) {
-
             return;
-
         }
 
 
