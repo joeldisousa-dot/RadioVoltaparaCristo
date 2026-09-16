@@ -34,7 +34,7 @@ CONFIGURAÇÃO
 */
 
 const SCRIPT_URL =
-"COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+"https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec";
 
 /*
 
