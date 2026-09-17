@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Administração — De Volta para Cristo</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --primary: #1456d9;
+    --primary-dark: #0d3fa5;
+    --text: #152238;
+    --muted: #718096;
+    --border: #e5eaf1;
+    --green: #159957;
+    --red: #d64545;
+    --gold: #d79b20;
+    --shadow:
+        0 12px 35px rgba(25, 45, 80, .08);
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #071525,
+            #0d2745
+        );
+
+    color: white;
+
+    padding: 22px 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.logo {
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+.brand-text strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    letter-spacing: .2px;
+}
+
+.brand-text span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 12px;
+
+    color:
+        rgba(255,255,255,.75);
+}
+
+.status-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #27c97b;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(39,201,123,.12);
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+
+    width: min(
+        1180px,
+        calc(100% - 32px)
+    );
+
+    margin: 28px auto 50px;
+}
+
+
+/* =========================================================
+   TOPO
+========================================================= */
+
+.page-title {
+
+    margin-bottom: 22px;
+}
+
+.page-title h1 {
+
+    margin: 0;
+
+    font-size: 27px;
+
+    letter-spacing: -.5px;
+}
+
+.page-title p {
+
+    margin: 7px 0 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.layout {
+
+    display: grid;
+
+    grid-template-columns:
+        390px 1fr;
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+
+    background: var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow: var(--shadow);
+
+    padding: 22px;
+}
+
+.card-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.card-title h2 {
+
+    margin: 0;
+
+    font-size: 17px;
+}
+
+.card-title span {
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.field {
+
+    margin-bottom: 16px;
+}
+
+.field label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.field input {
+
+    width: 100%;
+
+    height: 45px;
+
+    border:
+        1px solid #dbe2eb;
+
+    border-radius: 10px;
+
+    padding: 0 13px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    color: var(--text);
+
+    background: white;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s;
+}
+
+.field input:focus {
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(20,86,217,.10);
+}
+
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.file-area {
+
+    position: relative;
+
+    border:
+        1.5px dashed #cdd7e4;
+
+    border-radius: 13px;
+
+    padding: 23px 16px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    background:
+        #fafcff;
+
+    transition:
+        border-color .2s,
+        background .2s;
+}
+
+.file-area:hover {
+
+    border-color:
+        var(--primary);
+
+    background:
+        #f6f9ff;
+}
+
+.file-area input {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+.file-icon {
+
+    font-size: 29px;
+
+    margin-bottom: 7px;
+}
+
+.file-title {
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.file-name {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   ÁUDIO
+========================================================= */
+
+.audio-preview {
+
+    width: 100%;
+
+    margin-top: 13px;
+
+    display: none;
+}
+
+
+/* =========================================================
+   BOTÃO
+========================================================= */
+
+.btn {
+
+    border: 0;
+
+    border-radius: 10px;
+
+    min-height: 45px;
+
+    padding: 0 18px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s,
+        background .15s,
+        opacity .15s;
+}
+
+.btn:active {
+
+    transform: translateY(1px);
+}
+
+.btn-primary {
+
+    width: 100%;
+
+    background:
+        var(--primary);
+
+    color: white;
+
+    box-shadow:
+        0 7px 16px
+        rgba(20,86,217,.18);
+}
+
+.btn-primary:hover {
+
+    background:
+        var(--primary-dark);
+}
+
+.btn-primary:disabled {
+
+    opacity: .55;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   PROGRESSO
+========================================================= */
+
+.progress {
+
+    display: none;
+
+    margin-top: 16px;
+}
+
+.progress-text {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    margin-bottom: 6px;
+}
+
+.progress-track {
+
+    width: 100%;
+
+    height: 7px;
+
+    background: #edf1f6;
+
+    border-radius: 99px;
+
+    overflow: hidden;
+}
+
+.progress-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        var(--primary);
+
+    border-radius: inherit;
+
+    transition: width .25s;
+}
+
+
+/* =========================================================
+   MENSAGENS
+========================================================= */
+
+.message {
+
+    display: none;
+
+    margin-top: 14px;
+
+    padding: 12px 13px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    line-height: 1.45;
+}
+
+.message.success {
+
+    display: block;
+
+    background:
+        #edf9f3;
+
+    color:
+        #137846;
+}
+
+.message.error {
+
+    display: block;
+
+    background:
+        #fff0f0;
+
+    color:
+        #b33636;
+}
+
+
+/* =========================================================
+   LISTA
+========================================================= */
+
+.list-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.counter {
+
+    padding: 6px 10px;
+
+    border-radius: 99px;
+
+    background:
+        #edf4ff;
+
+    color:
+        var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.refresh {
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    color: var(--text);
+
+    height: 33px;
+
+    padding: 0 11px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+.refresh:hover {
+
+    background:
+        #f7f9fc;
+}
+
+
+/* =========================================================
+   MÚSICAS
+========================================================= */
+
+.music-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    max-height: 600px;
+
+    overflow-y: auto;
+
+    padding-right: 3px;
+}
+
+.music {
+
+    display: grid;
+
+    grid-template-columns:
+        38px 1fr auto;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: #fff;
+}
+
+.music-number {
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #f0f4fa;
+
+    color:
+        var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+.music-info {
+
+    min-width: 0;
+}
+
+.music-title {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.music-artist {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.music-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+.music-play {
+
+    width: 34px;
+
+    height: 34px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background:
+        #edf4ff;
+
+    color:
+        var(--primary);
+
+    cursor: pointer;
+}
+
+.music-delete {
+
+    width: 34px;
+
+    height: 34px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background:
+        #fff1f1;
+
+    color:
+        var(--red);
+
+    cursor: pointer;
+}
+
+.music-play:hover {
+
+    background:
+        #dfeaff;
+}
+
+.music-delete:hover {
+
+    background:
+        #ffe2e2;
+}
+
+
+/* =========================================================
+   VAZIO
+========================================================= */
+
+.empty {
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.footer {
+
+    margin-top: 24px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .layout {
+
+        grid-template-columns: 1fr;
+    }
+
+    .music-list {
+
+        max-height: none;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .header {
+
+        padding: 18px;
+    }
+
+    .container {
+
+        width:
+            calc(100% - 20px);
+
+        margin-top: 18px;
+    }
+
+    .card {
+
+        padding: 17px;
+    }
+
+    .status {
+
+        display: none;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="brand">
+
+        <div class="logo">
+            ♪
+        </div>
+
+        <div class="brand-text">
+
+            <strong>
+                De Volta para Cristo
+            </strong>
+
+            <span>
+                Administração da Rádio
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="status">
+
+        <span class="status-dot"></span>
+
+        Sistema online
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <div class="page-title">
+
+        <h1>
+            Gerenciar músicas
+        </h1>
+
+        <p>
+            Envie os arquivos de áudio e cadastre-os automaticamente na playlist.
+        </p>
+
+    </div>
+
+
+
+    <div class="layout">
+
+
+        <!-- =================================================
+             CADASTRO
+        ================================================== -->
+
+        <section class="card">
+
+
+            <div class="card-title">
+
+                <h2>
+                    Nova música
+                </h2>
+
+                <span>
+                    MP3 / áudio
+                </span>
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="senha">
+                    Senha administrativa
+                </label>
+
+                <input
+                    id="senha"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Digite a senha"
+                >
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="titulo">
+                    Título da música
+                </label>
+
+                <input
+                    id="titulo"
+                    type="text"
+                    placeholder="Ex.: Futuro do Homem"
+                >
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="artista">
+                    Artista
+                </label>
+
+                <input
+                    id="artista"
+                    type="text"
+                    placeholder="Ex.: Amanda Wanessa"
+                >
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label>
+                    Arquivo de áudio
+                </label>
+
+
+                <div class="file-area">
+
+                    <input
+                        id="arquivo"
+                        type="file"
+                        accept=".mp3,.m4a,.ogg,.wav,.aac,audio/*"
+                    >
+
+                    <div class="file-icon">
+                        🎵
+                    </div>
+
+                    <div class="file-title">
+                        Clique para selecionar o áudio
+                    </div>
+
+                    <div
+                        id="fileName"
+                        class="file-name"
+                    >
+                        Nenhum arquivo selecionado
+                    </div>
+
+                </div>
+
+
+                <audio
+                    id="preview"
+                    class="audio-preview"
+                    controls>
+                </audio>
+
+            </div>
+
+
+
+            <button
+                id="btnCadastrar"
+                class="btn btn-primary"
+                type="button">
+
+                Cadastrar música
+
+            </button>
+
+
+
+            <div
+                id="progress"
+                class="progress">
+
+                <div class="progress-text">
+
+                    <span>
+                        Enviando arquivo...
+                    </span>
+
+                    <span id="progressPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div
+                        id="progressBar"
+                        class="progress-bar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="message"
+                class="message">
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PLAYLIST
+        ================================================== -->
+
+        <section class="card">
+
+
+            <div class="list-header">
+
+                <div class="card-title"
+                     style="margin:0;">
+
+                    <h2>
+                        Playlist
+                    </h2>
+
+                </div>
+
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:8px;
+                ">
+
+                    <span
+                        id="counter"
+                        class="counter">
+                        0 músicas
+                    </span>
+
+                    <button
+                        id="refresh"
+                        class="refresh"
+                        type="button">
+
+                        Atualizar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="musicList"
+                class="music-list">
+
+                <div class="empty">
+
+                    Carregando playlist...
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <div class="footer">
+
+        De Volta para Cristo • Administração
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+/* ============================================================
+   ESTADO
+============================================================ */
+
+let senhaAtual = "";
+
+let arquivoSelecionado = null;
+
+
+/* ============================================================
+   ELEMENTOS
+============================================================ */
+
+const senha =
+    document.getElementById(
+        "senha"
+    );
+
+const titulo =
+    document.getElementById(
+        "titulo"
+    );
+
+const artista =
+    document.getElementById(
+        "artista"
+    );
+
+const arquivo =
+    document.getElementById(
+        "arquivo"
+    );
+
+const fileName =
+    document.getElementById(
+        "fileName"
+    );
+
+const preview =
+    document.getElementById(
+        "preview"
+    );
+
+const btnCadastrar =
+    document.getElementById(
+        "btnCadastrar"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const progress =
+    document.getElementById(
+        "progress"
+    );
+
+const progressBar =
+    document.getElementById(
+        "progressBar"
+    );
+
+const progressPercent =
+    document.getElementById(
+        "progressPercent"
+    );
+
+const musicList =
+    document.getElementById(
+        "musicList"
+    );
+
+const counter =
+    document.getElementById(
+        "counter"
+    );
+
+
+/* ============================================================
+   ARQUIVO SELECIONADO
+============================================================ */
+
+arquivo.addEventListener(
+    "change",
+    function () {
+
+        arquivoSelecionado =
+            this.files &&
+            this.files.length
+                ? this.files[0]
+                : null;
+
+
+        if (!arquivoSelecionado) {
+
+            fileName.textContent =
+                "Nenhum arquivo selecionado";
+
+            preview.style.display =
+                "none";
+
+            preview.removeAttribute(
+                "src"
+            );
+
+            return;
+        }
+
+
+        fileName.textContent =
+            arquivoSelecionado.name;
+
+
+        /*
+         * Mostra prévia local.
+         */
+
+        const url =
+            URL.createObjectURL(
+                arquivoSelecionado
+            );
+
+
+        preview.src =
+            url;
+
+        preview.style.display =
+            "block";
+    }
+);
+
+
+/* ============================================================
+   MENSAGEM
+============================================================ */
+
+function mostrarMensagem(
+    texto,
+    tipo
+) {
+
+    message.textContent =
+        texto;
+
+    message.className =
+        "message " + tipo;
+}
+
+
+/* ============================================================
+   PROGRESSO
+============================================================ */
+
+function mostrarProgresso(
+    percentual
+) {
+
+    progress.style.display =
+        "block";
+
+    progressBar.style.width =
+        percentual + "%";
+
+    progressPercent.textContent =
+        percentual + "%";
+}
+
+
+function esconderProgresso() {
+
+    progress.style.display =
+        "none";
+
+    progressBar.style.width =
+        "0%";
+
+    progressPercent.textContent =
+        "0%";
+}
+
+
+/* ============================================================
+   CONVERTER ARQUIVO PARA BASE64
+============================================================ */
+
+function arquivoParaBase64(
+    file
+) {
+
+    return new Promise(
+        function (
+            resolve,
+            reject
+        ) {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function () {
+
+                    try {
+
+                        const resultado =
+                            reader.result;
+
+
+                        /*
+                         * Remove:
+                         *
+                         * data:audio/mpeg;base64,
+                         */
+
+                        const base64 =
+                            resultado
+                                .split(",")[1];
+
+
+                        resolve(
+                            base64
+                        );
+
+                    } catch (erro) {
+
+                        reject(
+                            erro
+                        );
+                    }
+                };
+
+
+            reader.onerror =
+                function () {
+
+                    reject(
+                        new Error(
+                            "Não foi possível ler o arquivo."
+                        )
+                    );
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+        }
+    );
+}
+
+
+/* ============================================================
+   CADASTRAR
+============================================================ */
+
+btnCadastrar.addEventListener(
+    "click",
+    async function () {
+
+        try {
+
+            mostrarMensagem(
+                "",
+                ""
+            );
+
+
+            const senhaValor =
+                senha.value.trim();
+
+
+            const tituloValor =
+                titulo.value.trim();
+
+
+            const artistaValor =
+                artista.value.trim();
+
+
+            if (!senhaValor) {
+
+                mostrarMensagem(
+                    "Informe a senha administrativa.",
+                    "error"
+                );
+
+                senha.focus();
+
+                return;
+            }
+
+
+            if (!tituloValor) {
+
+                mostrarMensagem(
+                    "Informe o título da música.",
+                    "error"
+                );
+
+                titulo.focus();
+
+                return;
+            }
+
+
+            if (!artistaValor) {
+
+                mostrarMensagem(
+                    "Informe o artista.",
+                    "error"
+                );
+
+                artista.focus();
+
+                return;
+            }
+
+
+            if (!arquivoSelecionado) {
+
+                mostrarMensagem(
+                    "Selecione um arquivo de áudio.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /*
+             * Limite recomendado.
+             *
+             * Apps Script não é indicado
+             * para arquivos muito grandes.
+             */
+
+            const tamanhoMB =
+                arquivoSelecionado.size /
+                1024 /
+                1024;
+
+
+            if (tamanhoMB > 35) {
+
+                mostrarMensagem(
+                    "O arquivo possui " +
+                    tamanhoMB.toFixed(1) +
+                    " MB. Para este sistema, recomendamos arquivos de até 35 MB.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            btnCadastrar.disabled =
+                true;
+
+
+            senhaAtual =
+                senhaValor;
+
+
+            mostrarProgresso(10);
+
+
+            const base64 =
+                await arquivoParaBase64(
+                    arquivoSelecionado
+                );
+
+
+            mostrarProgresso(45);
+
+
+            google.script.run
+
+                .withSuccessHandler(
+                    function (resultado) {
+
+                        mostrarProgresso(100);
+
+
+                        setTimeout(
+                            esconderProgresso,
+                            500
+                        );
+
+
+                        btnCadastrar.disabled =
+                            false;
+
+
+                        if (
+                            !resultado ||
+                            !resultado.ok
+                        ) {
+
+                            mostrarMensagem(
+                                resultado &&
+                                resultado.error
+                                    ? resultado.error
+                                    : "Não foi possível cadastrar a música.",
+                                "error"
+                            );
+
+                            return;
+                        }
+
+
+                        mostrarMensagem(
+                            "✓ " +
+                            resultado.mensagem +
+                            " — " +
+                            resultado.titulo,
+                            "success"
+                        );
+
+
+                        /*
+                         * Limpa formulário.
+                         */
+
+                        titulo.value =
+                            "";
+
+                        artista.value =
+                            "";
+
+                        arquivo.value =
+                            "";
+
+                        arquivoSelecionado =
+                            null;
+
+                        fileName.textContent =
+                            "Nenhum arquivo selecionado";
+
+                        preview.pause();
+
+                        preview.removeAttribute(
+                            "src"
+                        );
+
+                        preview.style.display =
+                            "none";
+
+
+                        /*
+                         * Atualiza playlist.
+                         */
+
+                        carregarPlaylist();
+
+                    }
+                )
+
+                .withFailureHandler(
+                    function (erro) {
+
+                        btnCadastrar.disabled =
+                            false;
+
+                        esconderProgresso();
+
+
+                        mostrarMensagem(
+                            erro &&
+                            erro.message
+                                ? erro.message
+                                : String(erro),
+                            "error"
+                        );
+                    }
+                )
+
+                .cadastrarAudio({
+
+                    senha:
+                        senhaValor,
+
+                    titulo:
+                        tituloValor,
+
+                    artista:
+                        artistaValor,
+
+                    nomeArquivo:
+                        arquivoSelecionado.name,
+
+                    base64:
+                        base64
+                });
+
+
+        } catch (erro) {
+
+            btnCadastrar.disabled =
+                false;
+
+            esconderProgresso();
+
+
+            mostrarMensagem(
+                erro.message ||
+                String(erro),
+                "error"
+            );
+        }
+    }
+);
+
+
+/* ============================================================
+   CARREGAR PLAYLIST
+============================================================ */
+
+function carregarPlaylist() {
+
+    const senhaValor =
+        senha.value.trim();
+
+
+    if (!senhaValor) {
+
+        musicList.innerHTML = `
+            <div class="empty">
+                Informe a senha administrativa para visualizar a playlist.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    musicList.innerHTML = `
+        <div class="empty">
+            Carregando músicas...
+        </div>
+    `;
+
+
+    google.script.run
+
+        .withSuccessHandler(
+            function (resultado) {
+
+                if (
+                    !resultado ||
+                    !resultado.ok
+                ) {
+
+                    musicList.innerHTML = `
+                        <div class="empty">
+                            ${escapeHtml(
+                                resultado &&
+                                resultado.error
+                                    ? resultado.error
+                                    : "Erro ao carregar playlist."
+                            )}
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                renderizarPlaylist(
+                    resultado.musicas || []
+                );
+            }
+        )
+
+        .withFailureHandler(
+            function (erro) {
+
+                musicList.innerHTML = `
+                    <div class="empty">
+                        Erro ao carregar playlist.
+                    </div>
+                `;
+            }
+        )
+
+        .listarPlaylistAdmin(
+            senhaValor
+        );
+}
+
+
+/* ============================================================
+   RENDERIZAR PLAYLIST
+============================================================ */
+
+function renderizarPlaylist(
+    musicas
+) {
+
+    counter.textContent =
+        musicas.length +
+        (
+            musicas.length === 1
+                ? " música"
+                : " músicas"
+        );
+
+
+    if (!musicas.length) {
+
+        musicList.innerHTML = `
+            <div class="empty">
+                Nenhuma música cadastrada.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    musicList.innerHTML =
+        musicas
+            .map(
+                function (
+                    musica,
+                    index
+                ) {
+
+                    const ativo =
+                        String(
+                            musica.ativo || "SIM"
+                        )
+                        .toUpperCase() === "SIM";
+
+
+                    return `
+
+                    <div
+                        class="music"
+                        data-id="${escapeHtml(
+                            String(musica.id)
+                        )}"
+                    >
+
+                        <div class="music-number">
+
+                            ${String(
+                                index + 1
+                            ).padStart(2, "0")}
+
+                        </div>
+
+
+                        <div class="music-info">
+
+                            <div
+                                class="music-title"
+                                title="${escapeHtml(
+                                    musica.titulo
+                                )}"
+                            >
+                                ${escapeHtml(
+                                    musica.titulo ||
+                                    "Sem título"
+                                )}
+                            </div>
+
+                            <div
+                                class="music-artist"
+                                title="${escapeHtml(
+                                    musica.artista
+                                )}"
+                            >
+                                ${escapeHtml(
+                                    musica.artista ||
+                                    "De Volta para Cristo"
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="music-actions">
+
+                            ${
+                                musica.url
+                                ?
+                                `
+                                <button
+                                    class="music-play"
+                                    type="button"
+                                    title="Ouvir"
+                                    onclick="ouvirMusica(
+                                        '${escapeJs(
+                                            musica.url
+                                        )}'
+                                    )">
+                                    ▶
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+
+                            ${
+                                ativo
+                                ?
+                                `
+                                <button
+                                    class="music-delete"
+                                    type="button"
+                                    title="Remover da playlist"
+                                    onclick="excluir(
+                                        '${escapeJs(
+                                            String(musica.id)
+                                        )}',
+                                        '${escapeJs(
+                                            musica.titulo
+                                        )}'
+                                    )">
+                                    ×
+                                </button>
+                                `
+                                :
+                                `
+                                <button
+                                    class="music-play"
+                                    type="button"
+                                    title="Ativar"
+                                    onclick="ativar(
+                                        '${escapeJs(
+                                            String(musica.id)
+                                        )}'
+                                    )">
+                                    ✓
+                                </button>
+                                `
+                            }
+
+                        </div>
+
+                    </div>
+                    `;
+                }
+            )
+            .join("");
+}
+
+
+/* ============================================================
+   OUVIR MÚSICA
+============================================================ */
+
+function ouvirMusica(
+    url
+) {
+
+    if (!url) {
+        return;
+    }
+
+
+    const janela =
+        window.open(
+            "",
+            "_blank"
+        );
+
+
+    if (!janela) {
+
+        alert(
+            "Permita a abertura de novas janelas no navegador."
+        );
+
+        return;
+    }
+
+
+    janela.document.write(`
+        <!DOCTYPE html>
+
+        <html lang="pt-BR">
+
+        <head>
+
+            <meta charset="UTF-8">
+
+            <title>
+                De Volta para Cristo
+            </title>
+
+            <style>
+
+                body {
+                    margin:0;
+                    min-height:100vh;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    background:#071525;
+                    font-family:Arial,sans-serif;
+                    color:white;
+                }
+
+                main {
+                    width:min(600px,90%);
+                    text-align:center;
+                }
+
+                h1 {
+                    font-size:22px;
+                }
+
+                audio {
+                    width:100%;
+                    margin-top:20px;
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            <main>
+
+                <h1>
+                    🎵 De Volta para Cristo
+                </h1>
+
+                <audio
+                    controls
+                    autoplay
+                    src="${escapeHtml(url)}">
+                </audio>
+
+            </main>
+
+        </body>
+
+        </html>
+    `);
+}
+
+
+/* ============================================================
+   EXCLUIR / DESATIVAR
+============================================================ */
+
+function excluir(
+    id,
+    tituloMusica
+) {
+
+    const confirmar =
+        confirm(
+            'Remover "' +
+            tituloMusica +
+            '" da playlist?'
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    google.script.run
+
+        .withSuccessHandler(
+            function (resultado) {
+
+                if (
+                    !resultado ||
+                    !resultado.ok
+                ) {
+
+                    mostrarMensagem(
+                        resultado &&
+                        resultado.error
+                            ? resultado.error
+                            : "Não foi possível remover.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                mostrarMensagem(
+                    "✓ Música removida da playlist.",
+                    "success"
+                );
+
+
+                carregarPlaylist();
+            }
+        )
+
+        .withFailureHandler(
+            function (erro) {
+
+                mostrarMensagem(
+                    erro.message ||
+                    String(erro),
+                    "error"
+                );
+            }
+        )
+
+        .excluirMusica(
+            senha.value.trim(),
+            id
+        );
+}
+
+
+/* ============================================================
+   ATIVAR
+============================================================ */
+
+function ativar(
+    id
+) {
+
+    google.script.run
+
+        .withSuccessHandler(
+            function (resultado) {
+
+                if (
+                    !resultado ||
+                    !resultado.ok
+                ) {
+
+                    mostrarMensagem(
+                        resultado &&
+                        resultado.error
+                            ? resultado.error
+                            : "Não foi possível ativar.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                mostrarMensagem(
+                    "✓ Música ativada.",
+                    "success"
+                );
+
+
+                carregarPlaylist();
+            }
+        )
+
+        .withFailureHandler(
+            function (erro) {
+
+                mostrarMensagem(
+                    erro.message ||
+                    String(erro),
+                    "error"
+                );
+            }
+        )
+
+        .ativarMusica(
+            senha.value.trim(),
+            id
+        );
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHtml(
+    valor
+) {
+
+    return String(
+        valor == null
+            ? ""
+            : valor
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+}
+
+
+/* ============================================================
+   ESCAPE JAVASCRIPT
+============================================================ */
+
+function escapeJs(
+    valor
+) {
+
+    return String(
+        valor == null
+            ? ""
+            : valor
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    )
+    .replace(
+        /"/g,
+        '\\"'
+    )
+    .replace(
+        /\r/g,
+        "\\r"
+    )
+    .replace(
+        /\n/g,
+        "\\n"
+    );
+}
+
+
+/* ============================================================
+   ENTER NA SENHA
+============================================================ */
+
+senha.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            carregarPlaylist();
+        }
+    }
+);
+
+
+/* ============================================================
+   BOTÃO ATUALIZAR
+============================================================ */
+
+document
+    .getElementById("refresh")
+    .addEventListener(
+        "click",
+        carregarPlaylist
+    );
+
+
+</script>
+
+</body>
+
+</html>
