@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-...
+
 <head>
 
 <meta charset="UTF-8">
@@ -18,7 +18,6 @@
     content="De Volta para Cristo — Louvores, Palavra e esperança.">
 
 <title>De Volta para Cristo</title>
-
 
 <style>
 
@@ -46,11 +45,11 @@ body {
 
     color: #182536;
 
-    background: #f6f8fb;
+    background: #f5f7fa;
 
     min-height: 100vh;
 
-    padding-bottom: 90px;
+    padding-bottom: 85px;
 }
 
 a {
@@ -80,16 +79,16 @@ header {
     left: 0;
     right: 0;
 
-    height: 68px;
+    height: 64px;
 
     z-index: 1000;
 
     background:
-        rgba(5,18,33,.95);
+        rgba(5,18,33,.96);
 
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(15px);
 
-    -webkit-backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(15px);
 
     border-bottom:
         1px solid rgba(255,255,255,.08);
@@ -98,7 +97,7 @@ header {
 .header-inner {
 
     width:
-        min(1120px, calc(100% - 30px));
+        min(1120px, calc(100% - 28px));
 
     height: 100%;
 
@@ -122,19 +121,18 @@ header {
 
     align-items: center;
 
-    gap: 10px;
+    gap: 9px;
 }
 
 .logo-mark {
 
-    width: 42px;
-    height: 42px;
+    width: 39px;
+    height: 39px;
 
     flex-shrink: 0;
 }
 
 .logo-text {
-
     line-height: 1;
 }
 
@@ -149,13 +147,12 @@ header {
         "Times New Roman",
         serif;
 
-    font-size: 16px;
+    font-size: 15px;
 
     letter-spacing: .3px;
 }
 
 .logo-text strong span {
-
     color: #dfbd6d;
 }
 
@@ -165,11 +162,11 @@ header {
 
     margin-top: 4px;
 
-    color: #91a4b9;
+    color: #8297ad;
 
     font-size: 7px;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.3px;
 
     text-transform: uppercase;
 }
@@ -185,18 +182,18 @@ nav {
 
     align-items: center;
 
-    gap: 3px;
+    gap: 2px;
 }
 
 nav a {
 
     color: #aebed0;
 
-    font-size: 12px;
+    font-size: 11px;
 
-    padding: 8px 11px;
+    padding: 7px 10px;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     transition: .2s ease;
 }
@@ -216,10 +213,10 @@ nav a:hover {
 
 .hero {
 
-    min-height: 580px;
+    min-height: 490px;
 
-    padding-top: 125px;
-    padding-bottom: 65px;
+    padding:
+        115px 0 55px;
 
     color: white;
 
@@ -227,13 +224,13 @@ nav a:hover {
 
         radial-gradient(
             circle at 85% 25%,
-            rgba(48,112,176,.22),
+            rgba(48,112,176,.20),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 10% 80%,
-            rgba(218,182,96,.08),
+            rgba(218,182,96,.07),
             transparent 28%
         ),
 
@@ -249,24 +246,23 @@ nav a:hover {
 .hero-inner {
 
     width:
-        min(1120px, calc(100% - 30px));
+        min(1120px, calc(100% - 28px));
 
     margin: auto;
 
     display: grid;
 
     grid-template-columns:
-        1.1fr
-        .9fr;
+        1.25fr
+        .75fr;
 
-    gap: 55px;
+    gap: 45px;
 
     align-items: center;
 }
 
 .hero-content {
-
-    max-width: 650px;
+    max-width: 680px;
 }
 
 .eyebrow {
@@ -277,9 +273,9 @@ nav a:hover {
 
     gap: 7px;
 
-    margin-bottom: 17px;
+    margin-bottom: 15px;
 
-    padding: 7px 11px;
+    padding: 6px 10px;
 
     border-radius: 999px;
 
@@ -291,11 +287,11 @@ nav a:hover {
     background:
         rgba(255,255,255,.04);
 
-    font-size: 9px;
+    font-size: 8px;
 
     font-weight: 800;
 
-    letter-spacing: 1.4px;
+    letter-spacing: 1.3px;
 
     text-transform: uppercase;
 }
@@ -320,38 +316,37 @@ nav a:hover {
         serif;
 
     font-size:
-        clamp(42px, 6vw, 68px);
+        clamp(39px, 5.5vw, 62px);
 
-    line-height: 1.02;
+    line-height: 1.03;
 
-    letter-spacing: -2px;
+    letter-spacing: -1.8px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 .hero h1 span {
-
     color: #dfbd6d;
 }
 
 .hero-description {
 
-    max-width: 560px;
+    max-width: 530px;
 
     color: #aebed0;
 
-    font-size: 15px;
+    font-size: 14px;
 
-    line-height: 1.7;
+    line-height: 1.65;
 
-    margin-bottom: 24px;
+    margin-bottom: 21px;
 }
 
 .hero-buttons {
 
     display: flex;
 
-    gap: 9px;
+    gap: 8px;
 
     flex-wrap: wrap;
 }
@@ -360,9 +355,9 @@ nav a:hover {
 
     border: 0;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
-    padding: 12px 17px;
+    padding: 11px 16px;
 
     display: inline-flex;
 
@@ -372,7 +367,7 @@ nav a:hover {
 
     gap: 7px;
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 750;
 
@@ -380,7 +375,6 @@ nav a:hover {
 }
 
 .btn:hover {
-
     transform: translateY(-2px);
 }
 
@@ -409,14 +403,14 @@ nav a:hover {
 
 
 /* =========================================================
-   VERSÍCULO HERO
+   VERSÍCULO
 ========================================================= */
 
 .hero-verse {
 
-    margin-top: 25px;
+    margin-top: 22px;
 
-    padding-left: 13px;
+    padding-left: 12px;
 
     border-left:
         2px solid #d8b86b;
@@ -430,11 +424,11 @@ nav a:hover {
         Georgia,
         serif;
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-style: italic;
 
-    line-height: 1.6;
+    line-height: 1.55;
 }
 
 .hero-verse span {
@@ -445,48 +439,62 @@ nav a:hover {
 
     color: #8195aa;
 
-    font-size: 10px;
+    font-size: 9px;
 }
 
 
 /* =========================================================
-   LOGO HERO
+   HERO RADIO
 ========================================================= */
 
-.hero-logo {
+.hero-radio {
 
-    width: min(350px, 100%);
+    width: min(300px, 100%);
 
     margin: auto;
 
-    padding: 30px 25px;
+    padding: 25px 22px;
 
     text-align: center;
 
-    border-radius: 25px;
+    border-radius: 22px;
 
     background:
-        rgba(255,255,255,.055);
+        rgba(255,255,255,.045);
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.09);
+}
+
+.radio-circle {
+
+    width: 92px;
+    height: 92px;
+
+    margin: 0 auto 16px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: #071525;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e5c77c,
+            #b9964d
+        );
+
+    font-size: 38px;
 
     box-shadow:
-        0 25px 65px rgba(0,0,0,.2);
+        0 15px 35px rgba(0,0,0,.22);
 }
 
-.logo-large {
-
-    width: 125px;
-    height: 125px;
-
-    display: block;
-
-    margin:
-        0 auto 18px;
-}
-
-.hero-logo h2 {
+.hero-radio h2 {
 
     color: white;
 
@@ -494,21 +502,20 @@ nav a:hover {
         Georgia,
         serif;
 
-    font-size: 24px;
+    font-size: 21px;
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 }
 
-.hero-logo h2 span {
-
+.hero-radio h2 span {
     color: #dfbd6d;
 }
 
-.hero-logo p {
+.hero-radio p {
 
-    color: #91a4b9;
+    color: #8297ad;
 
-    font-size: 9px;
+    font-size: 8px;
 
     letter-spacing: 1.3px;
 
@@ -523,31 +530,30 @@ nav a:hover {
 .section {
 
     width:
-        min(1120px, calc(100% - 30px));
+        min(1120px, calc(100% - 28px));
 
     margin: auto;
 
-    padding: 60px 0;
+    padding: 48px 0;
 }
 
 .section-header {
-
-    margin-bottom: 22px;
+    margin-bottom: 19px;
 }
 
 .section-label {
 
     color: #4d7fae;
 
-    font-size: 9px;
+    font-size: 8px;
 
     font-weight: 800;
 
-    letter-spacing: 1.7px;
+    letter-spacing: 1.6px;
 
     text-transform: uppercase;
 
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .section h2 {
@@ -559,27 +565,27 @@ nav a:hover {
         serif;
 
     font-size:
-        clamp(27px, 4vw, 37px);
+        clamp(25px, 3.5vw, 34px);
 
     line-height: 1.15;
 }
 
 .section-intro {
 
-    max-width: 560px;
+    max-width: 580px;
 
-    margin-top: 7px;
+    margin-top: 6px;
 
     color: #718093;
 
-    font-size: 13px;
+    font-size: 12px;
 
     line-height: 1.6;
 }
 
 
 /* =========================================================
-   PLAYER PRINCIPAL
+   PLAYER
 ========================================================= */
 
 .player-card {
@@ -593,11 +599,11 @@ nav a:hover {
 
     align-items: center;
 
-    gap: 15px;
+    gap: 13px;
 
-    padding: 17px;
+    padding: 14px;
 
-    border-radius: 19px;
+    border-radius: 17px;
 
     color: white;
 
@@ -609,19 +615,19 @@ nav a:hover {
         );
 
     box-shadow:
-        0 18px 40px rgba(7,29,51,.13);
+        0 15px 35px rgba(7,29,51,.12);
 }
 
 .player-cover {
 
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
 
     display: grid;
 
     place-items: center;
 
-    border-radius: 15px;
+    border-radius: 14px;
 
     color: #071525;
 
@@ -632,7 +638,7 @@ nav a:hover {
             #b9974e
         );
 
-    font-size: 23px;
+    font-size: 21px;
 }
 
 .player-label {
@@ -643,7 +649,7 @@ nav a:hover {
 
     font-weight: 800;
 
-    letter-spacing: 1.3px;
+    letter-spacing: 1.2px;
 
     text-transform: uppercase;
 
@@ -668,7 +674,7 @@ nav a:hover {
 
     color: white;
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-weight: 750;
 
@@ -683,7 +689,7 @@ nav a:hover {
 
     color: #91a4b9;
 
-    font-size: 10px;
+    font-size: 9px;
 
     margin-top: 3px;
 }
@@ -699,8 +705,8 @@ nav a:hover {
 
 .player-button {
 
-    width: 34px;
-    height: 34px;
+    width: 33px;
+    height: 33px;
 
     border-radius: 50%;
 
@@ -719,8 +725,8 @@ nav a:hover {
 
 .player-button-main {
 
-    width: 43px;
-    height: 43px;
+    width: 42px;
+    height: 42px;
 
     border: 0;
 
@@ -733,7 +739,7 @@ nav a:hover {
 
     width: 65px;
 
-    margin-left: 5px;
+    margin-left: 4px;
 }
 
 
@@ -741,37 +747,13 @@ nav a:hover {
    PALAVRA
 ========================================================= */
 
-.word-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1.25fr
-        .75fr;
-
-    gap: 15px;
-}
-
 .word-card {
 
-    padding: 26px;
+    padding: 23px;
 
-    border-radius: 19px;
-
-    background: white;
-
-    border:
-        1px solid #e5ebf1;
-
-    box-shadow:
-        0 10px 28px rgba(16,43,70,.045);
-}
-
-.word-main {
+    border-radius: 17px;
 
     color: white;
-
-    border: 0;
 
     background:
         linear-gradient(
@@ -779,84 +761,90 @@ nav a:hover {
             #0b2948,
             #102f51
         );
+
+    box-shadow:
+        0 12px 30px rgba(8,30,52,.10);
 }
 
 .word-tag {
 
     color: #dfc079;
 
-    font-size: 9px;
+    font-size: 8px;
 
     font-weight: 800;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.4px;
 
     text-transform: uppercase;
 
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
-.word-main blockquote {
+.word-card blockquote {
+
+    max-width: 850px;
 
     font-family:
         Georgia,
         serif;
 
-    font-size: 21px;
+    font-size: 19px;
 
     font-style: italic;
 
     line-height: 1.5;
 
-    margin-bottom: 13px;
+    margin-bottom: 10px;
 }
 
 .word-reference {
 
     color: #9db0c4;
 
-    font-size: 10px;
-}
-
-.word-side-icon {
-
-    width: 42px;
-    height: 42px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 12px;
-
-    background: #edf4fa;
-
-    margin-bottom: 13px;
-}
-
-.word-side h3 {
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 18px;
-
-    margin-bottom: 7px;
-}
-
-.word-side p {
-
-    color: #6f7e90;
-
-    font-size: 12px;
-
-    line-height: 1.65;
+    font-size: 9px;
 }
 
 
 /* =========================================================
-   LOUVORES
+   PLAYLIST
+========================================================= */
+
+.playlist-info {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+
+    padding: 10px 13px;
+
+    border-radius: 10px;
+
+    background: #edf3f8;
+
+    border: 1px solid #e0e8ef;
+
+    color: #627487;
+
+    font-size: 10px;
+}
+
+.playlist-count {
+
+    color: #4078aa;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   GRID DE MÚSICAS
 ========================================================= */
 
 .music-grid {
@@ -864,64 +852,105 @@ nav a:hover {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(4, 1fr);
 
-    gap: 13px;
+    gap: 11px;
 }
 
 .music-card {
 
-    padding: 20px;
+    position: relative;
 
-    border-radius: 17px;
+    min-width: 0;
+
+    padding: 16px;
+
+    border-radius: 15px;
 
     background: white;
 
     border:
-        1px solid #e5ebf1;
+        1px solid #e4eaf0;
 
     box-shadow:
-        0 8px 25px rgba(15,43,70,.04);
+        0 7px 20px rgba(15,43,70,.035);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.music-card:hover {
+
+    transform: translateY(-2px);
+
+    border-color: #d4e0ea;
+
+    box-shadow:
+        0 12px 25px rgba(15,43,70,.07);
+}
+
+.music-number {
+
+    position: absolute;
+
+    top: 11px;
+    right: 12px;
+
+    color: #a7b4c1;
+
+    font-size: 8px;
+
+    font-weight: 800;
 }
 
 .music-icon {
 
-    width: 42px;
-    height: 42px;
+    width: 39px;
+    height: 39px;
 
     display: grid;
 
     place-items: center;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
     background: #edf4fa;
 
-    font-size: 18px;
+    font-size: 17px;
 
-    margin-bottom: 14px;
+    margin-bottom: 11px;
 }
 
 .music-card h3 {
+
+    color: #172638;
 
     font-family:
         Georgia,
         serif;
 
-    font-size: 17px;
+    font-size: 15px;
 
-    margin-bottom: 5px;
+    line-height: 1.3;
+
+    margin-bottom: 4px;
+
+    padding-right: 15px;
 }
 
 .music-card p {
 
     color: #718093;
 
-    font-size: 12px;
+    font-size: 10px;
 
-    line-height: 1.55;
+    line-height: 1.45;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+
+    min-height: 29px;
 }
 
 .music-play {
@@ -934,9 +963,13 @@ nav a:hover {
 
     background: transparent;
 
-    font-size: 11px;
+    font-size: 10px;
 
     font-weight: 800;
+}
+
+.music-play:hover {
+    color: #244f76;
 }
 
 
@@ -946,71 +979,28 @@ nav a:hover {
 
 .message-card {
 
-    display: grid;
+    padding: 28px;
 
-    grid-template-columns:
-        .65fr
-        1.35fr;
-
-    overflow: hidden;
-
-    border-radius: 22px;
+    border-radius: 19px;
 
     color: white;
 
-    background: #0a213a;
+    background:
+        linear-gradient(
+            135deg,
+            #0a213a,
+            #0d2a48
+        );
 
     box-shadow:
-        0 18px 45px rgba(8,30,52,.12);
-}
-
-.message-symbol-area {
-
-    min-height: 250px;
-
-    display: grid;
-
-    place-items: center;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(221,188,105,.16),
-            transparent 30%
-        ),
-        linear-gradient(
-            145deg,
-            #153d63,
-            #071a2e
-        );
-}
-
-.message-cross {
-
-    width: 95px;
-    height: 95px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 50%;
-
-    border:
-        1px solid rgba(221,188,105,.3);
-
-    color: #e0c079;
-
-    font-size: 40px;
+        0 15px 35px rgba(8,30,52,.10);
 }
 
 .message-content {
-
-    padding: 35px;
+    max-width: 720px;
 }
 
 .message-content .section-label {
-
     color: #dfc079;
 }
 
@@ -1022,29 +1012,29 @@ nav a:hover {
         Georgia,
         serif;
 
-    font-size: 29px;
+    font-size: 27px;
 
     line-height: 1.2;
 
-    margin-bottom: 12px;
+    margin-bottom: 9px;
 }
 
 .message-content p {
 
     color: #a7b9cb;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    line-height: 1.7;
+    line-height: 1.65;
 
-    margin-bottom: 15px;
+    margin-bottom: 13px;
 }
 
 .message-link {
 
     color: #e0c079;
 
-    font-size: 11px;
+    font-size: 10px;
 
     font-weight: 800;
 }
@@ -1062,27 +1052,25 @@ nav a:hover {
 }
 
 .mission .section-label {
-
     text-align: center;
 }
 
 .mission h2 {
-
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .mission p {
 
     color: #6b7a8c;
 
-    font-size: 13px;
+    font-size: 12px;
 
     line-height: 1.7;
 }
 
 .mission-verse {
 
-    margin-top: 16px;
+    margin-top: 13px;
 
     color: #3f5d78;
 
@@ -1090,7 +1078,7 @@ nav a:hover {
         Georgia,
         serif;
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-style: italic;
 
@@ -1104,7 +1092,7 @@ nav a:hover {
 
 footer {
 
-    padding: 30px 15px;
+    padding: 25px 15px;
 
     background: #061425;
 
@@ -1133,11 +1121,10 @@ footer {
         Georgia,
         serif;
 
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .footer-name span {
-
     color: #dfbd6d;
 }
 
@@ -1145,7 +1132,7 @@ footer {
 
     color: #71869d;
 
-    font-size: 9px;
+    font-size: 8px;
 
     margin-top: 4px;
 }
@@ -1154,7 +1141,7 @@ footer {
 
     color: #71869d;
 
-    font-size: 9px;
+    font-size: 8px;
 
     text-align: right;
 
@@ -1172,12 +1159,12 @@ footer {
 
     z-index: 1100;
 
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
 
     width:
-        min(900px, calc(100% - 20px));
+        min(920px, calc(100% - 16px));
 
     margin: auto;
 
@@ -1190,11 +1177,11 @@ footer {
 
     align-items: center;
 
-    gap: 10px;
+    gap: 9px;
 
-    padding: 7px 9px;
+    padding: 6px 8px;
 
-    border-radius: 14px;
+    border-radius: 13px;
 
     background:
         rgba(6,20,36,.97);
@@ -1210,14 +1197,14 @@ footer {
 
 .bottom-cover {
 
-    width: 38px;
-    height: 38px;
+    width: 37px;
+    height: 37px;
 
     display: grid;
 
     place-items: center;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     color: #071525;
 
@@ -1228,7 +1215,7 @@ footer {
             #b6964e
         );
 
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .bottom-title {
@@ -1266,8 +1253,8 @@ footer {
 
 .bottom-button {
 
-    width: 29px;
-    height: 29px;
+    width: 28px;
+    height: 28px;
 
     border: 0;
 
@@ -1282,13 +1269,13 @@ footer {
 
     place-items: center;
 
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .bottom-play {
 
-    width: 35px;
-    height: 35px;
+    width: 34px;
+    height: 34px;
 
     color: #071525;
 
@@ -1306,8 +1293,62 @@ footer {
 
 
 /* =========================================================
-   MOBILE
+   ESTADO DE CARREGAMENTO
 ========================================================= */
+
+.playlist-loading {
+
+    grid-column: 1 / -1;
+
+    padding: 30px 15px;
+
+    text-align: center;
+
+    color: #718093;
+
+    font-size: 12px;
+
+    background: white;
+
+    border:
+        1px dashed #d9e2ea;
+
+    border-radius: 14px;
+}
+
+.playlist-error {
+
+    grid-column: 1 / -1;
+
+    padding: 25px 15px;
+
+    text-align: center;
+
+    color: #8b5b5b;
+
+    font-size: 12px;
+
+    background: #fff8f8;
+
+    border:
+        1px solid #f0dcdc;
+
+    border-radius: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .music-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
+
 
 @media (max-width: 850px) {
 
@@ -1316,29 +1357,21 @@ footer {
     }
 
     .hero-inner {
+
         grid-template-columns: 1fr;
-        gap: 35px;
+
+        gap: 28px;
     }
 
-    .hero-logo {
-        max-width: 320px;
-    }
+    .hero-radio {
 
-    .word-grid {
-        grid-template-columns: 1fr;
+        width: min(270px, 100%);
     }
 
     .music-grid {
+
         grid-template-columns:
             repeat(2, 1fr);
-    }
-
-    .message-card {
-        grid-template-columns: 1fr;
-    }
-
-    .message-symbol-area {
-        min-height: 180px;
     }
 }
 
@@ -1346,27 +1379,26 @@ footer {
 @media (max-width: 600px) {
 
     body {
-        padding-bottom: 75px;
+        padding-bottom: 72px;
     }
 
     .hero {
 
         min-height: auto;
 
-        padding-top: 105px;
-        padding-bottom: 45px;
+        padding:
+            100px 0 40px;
     }
 
     .hero h1 {
 
-        font-size: 41px;
+        font-size: 39px;
 
-        letter-spacing: -1.5px;
+        letter-spacing: -1.4px;
     }
 
     .hero-description {
-
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .hero-buttons {
@@ -1375,13 +1407,15 @@ footer {
     }
 
     .hero-buttons .btn {
-
         width: 100%;
     }
 
-    .section {
+    .hero-radio {
+        padding: 22px;
+    }
 
-        padding: 45px 0;
+    .section {
+        padding: 38px 0;
     }
 
     .player-card {
@@ -1397,27 +1431,30 @@ footer {
 
         justify-content: center;
 
-        padding-top: 5px;
+        padding-top: 3px;
     }
 
     .volume {
-
         width: 90px;
     }
 
     .music-grid {
-
         grid-template-columns: 1fr;
     }
 
-    .message-content {
+    .playlist-info {
 
-        padding: 25px 20px;
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .message-card {
+        padding: 23px 20px;
     }
 
     .message-content h2 {
-
-        font-size: 25px;
+        font-size: 24px;
     }
 
     .footer-inner {
@@ -1428,18 +1465,17 @@ footer {
     }
 
     .footer-right {
-
         text-align: left;
     }
 
     .bottom-player {
 
-        bottom: 6px;
+        bottom: 5px;
 
-        left: 6px;
-        right: 6px;
+        left: 5px;
+        right: 5px;
 
-        width: calc(100% - 12px);
+        width: calc(100% - 10px);
     }
 
 }
@@ -1628,8 +1664,9 @@ input:focus-visible {
 
     <p class="hero-description">
 
-        Louvores e mensagens para acompanhar
-        seus momentos de fé, reflexão e esperança.
+        Louvores, Palavra e mensagens para
+        acompanhar seus momentos de fé,
+        reflexão e esperança.
 
     </p>
 
@@ -1647,10 +1684,10 @@ input:focus-visible {
 
 
         <a
-            href="#palavra"
+            href="#louvores"
             class="btn btn-secondary">
 
-            📖 Palavra
+            ♪ Ver louvores
 
         </a>
 
@@ -1676,79 +1713,19 @@ input:focus-visible {
 
 
 <!-- =====================================================
-     LOGO
+     RADIO
 ===================================================== -->
 
-<div class="hero-logo">
+<div class="hero-radio">
 
-    <svg
-        class="logo-large"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg">
-
-        <defs>
-
-            <linearGradient
-                id="goldHero"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1">
-
-                <stop
-                    offset="0%"
-                    stop-color="#f2d995"/>
-
-                <stop
-                    offset="100%"
-                    stop-color="#b88b32"/>
-
-            </linearGradient>
-
-        </defs>
-
-        <circle
-            cx="50"
-            cy="50"
-            r="45"
-            fill="#091b30"
-            stroke="url(#goldHero)"
-            stroke-width="5"/>
-
-        <rect
-            x="44"
-            y="17"
-            width="12"
-            height="43"
-            rx="2"
-            fill="white"/>
-
-        <rect
-            x="31"
-            y="29"
-            width="38"
-            height="11"
-            rx="2"
-            fill="white"/>
-
-        <path
-            d="M20 76
-               C35 69 40 63 48 55
-               C52 51 58 52 61 58
-               C66 66 73 72 82 76"
-            fill="none"
-            stroke="url(#goldHero)"
-            stroke-width="6"
-            stroke-linecap="round"/>
-
-    </svg>
-
+    <div class="radio-circle">
+        ♪
+    </div>
 
     <h2>
         DE VOLTA PARA
         <span>CRISTO</span>
     </h2>
-
 
     <p>
         Louvor • Palavra • Esperança
@@ -1794,7 +1771,7 @@ input:focus-visible {
 
             <span></span>
 
-            Ao vivo
+            Rádio online
 
         </div>
 
@@ -1849,7 +1826,7 @@ input:focus-visible {
         </button>
 
 
-        <span>
+        <span aria-hidden="true">
             🔊
         </span>
 
@@ -1892,13 +1869,10 @@ input:focus-visible {
 </div>
 
 
-<div class="word-grid">
-
-
-<article class="word-card word-main">
+<div class="word-card">
 
     <div class="word-tag">
-        Versículo
+        Versículo do dia
     </div>
 
     <blockquote>
@@ -1911,30 +1885,6 @@ input:focus-visible {
     <div class="word-reference">
         Salmos 37:5
     </div>
-
-</article>
-
-
-<article class="word-card word-side">
-
-    <div class="word-side-icon">
-        📖
-    </div>
-
-    <h3>
-        Confie em Deus.
-    </h3>
-
-    <p>
-
-        Nem sempre sabemos o que acontecerá
-        amanhã. Entregue seu caminho a Deus
-        e siga confiando nele.
-
-    </p>
-
-</article>
-
 
 </div>
 
@@ -1952,12 +1902,37 @@ input:focus-visible {
 <div class="section-header">
 
     <div class="section-label">
-        Louvores
+        Playlist
     </div>
 
     <h2>
-        Música para a alma
+        Todos os louvores
     </h2>
+
+    <p class="section-intro">
+
+        Escolha uma música para ouvir.
+        A lista abaixo é carregada diretamente
+        da sua planilha.
+
+    </p>
+
+</div>
+
+
+<div class="playlist-info">
+
+    <span>
+        🎵 Músicas disponíveis
+    </span>
+
+    <span
+        id="playlistCount"
+        class="playlist-count">
+
+        Carregando...
+
+    </span>
 
 </div>
 
@@ -1966,10 +1941,11 @@ input:focus-visible {
     id="playlist"
     class="music-grid">
 
-    <!--
-        As músicas serão carregadas
-        automaticamente pelo script.js
-    -->
+    <div class="playlist-loading">
+
+        Carregando músicas...
+
+    </div>
 
 </div>
 
@@ -1986,47 +1962,36 @@ input:focus-visible {
 
 <div class="message-card">
 
+<div class="message-content">
 
-    <div class="message-symbol-area">
-
-        <div class="message-cross">
-            ✝
-        </div>
-
+    <div class="section-label">
+        Mensagem
     </div>
 
 
-    <div class="message-content">
-
-        <div class="section-label">
-            Mensagem
-        </div>
+    <h2>
+        Sempre existe um caminho de volta.
+    </h2>
 
 
-        <h2>
-            Sempre existe um caminho de volta.
-        </h2>
+    <p>
+
+        Mesmo nos momentos difíceis,
+        existe esperança. Volte seu coração
+        para Cristo e siga confiando em Deus.
+
+    </p>
 
 
-        <p>
+    <a
+        href="#palavra"
+        class="message-link">
 
-            Talvez você esteja passando por um
-            momento difícil ou procurando uma direção.
+        Continuar refletindo →
 
-            Volte seu coração para Cristo.
+    </a>
 
-        </p>
-
-
-        <a
-            href="#palavra"
-            class="message-link">
-
-            Continuar refletindo →
-
-        </a>
-
-    </div>
+</div>
 
 </div>
 
@@ -2215,13 +2180,11 @@ input:focus-visible {
 <audio
     id="audio"
     preload="auto"
-    autoplay
     playsinline>
 </audio>
 
 
 <script src="script.js"></script>
-
 
 </body>
 
