@@ -567,7 +567,9 @@ footer {
 
   <h1>Rádio Onda Livre</h1>
 
-  <p>Música, oração e mensagens para o seu dia</p>
+  <p>
+    Música, oração e mensagens para o seu dia
+  </p>
 
 </header>
 
@@ -581,7 +583,7 @@ footer {
     <span class="status-dot"></span>
 
     <span id="status">
-      Carregando playlist...
+      Conectando à rádio...
     </span>
 
   </div>
@@ -618,11 +620,10 @@ footer {
 
 
   <audio
-  id="audioPlayer"
-  controls
-  preload="metadata"
-  crossorigin="anonymous"
-></audio>
+    id="audioPlayer"
+    controls
+    preload="metadata"
+  ></audio>
 
 
 
@@ -683,10 +684,13 @@ footer {
 
 
 
-<section id="playlist" class="playlist">
+<section
+  id="playlist"
+  class="playlist"
+>
 
   <div class="message">
-    Carregando...
+    Carregando playlist...
   </div>
 
 </section>
@@ -707,6 +711,24 @@ footer {
 <script>
 
 /* =========================================================
+   CONFIGURAÇÃO
+   ========================================================= */
+
+/*
+ * COLOQUE AQUI A URL /exec DA SUA IMPLANTAÇÃO
+ * DO GOOGLE APPS SCRIPT.
+ *
+ * Exemplo:
+ *
+ * https://script.google.com/macros/s/XXXXXXXX/exec
+ *
+ */
+
+const URL_API =
+  'https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec';
+
+
+/* =========================================================
    VARIÁVEIS
    ========================================================= */
 
@@ -720,46 +742,39 @@ let filtroAtual = 'todos';
 
 
 const player =
-  document.getElementById('audioPlayer');
-player.addEventListener('error', function() {
-
-  console.error(
-    'Erro ao reproduzir:',
-    player.src,
-    player.error
+  document.getElementById(
+    'audioPlayer'
   );
 
-  status.textContent =
-    'Não foi possível reproduzir este áudio.';
-});
 
-
-player.addEventListener('canplay', function() {
-
-  status.textContent =
-    'Áudio pronto para reprodução.';
-
-});
 const lista =
-  document.getElementById('playlist');
+  document.getElementById(
+    'playlist'
+  );
+
 
 const status =
-  document.getElementById('status');
+  document.getElementById(
+    'status'
+  );
+
 
 const currentTitle =
-  document.getElementById('currentTitle');
+  document.getElementById(
+    'currentTitle'
+  );
+
 
 const currentArtist =
-  document.getElementById('currentArtist');
+  document.getElementById(
+    'currentArtist'
+  );
+
 
 const currentType =
-  document.getElementById('currentType');
-
-const btnAnterior =
-  document.getElementById('btnAnterior');
-
-const btnProximo =
-  document.getElementById('btnProximo');
+  document.getElementById(
+    'currentType'
+  );
 
 
 /* =========================================================
@@ -773,64 +788,187 @@ document.addEventListener(
 
 
 /* =========================================================
-   CARREGA PLAYLIST
+   CARREGAR PLAYLIST
    ========================================================= */
 
 function carregarPlaylist() {
+
+  /*
+   * Verifica configuração.
+   */
+  if (
+    !URL_API ||
+    URL_API.indexOf(
+      'COLE_AQUI'
+    ) !== -1
+  ) {
+
+    mostrarErro(
+      'URL do Google Apps Script não configurada.'
+    );
+
+    return;
+  }
+
 
   status.textContent =
     'Carregando playlist...';
 
 
-  google.script.run
+  /*
+   * ========================================================
+   * JSONP
+   *
+   * Não usamos:
+   *
+   * google.script.run
+   *
+   * porque o index está no GitHub Pages.
+   * ========================================================
+   */
 
-    .withSuccessHandler(function(resposta) {
+  const nomeCallback =
+    'receberPlaylist_' +
+    Date.now();
 
-      if (!resposta || !resposta.sucesso) {
 
-        mostrarErro(
-          resposta && resposta.mensagem
-            ? resposta.mensagem
-            : 'Não foi possível carregar a playlist.'
+  window[nomeCallback] =
+    function(resposta) {
+
+      try {
+
+        if (
+          !resposta ||
+          !resposta.sucesso
+        ) {
+
+          mostrarErro(
+            resposta &&
+            resposta.mensagem
+              ? resposta.mensagem
+              : 'Não foi possível carregar a playlist.'
+          );
+
+          return;
+        }
+
+
+        playlist =
+          Array.isArray(
+            resposta.playlist
+          )
+            ? resposta.playlist
+            : [];
+
+
+        status.textContent =
+          playlist.length +
+          ' áudio' +
+          (
+            playlist.length === 1
+              ? ''
+              : 's'
+          ) +
+          ' disponível' +
+          (
+            playlist.length === 1
+              ? ''
+              : 'is'
+          );
+
+
+        aplicarFiltro();
+
+
+      } catch (erro) {
+
+        console.error(
+          erro
         );
 
-        return;
+
+        mostrarErro(
+          erro.message ||
+          String(erro)
+        );
+
+      } finally {
+
+        /*
+         * Remove o callback.
+         */
+        delete window[
+          nomeCallback
+        ];
+
       }
+    };
 
 
-      playlist =
-        Array.isArray(resposta.playlist)
-          ? resposta.playlist
-          : [];
+  /*
+   * Cria a chamada JSONP.
+   */
+  const script =
+    document.createElement(
+      'script'
+    );
 
 
-      status.textContent =
-        playlist.length +
-        ' áudio' +
-        (playlist.length === 1 ? '' : 's') +
-        ' disponível' +
-        (playlist.length === 1 ? '' : 'is');
+  script.src =
+    URL_API +
+    '?acao=listarPlaylist' +
+    '&callback=' +
+    encodeURIComponent(
+      nomeCallback
+    ) +
+    '&_=' +
+    Date.now();
 
 
-      aplicarFiltro();
+  script.onerror =
+    function() {
 
+      delete window[
+        nomeCallback
+      ];
 
-    })
-
-
-    .withFailureHandler(function(erro) {
 
       mostrarErro(
-        erro &&
-        erro.message
-          ? erro.message
-          : String(erro)
+        'Não foi possível conectar ao servidor da rádio.'
       );
+    };
 
-    })
+
+  document.body.appendChild(
+    script
+  );
 
 
-    .listarPlaylist();
+  /*
+   * Timeout.
+   */
+  setTimeout(
+    function() {
+
+      if (
+        typeof window[
+          nomeCallback
+        ] === 'function'
+      ) {
+
+        delete window[
+          nomeCallback
+        ];
+
+
+        mostrarErro(
+          'Tempo limite ao carregar a playlist.'
+        );
+      }
+
+    },
+    15000
+  );
 }
 
 
@@ -838,22 +976,35 @@ function carregarPlaylist() {
    FILTRO
    ========================================================= */
 
-function filtrar(tipo, botao) {
+function filtrar(
+  tipo,
+  botao
+) {
 
-  filtroAtual = tipo;
+  filtroAtual =
+    tipo;
 
 
   document
-    .querySelectorAll('.filter')
-    .forEach(function(item) {
+    .querySelectorAll(
+      '.filter'
+    )
+    .forEach(
+      function(item) {
 
-      item.classList.remove('active');
+        item.classList.remove(
+          'active'
+        );
 
-    });
+      }
+    );
 
 
   if (botao) {
-    botao.classList.add('active');
+
+    botao.classList.add(
+      'active'
+    );
   }
 
 
@@ -862,12 +1013,15 @@ function filtrar(tipo, botao) {
 
 
 /* =========================================================
-   APLICA FILTRO
+   APLICAR FILTRO
    ========================================================= */
 
 function aplicarFiltro() {
 
-  if (filtroAtual === 'todos') {
+  if (
+    filtroAtual ===
+    'todos'
+  ) {
 
     playlistFiltrada =
       playlist.slice();
@@ -875,37 +1029,51 @@ function aplicarFiltro() {
   } else {
 
     playlistFiltrada =
-      playlist.filter(function(item) {
+      playlist.filter(
+        function(item) {
 
-        return normalizarTipo(item.tipo)
-          === filtroAtual;
+          return (
+            normalizarTipo(
+              item.tipo
+            ) ===
+            filtroAtual
+          );
 
-      });
+        }
+      );
   }
 
 
   indiceAtual = -1;
+
 
   renderizarPlaylist();
 }
 
 
 /* =========================================================
-   NORMALIZA TIPO
+   NORMALIZAR TIPO
    ========================================================= */
 
-function normalizarTipo(tipo) {
+function normalizarTipo(
+  tipo
+) {
 
-  return String(tipo || 'musica')
+  return String(
+    tipo || 'musica'
+  )
     .trim()
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
+    .replace(
+      /[\u0300-\u036f]/g,
+      ''
+    );
 }
 
 
 /* =========================================================
-   RENDERIZA
+   RENDERIZAR PLAYLIST
    ========================================================= */
 
 function renderizarPlaylist() {
@@ -913,7 +1081,9 @@ function renderizarPlaylist() {
   lista.innerHTML = '';
 
 
-  if (!playlistFiltrada.length) {
+  if (
+    !playlistFiltrada.length
+  ) {
 
     lista.innerHTML = `
       <div class="message">
@@ -925,87 +1095,107 @@ function renderizarPlaylist() {
   }
 
 
-  playlistFiltrada.forEach(function(item, index) {
+  playlistFiltrada.forEach(
+    function(item, index) {
 
-    const div =
-      document.createElement('div');
-
-
-    div.className =
-      'audio-item';
-
-
-    div.dataset.index =
-      index;
+      const div =
+        document.createElement(
+          'div'
+        );
 
 
-    const tipo =
-      item.tipo || 'Música';
+      div.className =
+        'audio-item';
 
 
-    const artista =
-      item.artista || 'Rádio Onda Livre';
+      div.dataset.index =
+        index;
 
 
-    div.innerHTML = `
+      const tipo =
+        item.tipo ||
+        'Música';
 
-      <div class="number">
-        ${index + 1}
-      </div>
 
-      <div class="audio-info">
+      const artista =
+        item.artista ||
+        'Rádio Onda Livre';
 
-        <div class="audio-title">
-          ${escaparHtml(item.titulo)}
+
+      div.innerHTML = `
+
+        <div class="number">
+          ${index + 1}
         </div>
 
-        <div class="audio-artist">
-          ${escaparHtml(artista)}
+        <div class="audio-info">
+
+          <div class="audio-title">
+            ${escaparHtml(
+              item.titulo
+            )}
+          </div>
+
+          <div class="audio-artist">
+            ${escaparHtml(
+              artista
+            )}
+          </div>
+
         </div>
 
-      </div>
+        <div class="audio-type">
+          ${escaparHtml(
+            tipo
+          )}
+        </div>
 
-      <div class="audio-type">
-        ${escaparHtml(tipo)}
-      </div>
-
-    `;
-
-
-    div.addEventListener(
-      'click',
-      function() {
-
-        tocar(index);
-
-      }
-    );
+      `;
 
 
-    lista.appendChild(div);
+      div.addEventListener(
+        'click',
+        function() {
 
-  });
+          tocar(index);
+
+        }
+      );
+
+
+      lista.appendChild(
+        div
+      );
+
+    }
+  );
 }
 
 
 /* =========================================================
-   TOCAR
+   TOCAR ÁUDIO
    ========================================================= */
 
 function tocar(index) {
 
   if (
     index < 0 ||
-    index >= playlistFiltrada.length
+    index >=
+    playlistFiltrada.length
   ) {
+
     return;
   }
 
-  indiceAtual = index;
 
-  const item = playlistFiltrada[index];
+  const item =
+    playlistFiltrada[index];
 
-  if (!item.url) {
+
+  if (
+    !item ||
+    !item.url
+  ) {
 
     status.textContent =
       'Este áudio não possui uma URL válida.';
@@ -1013,43 +1203,72 @@ function tocar(index) {
     return;
   }
 
+
+  indiceAtual =
+    index;
+
+
   currentTitle.textContent =
-    item.titulo || 'Áudio sem título';
+    item.titulo ||
+    'Áudio sem título';
+
 
   currentArtist.textContent =
-    item.artista || 'Rádio Onda Livre';
+    item.artista ||
+    'Rádio Onda Livre';
+
 
   currentType.textContent =
-    item.tipo || 'Música';
+    item.tipo ||
+    'Música';
+
 
   /*
-   * Define o endereço diretamente.
+   * Remove o áudio anterior.
    */
-  player.src = item.url;
+  player.pause();
+
 
   /*
-   * Recarrega o elemento de áudio.
+   * Define a URL exatamente como
+   * recebida do Apps Script.
+   */
+  player.src =
+    item.url;
+
+
+  /*
+   * Recarrega o elemento.
    */
   player.load();
 
+
   /*
-   * Tenta iniciar a reprodução.
+   * Tenta iniciar.
    */
-  const reproducao = player.play();
+  const reproducao =
+    player.play();
 
-  if (reproducao !== undefined) {
 
-    reproducao.catch(function(erro) {
+  if (
+    reproducao !== undefined
+  ) {
 
-      console.warn(
-        'Reprodução automática bloqueada:',
-        erro
-      );
+    reproducao.catch(
+      function(erro) {
 
-      status.textContent =
-        'Clique no botão ▶ do player para iniciar.';
-    });
+        console.warn(
+          'Reprodução automática bloqueada:',
+          erro
+        );
+
+
+        status.textContent =
+          'Clique em ▶ para iniciar o áudio.';
+      }
+    );
   }
+
 
   atualizarItemAtivo();
 }
@@ -1061,7 +1280,10 @@ function tocar(index) {
 
 function anterior() {
 
-  if (!playlistFiltrada.length) {
+  if (
+    !playlistFiltrada.length
+  ) {
+
     return;
   }
 
@@ -1070,13 +1292,18 @@ function anterior() {
     indiceAtual - 1;
 
 
-  if (novoIndice < 0) {
+  if (
+    novoIndice < 0
+  ) {
+
     novoIndice =
       playlistFiltrada.length - 1;
   }
 
 
-  tocar(novoIndice);
+  tocar(
+    novoIndice
+  );
 }
 
 
@@ -1086,7 +1313,10 @@ function anterior() {
 
 function proximo() {
 
-  if (!playlistFiltrada.length) {
+  if (
+    !playlistFiltrada.length
+  ) {
+
     return;
   }
 
@@ -1099,16 +1329,19 @@ function proximo() {
     novoIndice >=
     playlistFiltrada.length
   ) {
+
     novoIndice = 0;
   }
 
 
-  tocar(novoIndice);
+  tocar(
+    novoIndice
+  );
 }
 
 
 /* =========================================================
-   QUANDO TERMINAR
+   ÁUDIO TERMINOU
    ========================================================= */
 
 player.addEventListener(
@@ -1119,53 +1352,44 @@ player.addEventListener(
 
   }
 );
+
+
+/* =========================================================
+   ÁUDIO PRONTO
+   ========================================================= */
+
+player.addEventListener(
+  'canplay',
+  function() {
+
+    status.textContent =
+      'Áudio pronto para reprodução.';
+
+  }
+);
+
+
+/* =========================================================
+   ERRO DE ÁUDIO
+   ========================================================= */
+
 player.addEventListener(
   'error',
   function() {
 
-    const erro =
-      player.error;
+    console.error(
+      'Erro ao reproduzir áudio:',
+      player.src,
+      player.error
+    );
 
-    let mensagem =
-      'Não foi possível reproduzir este áudio.';
-
-    if (erro) {
-
-      switch (erro.code) {
-
-        case 1:
-          mensagem =
-            'A reprodução foi interrompida.';
-          break;
-
-        case 2:
-          mensagem =
-            'Erro de rede ao carregar o áudio.';
-          break;
-
-        case 3:
-          mensagem =
-            'O arquivo de áudio não pôde ser decodificado.';
-          break;
-
-        case 4:
-          mensagem =
-            'O formato ou endereço do áudio não é suportado.';
-          break;
-      }
-    }
 
     status.textContent =
-      mensagem;
-
-    console.error(
-      'Erro no áudio:',
-      mensagem,
-      player.src
-    );
+      'Não foi possível reproduzir este áudio.';
 
   }
 );
+
 
 /* =========================================================
    ITEM ATIVO
@@ -1174,12 +1398,18 @@ player.addEventListener(
 function atualizarItemAtivo() {
 
   document
-    .querySelectorAll('.audio-item')
-    .forEach(function(item) {
+    .querySelectorAll(
+      '.audio-item'
+    )
+    .forEach(
+      function(item) {
 
-      item.classList.remove('active');
+        item.classList.remove(
+          'active'
+        );
 
-    });
+      }
+    );
 
 
   const item =
@@ -1192,17 +1422,20 @@ function atualizarItemAtivo() {
 
   if (item) {
 
-    item.classList.add('active');
-
+    item.classList.add(
+      'active'
+    );
   }
 }
 
 
 /* =========================================================
-   ERRO
+   ERRO GERAL
    ========================================================= */
 
-function mostrarErro(mensagem) {
+function mostrarErro(
+  mensagem
+) {
 
   status.textContent =
     'Erro ao carregar';
@@ -1218,7 +1451,9 @@ function mostrarErro(mensagem) {
 
       <br><br>
 
-      ${escaparHtml(mensagem)}
+      ${escaparHtml(
+        mensagem
+      )}
 
     </div>
 
@@ -1231,14 +1466,33 @@ function mostrarErro(mensagem) {
    ESCAPA HTML
    ========================================================= */
 
-function escaparHtml(valor) {
+function escaparHtml(
+  valor
+) {
 
-  return String(valor || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+  return String(
+    valor || ''
+  )
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
+    );
 
 }
 
