@@ -618,10 +618,11 @@ footer {
 
 
   <audio
-    id="audioPlayer"
-    controls
-    preload="metadata"
-  ></audio>
+  id="audioPlayer"
+  controls
+  preload="metadata"
+  crossorigin="anonymous"
+></audio>
 
 
 
@@ -1089,7 +1090,53 @@ player.addEventListener(
 
   }
 );
+player.addEventListener(
+  'error',
+  function() {
 
+    const erro =
+      player.error;
+
+    let mensagem =
+      'Não foi possível reproduzir este áudio.';
+
+    if (erro) {
+
+      switch (erro.code) {
+
+        case 1:
+          mensagem =
+            'A reprodução foi interrompida.';
+          break;
+
+        case 2:
+          mensagem =
+            'Erro de rede ao carregar o áudio.';
+          break;
+
+        case 3:
+          mensagem =
+            'O arquivo de áudio não pôde ser decodificado.';
+          break;
+
+        case 4:
+          mensagem =
+            'O formato ou endereço do áudio não é suportado.';
+          break;
+      }
+    }
+
+    status.textContent =
+      mensagem;
+
+    console.error(
+      'Erro no áudio:',
+      mensagem,
+      player.src
+    );
+
+  }
+);
 
 /* =========================================================
    ITEM ATIVO
