@@ -721,7 +721,25 @@ let filtroAtual = 'todos';
 
 const player =
   document.getElementById('audioPlayer');
+player.addEventListener('error', function() {
 
+  console.error(
+    'Erro ao reproduzir:',
+    player.src,
+    player.error
+  );
+
+  status.textContent =
+    'Não foi possível reproduzir este áudio.';
+});
+
+
+player.addEventListener('canplay', function() {
+
+  status.textContent =
+    'Áudio pronto para reprodução.';
+
+});
 const lista =
   document.getElementById('playlist');
 
@@ -983,46 +1001,57 @@ function tocar(index) {
     return;
   }
 
-
   indiceAtual = index;
 
+  const item = playlistFiltrada[index];
 
-  const item =
-    playlistFiltrada[index];
+  if (!item.url) {
 
+    status.textContent =
+      'Este áudio não possui uma URL válida.';
 
-  player.src =
-    item.url;
-
+    return;
+  }
 
   currentTitle.textContent =
     item.titulo || 'Áudio sem título';
 
-
   currentArtist.textContent =
     item.artista || 'Rádio Onda Livre';
-
 
   currentType.textContent =
     item.tipo || 'Música';
 
+  /*
+   * Define o endereço diretamente.
+   */
+  player.src = item.url;
 
-  player.play()
-    .catch(function() {
-      /*
-       * Alguns navegadores bloqueiam
-       * reprodução automática.
-       */
+  /*
+   * Recarrega o elemento de áudio.
+   */
+  player.load();
+
+  /*
+   * Tenta iniciar a reprodução.
+   */
+  const reproducao = player.play();
+
+  if (reproducao !== undefined) {
+
+    reproducao.catch(function(erro) {
+
+      console.warn(
+        'Reprodução automática bloqueada:',
+        erro
+      );
+
+      status.textContent =
+        'Clique no botão ▶ do player para iniciar.';
     });
-
+  }
 
   atualizarItemAtivo();
-
-
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
 }
 
 
