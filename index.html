@@ -6,1545 +6,546 @@
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<meta
-    name="theme-color"
-    content="#071525">
+<title>Rádio Onda Livre</title>
 
-<meta
-    name="description"
-    content="De Volta para Cristo — Louvores, Palavra e esperança.">
-
-<title>De Volta para Cristo</title>
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
 body {
 
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
+  margin: 0;
 
-    color: #182536;
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
 
-    background: #f5f7fa;
+  background:
+    linear-gradient(
+      135deg,
+      #07111f,
+      #0d1b2e 55%,
+      #102840
+    );
 
-    min-height: 100vh;
+  color: #ffffff;
 
-    padding-bottom: 85px;
+  min-height: 100vh;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
 
-button,
-input {
-    font: inherit;
-}
+.container {
 
-button {
-    cursor: pointer;
+  width: min(1100px, 94%);
+
+  margin: auto;
+
+  padding: 30px 0 50px;
 }
 
 
 /* =========================================================
-   HEADER
-========================================================= */
+   CABEÇALHO
+   ========================================================= */
 
 header {
 
-    position: fixed;
+  text-align: center;
 
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 64px;
-
-    z-index: 1000;
-
-    background:
-        rgba(5,18,33,.96);
-
-    backdrop-filter: blur(15px);
-
-    -webkit-backdrop-filter: blur(15px);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
+  padding: 20px 10px 30px;
 }
 
-.header-inner {
-
-    width:
-        min(1120px, calc(100% - 28px));
-
-    height: 100%;
-
-    margin: auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-}
-
-
-/* =========================================================
-   LOGO
-========================================================= */
 
 .logo {
 
-    display: flex;
+  width: 72px;
 
-    align-items: center;
+  height: 72px;
 
-    gap: 9px;
-}
+  margin: auto;
 
-.logo-mark {
+  border-radius: 50%;
 
-    width: 39px;
-    height: 39px;
+  display: flex;
 
-    flex-shrink: 0;
-}
+  align-items: center;
 
-.logo-text {
-    line-height: 1;
-}
+  justify-content: center;
 
-.logo-text strong {
+  font-size: 30px;
 
-    display: block;
+  background: rgba(255,255,255,.1);
 
-    color: white;
+  border: 1px solid rgba(255,255,255,.15);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 15px;
-
-    letter-spacing: .3px;
-}
-
-.logo-text strong span {
-    color: #dfbd6d;
-}
-
-.logo-text small {
-
-    display: block;
-
-    margin-top: 4px;
-
-    color: #8297ad;
-
-    font-size: 7px;
-
-    letter-spacing: 1.3px;
-
-    text-transform: uppercase;
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.25);
 }
 
 
-/* =========================================================
-   NAV
-========================================================= */
+header h1 {
 
-nav {
+  margin: 15px 0 5px;
 
-    display: flex;
+  font-size: clamp(28px, 5vw, 42px);
 
-    align-items: center;
-
-    gap: 2px;
-}
-
-nav a {
-
-    color: #aebed0;
-
-    font-size: 11px;
-
-    padding: 7px 10px;
-
-    border-radius: 7px;
-
-    transition: .2s ease;
-}
-
-nav a:hover {
-
-    color: white;
-
-    background:
-        rgba(255,255,255,.07);
+  font-weight: 700;
 }
 
 
-/* =========================================================
-   HERO
-========================================================= */
+header p {
 
-.hero {
+  margin: 0;
 
-    min-height: 490px;
+  color: #b8c7d9;
 
-    padding:
-        115px 0 55px;
-
-    color: white;
-
-    background:
-
-        radial-gradient(
-            circle at 85% 25%,
-            rgba(48,112,176,.20),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 10% 80%,
-            rgba(218,182,96,.07),
-            transparent 28%
-        ),
-
-        linear-gradient(
-            135deg,
-            #071525,
-            #0b2038
-        );
-
-    overflow: hidden;
-}
-
-.hero-inner {
-
-    width:
-        min(1120px, calc(100% - 28px));
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns:
-        1.25fr
-        .75fr;
-
-    gap: 45px;
-
-    align-items: center;
-}
-
-.hero-content {
-    max-width: 680px;
-}
-
-.eyebrow {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    margin-bottom: 15px;
-
-    padding: 6px 10px;
-
-    border-radius: 999px;
-
-    border:
-        1px solid rgba(224,194,122,.2);
-
-    color: #dfc079;
-
-    background:
-        rgba(255,255,255,.04);
-
-    font-size: 8px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.3px;
-
-    text-transform: uppercase;
-}
-
-.eyebrow-dot {
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: #65d28e;
-}
-
-.hero h1 {
-
-    max-width: 650px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(39px, 5.5vw, 62px);
-
-    line-height: 1.03;
-
-    letter-spacing: -1.8px;
-
-    margin-bottom: 15px;
-}
-
-.hero h1 span {
-    color: #dfbd6d;
-}
-
-.hero-description {
-
-    max-width: 530px;
-
-    color: #aebed0;
-
-    font-size: 14px;
-
-    line-height: 1.65;
-
-    margin-bottom: 21px;
-}
-
-.hero-buttons {
-
-    display: flex;
-
-    gap: 8px;
-
-    flex-wrap: wrap;
-}
-
-.btn {
-
-    border: 0;
-
-    border-radius: 9px;
-
-    padding: 11px 16px;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    font-size: 11px;
-
-    font-weight: 750;
-
-    transition: .2s ease;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-}
-
-.btn-primary {
-
-    color: #071525;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e5c77c,
-            #c7a758
-        );
-}
-
-.btn-secondary {
-
-    color: white;
-
-    background:
-        rgba(255,255,255,.06);
-
-    border:
-        1px solid rgba(255,255,255,.12);
-}
-
-
-/* =========================================================
-   VERSÍCULO
-========================================================= */
-
-.hero-verse {
-
-    margin-top: 22px;
-
-    padding-left: 12px;
-
-    border-left:
-        2px solid #d8b86b;
-}
-
-.hero-verse p {
-
-    color: #dce5ed;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 13px;
-
-    font-style: italic;
-
-    line-height: 1.55;
-}
-
-.hero-verse span {
-
-    display: block;
-
-    margin-top: 4px;
-
-    color: #8195aa;
-
-    font-size: 9px;
-}
-
-
-/* =========================================================
-   HERO RADIO
-========================================================= */
-
-.hero-radio {
-
-    width: min(300px, 100%);
-
-    margin: auto;
-
-    padding: 25px 22px;
-
-    text-align: center;
-
-    border-radius: 22px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid rgba(255,255,255,.09);
-}
-
-.radio-circle {
-
-    width: 92px;
-    height: 92px;
-
-    margin: 0 auto 16px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 50%;
-
-    color: #071525;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e5c77c,
-            #b9964d
-        );
-
-    font-size: 38px;
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.22);
-}
-
-.hero-radio h2 {
-
-    color: white;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 21px;
-
-    margin-bottom: 6px;
-}
-
-.hero-radio h2 span {
-    color: #dfbd6d;
-}
-
-.hero-radio p {
-
-    color: #8297ad;
-
-    font-size: 8px;
-
-    letter-spacing: 1.3px;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   SEÇÕES
-========================================================= */
-
-.section {
-
-    width:
-        min(1120px, calc(100% - 28px));
-
-    margin: auto;
-
-    padding: 48px 0;
-}
-
-.section-header {
-    margin-bottom: 19px;
-}
-
-.section-label {
-
-    color: #4d7fae;
-
-    font-size: 8px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.6px;
-
-    text-transform: uppercase;
-
-    margin-bottom: 5px;
-}
-
-.section h2 {
-
-    color: #111d2d;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(25px, 3.5vw, 34px);
-
-    line-height: 1.15;
-}
-
-.section-intro {
-
-    max-width: 580px;
-
-    margin-top: 6px;
-
-    color: #718093;
-
-    font-size: 12px;
-
-    line-height: 1.6;
+  font-size: 15px;
 }
 
 
 /* =========================================================
    PLAYER
-========================================================= */
+   ========================================================= */
 
-.player-card {
+.player {
 
-    display: grid;
+  background: rgba(255,255,255,.08);
 
-    grid-template-columns:
-        auto
-        1fr
-        auto;
+  border: 1px solid rgba(255,255,255,.12);
 
-    align-items: center;
+  border-radius: 22px;
 
-    gap: 13px;
+  padding: 25px;
 
-    padding: 14px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.25);
 
-    border-radius: 17px;
+  backdrop-filter: blur(12px);
 
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0a2440,
-            #07192d
-        );
-
-    box-shadow:
-        0 15px 35px rgba(7,29,51,.12);
+  margin-bottom: 25px;
 }
 
-.player-cover {
 
-    width: 52px;
-    height: 52px;
+.status {
 
-    display: grid;
+  display: flex;
 
-    place-items: center;
+  align-items: center;
 
-    border-radius: 14px;
+  gap: 9px;
 
-    color: #071525;
+  color: #9fb0c5;
 
-    background:
-        linear-gradient(
-            135deg,
-            #e3c37a,
-            #b9974e
-        );
+  font-size: 13px;
 
-    font-size: 21px;
+  margin-bottom: 18px;
 }
 
-.player-label {
 
-    color: #dfc079;
+.status-dot {
 
-    font-size: 8px;
+  width: 9px;
 
-    font-weight: 800;
+  height: 9px;
 
-    letter-spacing: 1.2px;
+  border-radius: 50%;
 
-    text-transform: uppercase;
+  background: #43d17a;
 
-    margin-bottom: 4px;
+  box-shadow:
+    0 0 12px #43d17a;
 }
 
-.player-label span {
 
-    display: inline-block;
+.current {
 
-    width: 5px;
-    height: 5px;
+  text-align: center;
 
-    margin-right: 4px;
-
-    border-radius: 50%;
-
-    background: #61cf8b;
+  padding: 10px 0 22px;
 }
 
-#trackTitle {
 
-    color: white;
+.current-type {
 
-    font-size: 13px;
+  display: inline-block;
 
-    font-weight: 750;
+  padding: 5px 12px;
 
-    white-space: nowrap;
+  border-radius: 30px;
 
-    overflow: hidden;
+  font-size: 11px;
 
-    text-overflow: ellipsis;
+  text-transform: uppercase;
+
+  letter-spacing: .8px;
+
+  background: rgba(255,255,255,.1);
+
+  color: #b9c8d9;
+
+  margin-bottom: 12px;
 }
 
-#trackArtist {
 
-    color: #91a4b9;
+.current-title {
 
-    font-size: 9px;
+  font-size: clamp(21px, 4vw, 30px);
 
-    margin-top: 3px;
+  font-weight: 700;
+
+  margin-bottom: 5px;
 }
 
-.player-controls {
 
-    display: flex;
+.current-artist {
 
-    align-items: center;
+  color: #9fb0c5;
 
-    gap: 5px;
+  font-size: 14px;
 }
 
-.player-button {
 
-    width: 33px;
-    height: 33px;
+audio {
 
-    border-radius: 50%;
+  width: 100%;
 
-    border:
-        1px solid rgba(255,255,255,.1);
-
-    background:
-        rgba(255,255,255,.06);
-
-    color: white;
-
-    display: grid;
-
-    place-items: center;
-}
-
-.player-button-main {
-
-    width: 42px;
-    height: 42px;
-
-    border: 0;
-
-    background: #e0c079;
-
-    color: #071525;
-}
-
-.volume {
-
-    width: 65px;
-
-    margin-left: 4px;
+  margin-top: 12px;
 }
 
 
 /* =========================================================
-   PALAVRA
-========================================================= */
+   CONTROLES
+   ========================================================= */
 
-.word-card {
+.controls {
 
-    padding: 23px;
+  display: flex;
 
-    border-radius: 17px;
+  justify-content: center;
 
-    color: white;
+  gap: 10px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #0b2948,
-            #102f51
-        );
-
-    box-shadow:
-        0 12px 30px rgba(8,30,52,.10);
-}
-
-.word-tag {
-
-    color: #dfc079;
-
-    font-size: 8px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.4px;
-
-    text-transform: uppercase;
-
-    margin-bottom: 12px;
-}
-
-.word-card blockquote {
-
-    max-width: 850px;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 19px;
-
-    font-style: italic;
-
-    line-height: 1.5;
-
-    margin-bottom: 10px;
-}
-
-.word-reference {
-
-    color: #9db0c4;
-
-    font-size: 9px;
+  margin-top: 18px;
 }
 
 
-/* =========================================================
-   PLAYLIST
-========================================================= */
-/* =========================================================
-   ABAS DA PLAYLIST
-========================================================= */
+.btn {
 
-.playlist-tabs {
-    display: flex;
-    gap: 8px;
-    margin: 0 0 14px;
-    flex-wrap: wrap;
-}
+  border: 0;
 
-.playlist-tab {
-    border: 1px solid #dfe7ef;
-    background: #ffffff;
-    color: #627487;
-    padding: 9px 14px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    transition: .2s ease;
-}
+  cursor: pointer;
 
-.playlist-tab:hover {
-    border-color: #c5d4e2;
-    background: #f8fafc;
-}
+  border-radius: 12px;
 
-.playlist-tab.active {
-    color: #ffffff;
-    background: #17385d;
-    border-color: #17385d;
-}
+  padding: 11px 20px;
 
-.playlist-tab-count {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 20px;
-    height: 18px;
-    margin-left: 5px;
-    padding: 0 5px;
-    border-radius: 9px;
-    background: rgba(255,255,255,.16);
-    font-size: 9px;
-}
+  font-size: 14px;
 
-.playlist-tab:not(.active) .playlist-tab-count {
-    background: #edf3f8;
-    color: #4078aa;
+  font-weight: 600;
+
+  transition:
+    .2s ease;
 }
 
 
+.btn:hover {
 
-.playlist-info {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-bottom: 14px;
-
-    padding: 10px 13px;
-
-    border-radius: 10px;
-
-    background: #edf3f8;
-
-    border: 1px solid #e0e8ef;
-
-    color: #627487;
-
-    font-size: 10px;
+  transform: translateY(-1px);
 }
 
-.playlist-count {
 
-    color: #4078aa;
+.btn-primary {
 
-    font-weight: 800;
+  background: #1d8cff;
+
+  color: white;
+}
+
+
+.btn-secondary {
+
+  background: rgba(255,255,255,.1);
+
+  color: white;
+}
+
+
+.btn:disabled {
+
+  opacity: .4;
+
+  cursor: not-allowed;
+
+  transform: none;
 }
 
 
 /* =========================================================
-   GRID DE MÚSICAS
-========================================================= */
+   FILTROS
+   ========================================================= */
 
-.music-grid {
+.filters {
 
-    display: grid;
+  display: flex;
 
-    grid-template-columns:
-        repeat(4, 1fr);
+  gap: 10px;
 
-    gap: 11px;
+  flex-wrap: wrap;
+
+  margin-bottom: 18px;
 }
 
-.music-card {
 
-    position: relative;
+.filter {
 
-    min-width: 0;
+  padding: 10px 17px;
 
-    padding: 16px;
+  border-radius: 30px;
 
-    border-radius: 15px;
+  border: 1px solid rgba(255,255,255,.12);
 
-    background: white;
+  background: rgba(255,255,255,.06);
 
-    border:
-        1px solid #e4eaf0;
+  color: #c8d4e2;
 
-    box-shadow:
-        0 7px 20px rgba(15,43,70,.035);
+  cursor: pointer;
 
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
+  font-size: 13px;
 }
 
-.music-card:hover {
 
-    transform: translateY(-2px);
+.filter.active {
 
-    border-color: #d4e0ea;
+  background: #1d8cff;
 
-    box-shadow:
-        0 12px 25px rgba(15,43,70,.07);
+  border-color: #1d8cff;
+
+  color: white;
 }
 
-.music-number {
 
-    position: absolute;
+/* =========================================================
+   LISTA
+   ========================================================= */
 
-    top: 11px;
-    right: 12px;
+.playlist {
 
-    color: #a7b4c1;
+  display: grid;
 
-    font-size: 8px;
-
-    font-weight: 800;
+  gap: 10px;
 }
 
-.music-icon {
 
-    width: 39px;
-    height: 39px;
+.audio-item {
 
-    display: grid;
+  display: flex;
 
-    place-items: center;
+  align-items: center;
 
-    border-radius: 11px;
+  gap: 15px;
 
-    background: #edf4fa;
+  padding: 15px;
 
-    font-size: 17px;
+  border-radius: 15px;
 
-    margin-bottom: 11px;
+  background: rgba(255,255,255,.06);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  cursor: pointer;
+
+  transition:
+    .2s ease;
 }
 
-.music-card h3 {
 
-    color: #172638;
+.audio-item:hover {
 
-    font-family:
-        Georgia,
-        serif;
+  background: rgba(255,255,255,.1);
 
-    font-size: 15px;
-
-    line-height: 1.3;
-
-    margin-bottom: 4px;
-
-    padding-right: 15px;
+  transform: translateX(2px);
 }
 
-.music-card p {
 
-    color: #718093;
+.audio-item.active {
 
-    font-size: 10px;
+  border-color: rgba(29,140,255,.7);
 
-    line-height: 1.45;
-
-    margin-bottom: 10px;
-
-    min-height: 29px;
+  background: rgba(29,140,255,.12);
 }
 
-.music-play {
 
-    border: 0;
+.number {
 
-    padding: 0;
+  min-width: 32px;
 
-    color: #4078aa;
+  height: 32px;
 
-    background: transparent;
+  border-radius: 10px;
 
-    font-size: 10px;
+  display: flex;
 
-    font-weight: 800;
+  justify-content: center;
+
+  align-items: center;
+
+  background: rgba(255,255,255,.08);
+
+  color: #9fb0c5;
+
+  font-size: 12px;
 }
 
-.music-play:hover {
-    color: #244f76;
+
+.audio-info {
+
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+.audio-title {
+
+  font-weight: 600;
+
+  font-size: 15px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+.audio-artist {
+
+  margin-top: 3px;
+
+  color: #8fa1b5;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+.audio-type {
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,.08);
+
+  color: #aebed0;
+
+  font-size: 10px;
+
+  white-space: nowrap;
 }
 
 
 /* =========================================================
    MENSAGEM
-========================================================= */
+   ========================================================= */
 
-.message-card {
+.message {
 
-    padding: 28px;
+  text-align: center;
 
-    border-radius: 19px;
+  padding: 35px 15px;
 
-    color: white;
+  color: #aebed0;
 
-    background:
-        linear-gradient(
-            135deg,
-            #0a213a,
-            #0d2a48
-        );
-
-    box-shadow:
-        0 15px 35px rgba(8,30,52,.10);
+  font-size: 14px;
 }
 
-.message-content {
-    max-width: 720px;
-}
 
-.message-content .section-label {
-    color: #dfc079;
-}
+.error {
 
-.message-content h2 {
-
-    color: white;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 27px;
-
-    line-height: 1.2;
-
-    margin-bottom: 9px;
-}
-
-.message-content p {
-
-    color: #a7b9cb;
-
-    font-size: 12px;
-
-    line-height: 1.65;
-
-    margin-bottom: 13px;
-}
-
-.message-link {
-
-    color: #e0c079;
-
-    font-size: 10px;
-
-    font-weight: 800;
+  color: #ff9b9b;
 }
 
 
 /* =========================================================
-   MISSÃO
-========================================================= */
-
-.mission {
-
-    max-width: 760px;
-
-    text-align: center;
-}
-
-.mission .section-label {
-    text-align: center;
-}
-
-.mission h2 {
-    margin-bottom: 10px;
-}
-
-.mission p {
-
-    color: #6b7a8c;
-
-    font-size: 12px;
-
-    line-height: 1.7;
-}
-
-.mission-verse {
-
-    margin-top: 13px;
-
-    color: #3f5d78;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 13px;
-
-    font-style: italic;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
+   RODAPÉ
+   ========================================================= */
 
 footer {
 
-    padding: 25px 15px;
+  text-align: center;
 
-    background: #061425;
+  padding-top: 35px;
 
-    color: white;
-}
+  color: #73869c;
 
-.footer-inner {
-
-    width:
-        min(1120px, 100%);
-
-    margin: auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-}
-
-.footer-name {
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 14px;
-}
-
-.footer-name span {
-    color: #dfbd6d;
-}
-
-.footer-text {
-
-    color: #71869d;
-
-    font-size: 8px;
-
-    margin-top: 4px;
-}
-
-.footer-right {
-
-    color: #71869d;
-
-    font-size: 8px;
-
-    text-align: right;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   PLAYER FIXO
-========================================================= */
-
-.bottom-player {
-
-    position: fixed;
-
-    z-index: 1100;
-
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-
-    width:
-        min(920px, calc(100% - 16px));
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns:
-        auto
-        1fr
-        auto;
-
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 6px 8px;
-
-    border-radius: 13px;
-
-    background:
-        rgba(6,20,36,.97);
-
-    border:
-        1px solid rgba(255,255,255,.1);
-
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.28);
-
-    backdrop-filter: blur(15px);
-}
-
-.bottom-cover {
-
-    width: 37px;
-    height: 37px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 9px;
-
-    color: #071525;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e2c078,
-            #b6964e
-        );
-
-    font-size: 15px;
-}
-
-.bottom-title {
-
-    color: white;
-
-    font-size: 10px;
-
-    font-weight: 750;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.bottom-artist {
-
-    color: #8296ac;
-
-    font-size: 8px;
-
-    margin-top: 2px;
-}
-
-.bottom-controls {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 4px;
-}
-
-.bottom-button {
-
-    width: 28px;
-    height: 28px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.06);
-
-    color: white;
-
-    display: grid;
-
-    place-items: center;
-
-    font-size: 10px;
-}
-
-.bottom-play {
-
-    width: 34px;
-    height: 34px;
-
-    color: #071525;
-
-    background: #dfbd6d;
-}
-
-
-/* =========================================================
-   ÁUDIO
-========================================================= */
-
-#audio {
-    display: none;
-}
-
-
-/* =========================================================
-   ESTADO DE CARREGAMENTO
-========================================================= */
-
-.playlist-loading {
-
-    grid-column: 1 / -1;
-
-    padding: 30px 15px;
-
-    text-align: center;
-
-    color: #718093;
-
-    font-size: 12px;
-
-    background: white;
-
-    border:
-        1px dashed #d9e2ea;
-
-    border-radius: 14px;
-}
-
-.playlist-error {
-
-    grid-column: 1 / -1;
-
-    padding: 25px 15px;
-
-    text-align: center;
-
-    color: #8b5b5b;
-
-    font-size: 12px;
-
-    background: #fff8f8;
-
-    border:
-        1px solid #f0dcdc;
-
-    border-radius: 14px;
+  font-size: 12px;
 }
 
 
 /* =========================================================
    RESPONSIVO
-========================================================= */
-
-@media (max-width: 950px) {
-
-    .music-grid {
-        grid-template-columns:
-            repeat(3, 1fr);
-    }
-}
-
-
-@media (max-width: 850px) {
-
-    nav {
-        display: none;
-    }
-
-    .hero-inner {
-
-        grid-template-columns: 1fr;
-
-        gap: 28px;
-    }
-
-    .hero-radio {
-
-        width: min(270px, 100%);
-    }
-
-    .music-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-}
-
+   ========================================================= */
 
 @media (max-width: 600px) {
 
-    body {
-        padding-bottom: 72px;
-    }
+  .container {
 
-    .hero {
+    width: 92%;
 
-        min-height: auto;
-
-        padding:
-            100px 0 40px;
-    }
-
-    .hero h1 {
-
-        font-size: 39px;
-
-        letter-spacing: -1.4px;
-    }
-
-    .hero-description {
-        font-size: 13px;
-    }
-
-    .hero-buttons {
-
-        flex-direction: column;
-    }
-
-    .hero-buttons .btn {
-        width: 100%;
-    }
-
-    .hero-radio {
-        padding: 22px;
-    }
-
-    .section {
-        padding: 38px 0;
-    }
-
-    .player-card {
-
-        grid-template-columns:
-            auto
-            1fr;
-    }
-
-    .player-controls {
-
-        grid-column: 1 / -1;
-
-        justify-content: center;
-
-        padding-top: 3px;
-    }
-
-    .volume {
-        width: 90px;
-    }
-
-    .music-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .playlist-info {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-    .message-card {
-        padding: 23px 20px;
-    }
-
-    .message-content h2 {
-        font-size: 24px;
-    }
-
-    .footer-inner {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-
-    .footer-right {
-        text-align: left;
-    }
-
-    .bottom-player {
-
-        bottom: 5px;
-
-        left: 5px;
-        right: 5px;
-
-        width: calc(100% - 10px);
-    }
-
-}
+    padding-top: 15px;
+  }
 
 
-/* =========================================================
-   ACESSIBILIDADE
-========================================================= */
+  .player {
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
+    padding: 18px;
 
-    outline:
-        3px solid rgba(220,188,105,.55);
+    border-radius: 18px;
+  }
 
-    outline-offset: 3px;
+
+  .audio-item {
+
+    padding: 12px;
+
+    gap: 10px;
+  }
+
+
+  .audio-type {
+
+    display: none;
+  }
+
+
+  .controls {
+
+    gap: 7px;
+  }
+
+
+  .btn {
+
+    padding: 10px 15px;
+  }
+
 }
 
 </style>
@@ -1555,726 +556,618 @@ input:focus-visible {
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<div class="container">
+
 
 <header>
 
-<div class="header-inner">
+  <div class="logo">
+    🎙️
+  </div>
 
-<a
-    href="#inicio"
-    class="logo">
+  <h1>Rádio Onda Livre</h1>
 
-    <svg
-        class="logo-mark"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="De Volta para Cristo">
-
-        <defs>
-
-            <linearGradient
-                id="goldLogo"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1">
-
-                <stop
-                    offset="0%"
-                    stop-color="#f0d58d"/>
-
-                <stop
-                    offset="100%"
-                    stop-color="#b98d35"/>
-
-            </linearGradient>
-
-        </defs>
-
-        <circle
-            cx="50"
-            cy="50"
-            r="45"
-            fill="#091b30"
-            stroke="url(#goldLogo)"
-            stroke-width="5"/>
-
-        <rect
-            x="44"
-            y="17"
-            width="12"
-            height="43"
-            rx="2"
-            fill="#ffffff"/>
-
-        <rect
-            x="31"
-            y="29"
-            width="38"
-            height="11"
-            rx="2"
-            fill="#ffffff"/>
-
-        <path
-            d="M20 76
-               C35 69 40 63 48 55
-               C52 51 58 52 61 58
-               C66 66 73 72 82 76"
-            fill="none"
-            stroke="url(#goldLogo)"
-            stroke-width="6"
-            stroke-linecap="round"/>
-
-    </svg>
-
-
-    <div class="logo-text">
-
-        <strong>
-            DE VOLTA PARA
-            <span>CRISTO</span>
-        </strong>
-
-        <small>
-            Uma nova direção
-        </small>
-
-    </div>
-
-</a>
-
-
-<nav>
-
-    <a href="#inicio">
-        Início
-    </a>
-
-    <a href="#louvores">
-        Louvores
-    </a>
-
-    <a href="#palavra">
-        Palavra
-    </a>
-
-    <a href="#mensagem">
-        Mensagem
-    </a>
-
-    <a href="#sobre">
-        Sobre
-    </a>
-
-</nav>
-
-</div>
+  <p>Música, oração e mensagens para o seu dia</p>
 
 </header>
 
 
-<!-- =====================================================
-     CONTEÚDO
-===================================================== -->
 
-<main>
+<section class="player">
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+  <div class="status">
 
-<section
-    class="hero"
-    id="inicio">
+    <span class="status-dot"></span>
 
-<div class="hero-inner">
-
-
-<div class="hero-content">
-
-    <div class="eyebrow">
-
-        <span class="eyebrow-dot"></span>
-
-        Rádio De Volta para Cristo
-
-    </div>
-
-
-    <h1>
-
-        Uma nova direção
-        para a sua
-        <span>vida.</span>
-
-    </h1>
-
-
-    <p class="hero-description">
-
-        Louvores, Palavra e mensagens para
-        acompanhar seus momentos de fé,
-        reflexão e esperança.
-
-    </p>
-
-
-    <div class="hero-buttons">
-
-        <button
-            id="heroPlayBtn"
-            class="btn btn-primary"
-            type="button">
-
-            ▶ Ouvir agora
-
-        </button>
-
-
-        <a
-            href="#louvores"
-            class="btn btn-secondary">
-
-            ♪ Ver louvores
-
-        </a>
-
-    </div>
-
-
-    <div class="hero-verse">
-
-        <p>
-
-            “Entrega o teu caminho ao Senhor;
-            confia nele, e ele tudo fará.”
-
-        </p>
-
-        <span>
-            Salmos 37:5
-        </span>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     RADIO
-===================================================== -->
-
-<div class="hero-radio">
-
-    <div class="radio-circle">
-        ♪
-    </div>
-
-    <h2>
-        DE VOLTA PARA
-        <span>CRISTO</span>
-    </h2>
-
-    <p>
-        Louvor • Palavra • Esperança
-    </p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     PLAYER
-===================================================== -->
-
-<section class="section">
-
-<div class="section-header">
-
-    <div class="section-label">
-        Rádio
-    </div>
-
-    <h2>
-        Tocando agora
-    </h2>
-
-</div>
-
-
-<div class="player-card">
-
-
-    <div class="player-cover">
-        ♪
-    </div>
-
-
-    <div>
-
-        <div class="player-label">
-
-            <span></span>
-
-            Rádio online
-
-        </div>
-
-
-        <div id="trackTitle">
-            Carregando...
-        </div>
-
-
-        <div id="trackArtist">
-            De Volta para Cristo
-        </div>
-
-    </div>
-
-
-    <div class="player-controls">
-
-
-        <button
-            id="prevBtn"
-            class="player-button"
-            type="button"
-            aria-label="Anterior">
-
-            ⏮
-
-        </button>
-
-
-        <button
-            id="playBtn"
-            class="player-button player-button-main"
-            type="button"
-            aria-label="Reproduzir">
-
-            <span id="playIcon">
-                ▶
-            </span>
-
-        </button>
-
-
-        <button
-            id="nextBtn"
-            class="player-button"
-            type="button"
-            aria-label="Próxima">
-
-            ⏭
-
-        </button>
-
-
-        <span aria-hidden="true">
-            🔊
-        </span>
-
-
-        <input
-            id="volume"
-            class="volume"
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value="1"
-            aria-label="Volume">
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     PALAVRA
-===================================================== -->
-
-<section
-    class="section"
-    id="palavra">
-
-<div class="section-header">
-
-    <div class="section-label">
-        Palavra
-    </div>
-
-    <h2>
-        Uma palavra para o seu coração
-    </h2>
-
-</div>
-
-
-<div class="word-card">
-
-    <div class="word-tag">
-        Versículo do dia
-    </div>
-
-    <blockquote>
-
-        “Entrega o teu caminho ao Senhor;
-        confia nele, e ele tudo fará.”
-
-    </blockquote>
-
-    <div class="word-reference">
-        Salmos 37:5
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     LOUVORES
-===================================================== -->
-
-<section
-    class="section"
-    id="louvores">
-
-<div class="section-header">
-
-    <div class="section-label">
-        Playlist
-    </div>
-
-    <h2>
-        Todos os louvores
-    </h2>
-
-    <p class="section-intro">
-
-        Escolha uma música para ouvir.
-        A lista abaixo é carregada diretamente
-        da sua planilha.
-
-    </p>
-
-</div>
-
-
-<div class="playlist-tabs" role="tablist" aria-label="Tipo de conteúdo">
-
-    <button
-        id="musicTab"
-        class="playlist-tab active"
-        type="button"
-        role="tab"
-        aria-selected="true">
-
-        🎵 Músicas
-
-        <span
-            id="musicCount"
-            class="playlist-tab-count">
-            0
-        </span>
-
-    </button>
-
-    <button
-        id="prayerTab"
-        class="playlist-tab"
-        type="button"
-        role="tab"
-        aria-selected="false">
-
-        🙏 Orações
-
-        <span
-            id="prayerCount"
-            class="playlist-tab-count">
-            0
-        </span>
-
-    </button>
-
-</div>
-
-<div class="playlist-info">
-
-    <span id="playlistLabel">
-        🎵 Músicas disponíveis
+    <span id="status">
+      Carregando playlist...
     </span>
 
-    <span
-        id="playlistCount"
-        class="playlist-count">
-
-        Carregando...
-
-    </span>
-
-</div>
+  </div>
 
 
-<div
-    id="playlist"
-    class="music-grid">
 
-    <div class="playlist-loading">
+  <div class="current">
 
-        Carregando músicas...
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     MENSAGEM
-===================================================== -->
-
-<section
-    class="section"
-    id="mensagem">
-
-<div class="message-card">
-
-<div class="message-content">
-
-    <div class="section-label">
-        Mensagem
+    <div
+      id="currentType"
+      class="current-type"
+    >
+      Aguardando
     </div>
 
 
-    <h2>
-        Sempre existe um caminho de volta.
-    </h2>
+    <div
+      id="currentTitle"
+      class="current-title"
+    >
+      Nenhum áudio selecionado
+    </div>
 
 
-    <p>
+    <div
+      id="currentArtist"
+      class="current-artist"
+    >
+      —
+    </div>
 
-        Mesmo nos momentos difíceis,
-        existe esperança. Volte seu coração
-        para Cristo e siga confiando em Deus.
-
-    </p>
-
-
-    <a
-        href="#palavra"
-        class="message-link">
-
-        Continuar refletindo →
-
-    </a>
-
-</div>
-
-</div>
-
-</section>
+  </div>
 
 
-<!-- =====================================================
-     SOBRE
-===================================================== -->
 
-<section
-    class="section mission"
-    id="sobre">
-
-<div class="section-label">
-    Nossa missão
-</div>
+  <audio
+    id="audioPlayer"
+    controls
+    preload="metadata"
+  ></audio>
 
 
-<h2>
-    Levar pessoas de volta para Cristo.
-</h2>
+
+  <div class="controls">
+
+    <button
+      id="btnAnterior"
+      class="btn btn-secondary"
+      onclick="anterior()"
+    >
+      ⏮ Anterior
+    </button>
 
 
-<p>
+    <button
+      id="btnProximo"
+      class="btn btn-primary"
+      onclick="proximo()"
+    >
+      Próximo ⏭
+    </button>
 
-    O projeto De Volta para Cristo nasceu
-    com o propósito de levar louvores,
-    mensagens e a Palavra de Deus através
-    da internet.
-
-</p>
-
-
-<div class="mission-verse">
-
-    “Ide por todo o mundo e pregai o evangelho
-    a toda criatura.”
-
-    <br>
-
-    Marcos 16:15
-
-</div>
+  </div>
 
 </section>
 
 
-</main>
+
+<div class="filters">
+
+  <button
+    class="filter active"
+    data-tipo="todos"
+    onclick="filtrar('todos', this)"
+  >
+    Todos
+  </button>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+  <button
+    class="filter"
+    data-tipo="musica"
+    onclick="filtrar('musica', this)"
+  >
+    🎵 Músicas
+  </button>
+
+
+  <button
+    class="filter"
+    data-tipo="oracao"
+    onclick="filtrar('oracao', this)"
+  >
+    🙏 Orações
+  </button>
+
+</div>
+
+
+
+<section id="playlist" class="playlist">
+
+  <div class="message">
+    Carregando...
+  </div>
+
+</section>
+
+
 
 <footer>
 
-<div class="footer-inner">
-
-
-<div>
-
-    <div class="footer-name">
-
-        DE VOLTA PARA
-        <span>CRISTO</span>
-
-    </div>
-
-
-    <div class="footer-text">
-
-        Louvor • Palavra • Esperança
-
-    </div>
-
-</div>
-
-
-<div class="footer-right">
-
-    Uma nova direção para sua vida.<br>
-
-    © 2026 De Volta para Cristo
-
-</div>
-
-
-</div>
+  Rádio Onda Livre
 
 </footer>
 
 
-<!-- =====================================================
-     PLAYER FIXO
-===================================================== -->
-
-<div class="bottom-player">
-
-
-<div class="bottom-cover">
-    ♪
 </div>
 
 
-<div>
 
-    <div
-        id="bottomTrackTitle"
-        class="bottom-title">
+<script>
 
-        Carregando...
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+let playlist = [];
+
+let playlistFiltrada = [];
+
+let indiceAtual = -1;
+
+let filtroAtual = 'todos';
+
+
+const player =
+  document.getElementById('audioPlayer');
+
+const lista =
+  document.getElementById('playlist');
+
+const status =
+  document.getElementById('status');
+
+const currentTitle =
+  document.getElementById('currentTitle');
+
+const currentArtist =
+  document.getElementById('currentArtist');
+
+const currentType =
+  document.getElementById('currentType');
+
+const btnAnterior =
+  document.getElementById('btnAnterior');
+
+const btnProximo =
+  document.getElementById('btnProximo');
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  carregarPlaylist
+);
+
+
+/* =========================================================
+   CARREGA PLAYLIST
+   ========================================================= */
+
+function carregarPlaylist() {
+
+  status.textContent =
+    'Carregando playlist...';
+
+
+  google.script.run
+
+    .withSuccessHandler(function(resposta) {
+
+      if (!resposta || !resposta.sucesso) {
+
+        mostrarErro(
+          resposta && resposta.mensagem
+            ? resposta.mensagem
+            : 'Não foi possível carregar a playlist.'
+        );
+
+        return;
+      }
+
+
+      playlist =
+        Array.isArray(resposta.playlist)
+          ? resposta.playlist
+          : [];
+
+
+      status.textContent =
+        playlist.length +
+        ' áudio' +
+        (playlist.length === 1 ? '' : 's') +
+        ' disponível' +
+        (playlist.length === 1 ? '' : 'is');
+
+
+      aplicarFiltro();
+
+
+    })
+
+
+    .withFailureHandler(function(erro) {
+
+      mostrarErro(
+        erro &&
+        erro.message
+          ? erro.message
+          : String(erro)
+      );
+
+    })
+
+
+    .listarPlaylist();
+}
+
+
+/* =========================================================
+   FILTRO
+   ========================================================= */
+
+function filtrar(tipo, botao) {
+
+  filtroAtual = tipo;
+
+
+  document
+    .querySelectorAll('.filter')
+    .forEach(function(item) {
+
+      item.classList.remove('active');
+
+    });
+
+
+  if (botao) {
+    botao.classList.add('active');
+  }
+
+
+  aplicarFiltro();
+}
+
+
+/* =========================================================
+   APLICA FILTRO
+   ========================================================= */
+
+function aplicarFiltro() {
+
+  if (filtroAtual === 'todos') {
+
+    playlistFiltrada =
+      playlist.slice();
+
+  } else {
+
+    playlistFiltrada =
+      playlist.filter(function(item) {
+
+        return normalizarTipo(item.tipo)
+          === filtroAtual;
+
+      });
+  }
+
+
+  indiceAtual = -1;
+
+  renderizarPlaylist();
+}
+
+
+/* =========================================================
+   NORMALIZA TIPO
+   ========================================================= */
+
+function normalizarTipo(tipo) {
+
+  return String(tipo || 'musica')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+
+/* =========================================================
+   RENDERIZA
+   ========================================================= */
+
+function renderizarPlaylist() {
+
+  lista.innerHTML = '';
+
+
+  if (!playlistFiltrada.length) {
+
+    lista.innerHTML = `
+      <div class="message">
+        Nenhum áudio encontrado.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  playlistFiltrada.forEach(function(item, index) {
+
+    const div =
+      document.createElement('div');
+
+
+    div.className =
+      'audio-item';
+
+
+    div.dataset.index =
+      index;
+
+
+    const tipo =
+      item.tipo || 'Música';
+
+
+    const artista =
+      item.artista || 'Rádio Onda Livre';
+
+
+    div.innerHTML = `
+
+      <div class="number">
+        ${index + 1}
+      </div>
+
+      <div class="audio-info">
+
+        <div class="audio-title">
+          ${escaparHtml(item.titulo)}
+        </div>
+
+        <div class="audio-artist">
+          ${escaparHtml(artista)}
+        </div>
+
+      </div>
+
+      <div class="audio-type">
+        ${escaparHtml(tipo)}
+      </div>
+
+    `;
+
+
+    div.addEventListener(
+      'click',
+      function() {
+
+        tocar(index);
+
+      }
+    );
+
+
+    lista.appendChild(div);
+
+  });
+}
+
+
+/* =========================================================
+   TOCAR
+   ========================================================= */
+
+function tocar(index) {
+
+  if (
+    index < 0 ||
+    index >= playlistFiltrada.length
+  ) {
+    return;
+  }
+
+
+  indiceAtual = index;
+
+
+  const item =
+    playlistFiltrada[index];
+
+
+  player.src =
+    item.url;
+
+
+  currentTitle.textContent =
+    item.titulo || 'Áudio sem título';
+
+
+  currentArtist.textContent =
+    item.artista || 'Rádio Onda Livre';
+
+
+  currentType.textContent =
+    item.tipo || 'Música';
+
+
+  player.play()
+    .catch(function() {
+      /*
+       * Alguns navegadores bloqueiam
+       * reprodução automática.
+       */
+    });
+
+
+  atualizarItemAtivo();
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+
+/* =========================================================
+   ANTERIOR
+   ========================================================= */
+
+function anterior() {
+
+  if (!playlistFiltrada.length) {
+    return;
+  }
+
+
+  let novoIndice =
+    indiceAtual - 1;
+
+
+  if (novoIndice < 0) {
+    novoIndice =
+      playlistFiltrada.length - 1;
+  }
+
+
+  tocar(novoIndice);
+}
+
+
+/* =========================================================
+   PRÓXIMO
+   ========================================================= */
+
+function proximo() {
+
+  if (!playlistFiltrada.length) {
+    return;
+  }
+
+
+  let novoIndice =
+    indiceAtual + 1;
+
+
+  if (
+    novoIndice >=
+    playlistFiltrada.length
+  ) {
+    novoIndice = 0;
+  }
+
+
+  tocar(novoIndice);
+}
+
+
+/* =========================================================
+   QUANDO TERMINAR
+   ========================================================= */
+
+player.addEventListener(
+  'ended',
+  function() {
+
+    proximo();
+
+  }
+);
+
+
+/* =========================================================
+   ITEM ATIVO
+   ========================================================= */
+
+function atualizarItemAtivo() {
+
+  document
+    .querySelectorAll('.audio-item')
+    .forEach(function(item) {
+
+      item.classList.remove('active');
+
+    });
+
+
+  const item =
+    document.querySelector(
+      '.audio-item[data-index="' +
+      indiceAtual +
+      '"]'
+    );
+
+
+  if (item) {
+
+    item.classList.add('active');
+
+  }
+}
+
+
+/* =========================================================
+   ERRO
+   ========================================================= */
+
+function mostrarErro(mensagem) {
+
+  status.textContent =
+    'Erro ao carregar';
+
+
+  lista.innerHTML = `
+
+    <div class="message error">
+
+      <strong>
+        Não foi possível carregar a playlist.
+      </strong>
+
+      <br><br>
+
+      ${escaparHtml(mensagem)}
 
     </div>
 
+  `;
 
-    <div
-        id="bottomTrackArtist"
-        class="bottom-artist">
-
-        De Volta para Cristo
-
-    </div>
-
-</div>
+}
 
 
-<div class="bottom-controls">
+/* =========================================================
+   ESCAPA HTML
+   ========================================================= */
 
+function escaparHtml(valor) {
 
-    <button
-        id="shuffleBtn"
-        class="bottom-button"
-        type="button"
-        aria-label="Aleatório"
-        aria-pressed="false">
+  return String(valor || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 
-        🔀
+}
 
-    </button>
+</script>
 
-
-    <button
-        id="bottomPrevBtn"
-        class="bottom-button"
-        type="button"
-        aria-label="Anterior">
-
-        ⏮
-
-    </button>
-
-
-    <button
-        id="bottomPlayBtn"
-        class="bottom-button bottom-play"
-        type="button"
-        aria-label="Reproduzir">
-
-        <span id="bottomPlayIcon">
-            ▶
-        </span>
-
-    </button>
-
-
-    <button
-        id="bottomNextBtn"
-        class="bottom-button"
-        type="button"
-        aria-label="Próxima">
-
-        ⏭
-
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     ÁUDIO
-===================================================== -->
-
-<audio
-    id="audio"
-    preload="auto"
-    playsinline>
-</audio>
-
-
-<script src="script.js"></script>
 
 </body>
 
