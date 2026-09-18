@@ -809,6 +809,58 @@ nav a:hover {
 /* =========================================================
    PLAYLIST
 ========================================================= */
+/* =========================================================
+   ABAS DA PLAYLIST
+========================================================= */
+
+.playlist-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 14px;
+    flex-wrap: wrap;
+}
+
+.playlist-tab {
+    border: 1px solid #dfe7ef;
+    background: #ffffff;
+    color: #627487;
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+.playlist-tab:hover {
+    border-color: #c5d4e2;
+    background: #f8fafc;
+}
+
+.playlist-tab.active {
+    color: #ffffff;
+    background: #17385d;
+    border-color: #17385d;
+}
+
+.playlist-tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 18px;
+    margin-left: 5px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background: rgba(255,255,255,.16);
+    font-size: 9px;
+}
+
+.playlist-tab:not(.active) .playlist-tab-count {
+    background: #edf3f8;
+    color: #4078aa;
+}
+
+
 
 .playlist-info {
 
@@ -1920,9 +1972,47 @@ input:focus-visible {
 </div>
 
 
+<div class="playlist-tabs" role="tablist" aria-label="Tipo de conteúdo">
+
+    <button
+        id="musicTab"
+        class="playlist-tab active"
+        type="button"
+        role="tab"
+        aria-selected="true">
+
+        🎵 Músicas
+
+        <span
+            id="musicCount"
+            class="playlist-tab-count">
+            0
+        </span>
+
+    </button>
+
+    <button
+        id="prayerTab"
+        class="playlist-tab"
+        type="button"
+        role="tab"
+        aria-selected="false">
+
+        🙏 Orações
+
+        <span
+            id="prayerCount"
+            class="playlist-tab-count">
+            0
+        </span>
+
+    </button>
+
+</div>
+
 <div class="playlist-info">
 
-    <span>
+    <span id="playlistLabel">
         🎵 Músicas disponíveis
     </span>
 
