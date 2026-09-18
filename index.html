@@ -217,8 +217,7 @@ audio {
 
     font-size: 17px;
 
-    transition:
-        .2s ease;
+    transition: .2s ease;
 }
 
 .control-btn:hover {
@@ -260,8 +259,7 @@ audio {
 
     font-size: 13px;
 
-    transition:
-        .2s ease;
+    transition: .2s ease;
 }
 
 .filter-btn:hover {
@@ -309,8 +307,7 @@ audio {
 
     cursor: pointer;
 
-    transition:
-        .2s ease;
+    transition: .2s ease;
 }
 
 .audio-item:hover {
@@ -637,7 +634,7 @@ let heartbeatTimer = null;
 
 
 /* =========================================================
-   LOCALIZAÇÃO APROXIMADA
+   LOCALIZAÇÃO
    ========================================================= */
 
 let localizacaoVisitante = {
@@ -649,7 +646,7 @@ let localizacaoVisitante = {
 
 
 /* =========================================================
-   SESSÃO ANÔNIMA
+   SESSÃO
    ========================================================= */
 
 function obterSessao() {
@@ -688,72 +685,207 @@ function gerarId() {
 
 
 /* =========================================================
-   OBTER LOCALIZAÇÃO POR IP
+   LOCALIZAÇÃO POR IP
    ========================================================= */
 
-async function obterLocalizacao() {
+function obterLocalizacao() {
 
-    try {
+    return new Promise(
+        function(resolve) {
 
-        const resposta =
-            await fetch(
-                'https://ipapi.co/json/',
-                {
-                    cache: 'no-store'
+            let concluido = false;
+
+            const callback =
+                'localizacao_' +
+                Date.now() +
+                '_' +
+                Math.floor(
+                    Math.random() * 10000
+                );
+
+            const script =
+                document.createElement(
+                    'script'
+                );
+
+            /*
+             * Tempo máximo de espera:
+             * 5 segundos.
+             */
+
+            const timer =
+                setTimeout(
+                    function() {
+
+                        if (concluido) {
+                            return;
+                        }
+
+                        concluido = true;
+
+                        console.warn(
+                            'Tempo esgotado para obter localização.'
+                        );
+
+                        limpar();
+
+                        resolve();
+
+                    },
+                    5000
+                );
+
+
+            function limpar() {
+
+                clearTimeout(timer);
+
+                try {
+
+                    delete window[callback];
+
+                } catch(e) {}
+
+                if (
+                    script &&
+                    script.parentNode
+                ) {
+
+                    script.parentNode.removeChild(
+                        script
+                    );
                 }
+            }
+
+
+            window[callback] =
+                function(dados) {
+
+                    if (concluido) {
+                        return;
+                    }
+
+                    concluido = true;
+
+                    limpar();
+
+
+                    if (
+                        dados &&
+                        dados.error
+                    ) {
+
+                        console.warn(
+                            'Erro na localização:',
+                            dados.reason || dados
+                        );
+
+                        resolve();
+
+                        return;
+                    }
+
+
+                    if (dados) {
+
+                        localizacaoVisitante = {
+
+                            cidade:
+                                String(
+                                    dados.city || ''
+                                ).trim(),
+
+                            estado:
+                                String(
+                                    dados.region_code ||
+                                    dados.region ||
+                                    ''
+                                ).trim()
+                        };
+                    }
+
+
+                    console.log(
+                        'LOCALIZAÇÃO OBTIDA:',
+                        localizacaoVisitante
+                    );
+
+
+                    resolve();
+                };
+
+
+            script.onerror =
+                function() {
+
+                    if (concluido) {
+                        return;
+                    }
+
+                    concluido = true;
+
+                    limpar();
+
+                    console.warn(
+                        'Não foi possível consultar a localização.'
+                    );
+
+                    resolve();
+                };
+
+
+            script.src =
+                'https://ipapi.co/jsonp/?callback=' +
+                encodeURIComponent(
+                    callback
+                ) +
+                '&_=' +
+                Date.now();
+
+
+            document.body.appendChild(
+                script
             );
-
-        if (!resposta.ok) {
-
-            console.warn(
-                'Serviço de localização indisponível.'
-            );
-
-            return;
         }
-
-        const dados =
-            await resposta.json();
-
-        localizacaoVisitante = {
-
-            cidade:
-                String(
-                    dados.city || ''
-                ).trim(),
-
-            estado:
-                String(
-                    dados.region_code ||
-                    dados.region ||
-                    ''
-                ).trim()
-        };
-
-        console.log(
-            'Localização aproximada:',
-            localizacaoVisitante
-        );
-
-    } catch (erro) {
-
-        console.warn(
-            'Não foi possível obter a localização:',
-            erro
-        );
-
-        localizacaoVisitante = {
-
-            cidade: '',
-
-            estado: ''
-        };
-    }
+    );
 }
 
 
 /* =========================================================
-   REGISTRAR ESTATÍSTICA
+   VERIFICAR SE O ACESSO JÁ FOI REGISTRADO
+   ========================================================= */
+
+function acessoJaRegistrado() {
+
+    const chave =
+        'radio_onda_livre_acesso_registrado';
+
+
+    const valor =
+        sessionStorage.getItem(
+            chave
+        );
+
+
+    return valor === '1';
+}
+
+
+/* =========================================================
+   MARCAR ACESSO COMO REGISTRADO
+   ========================================================= */
+
+function marcarAcessoRegistrado() {
+
+    sessionStorage.setItem(
+        'radio_onda_livre_acesso_registrado',
+        '1'
+    );
+}
+
+
+/* =========================================================
+   REGISTRAR EVENTO
    ========================================================= */
 
 function registrarEvento(
@@ -772,6 +904,7 @@ function registrarEvento(
         return;
     }
 
+
     const callback =
         'evento_' +
         Date.now() +
@@ -780,7 +913,9 @@ function registrarEvento(
             Math.random() * 10000
         );
 
+
     let script = null;
+
 
     window[callback] =
         function() {
@@ -790,6 +925,7 @@ function registrarEvento(
                 delete window[callback];
 
             } catch(e) {}
+
 
             if (
                 script &&
@@ -840,6 +976,7 @@ function registrarEvento(
             'script'
         );
 
+
     script.src =
         URL_API +
         '?' +
@@ -854,6 +991,7 @@ function registrarEvento(
                 delete window[callback];
 
             } catch(e) {}
+
 
             if (
                 script &&
@@ -874,10 +1012,52 @@ function registrarEvento(
 
 
 /* =========================================================
-   ACESSO
+   REGISTRAR ACESSO
    ========================================================= */
 
 function registrarAcesso() {
+
+    /*
+     * Impede que o mesmo carregamento/sessão
+     * registre o ACESSO mais de uma vez.
+     */
+
+    if (
+        acessoJaRegistrado()
+    ) {
+
+        console.log(
+            'ACESSO já registrado nesta sessão.'
+        );
+
+        return;
+    }
+
+
+    /*
+     * Marca ANTES de enviar.
+     *
+     * Assim, mesmo que alguma parte do código
+     * tente chamar novamente, não duplica.
+     */
+
+    marcarAcessoRegistrado();
+
+
+    console.log(
+        'REGISTRANDO ACESSO:',
+        {
+            cidade:
+                localizacaoVisitante.cidade,
+
+            estado:
+                localizacaoVisitante.estado,
+
+            sessao:
+                obterSessao()
+        }
+    );
+
 
     registrarEvento(
         'ACESSO'
@@ -925,7 +1105,6 @@ function carregarPlaylist() {
             function() {
 
                 if (concluido) {
-
                     return;
                 }
 
@@ -946,21 +1125,20 @@ function carregarPlaylist() {
         function(resposta) {
 
             if (concluido) {
-
                 return;
             }
 
             concluido = true;
 
-            clearTimeout(
-                timer
-            );
+            clearTimeout(timer);
+
 
             try {
 
                 delete window[callback];
 
             } catch(e) {}
+
 
             script.remove();
 
@@ -1014,15 +1192,13 @@ function carregarPlaylist() {
         function() {
 
             if (concluido) {
-
                 return;
             }
 
             concluido = true;
 
-            clearTimeout(
-                timer
-            );
+            clearTimeout(timer);
+
 
             try {
 
@@ -1030,7 +1206,9 @@ function carregarPlaylist() {
 
             } catch(e) {}
 
+
             script.remove();
+
 
             mostrarMensagem(
                 'Erro de comunicação com o servidor.'
@@ -1128,7 +1306,7 @@ function aplicarFiltro() {
 
 
 /* =========================================================
-   RENDERIZAR PLAYLIST
+   RENDERIZAR
    ========================================================= */
 
 function renderizarPlaylist() {
@@ -1155,7 +1333,7 @@ function renderizarPlaylist() {
     container.innerHTML =
         playlistFiltrada
             .map(
-                (item) => {
+                item => {
 
                     const originalIndex =
                         playlist.indexOf(
@@ -1699,26 +1877,23 @@ document.addEventListener(
     async function() {
 
         /*
-         * Primeiro tenta descobrir a cidade
-         * e o estado aproximados do visitante.
-         *
-         * Se não conseguir, a rádio continua
-         * funcionando normalmente.
+         * Primeiro tenta obter a localização.
          */
 
         await obterLocalizacao();
 
 
         /*
-         * Registra o acesso somente depois
-         * da tentativa de localização.
+         * Depois registra o acesso.
+         * O controle sessionStorage impede
+         * duplicação dentro da sessão.
          */
 
         registrarAcesso();
 
 
         /*
-         * Carrega a playlist.
+         * Finalmente carrega a playlist.
          */
 
         carregarPlaylist();
