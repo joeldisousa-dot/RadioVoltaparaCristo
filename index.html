@@ -1,1503 +1,1637 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+  <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+  <title>Rádio Onda Livre</title>
 
-<title>Rádio Onda Livre</title>
+  <style>
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-* {
-  box-sizing: border-box;
-}
+      min-height: 100vh;
 
+      background:
+        linear-gradient(
+          135deg,
+          #071a33 0%,
+          #0b315a 45%,
+          #09223f 100%
+        );
 
-body {
+      color: #ffffff;
 
-  margin: 0;
+      padding: 30px 15px;
+    }
 
-  font-family:
-    Inter,
-    Arial,
-    Helvetica,
-    sans-serif;
+    .container {
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+    }
 
-  background:
-    linear-gradient(
-      135deg,
-      #07111f,
-      #0d1b2e 55%,
-      #102840
-    );
+    /* =====================================================
+       CABEÇALHO
+    ===================================================== */
 
-  color: #ffffff;
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-  min-height: 100vh;
-}
+    .microphone {
+      width: 72px;
+      height: 72px;
 
+      margin: 0 auto 15px;
 
-.container {
+      border-radius: 50%;
 
-  width: min(1100px, 94%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  margin: auto;
+      background:
+        rgba(255,255,255,.10);
 
-  padding: 30px 0 50px;
-}
+      border:
+        1px solid rgba(255,255,255,.15);
 
+      box-shadow:
+        0 10px 30px rgba(0,0,0,.25);
 
-/* =========================================================
-   CABEÇALHO
-   ========================================================= */
+      font-size: 34px;
+    }
 
-header {
+    .header h1 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
 
-  text-align: center;
+    .subtitle {
+      margin-top: 7px;
 
-  padding: 20px 10px 30px;
-}
+      color: #b8d3ed;
 
+      font-size: 14px;
+    }
 
-.logo {
+    /* =====================================================
+       PLAYER
+    ===================================================== */
 
-  width: 72px;
+    .player-card {
+      background:
+        rgba(255,255,255,.09);
 
-  height: 72px;
+      border:
+        1px solid rgba(255,255,255,.14);
 
-  margin: auto;
+      border-radius: 22px;
 
-  border-radius: 50%;
+      padding: 24px;
 
-  display: flex;
+      backdrop-filter: blur(12px);
 
-  align-items: center;
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.25);
 
-  justify-content: center;
+      margin-bottom: 22px;
+    }
 
-  font-size: 30px;
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  background: rgba(255,255,255,.1);
+      gap: 8px;
 
-  border: 1px solid rgba(255,255,255,.15);
+      margin-bottom: 13px;
 
-  box-shadow:
-    0 10px 35px rgba(0,0,0,.25);
-}
+      color: #b7d7ee;
 
+      font-size: 12px;
+    }
 
-header h1 {
+    .status-dot {
+      width: 9px;
+      height: 9px;
 
-  margin: 15px 0 5px;
+      border-radius: 50%;
 
-  font-size: clamp(28px, 5vw, 42px);
+      background: #4ade80;
 
-  font-weight: 700;
-}
+      box-shadow:
+        0 0 10px rgba(74,222,128,.7);
+    }
 
+    .current-type {
+      text-align: center;
 
-header p {
+      color: #7fb7e8;
 
-  margin: 0;
+      font-size: 12px;
 
-  color: #b8c7d9;
+      text-transform: uppercase;
 
-  font-size: 15px;
-}
+      letter-spacing: 1.2px;
 
+      margin-bottom: 6px;
+    }
 
-/* =========================================================
-   PLAYER
-   ========================================================= */
+    .current-title {
+      text-align: center;
 
-.player {
+      font-size: 21px;
 
-  background: rgba(255,255,255,.08);
+      font-weight: 700;
 
-  border: 1px solid rgba(255,255,255,.12);
+      line-height: 1.35;
+    }
 
-  border-radius: 22px;
+    .current-artist {
+      text-align: center;
 
-  padding: 25px;
+      margin-top: 5px;
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.25);
+      color: #b8d3ed;
 
-  backdrop-filter: blur(12px);
+      font-size: 14px;
+    }
 
-  margin-bottom: 25px;
-}
+    /* =====================================================
+       AVISO PARA INICIAR ÁUDIO
+    ===================================================== */
 
+    .play-hint {
+      margin-top: 10px;
 
-.status {
+      color: #7fb7e8;
 
-  display: flex;
+      font-size: 13px;
 
-  align-items: center;
+      font-weight: 500;
 
-  gap: 9px;
+      opacity: .95;
 
-  color: #9fb0c5;
+      text-align: center;
+    }
 
-  font-size: 13px;
+    /* =====================================================
+       AUDIO
+    ===================================================== */
 
-  margin-bottom: 18px;
-}
+    #audioPlayer {
+      width: 100%;
 
+      margin-top: 20px;
 
-.status-dot {
+      border-radius: 10px;
+    }
 
-  width: 9px;
+    /* =====================================================
+       CONTROLES
+    ===================================================== */
 
-  height: 9px;
+    .controls {
+      display: flex;
 
-  border-radius: 50%;
+      justify-content: center;
 
-  background: #43d17a;
+      align-items: center;
 
-  box-shadow:
-    0 0 12px #43d17a;
-}
+      gap: 12px;
 
+      margin-top: 17px;
+    }
 
-.current {
+    .control-btn {
+      border: none;
 
-  text-align: center;
+      width: 45px;
+      height: 45px;
 
-  padding: 10px 0 22px;
-}
+      border-radius: 50%;
 
+      background: rgba(255,255,255,.12);
 
-.current-type {
+      color: #ffffff;
 
-  display: inline-block;
+      font-size: 17px;
 
-  padding: 5px 12px;
+      cursor: pointer;
 
-  border-radius: 30px;
+      transition:
+        transform .2s,
+        background .2s;
+    }
 
-  font-size: 11px;
+    .control-btn:hover {
+      background: rgba(255,255,255,.20);
 
-  text-transform: uppercase;
+      transform: translateY(-2px);
+    }
 
-  letter-spacing: .8px;
+    .control-btn:active {
+      transform: scale(.96);
+    }
 
-  background: rgba(255,255,255,.1);
+    /* =====================================================
+       FILTROS
+    ===================================================== */
 
-  color: #b9c8d9;
+    .filters {
+      display: flex;
 
-  margin-bottom: 12px;
-}
+      justify-content: center;
 
+      flex-wrap: wrap;
 
-.current-title {
+      gap: 8px;
 
-  font-size: clamp(21px, 4vw, 30px);
+      margin-bottom: 18px;
+    }
 
-  font-weight: 700;
+    .filter-btn {
+      border: 1px solid rgba(255,255,255,.15);
 
-  margin-bottom: 5px;
-}
+      background: rgba(255,255,255,.07);
 
+      color: #c7dcef;
 
-.current-artist {
+      padding: 9px 15px;
 
-  color: #9fb0c5;
+      border-radius: 30px;
 
-  font-size: 14px;
-}
+      font-size: 13px;
 
+      cursor: pointer;
 
-audio {
+      transition:
+        background .2s,
+        color .2s,
+        transform .2s;
+    }
 
-  width: 100%;
+    .filter-btn:hover {
+      background: rgba(255,255,255,.13);
 
-  margin-top: 12px;
-}
+      transform: translateY(-1px);
+    }
 
+    .filter-btn.active {
+      background: #1976d2;
 
-/* =========================================================
-   CONTROLES
-   ========================================================= */
+      border-color: #1976d2;
 
-.controls {
+      color: #ffffff;
+    }
 
-  display: flex;
+    /* =====================================================
+       LISTA
+    ===================================================== */
 
-  justify-content: center;
+    .playlist {
+      display: flex;
 
-  gap: 10px;
+      flex-direction: column;
 
-  margin-top: 18px;
-}
+      gap: 10px;
+    }
 
+    .audio-item {
+      display: flex;
 
-.btn {
+      align-items: center;
 
-  border: 0;
+      gap: 14px;
 
-  cursor: pointer;
+      padding: 14px 16px;
 
-  border-radius: 12px;
+      border-radius: 15px;
 
-  padding: 11px 20px;
+      background: rgba(255,255,255,.07);
 
-  font-size: 14px;
+      border:
+        1px solid rgba(255,255,255,.08);
 
-  font-weight: 600;
+      cursor: pointer;
 
-  transition:
-    .2s ease;
-}
+      transition:
+        background .2s,
+        transform .2s,
+        border-color .2s;
+    }
 
+    .audio-item:hover {
+      background: rgba(255,255,255,.12);
 
-.btn:hover {
+      transform: translateY(-1px);
 
-  transform: translateY(-1px);
-}
+      border-color:
+        rgba(255,255,255,.15);
+    }
 
+    .audio-item.active {
+      background:
+        rgba(25,118,210,.28);
 
-.btn-primary {
+      border-color:
+        rgba(76,160,230,.55);
+    }
 
-  background: #1d8cff;
+    .audio-icon {
+      width: 42px;
+      height: 42px;
 
-  color: white;
-}
+      flex-shrink: 0;
 
+      border-radius: 12px;
 
-.btn-secondary {
+      display: flex;
 
-  background: rgba(255,255,255,.1);
+      align-items: center;
 
-  color: white;
-}
+      justify-content: center;
 
+      background:
+        rgba(255,255,255,.10);
 
-.btn:disabled {
+      font-size: 19px;
+    }
 
-  opacity: .4;
+    .audio-info {
+      flex: 1;
 
-  cursor: not-allowed;
+      min-width: 0;
+    }
 
-  transform: none;
-}
+    .audio-title {
+      font-size: 14px;
 
+      font-weight: 600;
 
-/* =========================================================
-   FILTROS
-   ========================================================= */
+      color: #ffffff;
 
-.filters {
+      white-space: nowrap;
 
-  display: flex;
+      overflow: hidden;
 
-  gap: 10px;
+      text-overflow: ellipsis;
+    }
 
-  flex-wrap: wrap;
+    .audio-artist {
+      margin-top: 4px;
 
-  margin-bottom: 18px;
-}
+      font-size: 12px;
 
+      color: #a9c4dd;
 
-.filter {
+      white-space: nowrap;
 
-  padding: 10px 17px;
+      overflow: hidden;
 
-  border-radius: 30px;
+      text-overflow: ellipsis;
+    }
 
-  border: 1px solid rgba(255,255,255,.12);
+    .audio-type {
+      font-size: 10px;
 
-  background: rgba(255,255,255,.06);
+      color: #79b7e8;
 
-  color: #c8d4e2;
+      margin-top: 4px;
 
-  cursor: pointer;
+      text-transform: uppercase;
 
-  font-size: 13px;
-}
+      letter-spacing: .8px;
+    }
 
+    .play-icon {
+      width: 34px;
+      height: 34px;
 
-.filter.active {
+      flex-shrink: 0;
 
-  background: #1d8cff;
+      display: flex;
 
-  border-color: #1d8cff;
+      align-items: center;
 
-  color: white;
-}
+      justify-content: center;
 
+      border-radius: 50%;
 
-/* =========================================================
-   LISTA
-   ========================================================= */
+      background:
+        rgba(255,255,255,.10);
 
-.playlist {
+      color: #ffffff;
 
-  display: grid;
+      font-size: 13px;
+    }
 
-  gap: 10px;
-}
+    /* =====================================================
+       MENSAGENS
+    ===================================================== */
 
+    .message {
+      text-align: center;
 
-.audio-item {
+      padding: 25px 15px;
 
-  display: flex;
+      color: #a9c4dd;
 
-  align-items: center;
+      font-size: 14px;
+    }
 
-  gap: 15px;
+    .error {
+      color: #ffb4b4;
+    }
 
-  padding: 15px;
+    /* =====================================================
+       LOADING
+    ===================================================== */
 
-  border-radius: 15px;
+    .loading {
+      display: flex;
 
-  background: rgba(255,255,255,.06);
+      justify-content: center;
 
-  border: 1px solid rgba(255,255,255,.08);
+      align-items: center;
 
-  cursor: pointer;
+      gap: 9px;
 
-  transition:
-    .2s ease;
-}
+      padding: 25px;
 
+      color: #b8d3ed;
 
-.audio-item:hover {
+      font-size: 14px;
+    }
 
-  background: rgba(255,255,255,.1);
+    .spinner {
+      width: 18px;
+      height: 18px;
 
-  transform: translateX(2px);
-}
+      border:
+        2px solid rgba(255,255,255,.20);
 
+      border-top-color: #ffffff;
 
-.audio-item.active {
+      border-radius: 50%;
 
-  border-color: rgba(29,140,255,.7);
+      animation:
+        girar .8s linear infinite;
+    }
 
-  background: rgba(29,140,255,.12);
-}
+    @keyframes girar {
 
+      to {
+        transform: rotate(360deg);
+      }
 
-.number {
+    }
 
-  min-width: 32px;
+    /* =====================================================
+       RODAPÉ
+    ===================================================== */
 
-  height: 32px;
+    footer {
+      text-align: center;
 
-  border-radius: 10px;
+      margin-top: 30px;
 
-  display: flex;
+      color: #7898b5;
 
-  justify-content: center;
+      font-size: 11px;
+    }
 
-  align-items: center;
+    /* =====================================================
+       RESPONSIVO
+    ===================================================== */
 
-  background: rgba(255,255,255,.08);
+    @media (max-width: 600px) {
 
-  color: #9fb0c5;
+      body {
+        padding: 20px 12px;
+      }
 
-  font-size: 12px;
-}
+      .header h1 {
+        font-size: 26px;
+      }
 
+      .microphone {
+        width: 64px;
+        height: 64px;
 
-.audio-info {
+        font-size: 30px;
+      }
 
-  flex: 1;
+      .player-card {
+        padding: 19px;
+      }
 
-  min-width: 0;
-}
+      .current-title {
+        font-size: 18px;
+      }
 
+      .audio-item {
+        padding: 12px;
+      }
 
-.audio-title {
+      .audio-icon {
+        width: 38px;
+        height: 38px;
+      }
 
-  font-weight: 600;
+    }
 
-  font-size: 15px;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-
-.audio-artist {
-
-  margin-top: 3px;
-
-  color: #8fa1b5;
-
-  font-size: 12px;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-
-.audio-type {
-
-  padding: 5px 9px;
-
-  border-radius: 20px;
-
-  background: rgba(255,255,255,.08);
-
-  color: #aebed0;
-
-  font-size: 10px;
-
-  white-space: nowrap;
-}
-
-
-/* =========================================================
-   MENSAGEM
-   ========================================================= */
-
-.message {
-
-  text-align: center;
-
-  padding: 35px 15px;
-
-  color: #aebed0;
-
-  font-size: 14px;
-}
-
-
-.error {
-
-  color: #ff9b9b;
-}
-
-
-/* =========================================================
-   RODAPÉ
-   ========================================================= */
-
-footer {
-
-  text-align: center;
-
-  padding-top: 35px;
-
-  color: #73869c;
-
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   RESPONSIVO
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  .container {
-
-    width: 92%;
-
-    padding-top: 15px;
-  }
-
-
-  .player {
-
-    padding: 18px;
-
-    border-radius: 18px;
-  }
-
-
-  .audio-item {
-
-    padding: 12px;
-
-    gap: 10px;
-  }
-
-
-  .audio-type {
-
-    display: none;
-  }
-
-
-  .controls {
-
-    gap: 7px;
-  }
-
-
-  .btn {
-
-    padding: 10px 15px;
-  }
-
-}
-
-</style>
+  </style>
 
 </head>
 
-
 <body>
 
+  <div class="container">
 
-<div class="container">
+    <!-- ===================================================
+         CABEÇALHO
+    ==================================================== -->
 
+    <header class="header">
 
-<header>
+      <div class="microphone">
+        🎙️
+      </div>
 
-  <div class="logo">
-    🎙️
-  </div>
+      <h1>
+        Rádio Onda Livre
+      </h1>
 
-  <h1>Rádio Onda Livre</h1>
+      <div class="subtitle">
+        Música, oração e mensagens para o seu dia
+      </div>
 
-  <p>
-    Música, oração e mensagens para o seu dia
-  </p>
-
-</header>
-
-
-
-<section class="player">
-
-
-  <div class="status">
-
-    <span class="status-dot"></span>
-
-    <span id="status">
-      Conectando à rádio...
-    </span>
-
-  </div>
+    </header>
 
 
+    <!-- ===================================================
+         PLAYER
+    ==================================================== -->
 
-  <div class="current">
+    <section class="player-card">
 
-    <div
-      id="currentType"
-      class="current-type"
-    >
-      Aguardando
+      <div class="status">
+
+        <span
+          id="statusDot"
+          class="status-dot">
+        </span>
+
+        <span id="statusText">
+          Carregando programação...
+        </span>
+
+      </div>
+
+
+      <div
+        id="currentType"
+        class="current-type">
+        Rádio Onda Livre
+      </div>
+
+
+      <div
+        id="currentTitle"
+        class="current-title">
+
+        Escolha um áudio para ouvir
+
+      </div>
+
+
+      <div
+        id="playHint"
+        class="play-hint">
+
+        ▶ Clique em uma música ou oração abaixo para iniciar o áudio
+
+      </div>
+
+
+      <div
+        id="currentArtist"
+        class="current-artist">
+      </div>
+
+
+      <audio
+        id="audioPlayer"
+        controls
+        preload="metadata">
+      </audio>
+
+
+      <div class="controls">
+
+        <button
+          class="control-btn"
+          type="button"
+          onclick="anterior()"
+          title="Anterior">
+
+          ⏮
+
+        </button>
+
+
+        <button
+          class="control-btn"
+          type="button"
+          onclick="proximo()"
+          title="Próximo">
+
+          ⏭
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         FILTROS
+    ==================================================== -->
+
+    <div class="filters">
+
+      <button
+        type="button"
+        class="filter-btn active"
+        onclick="filtrar('todos', this)">
+
+        Todos
+
+      </button>
+
+
+      <button
+        type="button"
+        class="filter-btn"
+        onclick="filtrar('musica', this)">
+
+        🎵 Músicas
+
+      </button>
+
+
+      <button
+        type="button"
+        class="filter-btn"
+        onclick="filtrar('oracao', this)">
+
+        🙏 Orações
+
+      </button>
+
     </div>
 
 
-    <div
-      id="currentTitle"
-      class="current-title"
-    >
-      Nenhum áudio selecionado
+    <!-- ===================================================
+         PLAYLIST
+    ==================================================== -->
+
+    <div id="playlist">
+
+      <div class="loading">
+
+        <span class="spinner"></span>
+
+        Carregando áudios...
+
+      </div>
+
     </div>
 
 
-    <div
-      id="currentArtist"
-      class="current-artist"
-    >
-      —
-    </div>
+    <!-- ===================================================
+         RODAPÉ
+    ==================================================== -->
+
+    <footer>
+
+      Rádio Onda Livre • Música, oração e mensagens
+
+    </footer>
 
   </div>
 
 
+  <script>
 
-  <audio
-    id="audioPlayer"
-    controls
-    preload="metadata"
-  ></audio>
+    /* =====================================================
+       CONFIGURAÇÃO
+    ===================================================== */
 
+    const URL_API =
+       'https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec';
 
 
-  <div class="controls">
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
 
-    <button
-      id="btnAnterior"
-      class="btn btn-secondary"
-      onclick="anterior()"
-    >
-      ⏮ Anterior
-    </button>
+    const player =
+      document.getElementById('audioPlayer');
 
+    const playlistElement =
+      document.getElementById('playlist');
 
-    <button
-      id="btnProximo"
-      class="btn btn-primary"
-      onclick="proximo()"
-    >
-      Próximo ⏭
-    </button>
+    const statusText =
+      document.getElementById('statusText');
 
-  </div>
+    const statusDot =
+      document.getElementById('statusDot');
 
-</section>
+    const currentTitle =
+      document.getElementById('currentTitle');
 
+    const currentArtist =
+      document.getElementById('currentArtist');
 
+    const currentType =
+      document.getElementById('currentType');
 
-<div class="filters">
+    const playHint =
+      document.getElementById('playHint');
 
-  <button
-    class="filter active"
-    data-tipo="todos"
-    onclick="filtrar('todos', this)"
-  >
-    Todos
-  </button>
 
+    /* =====================================================
+       VARIÁVEIS
+    ===================================================== */
 
-  <button
-    class="filter"
-    data-tipo="musica"
-    onclick="filtrar('musica', this)"
-  >
-    🎵 Músicas
-  </button>
+    let playlist = [];
 
+    let playlistFiltrada = [];
 
-  <button
-    class="filter"
-    data-tipo="oracao"
-    onclick="filtrar('oracao', this)"
-  >
-    🙏 Orações
-  </button>
+    let filtroAtual = 'todos';
 
-</div>
+    let indiceAtual = -1;
 
 
+    /* =====================================================
+       INICIALIZAÇÃO
+    ===================================================== */
 
-<section
-  id="playlist"
-  class="playlist"
->
+    document.addEventListener(
+      'DOMContentLoaded',
+      function () {
 
-  <div class="message">
-    Carregando playlist...
-  </div>
-
-</section>
-
-
-
-<footer>
-
-  Rádio Onda Livre
-
-</footer>
-
-
-</div>
-
-
-
-<script>
-
-/* =========================================================
-   CONFIGURAÇÃO
-   ========================================================= */
-
-/*
- * COLOQUE AQUI A URL /exec DA SUA IMPLANTAÇÃO
- * DO GOOGLE APPS SCRIPT.
- *
- * Exemplo:
- *
- * https://script.google.com/macros/s/XXXXXXXX/exec
- *
- */
-
-const URL_API =
-  'https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec';
-
-
-/* =========================================================
-   VARIÁVEIS
-   ========================================================= */
-
-let playlist = [];
-
-let playlistFiltrada = [];
-
-let indiceAtual = -1;
-
-let filtroAtual = 'todos';
-
-
-const player =
-  document.getElementById(
-    'audioPlayer'
-  );
-
-
-const lista =
-  document.getElementById(
-    'playlist'
-  );
-
-
-const status =
-  document.getElementById(
-    'status'
-  );
-
-
-const currentTitle =
-  document.getElementById(
-    'currentTitle'
-  );
-
-
-const currentArtist =
-  document.getElementById(
-    'currentArtist'
-  );
-
-
-const currentType =
-  document.getElementById(
-    'currentType'
-  );
-
-
-/* =========================================================
-   INICIALIZAÇÃO
-   ========================================================= */
-
-document.addEventListener(
-  'DOMContentLoaded',
-  carregarPlaylist
-);
-
-
-/* =========================================================
-   CARREGAR PLAYLIST
-   ========================================================= */
-
-function carregarPlaylist() {
-
-  /*
-   * Verifica configuração.
-   */
-  if (
-    !URL_API ||
-    URL_API.indexOf(
-      'COLE_AQUI'
-    ) !== -1
-  ) {
-
-    mostrarErro(
-      'URL do Google Apps Script não configurada.'
-    );
-
-    return;
-  }
-
-
-  status.textContent =
-    'Carregando playlist...';
-
-
-  /*
-   * ========================================================
-   * JSONP
-   *
-   * Não usamos:
-   *
-   * google.script.run
-   *
-   * porque o index está no GitHub Pages.
-   * ========================================================
-   */
-
-  const nomeCallback =
-    'receberPlaylist_' +
-    Date.now();
-
-
-  window[nomeCallback] =
-    function(resposta) {
-
-      try {
-
-        if (
-          !resposta ||
-          !resposta.sucesso
-        ) {
-
-          mostrarErro(
-            resposta &&
-            resposta.mensagem
-              ? resposta.mensagem
-              : 'Não foi possível carregar a playlist.'
-          );
-
-          return;
-        }
-
-
-        playlist =
-          Array.isArray(
-            resposta.playlist
-          )
-            ? resposta.playlist
-            : [];
-
-
-        status.textContent =
-          playlist.length +
-          ' áudio' +
-          (
-            playlist.length === 1
-              ? ''
-              : 's'
-          ) +
-          ' disponível' +
-          (
-            playlist.length === 1
-              ? ''
-              : 'is'
-          );
-
-
-        aplicarFiltro();
-
-
-      } catch (erro) {
-
-        console.error(
-          erro
-        );
-
-
-        mostrarErro(
-          erro.message ||
-          String(erro)
-        );
-
-      } finally {
-
-        /*
-         * Remove o callback.
-         */
-        delete window[
-          nomeCallback
-        ];
+        carregarPlaylist();
 
       }
-    };
-
-
-  /*
-   * Cria a chamada JSONP.
-   */
-  const script =
-    document.createElement(
-      'script'
     );
 
 
-  script.src =
-    URL_API +
-    '?acao=listarPlaylist' +
-    '&callback=' +
-    encodeURIComponent(
-      nomeCallback
-    ) +
-    '&_=' +
-    Date.now();
+    /* =====================================================
+       CARREGAR PLAYLIST
+    ===================================================== */
 
-
-  script.onerror =
-    function() {
-
-      delete window[
-        nomeCallback
-      ];
-
-
-      mostrarErro(
-        'Não foi possível conectar ao servidor da rádio.'
-      );
-    };
-
-
-  document.body.appendChild(
-    script
-  );
-
-
-  /*
-   * Timeout.
-   */
-  setTimeout(
-    function() {
+    function carregarPlaylist() {
 
       if (
-        typeof window[
-          nomeCallback
-        ] === 'function'
+        !URL_API ||
+        URL_API.includes('COLE_AQUI')
       ) {
 
-        delete window[
-          nomeCallback
-        ];
-
-
         mostrarErro(
-          'Tempo limite ao carregar a playlist.'
+          'URL da API não configurada.'
         );
+
+        atualizarStatus(
+          'Configure a URL da API',
+          false
+        );
+
+        return;
       }
 
-    },
-    15000
-  );
-}
+
+      playlistElement.innerHTML = `
+        <div class="loading">
+          <span class="spinner"></span>
+          Carregando áudios...
+        </div>
+      `;
 
 
-/* =========================================================
-   FILTRO
-   ========================================================= */
-
-function filtrar(
-  tipo,
-  botao
-) {
-
-  filtroAtual =
-    tipo;
+      atualizarStatus(
+        'Carregando programação...',
+        true
+      );
 
 
-  document
-    .querySelectorAll(
-      '.filter'
-    )
-    .forEach(
-      function(item) {
+      const nomeCallback =
+        'receberPlaylist_' +
+        Date.now();
 
-        item.classList.remove(
+
+      let finalizado = false;
+
+
+      const script =
+        document.createElement('script');
+
+
+      const url =
+        URL_API +
+        '?acao=listarPlaylist' +
+        '&callback=' +
+        encodeURIComponent(nomeCallback) +
+        '&_=' +
+        Date.now();
+
+
+      const timeout =
+        setTimeout(
+          function () {
+
+            if (finalizado) {
+              return;
+            }
+
+            finalizado = true;
+
+            limparCallback();
+
+            mostrarErro(
+              'Tempo limite excedido ao carregar a programação.'
+            );
+
+            atualizarStatus(
+              'Não foi possível carregar a programação',
+              false
+            );
+
+          },
+          15000
+        );
+
+
+      function limparCallback() {
+
+        clearTimeout(timeout);
+
+        if (
+          window[nomeCallback]
+        ) {
+
+          delete window[nomeCallback];
+
+        }
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+      }
+
+
+      window[nomeCallback] =
+        function (resposta) {
+
+          if (finalizado) {
+            return;
+          }
+
+          finalizado = true;
+
+          limparCallback();
+
+
+          if (
+            !resposta ||
+            resposta.sucesso !== true
+          ) {
+
+            mostrarErro(
+              resposta &&
+              resposta.mensagem
+                ? resposta.mensagem
+                : 'Não foi possível carregar a playlist.'
+            );
+
+            atualizarStatus(
+              'Erro ao carregar programação',
+              false
+            );
+
+            return;
+          }
+
+
+          playlist =
+            Array.isArray(
+              resposta.playlist
+            )
+              ? resposta.playlist
+              : [];
+
+
+          if (
+            playlist.length === 0
+          ) {
+
+            playlistElement.innerHTML = `
+              <div class="message">
+                Nenhum áudio disponível no momento.
+              </div>
+            `;
+
+            atualizarStatus(
+              'Nenhum áudio disponível',
+              false
+            );
+
+            return;
+          }
+
+
+          aplicarFiltro();
+
+
+          atualizarStatus(
+            playlist.length +
+            ' áudio' +
+            (
+              playlist.length === 1
+                ? ''
+                : 's'
+            ) +
+            ' disponível' +
+            (
+              playlist.length === 1
+                ? ''
+                : 'is'
+            ),
+            true
+          );
+
+        };
+
+
+      script.onerror =
+        function () {
+
+          if (finalizado) {
+            return;
+          }
+
+          finalizado = true;
+
+          limparCallback();
+
+
+          mostrarErro(
+            'Não foi possível conectar à API.'
+          );
+
+          atualizarStatus(
+            'Erro de conexão',
+            false
+          );
+
+        };
+
+
+      script.src = url;
+
+      document.body.appendChild(
+        script
+      );
+
+    }
+
+
+    /* =====================================================
+       FILTRO
+    ===================================================== */
+
+    function filtrar(
+      tipo,
+      botao
+    ) {
+
+      filtroAtual = tipo;
+
+
+      document
+        .querySelectorAll(
+          '.filter-btn'
+        )
+        .forEach(
+          function (btn) {
+
+            btn.classList.remove(
+              'active'
+            );
+
+          }
+        );
+
+
+      if (botao) {
+
+        botao.classList.add(
           'active'
         );
 
       }
-    );
 
 
-  if (botao) {
+      aplicarFiltro();
 
-    botao.classList.add(
-      'active'
-    );
-  }
+    }
 
 
-  aplicarFiltro();
-}
+    function aplicarFiltro() {
 
+      if (
+        filtroAtual === 'todos'
+      ) {
 
-/* =========================================================
-   APLICAR FILTRO
-   ========================================================= */
+        playlistFiltrada =
+          playlist.slice();
 
-function aplicarFiltro() {
+      } else {
 
-  if (
-    filtroAtual ===
-    'todos'
-  ) {
+        playlistFiltrada =
+          playlist.filter(
+            function (item) {
 
-    playlistFiltrada =
-      playlist.slice();
+              return normalizarTipo(
+                item.tipo
+              ) === filtroAtual;
 
-  } else {
-
-    playlistFiltrada =
-      playlist.filter(
-        function(item) {
-
-          return (
-            normalizarTipo(
-              item.tipo
-            ) ===
-            filtroAtual
+            }
           );
 
-        }
-      );
-  }
+      }
 
 
-  indiceAtual = -1;
+      renderizarPlaylist();
+
+    }
 
 
-  renderizarPlaylist();
-}
+    /* =====================================================
+       NORMALIZAR TIPO
+    ===================================================== */
 
+    function normalizarTipo(
+      tipo
+    ) {
 
-/* =========================================================
-   NORMALIZAR TIPO
-   ========================================================= */
-
-function normalizarTipo(
-  tipo
-) {
-
-  return String(
-    tipo || 'musica'
-  )
-    .trim()
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(
-      /[\u0300-\u036f]/g,
-      ''
-    );
-}
-
-
-/* =========================================================
-   RENDERIZAR PLAYLIST
-   ========================================================= */
-
-function renderizarPlaylist() {
-
-  lista.innerHTML = '';
-
-
-  if (
-    !playlistFiltrada.length
-  ) {
-
-    lista.innerHTML = `
-      <div class="message">
-        Nenhum áudio encontrado.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  playlistFiltrada.forEach(
-    function(item, index) {
-
-      const div =
-        document.createElement(
-          'div'
+      return String(
+        tipo || ''
+      )
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(
+          /[\u0300-\u036f]/g,
+          ''
+        )
+        .trim()
+        .replace(
+          /\s+/g,
+          ' '
+        )
+        .replace(
+          ' ',
+          ''
         );
 
-
-      div.className =
-        'audio-item';
+    }
 
 
-      div.dataset.index =
-        index;
+    /* =====================================================
+       RENDERIZAR PLAYLIST
+    ===================================================== */
+
+    function renderizarPlaylist() {
+
+      if (
+        playlistFiltrada.length === 0
+      ) {
+
+        playlistElement.innerHTML = `
+          <div class="message">
+            Nenhum áudio encontrado neste filtro.
+          </div>
+        `;
+
+        return;
+      }
 
 
-      const tipo =
+      playlistElement.innerHTML =
+        playlistFiltrada
+          .map(
+            function (
+              item,
+              index
+            ) {
+
+              const tipo =
+                normalizarTipo(
+                  item.tipo
+                );
+
+
+              const ehOracao =
+                tipo === 'oracao';
+
+
+              const icone =
+                ehOracao
+                  ? '🙏'
+                  : '🎵';
+
+
+              const ativo =
+                indiceAtual === index
+                  ? 'active'
+                  : '';
+
+
+              const titulo =
+                escaparHtml(
+                  item.titulo ||
+                  'Áudio sem título'
+                );
+
+
+              const artista =
+                escaparHtml(
+                  item.artista ||
+                  ''
+                );
+
+
+              const tipoTexto =
+                escaparHtml(
+                  item.tipo ||
+                  'Música'
+                );
+
+
+              return `
+                <div
+                  class="audio-item ${ativo}"
+                  onclick="tocar(${index})"
+                  title="Clique para ouvir">
+
+                  <div class="audio-icon">
+                    ${icone}
+                  </div>
+
+
+                  <div class="audio-info">
+
+                    <div class="audio-title">
+                      ${titulo}
+                    </div>
+
+                    ${
+                      artista
+                        ? `
+                          <div class="audio-artist">
+                            ${artista}
+                          </div>
+                        `
+                        : ''
+                    }
+
+                    <div class="audio-type">
+                      ${tipoTexto}
+                    </div>
+
+                  </div>
+
+
+                  <div class="play-icon">
+                    ▶
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join('');
+
+    }
+
+
+    /* =====================================================
+       TOCAR ÁUDIO
+    ===================================================== */
+
+    function tocar(index) {
+
+      const item =
+        playlistFiltrada[index];
+
+
+      if (!item) {
+        return;
+      }
+
+
+      if (
+        !item.url
+      ) {
+
+        atualizarStatus(
+          'Este áudio não possui URL.',
+          false
+        );
+
+        return;
+      }
+
+
+      indiceAtual = index;
+
+
+      /* Remove o aviso inicial */
+
+      if (playHint) {
+
+        playHint.style.display =
+          'none';
+
+      }
+
+
+      currentTitle.textContent =
+        item.titulo ||
+        'Áudio sem título';
+
+
+      currentArtist.textContent =
+        item.artista ||
+        '';
+
+
+      currentType.textContent =
         item.tipo ||
         'Música';
 
 
-      const artista =
-        item.artista ||
-        'Rádio Onda Livre';
-
-
-      div.innerHTML = `
-
-        <div class="number">
-          ${index + 1}
-        </div>
-
-        <div class="audio-info">
-
-          <div class="audio-title">
-            ${escaparHtml(
-              item.titulo
-            )}
-          </div>
-
-          <div class="audio-artist">
-            ${escaparHtml(
-              artista
-            )}
-          </div>
-
-        </div>
-
-        <div class="audio-type">
-          ${escaparHtml(
-            tipo
-          )}
-        </div>
-
-      `;
-
-
-      div.addEventListener(
-        'click',
-        function() {
-
-          tocar(index);
-
-        }
+      atualizarStatus(
+        'Preparando áudio...',
+        true
       );
 
 
-      lista.appendChild(
-        div
-      );
+      player.pause();
+
+
+      player.src =
+        item.url;
+
+
+      player.load();
+
+
+      atualizarItemAtivo();
+
+
+      const tentativa =
+        player.play();
+
+
+      if (
+        tentativa &&
+        typeof tentativa.catch ===
+          'function'
+      ) {
+
+        tentativa.catch(
+          function () {
+
+            atualizarStatus(
+              'Clique em ▶ para iniciar o áudio.',
+              true
+            );
+
+          }
+        );
+
+      }
 
     }
-  );
-}
 
 
-/* =========================================================
-   TOCAR ÁUDIO
-   ========================================================= */
+    /* =====================================================
+       ANTERIOR
+    ===================================================== */
 
-function tocar(index) {
+    function anterior() {
 
-  if (
-    index < 0 ||
-    index >=
-    playlistFiltrada.length
-  ) {
-
-    return;
-  }
+      if (
+        playlistFiltrada.length === 0
+      ) {
+        return;
+      }
 
 
-  const item =
-    playlistFiltrada[index];
+      let novoIndice;
 
 
-  if (
-    !item ||
-    !item.url
-  ) {
+      if (
+        indiceAtual <= 0
+      ) {
 
-    status.textContent =
-      'Este áudio não possui uma URL válida.';
+        novoIndice =
+          playlistFiltrada.length - 1;
 
-    return;
-  }
+      } else {
 
+        novoIndice =
+          indiceAtual - 1;
 
-  indiceAtual =
-    index;
-
-
-  currentTitle.textContent =
-    item.titulo ||
-    'Áudio sem título';
+      }
 
 
-  currentArtist.textContent =
-    item.artista ||
-    'Rádio Onda Livre';
+      tocar(novoIndice);
+
+    }
 
 
-  currentType.textContent =
-    item.tipo ||
-    'Música';
+    /* =====================================================
+       PRÓXIMO
+    ===================================================== */
+
+    function proximo() {
+
+      if (
+        playlistFiltrada.length === 0
+      ) {
+        return;
+      }
 
 
-  /*
-   * Remove o áudio anterior.
-   */
-  player.pause();
+      let novoIndice;
 
 
-  /*
-   * Define a URL exatamente como
-   * recebida do Apps Script.
-   */
-  player.src =
-    item.url;
+      if (
+        indiceAtual < 0 ||
+        indiceAtual >=
+          playlistFiltrada.length - 1
+      ) {
+
+        novoIndice = 0;
+
+      } else {
+
+        novoIndice =
+          indiceAtual + 1;
+
+      }
 
 
-  /*
-   * Recarrega o elemento.
-   */
-  player.load();
+      tocar(novoIndice);
+
+    }
 
 
-  /*
-   * Tenta iniciar.
-   */
-  const reproducao =
-    player.play();
+    /* =====================================================
+       ÁUDIO TERMINOU
+    ===================================================== */
 
+    player.addEventListener(
+      'ended',
+      function () {
 
-  if (
-    reproducao !== undefined
-  ) {
+        proximo();
 
-    reproducao.catch(
-      function(erro) {
-
-        console.warn(
-          'Reprodução automática bloqueada:',
-          erro
-        );
-
-
-        status.textContent =
-          'Clique em ▶ para iniciar o áudio.';
       }
     );
-  }
 
 
-  atualizarItemAtivo();
-}
+    /* =====================================================
+       ÁUDIO PRONTO
+    ===================================================== */
 
+    player.addEventListener(
+      'canplay',
+      function () {
 
-/* =========================================================
-   ANTERIOR
-   ========================================================= */
-
-function anterior() {
-
-  if (
-    !playlistFiltrada.length
-  ) {
-
-    return;
-  }
-
-
-  let novoIndice =
-    indiceAtual - 1;
-
-
-  if (
-    novoIndice < 0
-  ) {
-
-    novoIndice =
-      playlistFiltrada.length - 1;
-  }
-
-
-  tocar(
-    novoIndice
-  );
-}
-
-
-/* =========================================================
-   PRÓXIMO
-   ========================================================= */
-
-function proximo() {
-
-  if (
-    !playlistFiltrada.length
-  ) {
-
-    return;
-  }
-
-
-  let novoIndice =
-    indiceAtual + 1;
-
-
-  if (
-    novoIndice >=
-    playlistFiltrada.length
-  ) {
-
-    novoIndice = 0;
-  }
-
-
-  tocar(
-    novoIndice
-  );
-}
-
-
-/* =========================================================
-   ÁUDIO TERMINOU
-   ========================================================= */
-
-player.addEventListener(
-  'ended',
-  function() {
-
-    proximo();
-
-  }
-);
-
-
-/* =========================================================
-   ÁUDIO PRONTO
-   ========================================================= */
-
-player.addEventListener(
-  'canplay',
-  function() {
-
-    status.textContent =
-      'Áudio pronto para reprodução.';
-
-  }
-);
-
-
-/* =========================================================
-   ERRO DE ÁUDIO
-   ========================================================= */
-
-player.addEventListener(
-  'error',
-  function() {
-
-    console.error(
-      'Erro ao reproduzir áudio:',
-      player.src,
-      player.error
-    );
-
-
-    status.textContent =
-      'Não foi possível reproduzir este áudio.';
-
-  }
-);
-
-
-/* =========================================================
-   ITEM ATIVO
-   ========================================================= */
-
-function atualizarItemAtivo() {
-
-  document
-    .querySelectorAll(
-      '.audio-item'
-    )
-    .forEach(
-      function(item) {
-
-        item.classList.remove(
-          'active'
+        atualizarStatus(
+          'Áudio pronto para reprodução.',
+          true
         );
 
       }
     );
 
 
-  const item =
-    document.querySelector(
-      '.audio-item[data-index="' +
-      indiceAtual +
-      '"]'
+    /* =====================================================
+       ÁUDIO TOCANDO
+    ===================================================== */
+
+    player.addEventListener(
+      'play',
+      function () {
+
+        atualizarStatus(
+          'Reproduzindo agora',
+          true
+        );
+
+      }
     );
 
 
-  if (item) {
+    /* =====================================================
+       ÁUDIO PAUSADO
+    ===================================================== */
 
-    item.classList.add(
-      'active'
-    );
-  }
-}
+    player.addEventListener(
+      'pause',
+      function () {
 
+        if (
+          !player.ended
+        ) {
 
-/* =========================================================
-   ERRO GERAL
-   ========================================================= */
+          atualizarStatus(
+            'Áudio pausado',
+            true
+          );
 
-function mostrarErro(
-  mensagem
-) {
+        }
 
-  status.textContent =
-    'Erro ao carregar';
-
-
-  lista.innerHTML = `
-
-    <div class="message error">
-
-      <strong>
-        Não foi possível carregar a playlist.
-      </strong>
-
-      <br><br>
-
-      ${escaparHtml(
-        mensagem
-      )}
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   ESCAPA HTML
-   ========================================================= */
-
-function escaparHtml(
-  valor
-) {
-
-  return String(
-    valor || ''
-  )
-    .replace(
-      /&/g,
-      '&amp;'
-    )
-    .replace(
-      /</g,
-      '&lt;'
-    )
-    .replace(
-      />/g,
-      '&gt;'
-    )
-    .replace(
-      /"/g,
-      '&quot;'
-    )
-    .replace(
-      /'/g,
-      '&#039;'
+      }
     );
 
-}
 
-</script>
+    /* =====================================================
+       ERRO NO ÁUDIO
+    ===================================================== */
 
+    player.addEventListener(
+      'error',
+      function () {
+
+        atualizarStatus(
+          'Não foi possível reproduzir este áudio.',
+          false
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       ITEM ATIVO
+    ===================================================== */
+
+    function atualizarItemAtivo() {
+
+      document
+        .querySelectorAll(
+          '.audio-item'
+        )
+        .forEach(
+          function (
+            item,
+            index
+          ) {
+
+            item.classList.toggle(
+              'active',
+              index === indiceAtual
+            );
+
+          }
+        );
+
+    }
+
+
+    /* =====================================================
+       STATUS
+    ===================================================== */
+
+    function atualizarStatus(
+      mensagem,
+      online
+    ) {
+
+      statusText.textContent =
+        mensagem;
+
+
+      if (online) {
+
+        statusDot.style.background =
+          '#4ade80';
+
+        statusDot.style.boxShadow =
+          '0 0 10px rgba(74,222,128,.7)';
+
+      } else {
+
+        statusDot.style.background =
+          '#f87171';
+
+        statusDot.style.boxShadow =
+          '0 0 10px rgba(248,113,113,.7)';
+
+      }
+
+    }
+
+
+    /* =====================================================
+       MOSTRAR ERRO
+    ===================================================== */
+
+    function mostrarErro(
+      mensagem
+    ) {
+
+      playlistElement.innerHTML = `
+        <div class="message error">
+          ${escaparHtml(mensagem)}
+        </div>
+      `;
+
+    }
+
+
+    /* =====================================================
+       ESCAPAR HTML
+    ===================================================== */
+
+    function escaparHtml(
+      valor
+    ) {
+
+      return String(
+        valor ?? ''
+      )
+        .replace(
+          /&/g,
+          '&amp;'
+        )
+        .replace(
+          /</g,
+          '&lt;'
+        )
+        .replace(
+          />/g,
+          '&gt;'
+        )
+        .replace(
+          /"/g,
+          '&quot;'
+        )
+        .replace(
+          /'/g,
+          '&#039;'
+        );
+
+    }
+
+  </script>
 
 </body>
 
