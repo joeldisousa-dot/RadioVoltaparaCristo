@@ -216,12 +216,18 @@ audio {
     cursor: pointer;
 
     font-size: 17px;
+
+    transition:
+        .2s ease;
 }
 
 .control-btn:hover {
 
     background:
         rgba(255,255,255,.20);
+
+    transform:
+        translateY(-1px);
 }
 
 .filters {
@@ -253,6 +259,15 @@ audio {
     cursor: pointer;
 
     font-size: 13px;
+
+    transition:
+        .2s ease;
+}
+
+.filter-btn:hover {
+
+    background:
+        rgba(255,255,255,.12);
 }
 
 .filter-btn.active {
@@ -425,6 +440,14 @@ footer {
     .player-card {
         padding: 16px;
     }
+
+    .current-title {
+        font-size: 19px;
+    }
+
+    .filter-btn {
+        padding: 7px 12px;
+    }
 }
 
 </style>
@@ -506,6 +529,7 @@ footer {
                 class="control-btn"
                 onclick="anterior()"
                 title="Anterior"
+                aria-label="Áudio anterior"
             >
                 ⏮
             </button>
@@ -514,6 +538,7 @@ footer {
                 class="control-btn"
                 onclick="proximo()"
                 title="Próximo"
+                aria-label="Próximo áudio"
             >
                 ⏭
             </button>
@@ -612,6 +637,18 @@ let heartbeatTimer = null;
 
 
 /* =========================================================
+   LOCALIZAÇÃO APROXIMADA
+   ========================================================= */
+
+let localizacaoVisitante = {
+
+    cidade: '',
+
+    estado: ''
+};
+
+
+/* =========================================================
    SESSÃO ANÔNIMA
    ========================================================= */
 
@@ -651,6 +688,71 @@ function gerarId() {
 
 
 /* =========================================================
+   OBTER LOCALIZAÇÃO POR IP
+   ========================================================= */
+
+async function obterLocalizacao() {
+
+    try {
+
+        const resposta =
+            await fetch(
+                'https://ipapi.co/json/',
+                {
+                    cache: 'no-store'
+                }
+            );
+
+        if (!resposta.ok) {
+
+            console.warn(
+                'Serviço de localização indisponível.'
+            );
+
+            return;
+        }
+
+        const dados =
+            await resposta.json();
+
+        localizacaoVisitante = {
+
+            cidade:
+                String(
+                    dados.city || ''
+                ).trim(),
+
+            estado:
+                String(
+                    dados.region_code ||
+                    dados.region ||
+                    ''
+                ).trim()
+        };
+
+        console.log(
+            'Localização aproximada:',
+            localizacaoVisitante
+        );
+
+    } catch (erro) {
+
+        console.warn(
+            'Não foi possível obter a localização:',
+            erro
+        );
+
+        localizacaoVisitante = {
+
+            cidade: '',
+
+            estado: ''
+        };
+    }
+}
+
+
+/* =========================================================
    REGISTRAR ESTATÍSTICA
    ========================================================= */
 
@@ -666,6 +768,7 @@ function registrarEvento(
             'COLE_AQUI'
         )
     ) {
+
         return;
     }
 
@@ -677,64 +780,92 @@ function registrarEvento(
             Math.random() * 10000
         );
 
+    let script = null;
+
     window[callback] =
         function() {
 
             try {
+
                 delete window[callback];
+
             } catch(e) {}
 
-            if (script.parentNode) {
+            if (
+                script &&
+                script.parentNode
+            ) {
+
                 script.parentNode.removeChild(
                     script
                 );
             }
         };
 
-    const params = new URLSearchParams({
 
-        acao:
-            'registrarEvento',
+    const params =
+        new URLSearchParams({
 
-        evento:
-            evento,
+            acao:
+                'registrarEvento',
 
-        audioId:
-            audioId,
+            evento:
+                evento,
 
-        titulo:
-            titulo,
+            audioId:
+                audioId,
 
-        sessao:
-            obterSessao(),
+            titulo:
+                titulo,
 
-        callback:
-            callback,
+            sessao:
+                obterSessao(),
 
-        _: Date.now()
-    });
+            cidade:
+                localizacaoVisitante.cidade,
 
-    const script =
-        document.createElement('script');
+            estado:
+                localizacaoVisitante.estado,
+
+            callback:
+                callback,
+
+            _:
+                Date.now()
+        });
+
+
+    script =
+        document.createElement(
+            'script'
+        );
 
     script.src =
         URL_API +
         '?' +
         params.toString();
 
+
     script.onerror =
         function() {
 
             try {
+
                 delete window[callback];
+
             } catch(e) {}
 
-            if (script.parentNode) {
+            if (
+                script &&
+                script.parentNode
+            ) {
+
                 script.parentNode.removeChild(
                     script
                 );
             }
         };
+
 
     document.body.appendChild(
         script
@@ -774,20 +905,27 @@ function carregarPlaylist() {
         return;
     }
 
+
     const callback =
         'receberPlaylist_' +
         Date.now();
 
+
     let concluido = false;
 
+
     const script =
-        document.createElement('script');
+        document.createElement(
+            'script'
+        );
+
 
     const timer =
         setTimeout(
             function() {
 
                 if (concluido) {
+
                     return;
                 }
 
@@ -803,22 +941,29 @@ function carregarPlaylist() {
             15000
         );
 
+
     window[callback] =
         function(resposta) {
 
             if (concluido) {
+
                 return;
             }
 
             concluido = true;
 
-            clearTimeout(timer);
+            clearTimeout(
+                timer
+            );
 
             try {
+
                 delete window[callback];
+
             } catch(e) {}
 
             script.remove();
+
 
             if (
                 !resposta ||
@@ -826,6 +971,7 @@ function carregarPlaylist() {
             ) {
 
                 mostrarMensagem(
+
                     resposta &&
                     resposta.mensagem
                         ? resposta.mensagem
@@ -835,6 +981,7 @@ function carregarPlaylist() {
                 return;
             }
 
+
             playlist =
                 Array.isArray(
                     resposta.playlist
@@ -842,9 +989,11 @@ function carregarPlaylist() {
                     ? resposta.playlist
                     : [];
 
+
             aplicarFiltro();
 
         };
+
 
     const url =
         URL_API +
@@ -856,21 +1005,29 @@ function carregarPlaylist() {
         '&_=' +
         Date.now();
 
-    script.src = url;
+
+    script.src =
+        url;
+
 
     script.onerror =
         function() {
 
             if (concluido) {
+
                 return;
             }
 
             concluido = true;
 
-            clearTimeout(timer);
+            clearTimeout(
+                timer
+            );
 
             try {
+
                 delete window[callback];
+
             } catch(e) {}
 
             script.remove();
@@ -879,6 +1036,7 @@ function carregarPlaylist() {
                 'Erro de comunicação com o servidor.'
             );
         };
+
 
     document.body.appendChild(
         script
@@ -898,6 +1056,7 @@ function filtrar(
     filtroAtual =
         tipo;
 
+
     document
         .querySelectorAll(
             '.filter-btn'
@@ -909,11 +1068,14 @@ function filtrar(
                 )
         );
 
+
     if (botao) {
+
         botao.classList.add(
             'active'
         );
     }
+
 
     aplicarFiltro();
 }
@@ -950,6 +1112,7 @@ function aplicarFiltro() {
                 filtroAtual
             );
 
+
         playlistFiltrada =
             playlist.filter(
                 item =>
@@ -959,12 +1122,13 @@ function aplicarFiltro() {
             );
     }
 
+
     renderizarPlaylist();
 }
 
 
 /* =========================================================
-   RENDERIZAR
+   RENDERIZAR PLAYLIST
    ========================================================= */
 
 function renderizarPlaylist() {
@@ -973,6 +1137,7 @@ function renderizarPlaylist() {
         document.getElementById(
             'playlist'
         );
+
 
     if (
         !playlistFiltrada.length
@@ -986,41 +1151,52 @@ function renderizarPlaylist() {
         return;
     }
 
+
     container.innerHTML =
         playlistFiltrada
             .map(
-                (item, index) => {
+                (item) => {
 
                     const originalIndex =
                         playlist.indexOf(
                             item
                         );
 
+
                     const tipo =
                         normalizarTipo(
                             item.tipo
                         );
 
+
                     let icone =
                         '🎵';
+
 
                     if (
                         tipo === 'oracao'
                     ) {
-                        icone = '🙏';
+
+                        icone =
+                            '🙏';
                     }
+
 
                     if (
                         tipo === 'mensagem'
                     ) {
-                        icone = '💬';
+
+                        icone =
+                            '💬';
                     }
+
 
                     const ativo =
                         originalIndex ===
                         indiceAtual
                             ? 'active'
                             : '';
+
 
                     return `
 
@@ -1056,6 +1232,7 @@ function renderizarPlaylist() {
                         </div>
 
                     </div>
+
                     `;
                 }
             )
@@ -1073,19 +1250,24 @@ function tocar(index) {
         index < 0 ||
         index >= playlist.length
     ) {
+
         return;
     }
+
 
     const item =
         playlist[index];
 
+
     indiceAtual =
         index;
+
 
     const player =
         document.getElementById(
             'audioPlayer'
         );
+
 
     document.getElementById(
         'currentTitle'
@@ -1093,40 +1275,45 @@ function tocar(index) {
         item.titulo ||
         'Áudio sem título';
 
+
     document.getElementById(
         'currentArtist'
     ).textContent =
         item.artista || '';
+
 
     document.getElementById(
         'currentType'
     ).textContent =
         item.tipo || 'ÁUDIO';
 
+
     const hint =
         document.getElementById(
             'playHint'
         );
 
+
     if (hint) {
+
         hint.style.display =
             'none';
     }
 
+
     player.pause();
 
-    /*
-     * Registra PLAY somente quando
-     * o navegador efetivamente começar
-     * a reprodução.
-     */
 
-    ultimoEventoPlay = '';
+    ultimoEventoPlay =
+        '';
+
 
     player.src =
         item.url;
 
+
     player.load();
+
 
     player.play()
         .catch(
@@ -1137,6 +1324,7 @@ function tocar(index) {
                 );
             }
         );
+
 
     atualizarItemAtivo();
 }
@@ -1152,29 +1340,37 @@ function registrarPlayAtual() {
         indiceAtual < 0 ||
         !playlist[indiceAtual]
     ) {
+
         return;
     }
+
 
     const item =
         playlist[indiceAtual];
 
+
     const chave =
         String(item.id);
+
 
     if (
         ultimoEventoPlay === chave
     ) {
+
         return;
     }
 
+
     ultimoEventoPlay =
         chave;
+
 
     registrarEvento(
         'PLAY',
         item.id,
         item.titulo
     );
+
 
     iniciarHeartbeat();
 }
@@ -1188,6 +1384,7 @@ function iniciarHeartbeat() {
 
     pararHeartbeat();
 
+
     heartbeatTimer =
         setInterval(
             function() {
@@ -1196,6 +1393,7 @@ function iniciarHeartbeat() {
                     document.getElementById(
                         'audioPlayer'
                     );
+
 
                 if (
                     !player.paused &&
@@ -1207,6 +1405,7 @@ function iniciarHeartbeat() {
                         playlist[
                             indiceAtual
                         ];
+
 
                     registrarEvento(
                         'HEARTBEAT',
@@ -1243,12 +1442,17 @@ function pararHeartbeat() {
 
 function anterior() {
 
-    if (!playlist.length) {
+    if (
+        !playlist.length
+    ) {
+
         return;
     }
 
+
     let novoIndice =
         indiceAtual - 1;
+
 
     if (
         novoIndice < 0
@@ -1257,6 +1461,7 @@ function anterior() {
         novoIndice =
             playlist.length - 1;
     }
+
 
     tocar(
         novoIndice
@@ -1270,12 +1475,17 @@ function anterior() {
 
 function proximo() {
 
-    if (!playlist.length) {
+    if (
+        !playlist.length
+    ) {
+
         return;
     }
 
+
     let novoIndice =
         indiceAtual + 1;
+
 
     if (
         novoIndice >=
@@ -1284,6 +1494,7 @@ function proximo() {
 
         novoIndice = 0;
     }
+
 
     tocar(
         novoIndice
@@ -1401,6 +1612,7 @@ player.addEventListener(
 
         pararHeartbeat();
 
+
         if (
             indiceAtual >= 0 &&
             playlist[indiceAtual]
@@ -1408,6 +1620,7 @@ player.addEventListener(
 
             const item =
                 playlist[indiceAtual];
+
 
             registrarEvento(
                 'PAUSE',
@@ -1427,7 +1640,9 @@ player.addEventListener(
             'Próximo áudio'
         );
 
+
         pararHeartbeat();
+
 
         if (
             indiceAtual >= 0 &&
@@ -1437,12 +1652,14 @@ player.addEventListener(
             const item =
                 playlist[indiceAtual];
 
+
             registrarEvento(
                 'FIM',
                 item.id,
                 item.titulo
             );
         }
+
 
         proximo();
     }
@@ -1479,19 +1696,33 @@ player.addEventListener(
 
 document.addEventListener(
     'DOMContentLoaded',
-    function() {
+    async function() {
 
         /*
-         * Registra uma visita.
+         * Primeiro tenta descobrir a cidade
+         * e o estado aproximados do visitante.
+         *
+         * Se não conseguir, a rádio continua
+         * funcionando normalmente.
+         */
+
+        await obterLocalizacao();
+
+
+        /*
+         * Registra o acesso somente depois
+         * da tentativa de localização.
          */
 
         registrarAcesso();
+
 
         /*
          * Carrega a playlist.
          */
 
         carregarPlaylist();
+
     }
 );
 
