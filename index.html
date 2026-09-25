@@ -14,9 +14,18 @@
 
 <style>
 
+/* =========================================================
+   RESET
+   ========================================================= */
+
 * {
     box-sizing: border-box;
 }
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
 
 body {
 
@@ -45,13 +54,24 @@ body {
     padding: 25px 15px;
 }
 
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
 .container {
 
     width: 100%;
+
     max-width: 760px;
 
     margin: 0 auto;
 }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .header {
 
@@ -59,6 +79,7 @@ body {
 
     margin-bottom: 20px;
 }
+
 
 .microphone {
 
@@ -84,6 +105,7 @@ body {
         rgba(255,255,255,.15);
 }
 
+
 h1 {
 
     margin: 0;
@@ -92,6 +114,7 @@ h1 {
 
     font-weight: 700;
 }
+
 
 .subtitle {
 
@@ -102,6 +125,11 @@ h1 {
 
     font-size: 14px;
 }
+
+
+/* =========================================================
+   PLAYER
+   ========================================================= */
 
 .player-card {
 
@@ -124,6 +152,7 @@ h1 {
         rgba(0,0,0,.22);
 }
 
+
 .status {
 
     display: flex;
@@ -140,6 +169,7 @@ h1 {
     margin-bottom: 10px;
 }
 
+
 .status-dot {
 
     width: 8px;
@@ -149,6 +179,7 @@ h1 {
 
     background: #5ee68a;
 }
+
 
 .current-type {
 
@@ -162,6 +193,7 @@ h1 {
         rgba(255,255,255,.55);
 }
 
+
 .current-title {
 
     font-size: 21px;
@@ -170,6 +202,7 @@ h1 {
 
     margin-top: 3px;
 }
+
 
 .current-artist {
 
@@ -183,10 +216,12 @@ h1 {
     margin-bottom: 15px;
 }
 
+
 audio {
 
     width: 100%;
 }
+
 
 .controls {
 
@@ -198,6 +233,7 @@ audio {
 
     margin-top: 15px;
 }
+
 
 .control-btn {
 
@@ -220,6 +256,7 @@ audio {
     transition: .2s ease;
 }
 
+
 .control-btn:hover {
 
     background:
@@ -228,6 +265,11 @@ audio {
     transform:
         translateY(-1px);
 }
+
+
+/* =========================================================
+   FILTROS DE TIPO
+   ========================================================= */
 
 .filters {
 
@@ -240,9 +282,11 @@ audio {
     margin: 20px 0 12px;
 }
 
+
 .filter-btn {
 
-    border: 1px solid
+    border:
+        1px solid
         rgba(255,255,255,.12);
 
     background:
@@ -262,11 +306,13 @@ audio {
     transition: .2s ease;
 }
 
+
 .filter-btn:hover {
 
     background:
         rgba(255,255,255,.12);
 }
+
 
 .filter-btn.active {
 
@@ -277,6 +323,161 @@ audio {
     border-color: #1976d2;
 }
 
+
+/* =========================================================
+   FILTRO POR DATA
+   ========================================================= */
+
+.date-filter {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin:
+        0 0 15px;
+
+    padding: 12px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+}
+
+
+.date-field {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    flex: 1;
+
+    min-width: 150px;
+}
+
+
+.date-field label {
+
+    font-size: 11px;
+
+    color:
+        rgba(255,255,255,.55);
+}
+
+
+.date-field input {
+
+    width: 100%;
+
+    height: 36px;
+
+    padding:
+        0 10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    color: white;
+
+    font-size: 13px;
+
+    outline: none;
+}
+
+
+.date-field input:focus {
+
+    border-color:
+        #1976d2;
+}
+
+
+.date-clear {
+
+    height: 36px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    color:
+        rgba(255,255,255,.80);
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition: .2s ease;
+}
+
+
+.date-clear:hover {
+
+    background:
+        rgba(255,255,255,.15);
+}
+
+
+/* =========================================================
+   RESUMO DO FILTRO
+   ========================================================= */
+
+.filter-info {
+
+    display: none;
+
+    margin:
+        0 0 10px;
+
+    padding:
+        8px 12px;
+
+    border-radius: 9px;
+
+    background:
+        rgba(25,118,210,.15);
+
+    border:
+        1px solid
+        rgba(25,118,210,.25);
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PLAYLIST
+   ========================================================= */
+
 .playlist {
 
     display: flex;
@@ -286,6 +487,7 @@ audio {
     gap: 8px;
 }
 
+
 .audio-item {
 
     display: flex;
@@ -294,7 +496,8 @@ audio {
 
     gap: 12px;
 
-    padding: 12px 14px;
+    padding:
+        12px 14px;
 
     border-radius: 13px;
 
@@ -310,6 +513,7 @@ audio {
     transition: .2s ease;
 }
 
+
 .audio-item:hover {
 
     background:
@@ -319,6 +523,7 @@ audio {
         translateY(-1px);
 }
 
+
 .audio-item.active {
 
     background:
@@ -327,6 +532,7 @@ audio {
     border-color:
         rgba(65,155,235,.45);
 }
+
 
 .audio-icon {
 
@@ -348,12 +554,14 @@ audio {
     font-size: 17px;
 }
 
+
 .audio-info {
 
     min-width: 0;
 
     flex: 1;
 }
+
 
 .audio-title {
 
@@ -368,6 +576,7 @@ audio {
     text-overflow: ellipsis;
 }
 
+
 .audio-artist {
 
     font-size: 12px;
@@ -378,6 +587,7 @@ audio {
     margin-top: 2px;
 }
 
+
 .audio-type {
 
     font-size: 10px;
@@ -387,6 +597,22 @@ audio {
 
     margin-top: 4px;
 }
+
+
+.audio-date {
+
+    font-size: 10px;
+
+    color:
+        rgba(255,255,255,.45);
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   MENSAGENS
+   ========================================================= */
 
 .play-hint {
 
@@ -400,6 +626,7 @@ audio {
     font-size: 13px;
 }
 
+
 .message {
 
     text-align: center;
@@ -411,6 +638,11 @@ audio {
 
     font-size: 14px;
 }
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer {
 
@@ -424,26 +656,62 @@ footer {
         rgba(255,255,255,.42);
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media(max-width:600px) {
 
     body {
-        padding: 18px 10px;
+
+        padding:
+            18px 10px;
     }
 
+
     h1 {
+
         font-size: 24px;
     }
 
+
     .player-card {
+
         padding: 16px;
     }
 
+
     .current-title {
+
         font-size: 19px;
     }
 
+
     .filter-btn {
-        padding: 7px 12px;
+
+        padding:
+            7px 12px;
+    }
+
+
+    .date-filter {
+
+        align-items:
+            stretch;
+    }
+
+
+    .date-field {
+
+        min-width:
+            130px;
+    }
+
+
+    .date-clear {
+
+        width: 100%;
     }
 }
 
@@ -455,6 +723,11 @@ footer {
 <body>
 
 <div class="container">
+
+
+    <!-- =====================================================
+         CABEÇALHO
+         ===================================================== -->
 
     <header class="header">
 
@@ -472,6 +745,10 @@ footer {
 
     </header>
 
+
+    <!-- =====================================================
+         PLAYER
+         ===================================================== -->
 
     <section class="player-card">
 
@@ -531,6 +808,7 @@ footer {
                 ⏮
             </button>
 
+
             <button
                 class="control-btn"
                 onclick="proximo()"
@@ -545,6 +823,10 @@ footer {
     </section>
 
 
+    <!-- =====================================================
+         FILTROS POR TIPO
+         ===================================================== -->
+
     <div class="filters">
 
         <button
@@ -554,6 +836,7 @@ footer {
             Todos
         </button>
 
+
         <button
             class="filter-btn"
             onclick="filtrar('Música', this)"
@@ -561,12 +844,14 @@ footer {
             🎵 Músicas
         </button>
 
+
         <button
             class="filter-btn"
             onclick="filtrar('Oração', this)"
         >
             🙏 Orações
         </button>
+
 
         <button
             class="filter-btn"
@@ -578,10 +863,71 @@ footer {
     </div>
 
 
+    <!-- =====================================================
+         FILTRO POR DATA
+         ===================================================== -->
+
+    <div class="date-filter">
+
+        <div class="date-field">
+
+            <label for="dataInicial">
+                Data inicial
+            </label>
+
+            <input
+                type="date"
+                id="dataInicial"
+                onchange="aplicarFiltro()"
+            >
+
+        </div>
+
+
+        <div class="date-field">
+
+            <label for="dataFinal">
+                Data final
+            </label>
+
+            <input
+                type="date"
+                id="dataFinal"
+                onchange="aplicarFiltro()"
+            >
+
+        </div>
+
+
+        <button
+            class="date-clear"
+            onclick="limparFiltroData()"
+        >
+            Limpar
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         INFORMAÇÃO DO FILTRO
+         ===================================================== -->
+
+    <div
+        id="filterInfo"
+        class="filter-info"
+    ></div>
+
+
+    <!-- =====================================================
+         AVISO INICIAL
+         ===================================================== -->
+
     <div
         id="playHint"
         class="play-hint"
     >
+
         <strong>
             Escolha um áudio para ouvir
         </strong>
@@ -590,14 +936,23 @@ footer {
 
         ▶ Clique em uma música ou oração
         abaixo para iniciar o áudio
+
     </div>
 
+
+    <!-- =====================================================
+         PLAYLIST
+         ===================================================== -->
 
     <div
         id="playlist"
         class="playlist"
     ></div>
 
+
+    <!-- =====================================================
+         RODAPÉ
+         ===================================================== -->
 
     <footer>
         Rádio Onda Livre • Joel Rodrigues
@@ -607,6 +962,7 @@ footer {
 
 
 <script>
+
 
 /* =========================================================
    CONFIGURAÇÃO
@@ -657,6 +1013,7 @@ function obterSessao() {
     let sessao =
         localStorage.getItem(chave);
 
+
     if (!sessao) {
 
         sessao =
@@ -668,6 +1025,7 @@ function obterSessao() {
         );
     }
 
+
     return sessao;
 }
 
@@ -675,11 +1033,15 @@ function obterSessao() {
 function gerarId() {
 
     return (
+
         Date.now().toString(36) +
+
         '_' +
+
         Math.random()
             .toString(36)
             .substring(2, 12)
+
     );
 }
 
@@ -691,9 +1053,11 @@ function gerarId() {
 function obterLocalizacao() {
 
     return new Promise(
+
         function(resolve) {
 
             let concluido = false;
+
 
             const callback =
                 'localizacao_' +
@@ -703,36 +1067,39 @@ function obterLocalizacao() {
                     Math.random() * 10000
                 );
 
+
             const script =
                 document.createElement(
                     'script'
                 );
 
-            /*
-             * Tempo máximo de espera:
-             * 5 segundos.
-             */
 
             const timer =
                 setTimeout(
+
                     function() {
 
                         if (concluido) {
                             return;
                         }
 
+
                         concluido = true;
+
 
                         console.warn(
                             'Tempo esgotado para obter localização.'
                         );
+
 
                         limpar();
 
                         resolve();
 
                     },
+
                     5000
+
                 );
 
 
@@ -740,11 +1107,13 @@ function obterLocalizacao() {
 
                 clearTimeout(timer);
 
+
                 try {
 
                     delete window[callback];
 
                 } catch(e) {}
+
 
                 if (
                     script &&
@@ -765,7 +1134,9 @@ function obterLocalizacao() {
                         return;
                     }
 
+
                     concluido = true;
+
 
                     limpar();
 
@@ -779,6 +1150,7 @@ function obterLocalizacao() {
                             'Erro na localização:',
                             dados.reason || dados
                         );
+
 
                         resolve();
 
@@ -822,13 +1194,17 @@ function obterLocalizacao() {
                         return;
                     }
 
+
                     concluido = true;
 
+
                     limpar();
+
 
                     console.warn(
                         'Não foi possível consultar a localização.'
                     );
+
 
                     resolve();
                 };
@@ -836,23 +1212,28 @@ function obterLocalizacao() {
 
             script.src =
                 'https://ipapi.co/jsonp/?callback=' +
+
                 encodeURIComponent(
                     callback
                 ) +
+
                 '&_=' +
+
                 Date.now();
 
 
             document.body.appendChild(
                 script
             );
+
         }
+
     );
 }
 
 
 /* =========================================================
-   VERIFICAR SE O ACESSO JÁ FOI REGISTRADO
+   ACESSO
    ========================================================= */
 
 function acessoJaRegistrado() {
@@ -871,14 +1252,12 @@ function acessoJaRegistrado() {
 }
 
 
-/* =========================================================
-   MARCAR ACESSO COMO REGISTRADO
-   ========================================================= */
-
 function marcarAcessoRegistrado() {
 
     sessionStorage.setItem(
+
         'radio_onda_livre_acesso_registrado',
+
         '1'
     );
 }
@@ -889,16 +1268,23 @@ function marcarAcessoRegistrado() {
    ========================================================= */
 
 function registrarEvento(
+
     evento,
+
     audioId = '',
+
     titulo = ''
+
 ) {
 
     if (
+
         !URL_API ||
+
         URL_API.includes(
             'COLE_AQUI'
         )
+
     ) {
 
         return;
@@ -906,9 +1292,13 @@ function registrarEvento(
 
 
     const callback =
+
         'evento_' +
+
         Date.now() +
+
         '_' +
+
         Math.floor(
             Math.random() * 10000
         );
@@ -918,6 +1308,7 @@ function registrarEvento(
 
 
     window[callback] =
+
         function() {
 
             try {
@@ -928,8 +1319,11 @@ function registrarEvento(
 
 
             if (
+
                 script &&
+
                 script.parentNode
+
             ) {
 
                 script.parentNode.removeChild(
@@ -940,6 +1334,7 @@ function registrarEvento(
 
 
     const params =
+
         new URLSearchParams({
 
             acao:
@@ -968,22 +1363,28 @@ function registrarEvento(
 
             _:
                 Date.now()
+
         });
 
 
     script =
+
         document.createElement(
             'script'
         );
 
 
     script.src =
+
         URL_API +
+
         '?' +
+
         params.toString();
 
 
     script.onerror =
+
         function() {
 
             try {
@@ -994,8 +1395,11 @@ function registrarEvento(
 
 
             if (
+
                 script &&
+
                 script.parentNode
+
             ) {
 
                 script.parentNode.removeChild(
@@ -1017,11 +1421,6 @@ function registrarEvento(
 
 function registrarAcesso() {
 
-    /*
-     * Impede que o mesmo carregamento/sessão
-     * registre o ACESSO mais de uma vez.
-     */
-
     if (
         acessoJaRegistrado()
     ) {
@@ -1034,19 +1433,15 @@ function registrarAcesso() {
     }
 
 
-    /*
-     * Marca ANTES de enviar.
-     *
-     * Assim, mesmo que alguma parte do código
-     * tente chamar novamente, não duplica.
-     */
-
     marcarAcessoRegistrado();
 
 
     console.log(
+
         'REGISTRANDO ACESSO:',
+
         {
+
             cidade:
                 localizacaoVisitante.cidade,
 
@@ -1055,7 +1450,9 @@ function registrarAcesso() {
 
             sessao:
                 obterSessao()
+
         }
+
     );
 
 
@@ -1072,10 +1469,13 @@ function registrarAcesso() {
 function carregarPlaylist() {
 
     if (
+
         !URL_API ||
+
         URL_API.includes(
             'COLE_AQUI'
         )
+
     ) {
 
         mostrarMensagem(
@@ -1087,7 +1487,9 @@ function carregarPlaylist() {
 
 
     const callback =
+
         'receberPlaylist_' +
+
         Date.now();
 
 
@@ -1095,40 +1497,51 @@ function carregarPlaylist() {
 
 
     const script =
+
         document.createElement(
             'script'
         );
 
 
     const timer =
+
         setTimeout(
+
             function() {
 
                 if (concluido) {
                     return;
                 }
 
+
                 concluido = true;
+
 
                 mostrarMensagem(
                     'Não foi possível carregar a playlist.'
                 );
 
+
                 script.remove();
 
             },
+
             15000
+
         );
 
 
     window[callback] =
+
         function(resposta) {
 
             if (concluido) {
                 return;
             }
 
+
             concluido = true;
+
 
             clearTimeout(timer);
 
@@ -1144,16 +1557,23 @@ function carregarPlaylist() {
 
 
             if (
+
                 !resposta ||
+
                 !resposta.sucesso
+
             ) {
 
                 mostrarMensagem(
 
                     resposta &&
+
                     resposta.mensagem
+
                         ? resposta.mensagem
+
                         : 'Erro ao carregar playlist.'
+
                 );
 
                 return;
@@ -1161,10 +1581,13 @@ function carregarPlaylist() {
 
 
             playlist =
+
                 Array.isArray(
                     resposta.playlist
                 )
+
                     ? resposta.playlist
+
                     : [];
 
 
@@ -1174,13 +1597,19 @@ function carregarPlaylist() {
 
 
     const url =
+
         URL_API +
+
         '?acao=listarPlaylist' +
+
         '&callback=' +
+
         encodeURIComponent(
             callback
         ) +
+
         '&_=' +
+
         Date.now();
 
 
@@ -1189,13 +1618,16 @@ function carregarPlaylist() {
 
 
     script.onerror =
+
         function() {
 
             if (concluido) {
                 return;
             }
 
+
             concluido = true;
+
 
             clearTimeout(timer);
 
@@ -1223,12 +1655,15 @@ function carregarPlaylist() {
 
 
 /* =========================================================
-   FILTRO
+   FILTRO POR TIPO
    ========================================================= */
 
 function filtrar(
+
     tipo,
+
     botao
+
 ) {
 
     filtroAtual =
@@ -1240,10 +1675,13 @@ function filtrar(
             '.filter-btn'
         )
         .forEach(
+
             btn =>
+
                 btn.classList.remove(
                     'active'
                 )
+
         );
 
 
@@ -1259,46 +1697,416 @@ function filtrar(
 }
 
 
+/* =========================================================
+   NORMALIZAR TIPO
+   ========================================================= */
+
 function normalizarTipo(tipo) {
 
     return String(
         tipo || ''
     )
+
         .toLowerCase()
+
         .normalize('NFD')
+
         .replace(
             /[\u0300-\u036f]/g,
             ''
         )
+
         .trim();
 }
 
 
-function aplicarFiltro() {
+/* =========================================================
+   OBTER DATA DO ÁUDIO
+   ========================================================= */
 
-    if (
-        filtroAtual === 'Todos'
+function obterDataItem(item) {
+
+    if (!item) {
+        return '';
+    }
+
+
+    /*
+     * Campos aceitos.
+     *
+     * O primeiro que existir será utilizado.
+     */
+
+    const campos = [
+
+        'data',
+
+        'dataAudio',
+
+        'dataPublicacao',
+
+        'dataCadastro',
+
+        'createdAt',
+
+        'date',
+
+        'Data',
+
+        'DATA'
+
+    ];
+
+
+    for (
+        const campo of campos
     ) {
 
-        playlistFiltrada =
-            playlist.slice();
+        if (
+            item[campo] !== undefined &&
+            item[campo] !== null &&
+            String(item[campo]).trim() !== ''
+        ) {
 
-    } else {
-
-        const filtro =
-            normalizarTipo(
-                filtroAtual
-            );
-
-
-        playlistFiltrada =
-            playlist.filter(
-                item =>
-                    normalizarTipo(
-                        item.tipo
-                    ) === filtro
-            );
+            return item[campo];
+        }
     }
+
+
+    return '';
+}
+
+
+/* =========================================================
+   NORMALIZAR DATA
+   ========================================================= */
+
+function normalizarData(data) {
+
+    if (!data) {
+        return '';
+    }
+
+
+    let valor =
+        String(data).trim();
+
+
+    /*
+     * yyyy-mm-dd
+     */
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            valor
+        )
+    ) {
+
+        return valor;
+    }
+
+
+    /*
+     * dd/mm/yyyy
+     */
+
+    const partes =
+        valor.split('/');
+
+
+    if (
+        partes.length === 3
+    ) {
+
+        const dia =
+            partes[0]
+                .padStart(2, '0');
+
+        const mes =
+            partes[1]
+                .padStart(2, '0');
+
+        const ano =
+            partes[2];
+
+
+        if (
+            ano.length === 4
+        ) {
+
+            return (
+                `${ano}-${mes}-${dia}`
+            );
+        }
+    }
+
+
+    /*
+     * Data com hora.
+     *
+     * Exemplo:
+     * 2026-09-25T10:30:00
+     */
+
+    if (
+        /^\d{4}-\d{2}-\d{2}T/.test(
+            valor
+        )
+    ) {
+
+        return valor.substring(
+            0,
+            10
+        );
+    }
+
+
+    /*
+     * Tenta converter
+     * datas reconhecidas pelo JavaScript.
+     */
+
+    const dataConvertida =
+        new Date(valor);
+
+
+    if (
+        !isNaN(
+            dataConvertida.getTime()
+        )
+    ) {
+
+        const ano =
+            dataConvertida
+                .getFullYear();
+
+
+        const mes =
+            String(
+                dataConvertida
+                    .getMonth() + 1
+            )
+            .padStart(
+                2,
+                '0'
+            );
+
+
+        const dia =
+            String(
+                dataConvertida
+                    .getDate()
+            )
+            .padStart(
+                2,
+                '0'
+            );
+
+
+        return (
+            `${ano}-${mes}-${dia}`
+        );
+    }
+
+
+    return '';
+}
+
+
+/* =========================================================
+   FORMATAR DATA PARA EXIBIÇÃO
+   ========================================================= */
+
+function formatarData(data) {
+
+    const valor =
+        normalizarData(data);
+
+
+    if (!valor) {
+        return '';
+    }
+
+
+    const partes =
+        valor.split('-');
+
+
+    if (
+        partes.length !== 3
+    ) {
+
+        return '';
+    }
+
+
+    return (
+
+        partes[2] +
+
+        '/' +
+
+        partes[1] +
+
+        '/' +
+
+        partes[0]
+
+    );
+}
+
+
+/* =========================================================
+   APLICAR FILTROS
+   ========================================================= */
+
+function aplicarFiltro() {
+
+    const dataInicialElement =
+        document.getElementById(
+            'dataInicial'
+        );
+
+
+    const dataFinalElement =
+        document.getElementById(
+            'dataFinal'
+        );
+
+
+    const dataInicial =
+        dataInicialElement
+            ? dataInicialElement.value
+            : '';
+
+
+    const dataFinal =
+        dataFinalElement
+            ? dataFinalElement.value
+            : '';
+
+
+    /*
+     * Validação:
+     * data inicial não pode ser maior
+     * que data final.
+     */
+
+    if (
+        dataInicial &&
+        dataFinal &&
+        dataInicial > dataFinal
+    ) {
+
+        mostrarInfoFiltro(
+            'A data inicial não pode ser maior que a data final.'
+        );
+
+
+        playlistFiltrada = [];
+
+
+        renderizarPlaylist();
+
+        return;
+    }
+
+
+    playlistFiltrada =
+
+        playlist.filter(
+
+            function(item) {
+
+
+                /* =========================================
+                   FILTRO POR TIPO
+                   ========================================= */
+
+                if (
+                    filtroAtual !== 'Todos'
+                ) {
+
+                    const filtro =
+                        normalizarTipo(
+                            filtroAtual
+                        );
+
+
+                    const tipoItem =
+                        normalizarTipo(
+                            item.tipo
+                        );
+
+
+                    if (
+                        tipoItem !== filtro
+                    ) {
+
+                        return false;
+                    }
+                }
+
+
+                /* =========================================
+                   FILTRO POR DATA
+                   ========================================= */
+
+                if (
+                    dataInicial ||
+                    dataFinal
+                ) {
+
+                    const dataItem =
+                        normalizarData(
+                            obterDataItem(
+                                item
+                            )
+                        );
+
+
+                    /*
+                     * Se foi solicitado filtro
+                     * por data e o áudio não possui
+                     * data, não será exibido.
+                     */
+
+                    if (!dataItem) {
+
+                        return false;
+                    }
+
+
+                    if (
+                        dataInicial &&
+                        dataItem < dataInicial
+                    ) {
+
+                        return false;
+                    }
+
+
+                    if (
+                        dataFinal &&
+                        dataItem > dataFinal
+                    ) {
+
+                        return false;
+                    }
+                }
+
+
+                return true;
+
+            }
+
+        );
+
+
+    atualizarInfoFiltro(
+        dataInicial,
+        dataFinal
+    );
 
 
     renderizarPlaylist();
@@ -1306,7 +2114,142 @@ function aplicarFiltro() {
 
 
 /* =========================================================
-   RENDERIZAR
+   INFORMAÇÃO DO FILTRO
+   ========================================================= */
+
+function atualizarInfoFiltro(
+
+    dataInicial,
+
+    dataFinal
+
+) {
+
+    const info =
+        document.getElementById(
+            'filterInfo'
+        );
+
+
+    if (!info) {
+        return;
+    }
+
+
+    const quantidade =
+        playlistFiltrada.length;
+
+
+    let texto = '';
+
+
+    if (
+        dataInicial &&
+        dataFinal
+    ) {
+
+        texto =
+            `📅 ${formatarData(dataInicial)} até ${formatarData(dataFinal)} • ${quantidade} áudio(s)`;
+
+    } else if (
+        dataInicial
+    ) {
+
+        texto =
+            `📅 A partir de ${formatarData(dataInicial)} • ${quantidade} áudio(s)`;
+
+    } else if (
+        dataFinal
+    ) {
+
+        texto =
+            `📅 Até ${formatarData(dataFinal)} • ${quantidade} áudio(s)`;
+
+    } else {
+
+        info.style.display =
+            'none';
+
+        info.textContent =
+            '';
+
+        return;
+    }
+
+
+    info.textContent =
+        texto;
+
+
+    info.style.display =
+        'block';
+}
+
+
+/* =========================================================
+   MENSAGEM DE ERRO DO FILTRO
+   ========================================================= */
+
+function mostrarInfoFiltro(texto) {
+
+    const info =
+        document.getElementById(
+            'filterInfo'
+        );
+
+
+    if (!info) {
+        return;
+    }
+
+
+    info.textContent =
+        texto;
+
+
+    info.style.display =
+        'block';
+}
+
+
+/* =========================================================
+   LIMPAR FILTRO DE DATA
+   ========================================================= */
+
+function limparFiltroData() {
+
+    const dataInicial =
+        document.getElementById(
+            'dataInicial'
+        );
+
+
+    const dataFinal =
+        document.getElementById(
+            'dataFinal'
+        );
+
+
+    if (dataInicial) {
+
+        dataInicial.value =
+            '';
+    }
+
+
+    if (dataFinal) {
+
+        dataFinal.value =
+            '';
+    }
+
+
+    aplicarFiltro();
+}
+
+
+/* =========================================================
+   RENDERIZAR PLAYLIST
    ========================================================= */
 
 function renderizarPlaylist() {
@@ -1322,26 +2265,36 @@ function renderizarPlaylist() {
     ) {
 
         container.innerHTML =
+
             '<div class="message">' +
+
             'Nenhum áudio encontrado.' +
+
             '</div>';
+
 
         return;
     }
 
 
     container.innerHTML =
+
         playlistFiltrada
+
             .map(
+
                 item => {
 
+
                     const originalIndex =
+
                         playlist.indexOf(
                             item
                         );
 
 
                     const tipo =
+
                         normalizarTipo(
                             item.tipo
                         );
@@ -1370,50 +2323,107 @@ function renderizarPlaylist() {
 
 
                     const ativo =
+
                         originalIndex ===
                         indiceAtual
+
                             ? 'active'
+
                             : '';
+
+
+                    const dataOriginal =
+                        obterDataItem(
+                            item
+                        );
+
+
+                    const dataFormatada =
+                        formatarData(
+                            dataOriginal
+                        );
 
 
                     return `
 
                     <div
+
                         class="audio-item ${ativo}"
+
                         onclick="tocar(${originalIndex})"
+
                     >
 
-                        <div class="audio-icon">
+                        <div
+                            class="audio-icon"
+                        >
                             ${icone}
                         </div>
 
-                        <div class="audio-info">
 
-                            <div class="audio-title">
+                        <div
+                            class="audio-info"
+                        >
+
+                            <div
+                                class="audio-title"
+                            >
+
                                 ${escaparHtml(
                                     item.titulo
                                 )}
+
                             </div>
 
-                            <div class="audio-artist">
+
+                            <div
+                                class="audio-artist"
+                            >
+
                                 ${escaparHtml(
                                     item.artista || ''
                                 )}
+
                             </div>
 
-                            <div class="audio-type">
+
+                            <div
+                                class="audio-type"
+                            >
+
                                 ${escaparHtml(
                                     item.tipo || ''
                                 )}
+
                             </div>
+
+
+                            ${
+                                dataFormatada
+
+                                ? `
+
+                                <div
+                                    class="audio-date"
+                                >
+                                    📅 ${dataFormatada}
+                                </div>
+
+                                `
+
+                                : ''
+                            }
 
                         </div>
 
                     </div>
 
                     `;
+
                 }
+
             )
+
             .join('');
 }
 
@@ -1425,8 +2435,11 @@ function renderizarPlaylist() {
 function tocar(index) {
 
     if (
+
         index < 0 ||
+
         index >= playlist.length
+
     ) {
 
         return;
@@ -1450,20 +2463,28 @@ function tocar(index) {
     document.getElementById(
         'currentTitle'
     ).textContent =
+
         item.titulo ||
+
         'Áudio sem título';
 
 
     document.getElementById(
         'currentArtist'
     ).textContent =
-        item.artista || '';
+
+        item.artista ||
+
+        '';
 
 
     document.getElementById(
         'currentType'
     ).textContent =
-        item.tipo || 'ÁUDIO';
+
+        item.tipo ||
+
+        'ÁUDIO';
 
 
     const hint =
@@ -1494,13 +2515,17 @@ function tocar(index) {
 
 
     player.play()
+
         .catch(
+
             function() {
 
                 atualizarStatus(
                     'Clique no player para iniciar'
                 );
+
             }
+
         );
 
 
@@ -1515,8 +2540,11 @@ function tocar(index) {
 function registrarPlayAtual() {
 
     if (
+
         indiceAtual < 0 ||
+
         !playlist[indiceAtual]
+
     ) {
 
         return;
@@ -1528,7 +2556,9 @@ function registrarPlayAtual() {
 
 
     const chave =
-        String(item.id);
+        String(
+            item.id
+        );
 
 
     if (
@@ -1544,9 +2574,13 @@ function registrarPlayAtual() {
 
 
     registrarEvento(
+
         'PLAY',
+
         item.id,
+
         item.titulo
+
     );
 
 
@@ -1564,7 +2598,9 @@ function iniciarHeartbeat() {
 
 
     heartbeatTimer =
+
         setInterval(
+
             function() {
 
                 const player =
@@ -1574,26 +2610,37 @@ function iniciarHeartbeat() {
 
 
                 if (
+
                     !player.paused &&
+
                     indiceAtual >= 0 &&
+
                     playlist[indiceAtual]
+
                 ) {
 
                     const item =
+
                         playlist[
                             indiceAtual
                         ];
 
 
                     registrarEvento(
+
                         'HEARTBEAT',
+
                         item.id,
+
                         item.titulo
+
                     );
                 }
 
             },
+
             60000
+
         );
 }
 
@@ -1607,6 +2654,7 @@ function pararHeartbeat() {
         clearInterval(
             heartbeatTimer
         );
+
 
         heartbeatTimer =
             null;
@@ -1629,6 +2677,7 @@ function anterior() {
 
 
     let novoIndice =
+
         indiceAtual - 1;
 
 
@@ -1637,6 +2686,7 @@ function anterior() {
     ) {
 
         novoIndice =
+
             playlist.length - 1;
     }
 
@@ -1662,12 +2712,16 @@ function proximo() {
 
 
     let novoIndice =
+
         indiceAtual + 1;
 
 
     if (
+
         novoIndice >=
+
         playlist.length
+
     ) {
 
         novoIndice = 0;
@@ -1701,6 +2755,7 @@ function atualizarStatus(
     document.getElementById(
         'statusText'
     ).textContent =
+
         texto;
 }
 
@@ -1718,7 +2773,11 @@ function mostrarMensagem(
     ).innerHTML =
 
         '<div class="message">' +
-        escaparHtml(mensagem) +
+
+        escaparHtml(
+            mensagem
+        ) +
+
         '</div>';
 }
 
@@ -1734,22 +2793,27 @@ function escaparHtml(
     return String(
         texto || ''
     )
+
         .replace(
             /&/g,
             '&amp;'
         )
+
         .replace(
             /</g,
             '&lt;'
         )
+
         .replace(
             />/g,
             '&gt;'
         )
+
         .replace(
             /"/g,
             '&quot;'
         )
+
         .replace(
             /'/g,
             '&#039;'
@@ -1768,50 +2832,72 @@ const player =
 
 
 player.addEventListener(
+
     'play',
+
     function() {
 
         atualizarStatus(
             'Reproduzindo'
         );
 
+
         registrarPlayAtual();
+
     }
+
 );
 
 
 player.addEventListener(
+
     'pause',
+
     function() {
 
         atualizarStatus(
             'Pausado'
         );
 
+
         pararHeartbeat();
 
 
         if (
+
             indiceAtual >= 0 &&
+
             playlist[indiceAtual]
+
         ) {
 
             const item =
-                playlist[indiceAtual];
+
+                playlist[
+                    indiceAtual
+                ];
 
 
             registrarEvento(
+
                 'PAUSE',
+
                 item.id,
+
                 item.titulo
+
             );
         }
+
     }
+
 );
 
 
 player.addEventListener(
+
     'ended',
+
     function() {
 
         atualizarStatus(
@@ -1823,48 +2909,69 @@ player.addEventListener(
 
 
         if (
+
             indiceAtual >= 0 &&
+
             playlist[indiceAtual]
+
         ) {
 
             const item =
-                playlist[indiceAtual];
+
+                playlist[
+                    indiceAtual
+                ];
 
 
             registrarEvento(
+
                 'FIM',
+
                 item.id,
+
                 item.titulo
+
             );
         }
 
 
         proximo();
+
     }
+
 );
 
 
 player.addEventListener(
+
     'canplay',
+
     function() {
 
         atualizarStatus(
             'Áudio pronto'
         );
+
     }
+
 );
 
 
 player.addEventListener(
+
     'error',
+
     function() {
 
         atualizarStatus(
             'Não foi possível reproduzir'
         );
 
+
         pararHeartbeat();
+
     }
+
 );
 
 
@@ -1873,11 +2980,15 @@ player.addEventListener(
    ========================================================= */
 
 document.addEventListener(
+
     'DOMContentLoaded',
+
     async function() {
 
+
         /*
-         * Primeiro tenta obter a localização.
+         * Primeiro tenta obter
+         * a localização.
          */
 
         await obterLocalizacao();
@@ -1885,20 +2996,20 @@ document.addEventListener(
 
         /*
          * Depois registra o acesso.
-         * O controle sessionStorage impede
-         * duplicação dentro da sessão.
          */
 
         registrarAcesso();
 
 
         /*
-         * Finalmente carrega a playlist.
+         * Finalmente carrega
+         * a playlist.
          */
 
         carregarPlaylist();
 
     }
+
 );
 
 </script>
