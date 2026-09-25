@@ -1,3 +1,372 @@
+
+Para o caso da igreja que está sendo constituída em Belo Horizonte/MG, considerando uma igreja comum, instalada em imóvel próprio/alugado, sem atividade de brigadista, sem armazenamento relevante de inflamáveis/GLP e sem características especiais, o preenchimento tende a ser:
+
+Pergunta	Resposta
+A atividade é explorada em ambiente inócuo ou virtual?	NÃO
+A atividade é exercida em imóvel que compõe o Patrimônio Histórico e Cultural?	NÃO, salvo se o imóvel for efetivamente tombado
+O estabelecimento ocupa imóvel com área construída igual ou inferior a 200 m²?	SIM, se o imóvel inteiro tiver até 200 m²
+O imóvel possui área construída superior a 930 m²?	NÃO, se tiver até 930 m²
+O imóvel possui mais de 3 pavimentos ou altura superior a 12 m?	NÃO, se não possuir
+Demanda armazenamento de líquido combustível ou inflamável superior a 1.000 L?	NÃO
+A atividade está na área de competência específica do CBMMG descrita na pergunta?	NÃO
+Demanda utilização ou armazenamento de GLP acima de 190 kg?	NÃO
+Possui lotação de público superior a 100 pessoas?	DEPENDE DA CAPACIDADE DO TEMPLO
+Destina-se à comercialização, instalação, manutenção ou conservação de aparelhos de prevenção contra incêndio e pânico?	NÃO
+O imóvel possui subsolo com uso distinto de estacionamento?	NÃO, se não houver esse tipo de subsolo
+⚠️ O ponto que merece atenção: público superior a 100 pessoas
+Essa pergunta não deve ser respondida simplesmente com base no tamanho do imóvel. É necessário considerar a lotação prevista para o estabelecimento.
+
+Se a igreja terá capacidade para mais de 100 pessoas, marque SIM.
+
+Se a capacidade for até 100 pessoas, marque NÃO.
+
+Também é importante não confundir essa pergunta com a anterior sobre área construída. São critérios diferentes.
+
+Para o seu caso
+Pelo que você havia informado anteriormente, o imóvel da igreja tem 150 m² de área total/utilizada. Portanto, se esses 150 m² correspondem à área total do imóvel, a pergunta:
+
+“A atividade é exercida em estabelecimento que ocupa em todo ou em parte imóvel com área construída igual ou inferior a 200 m²?”
+
+deve ser SIM.
+
+E, naturalmente, isso parte da premissa de que o imóvel não é tombado, não possui mais de 3 pavimentos, não possui subsolo com outra utilização, não armazena grandes quantidades de inflamáveis/GLP e a igreja não exerce atividades especiais relacionadas ao Corpo de Bombeiros.
+
+A única informação que falta para fechar todas as respostas com segurança é a capacidade de público prevista para a igreja.
+
+
+hoje 8:13
+
+Texto colado(20260925-111322).txt
+Documento
+acrescente uma opção de filtrar por data:
+
+Sim. No seu código atual, o filtro existente trabalha apenas por tipo — Todos, Músicas, Orações e Mensagens. 
+
+
+Podemos acrescentar um filtro por data, sem retirar os filtros atuais. A ideia será:
+
+Todos | 🎵 Músicas | 🙏 Orações | 💬 Mensagens | 📅 Data
+
+Ao clicar em Data, aparecem Data inicial e Data final, permitindo visualizar os áudios de um período.
+
+1. Substitua o bloco atual de filtros
+O bloco atual está nas linhas correspondentes a .filters. 
+
+
+Substitua por:
+
+<div class="filters">
+
+    <button
+        class="filter-btn active"
+        onclick="filtrar('Todos', this)"
+    >
+        Todos
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filtrar('Música', this)"
+    >
+        🎵 Músicas
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filtrar('Oração', this)"
+    >
+        🙏 Orações
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filtrar('Mensagem', this)"
+    >
+        💬 Mensagens
+    </button>
+
+</div>
+
+<div class="date-filter">
+
+    <div class="date-field">
+        <label for="dataInicial">Data inicial</label>
+        <input
+            type="date"
+            id="dataInicial"
+            onchange="aplicarFiltro()"
+        >
+    </div>
+
+    <div class="date-field">
+        <label for="dataFinal">Data final</label>
+        <input
+            type="date"
+            id="dataFinal"
+            onchange="aplicarFiltro()"
+        >
+    </div>
+
+    <button
+        class="date-clear"
+        onclick="limparFiltroData()"
+    >
+        Limpar
+    </button>
+
+</div>
+2. Acrescente este CSS
+Coloque antes do </style>:
+
+.date-filter {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 0 0 15px;
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+.date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.date-field label {
+    font-size: 11px;
+    color: rgba(255,255,255,.55);
+}
+
+.date-field input {
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 9px;
+    background: rgba(255,255,255,.10);
+    color: white;
+    font-size: 13px;
+    outline: none;
+}
+
+.date-field input:focus {
+    border-color: #1976d2;
+}
+
+.date-clear {
+    height: 36px;
+    padding: 0 14px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 9px;
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.80);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.date-clear:hover {
+    background: rgba(255,255,255,.15);
+}
+
+@media(max-width:600px) {
+
+    .date-filter {
+        align-items: stretch;
+    }
+
+    .date-field {
+        flex: 1;
+        min-width: 130px;
+    }
+
+    .date-clear {
+        width: 100%;
+    }
+}
+3. Altere o aplicarFiltro()
+Seu código atual filtra somente pelo tipo. 
+
+
+Substitua toda a função por esta:
+
+function aplicarFiltro() {
+
+    const dataInicial =
+        document.getElementById('dataInicial')?.value || '';
+
+    const dataFinal =
+        document.getElementById('dataFinal')?.value || '';
+
+    playlistFiltrada = playlist.filter(function(item) {
+
+        /* =========================
+           FILTRO POR TIPO
+           ========================= */
+
+        if (filtroAtual !== 'Todos') {
+
+            const filtro =
+                normalizarTipo(filtroAtual);
+
+            if (
+                normalizarTipo(item.tipo) !== filtro
+            ) {
+                return false;
+            }
+        }
+
+
+        /* =========================
+           FILTRO POR DATA
+           ========================= */
+
+        if (dataInicial || dataFinal) {
+
+            /*
+             * A API deve retornar a data do áudio
+             * no campo "data".
+             */
+
+            const dataItem =
+                normalizarData(item.data);
+
+            if (!dataItem) {
+                return false;
+            }
+
+            if (
+                dataInicial &&
+                dataItem < dataInicial
+            ) {
+                return false;
+            }
+
+            if (
+                dataFinal &&
+                dataItem > dataFinal
+            ) {
+                return false;
+            }
+        }
+
+
+        return true;
+    });
+
+    renderizarPlaylist();
+}
+4. Acrescente a função de normalização da data
+Coloque logo depois de normalizarTipo():
+
+function normalizarData(data) {
+
+    if (!data) {
+        return '';
+    }
+
+    let valor = String(data).trim();
+
+    /*
+     * Se já estiver no formato:
+     * 2026-09-25
+     */
+    if (/^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+        return valor;
+    }
+
+    /*
+     * Se vier como:
+     * 25/09/2026
+     */
+    const partes = valor.split('/');
+
+    if (partes.length === 3) {
+
+        const dia = partes[0].padStart(2, '0');
+        const mes = partes[1].padStart(2, '0');
+        const ano = partes[2];
+
+        if (ano.length === 4) {
+            return `${ano}-${mes}-${dia}`;
+        }
+    }
+
+    /*
+     * Tenta converter datas reconhecidas pelo JavaScript.
+     */
+    const dataConvertida =
+        new Date(valor);
+
+    if (!isNaN(dataConvertida.getTime())) {
+
+        const ano =
+            dataConvertida.getFullYear();
+
+        const mes =
+            String(
+                dataConvertida.getMonth() + 1
+            ).padStart(2, '0');
+
+        const dia =
+            String(
+                dataConvertida.getDate()
+            ).padStart(2, '0');
+
+        return `${ano}-${mes}-${dia}`;
+    }
+
+    return '';
+}
+5. Acrescente a função para limpar
+function limparFiltroData() {
+
+    document.getElementById(
+        'dataInicial'
+    ).value = '';
+
+    document.getElementById(
+        'dataFinal'
+    ).value = '';
+
+    aplicarFiltro();
+}
+⚠️ Um ponto importante
+Para esse filtro funcionar, cada item retornado pelo seu Apps Script precisa possuir uma informação de data, por exemplo:
+
+{
+    id: 1,
+    titulo: "Oração da Manhã",
+    artista: "Rádio Onda Livre",
+    tipo: "Oração",
+    data: "2026-09-25",
+    url: "..."
+}
+No HTML que você me enviou, a playlist atualmente recebe os dados da API através de resposta.playlist, mas o código não mostra quais campos a API está retornando. 
+
+
+Portanto, antes de alterar o Apps Script, precisamos confirmar o nome exato da coluna/campo de data que já existe na sua planilha.
+
+Se sua planilha já tiver uma coluna Data, posso ajustar o código para usar exatamente esse campo e também fazer a lista mostrar a data em cada áudio, por exemplo:
+
+🎵 Música
+Nome da música
+Artista
+25/09/2026
+
+Isso deixaria o histórico da Rádio Onda Livre bem mais organizado.
+
+
+crie o codigo completo e atualizado
+
+Sim. Atualizei o código completo mantendo a estrutura atual da Rádio Onda Livre, incluindo player, filtros por tipo, localização, registro de acesso, eventos, heartbeat e agora filtro por período de data. O código original já utiliza a playlist retornada pela ação listarPlaylist do Apps Script. 
+
+
+Importante: o filtro de data foi preparado para reconhecer automaticamente campos como data, dataAudio, dataPublicacao, dataCadastro ou createdAt. Se sua API ainda não estiver retornando nenhuma dessas informações, será necessário ajustar o Apps Script também.
+
+Código completo atualizado
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -3017,3 +3386,207 @@ document.addEventListener(
 </body>
 
 </html>
+O que foi acrescentado
+Agora a página terá:
+
+Todos | 🎵 Músicas | 🙏 Orações | 💬 Mensagens
+
+e logo abaixo:
+
+Data inicial | Data final | Limpar
+
+Assim, por exemplo, você poderá colocar:
+
+Data inicial: 01/09/2026
+
+Data final: 30/09/2026
+
+e serão mostrados somente os áudios daquele período.
+
+Também coloquei a data em cada item da playlist, quando ela estiver disponível.
+
+Atenção ao próximo passo: seu HTML chama a API listarPlaylist, que atualmente simplesmente recebe resposta.playlist. 
+
+ Para o filtro funcionar de fato, o objeto de cada áudio precisa vir com a data. Se você me enviar agora o Code.gs do Apps Script, eu posso atualizar o HTML + Apps Script juntos, fazendo a data sair diretamente da sua planilha e evitando qualquer incompatibilidade.
+
+
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+
+
+<title>Rádio Onda Livre</title>
+
+<style> * { box-sizing: border-box; } body { margin: 0; min-height: 100vh; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: linear-gradient( 135deg, #071a35, #0b2e59, #082342 ); color: #fff; padding: 25px 15px; } .container { width: 100%; max-width: 760px; margin: 0 auto; } .header { text-align: center; margin-bottom: 20px; } .microphone { width: 62px; height: 62px; margin: 0 auto 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.15); } h1 { margin: 0; font-size: 28px; font-weight: 700; } .subtitle { margin-top: 6px; color: rgba(255,255,255,.72); font-size: 14px; } .player-card { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.13); backdrop-filter: blur(16px); border-radius: 18px; padding: 20px; box-shadow: 0 15px 45px rgba(0,0,0,.22); } .status { display: flex; align-items: center; gap: 7px; font-size: 12px; color: rgba(255,255,255,.65); margin-bottom: 10px; } .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #5ee68a; } .current-type { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.55); } .current-title { font-size: 21px; font-weight: 700; margin-top: 3px; } .current-artist { font-size: 13px; color: rgba(255,255,255,.68); margin-top: 2px; margin-bottom: 15px; } audio { width: 100%; } .controls { display: flex; justify-content: center; gap: 10px; margin-top: 15px; } .control-btn { border: none; width: 43px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.12); color: white; cursor: pointer; font-size: 17px; transition: .2s ease; } .control-btn:hover { background: rgba(255,255,255,.20); transform: translateY(-1px); } .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0 12px; } .filter-btn { border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.07); color: rgba(255,255,255,.75); padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: .2s ease; } .filter-btn:hover { background: rgba(255,255,255,.12); } .filter-btn.active { background: #1976d2; color: white; border-color: #1976d2; } .playlist { display: flex; flex-direction: column; gap: 8px; } .audio-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 13px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: .2s ease; } .audio-item:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); } .audio-item.active { background: rgba(25,118,210,.27); border-color: rgba(65,155,235,.45); } .audio-icon { width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255,255,255,.09); font-size: 17px; } .audio-info { min-width: 0; flex: 1; } .audio-title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .audio-artist { font-size: 12px; color: rgba(255,255,255,.58); margin-top: 2px; } .audio-type { font-size: 10px; color: rgba(255,255,255,.48); margin-top: 4px; } .play-hint { text-align: center; padding: 16px; color: rgba(255,255,255,.60); font-size: 13px; } .message { text-align: center; padding: 25px; color: rgba(255,255,255,.65); font-size: 14px; } footer { text-align: center; margin-top: 25px; font-size: 11px; color: rgba(255,255,255,.42); } @media(max-width:600px) { body { padding: 18px 10px; } h1 { font-size: 24px; } .player-card { padding: 16px; } .current-title { font-size: 19px; } .filter-btn { padding: 7px 12px; } } </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header class="header">
+
+    <div class="microphone">
+        🎙️
+    </div>
+
+    <h1>
+        Rádio Onda Livre
+    </h1>
+
+    <div class="subtitle">
+        Música, oração e mensagens para o seu dia
+    </div>
+
+</header>
+
+
+<section class="player-card">
+
+    <div class="status">
+
+        <span
+            class="status-dot"
+            id="statusDot"
+        ></span>
+
+        <span id="statusText">
+            Pronto
+        </span>
+
+    </div>
+
+
+    <div
+        class="current-type"
+        id="currentType"
+    >
+        ÁUDIO
+    </div>
+
+
+    <div
+        class="current-title"
+        id="currentTitle"
+    >
+        Rádio Onda Livre
+    </div>
+
+
+    <div
+        class="current-artist"
+        id="currentArtist"
+    >
+        Escolha um áudio abaixo
+    </div>
+
+
+    <audio
+        id="audioPlayer"
+        controls
+        preload="metadata"
+    ></audio>
+
+
+    <div class="controls">
+
+        <button
+            class="control-btn"
+            onclick="anterior()"
+            title="Anterior"
+            aria-label="Áudio anterior"
+        >
+            ⏮
+        </button>
+
+        <button
+            class="control-btn"
+            onclick="proximo()"
+            title="Próximo"
+            aria-label="Próximo áudio"
+        >
+            ⏭
+        </button>
+
+    </div>
+
+</section>
+
+
+<div class="filters">
+
+    <button
+        class="filter-btn active"
+        onclick="filtrar('Todos', this)"
+    >
+        Todos
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filtrar('Música', this)"
+    >
+        🎵 Músicas
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filtrar('Oração', this)"
+    >
+        🙏 Orações
+    </button>
+
+    <button
+        class="filter-btn"
+        onclick="filtrar('Mensagem', this)"
+    >
+        💬 Mensagens
+    </button>
+
+</div>
+
+
+<div
+    id="playHint"
+    class="play-hint"
+>
+    <strong>
+        Escolha um áudio para ouvir
+    </strong>
+
+    <br>
+
+    ▶ Clique em uma música ou oração
+    abaixo para iniciar o áudio
+</div>
+
+
+<div
+    id="playlist"
+    class="playlist"
+></div>
+
+
+<footer>
+    Rádio Onda Livre • Joel Rodrigues
+</footer>
+</div>
+
+<script> /* ========================================================= CONFIGURAÇÃO ========================================================= */ const URL_API = 'https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec'; /* ========================================================= VARIÁVEIS ========================================================= */ let playlist = []; let playlistFiltrada = []; let indiceAtual = -1; let filtroAtual = 'Todos'; let ultimoEventoPlay = ''; let heartbeatTimer = null; /* ========================================================= LOCALIZAÇÃO ========================================================= */ let localizacaoVisitante = { cidade: '', estado: '' }; /* ========================================================= SESSÃO ========================================================= */ function obterSessao() { const chave = 'radio_onda_livre_sessao'; let sessao = localStorage.getItem(chave); if (!sessao) { sessao = gerarId(); localStorage.setItem( chave, sessao ); } return sessao; } function gerarId() { return ( Date.now().toString(36) + '_' + Math.random() .toString(36) .substring(2, 12) ); } /* ========================================================= LOCALIZAÇÃO POR IP ========================================================= */ function obterLocalizacao() { return new Promise( function(resolve) { let concluido = false; const callback = 'localizacao_' + Date.now() + '_' + Math.floor( Math.random() * 10000 ); const script = document.createElement( 'script' ); /* * Tempo máximo de espera: * 5 segundos. */ const timer = setTimeout( function() { if (concluido) { return; } concluido = true; console.warn( 'Tempo esgotado para obter localização.' ); limpar(); resolve(); }, 5000 ); function limpar() { clearTimeout(timer); try { delete window[callback]; } catch(e) {} if ( script && script.parentNode ) { script.parentNode.removeChild( script ); } } window[callback] = function(dados) { if (concluido) { return; } concluido = true; limpar(); if ( dados && dados.error ) { console.warn( 'Erro na localização:', dados.reason || dados ); resolve(); return; } if (dados) { localizacaoVisitante = { cidade: String( dados.city || '' ).trim(), estado: String( dados.region_code || dados.region || '' ).trim() }; } console.log( 'LOCALIZAÇÃO OBTIDA:', localizacaoVisitante ); resolve(); }; script.onerror = function() { if (concluido) { return; } concluido = true; limpar(); console.warn( 'Não foi possível consultar a localização.' ); resolve(); }; script.src = 'https://ipapi.co/jsonp/?callback=' + encodeURIComponent( callback ) + '&_=' + Date.now(); document.body.appendChild( script ); } ); } /* ========================================================= VERIFICAR SE O ACESSO JÁ FOI REGISTRADO ========================================================= */ function acessoJaRegistrado() { const chave = 'radio_onda_livre_acesso_registrado'; const valor = sessionStorage.getItem( chave ); return valor === '1'; } /* ========================================================= MARCAR ACESSO COMO REGISTRADO ========================================================= */ function marcarAcessoRegistrado() { sessionStorage.setItem( 'radio_onda_livre_acesso_registrado', '1' ); } /* ========================================================= REGISTRAR EVENTO ========================================================= */ function registrarEvento( evento, audioId = '', titulo = '' ) { if ( !URL_API || URL_API.includes( 'COLE_AQUI' ) ) { return; } const callback = 'evento_' + Date.now() + '_' + Math.floor( Math.random() * 10000 ); let script = null; window[callback] = function() { try { delete window[callback]; } catch(e) {} if ( script && script.parentNode ) { script.parentNode.removeChild( script ); } }; const params = new URLSearchParams({ acao: 'registrarEvento', evento: evento, audioId: audioId, titulo: titulo, sessao: obterSessao(), cidade: localizacaoVisitante.cidade, estado: localizacaoVisitante.estado, callback: callback, _: Date.now() }); script = document.createElement( 'script' ); script.src = URL_API + '?' + params.toString(); script.onerror = function() { try { delete window[callback]; } catch(e) {} if ( script && script.parentNode ) { script.parentNode.removeChild( script ); } }; document.body.appendChild( script ); } /* ========================================================= REGISTRAR ACESSO ========================================================= */ function registrarAcesso() { /* * Impede que o mesmo carregamento/sessão * registre o ACESSO mais de uma vez. */ if ( acessoJaRegistrado() ) { console.log( 'ACESSO já registrado nesta sessão.' ); return; } /* * Marca ANTES de enviar. * * Assim, mesmo que alguma parte do código * tente chamar novamente, não duplica. */ marcarAcessoRegistrado(); console.log( 'REGISTRANDO ACESSO:', { cidade: localizacaoVisitante.cidade, estado: localizacaoVisitante.estado, sessao: obterSessao() } ); registrarEvento( 'ACESSO' ); } /* ========================================================= CARREGAR PLAYLIST ========================================================= */ function carregarPlaylist() { if ( !URL_API || URL_API.includes( 'COLE_AQUI' ) ) { mostrarMensagem( 'Configure a URL da implantação do Apps Script.' ); return; } const callback = 'receberPlaylist_' + Date.now(); let concluido = false; const script = document.createElement( 'script' ); const timer = setTimeout( function() { if (concluido) { return; } concluido = true; mostrarMensagem( 'Não foi possível carregar a playlist.' ); script.remove(); }, 15000 ); window[callback] = function(resposta) { if (concluido) { return; } concluido = true; clearTimeout(timer); try { delete window[callback]; } catch(e) {} script.remove(); if ( !resposta || !resposta.sucesso ) { mostrarMensagem( resposta && resposta.mensagem ? resposta.mensagem : 'Erro ao carregar playlist.' ); return; } playlist = Array.isArray( resposta.playlist ) ? resposta.playlist : []; aplicarFiltro(); }; const url = URL_API + '?acao=listarPlaylist' + '&callback=' + encodeURIComponent( callback ) + '&_=' + Date.now(); script.src = url; script.onerror = function() { if (concluido) { return; } concluido = true; clearTimeout(timer); try { delete window[callback]; } catch(e) {} script.remove(); mostrarMensagem( 'Erro de comunicação com o servidor.' ); }; document.body.appendChild( script ); } /* ========================================================= FILTRO ========================================================= */ function filtrar( tipo, botao ) { filtroAtual = tipo; document .querySelectorAll( '.filter-btn' ) .forEach( btn => btn.classList.remove( 'active' ) ); if (botao) { botao.classList.add( 'active' ); } aplicarFiltro(); } function normalizarTipo(tipo) { return String( tipo || '' ) .toLowerCase() .normalize('NFD') .replace( /[\u0300-\u036f]/g, '' ) .trim(); } function aplicarFiltro() { if ( filtroAtual === 'Todos' ) { playlistFiltrada = playlist.slice(); } else { const filtro = normalizarTipo( filtroAtual ); playlistFiltrada = playlist.filter( item => normalizarTipo( item.tipo ) === filtro ); } renderizarPlaylist(); } /* ========================================================= RENDERIZAR ========================================================= */ function renderizarPlaylist() { const container = document.getElementById( 'playlist' ); if ( !playlistFiltrada.length ) { container.innerHTML = '<div class="message">' + 'Nenhum áudio encontrado.' + '</div>'; return; } container.innerHTML = playlistFiltrada .map( item => { const originalIndex = playlist.indexOf( item ); const tipo = normalizarTipo( item.tipo ); let icone = '🎵'; if ( tipo === 'oracao' ) { icone = '🙏'; } if ( tipo === 'mensagem' ) { icone = '💬'; } const ativo = originalIndex === indiceAtual ? 'active' : ''; return ` <div class="audio-item ${ativo}" onclick="tocar(${originalIndex})" > <div class="audio-icon"> ${icone} </div> <div class="audio-info"> <div class="audio-title"> ${escaparHtml( item.titulo )} </div> <div class="audio-artist"> ${escaparHtml( item.artista || '' )} </div> <div class="audio-type"> ${escaparHtml( item.tipo || '' )} </div> </div> </div> `; } ) .join(''); } /* ========================================================= TOCAR ========================================================= */ function tocar(index) { if ( index < 0 || index >= playlist.length ) { return; } const item = playlist[index]; indiceAtual = index; const player = document.getElementById( 'audioPlayer' ); document.getElementById( 'currentTitle' ).textContent = item.titulo || 'Áudio sem título'; document.getElementById( 'currentArtist' ).textContent = item.artista || ''; document.getElementById( 'currentType' ).textContent = item.tipo || 'ÁUDIO'; const hint = document.getElementById( 'playHint' ); if (hint) { hint.style.display = 'none'; } player.pause(); ultimoEventoPlay = ''; player.src = item.url; player.load(); player.play() .catch( function() { atualizarStatus( 'Clique no player para iniciar' ); } ); atualizarItemAtivo(); } /* ========================================================= PLAY ========================================================= */ function registrarPlayAtual() { if ( indiceAtual < 0 || !playlist[indiceAtual] ) { return; } const item = playlist[indiceAtual]; const chave = String(item.id); if ( ultimoEventoPlay === chave ) { return; } ultimoEventoPlay = chave; registrarEvento( 'PLAY', item.id, item.titulo ); iniciarHeartbeat(); } /* ========================================================= HEARTBEAT ========================================================= */ function iniciarHeartbeat() { pararHeartbeat(); heartbeatTimer = setInterval( function() { const player = document.getElementById( 'audioPlayer' ); if ( !player.paused && indiceAtual >= 0 && playlist[indiceAtual] ) { const item = playlist[ indiceAtual ]; registrarEvento( 'HEARTBEAT', item.id, item.titulo ); } }, 60000 ); } function pararHeartbeat() { if ( heartbeatTimer ) { clearInterval( heartbeatTimer ); heartbeatTimer = null; } } /* ========================================================= ANTERIOR ========================================================= */ function anterior() { if ( !playlist.length ) { return; } let novoIndice = indiceAtual - 1; if ( novoIndice < 0 ) { novoIndice = playlist.length - 1; } tocar( novoIndice ); } /* ========================================================= PRÓXIMO ========================================================= */ function proximo() { if ( !playlist.length ) { return; } let novoIndice = indiceAtual + 1; if ( novoIndice >= playlist.length ) { novoIndice = 0; } tocar( novoIndice ); } /* ========================================================= ITEM ATIVO ========================================================= */ function atualizarItemAtivo() { renderizarPlaylist(); } /* ========================================================= STATUS ========================================================= */ function atualizarStatus( texto ) { document.getElementById( 'statusText' ).textContent = texto; } /* ========================================================= MENSAGEM ========================================================= */ function mostrarMensagem( mensagem ) { document.getElementById( 'playlist' ).innerHTML = '<div class="message">' + escaparHtml(mensagem) + '</div>'; } /* ========================================================= ESCAPAR HTML ========================================================= */ function escaparHtml( texto ) { return String( texto || '' ) .replace( /&/g, '&amp;' ) .replace( /</g, '&lt;' ) .replace( />/g, '&gt;' ) .replace( /"/g, '&quot;' ) .replace( /'/g, '&#039;' ); } /* ========================================================= EVENTOS DO PLAYER ========================================================= */ const player = document.getElementById( 'audioPlayer' ); player.addEventListener( 'play', function() { atualizarStatus( 'Reproduzindo' ); registrarPlayAtual(); } ); player.addEventListener( 'pause', function() { atualizarStatus( 'Pausado' ); pararHeartbeat(); if ( indiceAtual >= 0 && playlist[indiceAtual] ) { const item = playlist[indiceAtual]; registrarEvento( 'PAUSE', item.id, item.titulo ); } } ); player.addEventListener( 'ended', function() { atualizarStatus( 'Próximo áudio' ); pararHeartbeat(); if ( indiceAtual >= 0 && playlist[indiceAtual] ) { const item = playlist[indiceAtual]; registrarEvento( 'FIM', item.id, item.titulo ); } proximo(); } ); player.addEventListener( 'canplay', function() { atualizarStatus( 'Áudio pronto' ); } ); player.addEventListener( 'error', function() { atualizarStatus( 'Não foi possível reproduzir' ); pararHeartbeat(); } ); /* ========================================================= INICIALIZAÇÃO ========================================================= */ document.addEventListener( 'DOMContentLoaded', async function() { /* * Primeiro tenta obter a localização. */ await obterLocalizacao(); /* * Depois registra o acesso. * O controle sessionStorage impede * duplicação dentro da sessão. */ registrarAcesso(); /* * Finalmente carrega a playlist. */ carregarPlaylist(); } ); </script>
+
+</body>
+
+</html>
+
+
+Fechar
