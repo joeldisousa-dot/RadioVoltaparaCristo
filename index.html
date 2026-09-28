@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
@@ -7,10 +6,9 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
-
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Rádio Onda Livre</title>
 
@@ -50,6 +48,7 @@ body {
 .container {
 
     width: 100%;
+
     max-width: 760px;
 
     margin: 0 auto;
@@ -453,9 +452,12 @@ footer {
 
 </head>
 
+
 <body>
 
+
 <div class="container">
+
 
 <header class="header">
 
@@ -476,6 +478,7 @@ footer {
 
 <section class="player-card">
 
+
     <div class="status">
 
         <span
@@ -484,7 +487,7 @@ footer {
         ></span>
 
         <span id="statusText">
-            Pronto
+            Conectando...
         </span>
 
     </div>
@@ -532,6 +535,7 @@ footer {
             ⏮
         </button>
 
+
         <button
             class="control-btn"
             onclick="proximo()"
@@ -543,10 +547,12 @@ footer {
 
     </div>
 
+
 </section>
 
 
 <div class="filters">
+
 
     <button
         class="filter-btn active"
@@ -555,12 +561,14 @@ footer {
         Todos
     </button>
 
+
     <button
         class="filter-btn"
         onclick="filtrar('Música', this)"
     >
         🎵 Músicas
     </button>
+
 
     <button
         class="filter-btn"
@@ -569,12 +577,14 @@ footer {
         🙏 Orações
     </button>
 
+
     <button
         class="filter-btn"
         onclick="filtrar('Mensagem', this)"
     >
         💬 Mensagens
     </button>
+
 
 </div>
 
@@ -583,6 +593,7 @@ footer {
     id="playHint"
     class="play-hint"
 >
+
     <strong>
         Escolha um áudio para ouvir
     </strong>
@@ -591,6 +602,7 @@ footer {
 
     ▶ Clique em uma música ou oração
     abaixo para iniciar o áudio
+
 </div>
 
 
@@ -601,12 +613,18 @@ footer {
 
 
 <footer>
+
     Rádio Onda Livre • Joel Rodrigues
+
 </footer>
+
 
 </div>
 
+
+
 <script>
+
 
 /* =========================================================
    CONFIGURAÇÃO
@@ -614,6 +632,7 @@ footer {
 
 const URL_API =
     'https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec';
+
 
 
 /* =========================================================
@@ -632,6 +651,9 @@ let ultimoEventoPlay = '';
 
 let heartbeatTimer = null;
 
+let acessoRegistrado = false;
+
+
 
 /* =========================================================
    LOCALIZAÇÃO
@@ -645,6 +667,7 @@ let localizacaoVisitante = {
 };
 
 
+
 /* =========================================================
    SESSÃO
    ========================================================= */
@@ -654,23 +677,34 @@ function obterSessao() {
     const chave =
         'radio_onda_livre_sessao';
 
+
     let sessao =
-        localStorage.getItem(chave);
+        sessionStorage.getItem(
+            chave
+        );
+
 
     if (!sessao) {
 
         sessao =
             gerarId();
 
-        localStorage.setItem(
+
+        sessionStorage.setItem(
             chave,
             sessao
         );
     }
 
+
     return sessao;
 }
 
+
+
+/* =========================================================
+   GERAR ID DA SESSÃO
+   ========================================================= */
 
 function gerarId() {
 
@@ -679,130 +713,256 @@ function gerarId() {
         '_' +
         Math.random()
             .toString(36)
-            .substring(2, 12)
+            .substring(2, 14)
     );
 }
 
 
+
 /* =========================================================
-   LOCALIZAÇÃO POR IP
+   LOCALIZAÇÃO SALVA
    ========================================================= */
 
-function obterLocalizacao() {
+function obterLocalizacaoSalva() {
+
+    try {
+
+        const texto =
+            localStorage.getItem(
+                'radio_onda_livre_localizacao'
+            );
+
+
+        if (!texto) {
+
+            return false;
+        }
+
+
+        const dados =
+            JSON.parse(
+                texto
+            );
+
+
+        if (
+            dados &&
+            dados.cidade
+        ) {
+
+            localizacaoVisitante = {
+
+                cidade:
+                    String(
+                        dados.cidade ||
+                        ''
+                    ).trim(),
+
+                estado:
+                    String(
+                        dados.estado ||
+                        ''
+                    ).trim()
+            };
+
+
+            return true;
+        }
+
+    } catch (erro) {
+
+        console.warn(
+            'Erro ao ler localização salva:',
+            erro
+        );
+    }
+
+
+    return false;
+}
+
+
+
+/* =========================================================
+   SALVAR LOCALIZAÇÃO
+   ========================================================= */
+
+function salvarLocalizacao() {
+
+    try {
+
+        localStorage.setItem(
+
+            'radio_onda_livre_localizacao',
+
+            JSON.stringify(
+                localizacaoVisitante
+            )
+        );
+
+    } catch (erro) {
+
+        console.warn(
+            'Não foi possível salvar localização:',
+            erro
+        );
+    }
+}
+
+
+
+/* =========================================================
+   CONSULTAR LOCALIZAÇÃO POR IP
+   ========================================================= */
+
+function consultarLocalizacaoIP() {
 
     return new Promise(
         function(resolve) {
 
             let concluido = false;
 
+
             const callback =
                 'localizacao_' +
                 Date.now() +
                 '_' +
                 Math.floor(
-                    Math.random() * 10000
+                    Math.random() * 100000
                 );
+
 
             const script =
                 document.createElement(
                     'script'
                 );
 
-            /*
-             * Tempo máximo de espera:
-             * 5 segundos.
-             */
 
             const timer =
                 setTimeout(
                     function() {
 
                         if (concluido) {
+
                             return;
                         }
 
+
                         concluido = true;
 
-                        console.warn(
-                            'Tempo esgotado para obter localização.'
-                        );
 
                         limpar();
 
-                        resolve();
+
+                        console.warn(
+                            'Tempo esgotado ao obter localização.'
+                        );
+
+
+                        resolve(false);
 
                     },
-                    5000
+                    7000
                 );
+
 
 
             function limpar() {
 
-                clearTimeout(timer);
+                clearTimeout(
+                    timer
+                );
+
 
                 try {
 
-                    delete window[callback];
+                    delete window[
+                        callback
+                    ];
 
                 } catch(e) {}
+
 
                 if (
                     script &&
                     script.parentNode
                 ) {
 
-                    script.parentNode.removeChild(
-                        script
-                    );
+                    script.parentNode
+                        .removeChild(
+                            script
+                        );
                 }
             }
+
 
 
             window[callback] =
                 function(dados) {
 
                     if (concluido) {
+
                         return;
                     }
 
+
                     concluido = true;
+
 
                     limpar();
 
 
                     if (
-                        dados &&
+                        !dados ||
                         dados.error
                     ) {
 
                         console.warn(
-                            'Erro na localização:',
-                            dados.reason || dados
+                            'IP API não retornou localização:',
+                            dados
                         );
 
-                        resolve();
+
+                        resolve(false);
 
                         return;
                     }
 
 
-                    if (dados) {
+                    const cidade =
+                        String(
+                            dados.city ||
+                            ''
+                        ).trim();
 
-                        localizacaoVisitante = {
 
-                            cidade:
-                                String(
-                                    dados.city || ''
-                                ).trim(),
+                    const estado =
+                        String(
+                            dados.region_code ||
+                            dados.region ||
+                            ''
+                        ).trim();
 
-                            estado:
-                                String(
-                                    dados.region_code ||
-                                    dados.region ||
-                                    ''
-                                ).trim()
-                        };
+
+                    if (!cidade) {
+
+                        resolve(false);
+
+                        return;
                     }
+
+
+                    localizacaoVisitante = {
+
+                        cidade:
+                            cidade,
+
+                        estado:
+                            estado
+                    };
+
+
+                    salvarLocalizacao();
 
 
                     console.log(
@@ -811,27 +971,34 @@ function obterLocalizacao() {
                     );
 
 
-                    resolve();
+                    resolve(true);
                 };
+
 
 
             script.onerror =
                 function() {
 
                     if (concluido) {
+
                         return;
                     }
 
+
                     concluido = true;
+
 
                     limpar();
 
+
                     console.warn(
-                        'Não foi possível consultar a localização.'
+                        'Falha na API de localização.'
                     );
 
-                    resolve();
+
+                    resolve(false);
                 };
+
 
 
             script.src =
@@ -846,42 +1013,88 @@ function obterLocalizacao() {
             document.body.appendChild(
                 script
             );
+
         }
     );
 }
 
 
+
 /* =========================================================
-   VERIFICAR SE O ACESSO JÁ FOI REGISTRADO
+   OBTER LOCALIZAÇÃO
    ========================================================= */
 
-function acessoJaRegistrado() {
+async function obterLocalizacao() {
 
-    const chave =
-        'radio_onda_livre_acesso_registrado';
+    /*
+     * Primeiro procura uma localização
+     * já salva no navegador.
+     */
 
+    if (
+        obterLocalizacaoSalva()
+    ) {
 
-    const valor =
-        sessionStorage.getItem(
-            chave
+        console.log(
+            'Localização recuperada:',
+            localizacaoVisitante
         );
 
 
-    return valor === '1';
-}
+        return true;
+    }
 
 
-/* =========================================================
-   MARCAR ACESSO COMO REGISTRADO
-   ========================================================= */
-
-function marcarAcessoRegistrado() {
-
-    sessionStorage.setItem(
-        'radio_onda_livre_acesso_registrado',
-        '1'
+    atualizarStatus(
+        'Identificando localização...'
     );
+
+
+    /*
+     * Faz até duas tentativas.
+     */
+
+    for (
+        let tentativa = 1;
+        tentativa <= 2;
+        tentativa++
+    ) {
+
+        const sucesso =
+            await consultarLocalizacaoIP();
+
+
+        if (sucesso) {
+
+            return true;
+        }
+
+
+        if (
+            tentativa === 1
+        ) {
+
+            await new Promise(
+                function(resolve) {
+
+                    setTimeout(
+                        resolve,
+                        800
+                    );
+                }
+            );
+        }
+    }
+
+
+    console.warn(
+        'Não foi possível identificar a localização.'
+    );
+
+
+    return false;
 }
+
 
 
 /* =========================================================
@@ -894,12 +1107,7 @@ function registrarEvento(
     titulo = ''
 ) {
 
-    if (
-        !URL_API ||
-        URL_API.includes(
-            'COLE_AQUI'
-        )
-    ) {
+    if (!URL_API) {
 
         return;
     }
@@ -910,7 +1118,7 @@ function registrarEvento(
         Date.now() +
         '_' +
         Math.floor(
-            Math.random() * 10000
+            Math.random() * 100000
         );
 
 
@@ -918,11 +1126,13 @@ function registrarEvento(
 
 
     window[callback] =
-        function() {
+        function(resposta) {
 
             try {
 
-                delete window[callback];
+                delete window[
+                    callback
+                ];
 
             } catch(e) {}
 
@@ -932,27 +1142,50 @@ function registrarEvento(
                 script.parentNode
             ) {
 
-                script.parentNode.removeChild(
-                    script
-                );
+                script.parentNode
+                    .removeChild(
+                        script
+                    );
+            }
+
+
+            /*
+             * Caso o servidor devolva
+             * localização, atualiza o navegador.
+             */
+
+            if (
+                resposta &&
+                resposta.cidade
+            ) {
+
+                localizacaoVisitante.cidade =
+                    resposta.cidade;
+
+
+                localizacaoVisitante.estado =
+                    resposta.estado || '';
+
+
+                salvarLocalizacao();
             }
         };
 
 
-    const params =
+    const parametros =
         new URLSearchParams({
 
             acao:
                 'registrarEvento',
 
             evento:
-                evento,
+                evento || '',
 
             audioId:
-                audioId,
+                audioId || '',
 
             titulo:
-                titulo,
+                titulo || '',
 
             sessao:
                 obterSessao(),
@@ -980,7 +1213,7 @@ function registrarEvento(
     script.src =
         URL_API +
         '?' +
-        params.toString();
+        parametros.toString();
 
 
     script.onerror =
@@ -988,7 +1221,9 @@ function registrarEvento(
 
             try {
 
-                delete window[callback];
+                delete window[
+                    callback
+                ];
 
             } catch(e) {}
 
@@ -998,9 +1233,10 @@ function registrarEvento(
                 script.parentNode
             ) {
 
-                script.parentNode.removeChild(
-                    script
-                );
+                script.parentNode
+                    .removeChild(
+                        script
+                    );
             }
         };
 
@@ -1011,50 +1247,56 @@ function registrarEvento(
 }
 
 
+
+/* =========================================================
+   VERIFICAR ACESSO ANTERIOR
+   ========================================================= */
+
+function verificarAcessoAnterior() {
+
+    return (
+        sessionStorage.getItem(
+            'radio_onda_livre_acesso_registrado'
+        ) === '1'
+    );
+}
+
+
+
 /* =========================================================
    REGISTRAR ACESSO
    ========================================================= */
 
-function registrarAcesso() {
-
-    /*
-     * Impede que o mesmo carregamento/sessão
-     * registre o ACESSO mais de uma vez.
-     */
+async function registrarAcesso() {
 
     if (
-        acessoJaRegistrado()
+        acessoRegistrado
     ) {
-
-        console.log(
-            'ACESSO já registrado nesta sessão.'
-        );
 
         return;
     }
 
 
     /*
-     * Marca ANTES de enviar.
-     *
-     * Assim, mesmo que alguma parte do código
-     * tente chamar novamente, não duplica.
+     * Não registra o ACESSO antes
+     * da tentativa de localização.
      */
 
-    marcarAcessoRegistrado();
+    await obterLocalizacao();
 
 
     console.log(
         'REGISTRANDO ACESSO:',
         {
+
+            sessao:
+                obterSessao(),
+
             cidade:
                 localizacaoVisitante.cidade,
 
             estado:
-                localizacaoVisitante.estado,
-
-            sessao:
-                obterSessao()
+                localizacaoVisitante.estado
         }
     );
 
@@ -1062,7 +1304,18 @@ function registrarAcesso() {
     registrarEvento(
         'ACESSO'
     );
+
+
+    acessoRegistrado =
+        true;
+
+
+    sessionStorage.setItem(
+        'radio_onda_livre_acesso_registrado',
+        '1'
+    );
 }
+
 
 
 /* =========================================================
@@ -1071,24 +1324,13 @@ function registrarAcesso() {
 
 function carregarPlaylist() {
 
-    if (
-        !URL_API ||
-        URL_API.includes(
-            'COLE_AQUI'
-        )
-    ) {
-
-        mostrarMensagem(
-            'Configure a URL da implantação do Apps Script.'
-        );
-
-        return;
-    }
-
-
     const callback =
-        'receberPlaylist_' +
-        Date.now();
+        'playlist_' +
+        Date.now() +
+        '_' +
+        Math.floor(
+            Math.random() * 10000
+        );
 
 
     let concluido = false;
@@ -1105,37 +1347,58 @@ function carregarPlaylist() {
             function() {
 
                 if (concluido) {
+
                     return;
                 }
 
+
                 concluido = true;
+
+
+                try {
+
+                    delete window[
+                        callback
+                    ];
+
+                } catch(e) {}
+
+
+                script.remove();
+
 
                 mostrarMensagem(
                     'Não foi possível carregar a playlist.'
                 );
-
-                script.remove();
 
             },
             15000
         );
 
 
+
     window[callback] =
         function(resposta) {
 
             if (concluido) {
+
                 return;
             }
 
+
             concluido = true;
 
-            clearTimeout(timer);
+
+            clearTimeout(
+                timer
+            );
 
 
             try {
 
-                delete window[callback];
+                delete window[
+                    callback
+                ];
 
             } catch(e) {}
 
@@ -1156,6 +1419,7 @@ function carregarPlaylist() {
                         : 'Erro ao carregar playlist.'
                 );
 
+
                 return;
             }
 
@@ -1170,39 +1434,36 @@ function carregarPlaylist() {
 
             aplicarFiltro();
 
+
+            atualizarStatus(
+                'Pronto'
+            );
         };
 
-
-    const url =
-        URL_API +
-        '?acao=listarPlaylist' +
-        '&callback=' +
-        encodeURIComponent(
-            callback
-        ) +
-        '&_=' +
-        Date.now();
-
-
-    script.src =
-        url;
 
 
     script.onerror =
         function() {
 
             if (concluido) {
+
                 return;
             }
 
+
             concluido = true;
 
-            clearTimeout(timer);
+
+            clearTimeout(
+                timer
+            );
 
 
             try {
 
-                delete window[callback];
+                delete window[
+                    callback
+                ];
 
             } catch(e) {}
 
@@ -1216,10 +1477,23 @@ function carregarPlaylist() {
         };
 
 
+
+    script.src =
+        URL_API +
+        '?acao=listarPlaylist' +
+        '&callback=' +
+        encodeURIComponent(
+            callback
+        ) +
+        '&_=' +
+        Date.now();
+
+
     document.body.appendChild(
         script
     );
 }
+
 
 
 /* =========================================================
@@ -1240,10 +1514,12 @@ function filtrar(
             '.filter-btn'
         )
         .forEach(
-            btn =>
+            function(btn) {
+
                 btn.classList.remove(
                     'active'
-                )
+                );
+            }
         );
 
 
@@ -1259,7 +1535,14 @@ function filtrar(
 }
 
 
-function normalizarTipo(tipo) {
+
+/* =========================================================
+   NORMALIZAR TIPO
+   ========================================================= */
+
+function normalizarTipo(
+    tipo
+) {
 
     return String(
         tipo || ''
@@ -1273,6 +1556,11 @@ function normalizarTipo(tipo) {
         .trim();
 }
 
+
+
+/* =========================================================
+   APLICAR FILTRO
+   ========================================================= */
 
 function aplicarFiltro() {
 
@@ -1293,10 +1581,14 @@ function aplicarFiltro() {
 
         playlistFiltrada =
             playlist.filter(
-                item =>
-                    normalizarTipo(
-                        item.tipo
-                    ) === filtro
+                function(item) {
+
+                    return (
+                        normalizarTipo(
+                            item.tipo
+                        ) === filtro
+                    );
+                }
             );
     }
 
@@ -1305,8 +1597,9 @@ function aplicarFiltro() {
 }
 
 
+
 /* =========================================================
-   RENDERIZAR
+   RENDERIZAR PLAYLIST
    ========================================================= */
 
 function renderizarPlaylist() {
@@ -1326,6 +1619,7 @@ function renderizarPlaylist() {
             'Nenhum áudio encontrado.' +
             '</div>';
 
+
         return;
     }
 
@@ -1333,7 +1627,7 @@ function renderizarPlaylist() {
     container.innerHTML =
         playlistFiltrada
             .map(
-                item => {
+                function(item) {
 
                     const originalIndex =
                         playlist.indexOf(
@@ -1418,6 +1712,7 @@ function renderizarPlaylist() {
 }
 
 
+
 /* =========================================================
    TOCAR
    ========================================================= */
@@ -1463,7 +1758,8 @@ function tocar(index) {
     document.getElementById(
         'currentType'
     ).textContent =
-        item.tipo || 'ÁUDIO';
+        item.tipo ||
+        'ÁUDIO';
 
 
     const hint =
@@ -1508,8 +1804,9 @@ function tocar(index) {
 }
 
 
+
 /* =========================================================
-   PLAY
+   REGISTRAR PLAY
    ========================================================= */
 
 function registrarPlayAtual() {
@@ -1524,15 +1821,20 @@ function registrarPlayAtual() {
 
 
     const item =
-        playlist[indiceAtual];
+        playlist[
+            indiceAtual
+        ];
 
 
     const chave =
-        String(item.id);
+        String(
+            item.id
+        );
 
 
     if (
-        ultimoEventoPlay === chave
+        ultimoEventoPlay ===
+        chave
     ) {
 
         return;
@@ -1552,6 +1854,7 @@ function registrarPlayAtual() {
 
     iniciarHeartbeat();
 }
+
 
 
 /* =========================================================
@@ -1598,6 +1901,7 @@ function iniciarHeartbeat() {
 }
 
 
+
 function pararHeartbeat() {
 
     if (
@@ -1608,10 +1912,12 @@ function pararHeartbeat() {
             heartbeatTimer
         );
 
+
         heartbeatTimer =
             null;
     }
 }
+
 
 
 /* =========================================================
@@ -1647,6 +1953,7 @@ function anterior() {
 }
 
 
+
 /* =========================================================
    PRÓXIMO
    ========================================================= */
@@ -1680,14 +1987,16 @@ function proximo() {
 }
 
 
+
 /* =========================================================
-   ITEM ATIVO
+   ATUALIZAR ITEM ATIVO
    ========================================================= */
 
 function atualizarItemAtivo() {
 
     renderizarPlaylist();
 }
+
 
 
 /* =========================================================
@@ -1698,11 +2007,19 @@ function atualizarStatus(
     texto
 ) {
 
-    document.getElementById(
-        'statusText'
-    ).textContent =
-        texto;
+    const elemento =
+        document.getElementById(
+            'statusText'
+        );
+
+
+    if (elemento) {
+
+        elemento.textContent =
+            texto;
+    }
 }
+
 
 
 /* =========================================================
@@ -1718,9 +2035,12 @@ function mostrarMensagem(
     ).innerHTML =
 
         '<div class="message">' +
-        escaparHtml(mensagem) +
+        escaparHtml(
+            mensagem
+        ) +
         '</div>';
 }
+
 
 
 /* =========================================================
@@ -1757,6 +2077,7 @@ function escaparHtml(
 }
 
 
+
 /* =========================================================
    EVENTOS DO PLAYER
    ========================================================= */
@@ -1767,6 +2088,9 @@ const player =
     );
 
 
+/*
+ * PLAY
+ */
 player.addEventListener(
     'play',
     function() {
@@ -1775,11 +2099,15 @@ player.addEventListener(
             'Reproduzindo'
         );
 
+
         registrarPlayAtual();
     }
 );
 
 
+/*
+ * PAUSE
+ */
 player.addEventListener(
     'pause',
     function() {
@@ -1787,6 +2115,7 @@ player.addEventListener(
         atualizarStatus(
             'Pausado'
         );
+
 
         pararHeartbeat();
 
@@ -1797,7 +2126,9 @@ player.addEventListener(
         ) {
 
             const item =
-                playlist[indiceAtual];
+                playlist[
+                    indiceAtual
+                ];
 
 
             registrarEvento(
@@ -1810,6 +2141,9 @@ player.addEventListener(
 );
 
 
+/*
+ * FIM
+ */
 player.addEventListener(
     'ended',
     function() {
@@ -1828,7 +2162,9 @@ player.addEventListener(
         ) {
 
             const item =
-                playlist[indiceAtual];
+                playlist[
+                    indiceAtual
+                ];
 
 
             registrarEvento(
@@ -1844,6 +2180,9 @@ player.addEventListener(
 );
 
 
+/*
+ * ÁUDIO PRONTO
+ */
 player.addEventListener(
     'canplay',
     function() {
@@ -1855,6 +2194,9 @@ player.addEventListener(
 );
 
 
+/*
+ * ERRO
+ */
 player.addEventListener(
     'error',
     function() {
@@ -1863,9 +2205,11 @@ player.addEventListener(
             'Não foi possível reproduzir'
         );
 
+
         pararHeartbeat();
     }
 );
+
 
 
 /* =========================================================
@@ -1877,23 +2221,44 @@ document.addEventListener(
     async function() {
 
         /*
-         * Primeiro tenta obter a localização.
+         * Verifica se o acesso já foi
+         * registrado nesta sessão da aba.
          */
 
-        await obterLocalizacao();
+        if (
+            verificarAcessoAnterior()
+        ) {
+
+            acessoRegistrado =
+                true;
+
+
+            console.log(
+                'Acesso já registrado nesta sessão.'
+            );
+
+        } else {
+
+            /*
+             * PRIMEIRO:
+             * identificar localização.
+             */
+
+            await obterLocalizacao();
+
+
+            /*
+             * SEGUNDO:
+             * registrar ACESSO.
+             */
+
+            await registrarAcesso();
+        }
 
 
         /*
-         * Depois registra o acesso.
-         * O controle sessionStorage impede
-         * duplicação dentro da sessão.
-         */
-
-        registrarAcesso();
-
-
-        /*
-         * Finalmente carrega a playlist.
+         * TERCEIRO:
+         * carregar playlist.
          */
 
         carregarPlaylist();
