@@ -389,41 +389,10 @@ audio {
     margin-top: 4px;
 }
 
-.play-hint {
+/* =========================================================
+   BOTÃO COMPARTILHAR
+   ========================================================= */
 
-    text-align: center;
-
-    padding: 16px;
-
-    color:
-        rgba(255,255,255,.60);
-
-    font-size: 13px;
-}
-
-.message {
-
-    text-align: center;
-
-    padding: 25px;
-
-    color:
-        rgba(255,255,255,.65);
-
-    font-size: 14px;
-}
-
-footer {
-
-    text-align: center;
-
-    margin-top: 25px;
-
-    font-size: 11px;
-
-    color:
-        rgba(255,255,255,.42);
-}
 .share-btn {
 
     flex-shrink: 0;
@@ -468,26 +437,86 @@ footer {
     transform:
         scale(.94);
 }
+
+.play-hint {
+
+    text-align: center;
+
+    padding: 16px;
+
+    color:
+        rgba(255,255,255,.60);
+
+    font-size: 13px;
+}
+
+.message {
+
+    text-align: center;
+
+    padding: 25px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 14px;
+}
+
+footer {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    font-size: 11px;
+
+    color:
+        rgba(255,255,255,.42);
+}
+
 @media(max-width:600px) {
 
     body {
+
         padding: 18px 10px;
     }
 
     h1 {
+
         font-size: 24px;
     }
 
     .player-card {
+
         padding: 16px;
     }
 
     .current-title {
+
         font-size: 19px;
     }
 
     .filter-btn {
+
         padding: 7px 12px;
+    }
+
+    .audio-item {
+
+        padding: 11px 10px;
+
+        gap: 9px;
+    }
+
+    .audio-title {
+
+        font-size: 13px;
+    }
+
+    .share-btn {
+
+        width: 36px;
+        height: 36px;
     }
 }
 
@@ -556,14 +585,14 @@ footer {
         class="current-artist"
         id="currentArtist"
     >
-        Escolha um áudio abaixo
+        Carregando primeiro áudio...
     </div>
 
 
     <audio
         id="audioPlayer"
         controls
-        preload="metadata"
+        preload="auto"
     ></audio>
 
 
@@ -638,13 +667,12 @@ footer {
 >
 
     <strong>
-        Escolha um áudio para ouvir
+        Carregando o primeiro áudio...
     </strong>
 
     <br>
 
-    ▶ Clique em uma música ou oração
-    abaixo para iniciar o áudio
+    ▶ A reprodução automática será iniciada quando possível
 
 </div>
 
@@ -1069,11 +1097,6 @@ function consultarLocalizacaoIP() {
 
 async function obterLocalizacao() {
 
-    /*
-     * Primeiro procura uma localização
-     * já salva no navegador.
-     */
-
     if (
         obterLocalizacaoSalva()
     ) {
@@ -1092,10 +1115,6 @@ async function obterLocalizacao() {
         'Identificando localização...'
     );
 
-
-    /*
-     * Faz até duas tentativas.
-     */
 
     for (
         let tentativa = 1;
@@ -1191,11 +1210,6 @@ function registrarEvento(
                     );
             }
 
-
-            /*
-             * Caso o servidor devolva
-             * localização, atualiza o navegador.
-             */
 
             if (
                 resposta &&
@@ -1320,11 +1334,6 @@ async function registrarAcesso() {
     }
 
 
-    /*
-     * Não registra o ACESSO antes
-     * da tentativa de localização.
-     */
-
     await obterLocalizacao();
 
 
@@ -1366,6 +1375,11 @@ async function registrarAcesso() {
    ========================================================= */
 
 function carregarPlaylist() {
+
+    atualizarStatus(
+        'Carregando playlist...'
+    );
+
 
     const callback =
         'playlist_' +
@@ -1463,6 +1477,11 @@ function carregarPlaylist() {
                 );
 
 
+                atualizarStatus(
+                    'Erro'
+                );
+
+
                 return;
             }
 
@@ -1481,6 +1500,33 @@ function carregarPlaylist() {
             atualizarStatus(
                 'Pronto'
             );
+
+
+            /*
+             * =================================================
+             * INICIA O PRIMEIRO ÁUDIO
+             * =================================================
+             */
+
+            if (
+                playlist.length > 0
+            ) {
+
+                setTimeout(
+                    function() {
+
+                        tocarPrimeiroAudio();
+
+                    },
+                    500
+                );
+
+            } else {
+
+                atualizarStatus(
+                    'Playlist vazia'
+                );
+            }
         };
 
 
@@ -1516,6 +1562,11 @@ function carregarPlaylist() {
 
             mostrarMensagem(
                 'Erro de comunicação com o servidor.'
+            );
+
+
+            atualizarStatus(
+                'Erro de comunicação'
             );
         };
 
@@ -1639,6 +1690,8 @@ function aplicarFiltro() {
     renderizarPlaylist();
 }
 
+
+
 /* =========================================================
    COMPARTILHAR ÁUDIO
    ========================================================= */
@@ -1680,12 +1733,6 @@ async function compartilharAudio(index) {
         '\n\nOuça na Rádio Onda Livre';
 
 
-    /*
-     * Compartilhamento nativo
-     * em celulares e navegadores
-     * compatíveis.
-     */
-
     if (
         navigator.share
     ) {
@@ -1716,11 +1763,6 @@ async function compartilharAudio(index) {
 
         } catch (erro) {
 
-            /*
-             * O usuário pode ter
-             * cancelado o compartilhamento.
-             */
-
             if (
                 erro &&
                 erro.name ===
@@ -1738,12 +1780,6 @@ async function compartilharAudio(index) {
         }
     }
 
-
-    /*
-     * Caso o navegador não tenha
-     * navigator.share, copia o
-     * endereço do áudio.
-     */
 
     try {
 
@@ -1765,11 +1801,6 @@ async function compartilharAudio(index) {
         );
 
     } catch (erro) {
-
-        /*
-         * Fallback para navegadores
-         * que não permitem clipboard.
-         */
 
         const campo =
             document.createElement(
@@ -1829,6 +1860,8 @@ async function compartilharAudio(index) {
         }
     }
 }
+
+
 
 /* =========================================================
    RENDERIZAR PLAYLIST
@@ -1960,7 +1993,162 @@ function renderizarPlaylist() {
 
 
 /* =========================================================
-   TOCAR
+   TOCAR PRIMEIRO ÁUDIO
+   ========================================================= */
+
+function tocarPrimeiroAudio() {
+
+    if (
+        !playlist ||
+        !playlist.length
+    ) {
+
+        return;
+    }
+
+
+    /*
+     * Não substitui uma música
+     * que já esteja tocando.
+     */
+
+    if (
+        indiceAtual >= 0
+    ) {
+
+        return;
+    }
+
+
+    indiceAtual =
+        0;
+
+
+    const item =
+        playlist[0];
+
+
+    const player =
+        document.getElementById(
+            'audioPlayer'
+        );
+
+
+    /*
+     * Atualiza informações.
+     */
+
+    document.getElementById(
+        'currentTitle'
+    ).textContent =
+        item.titulo ||
+        'Áudio sem título';
+
+
+    document.getElementById(
+        'currentArtist'
+    ).textContent =
+        item.artista || '';
+
+
+    document.getElementById(
+        'currentType'
+    ).textContent =
+        item.tipo ||
+        'ÁUDIO';
+
+
+    /*
+     * Esconde mensagem inicial.
+     */
+
+    const hint =
+        document.getElementById(
+            'playHint'
+        );
+
+
+    if (hint) {
+
+        hint.style.display =
+            'none';
+    }
+
+
+    /*
+     * Define o áudio.
+     */
+
+    player.src =
+        item.url;
+
+
+    player.load();
+
+
+    /*
+     * Destaca a primeira música.
+     */
+
+    atualizarItemAtivo();
+
+
+    atualizarStatus(
+        'Iniciando primeiro áudio...'
+    );
+
+
+    /*
+     * Tenta iniciar automaticamente.
+     */
+
+    const tentativa =
+        player.play();
+
+
+    if (
+        tentativa !== undefined
+    ) {
+
+        tentativa
+            .then(
+                function() {
+
+                    atualizarStatus(
+                        'Reproduzindo'
+                    );
+
+                }
+            )
+            .catch(
+                function(erro) {
+
+                    console.log(
+                        'Autoplay bloqueado pelo navegador:',
+                        erro
+                    );
+
+
+                    atualizarStatus(
+                        'Clique no ▶ para iniciar'
+                    );
+
+
+                    /*
+                     * Mantém o primeiro áudio
+                     * carregado no player.
+                     */
+
+                    player.controls = true;
+                }
+            );
+    }
+}
+
+
+
+/* =========================================================
+   TOCAR ÁUDIO
    ========================================================= */
 
 function tocar(index) {
@@ -2035,15 +2223,38 @@ function tocar(index) {
     player.load();
 
 
-    player.play()
-        .catch(
-            function() {
+    atualizarStatus(
+        'Carregando áudio...'
+    );
 
-                atualizarStatus(
-                    'Clique no player para iniciar'
-                );
-            }
-        );
+
+    const tentativa =
+        player.play();
+
+
+    if (
+        tentativa !== undefined
+    ) {
+
+        tentativa
+            .then(
+                function() {
+
+                    atualizarStatus(
+                        'Reproduzindo'
+                    );
+
+                }
+            )
+            .catch(
+                function() {
+
+                    atualizarStatus(
+                        'Clique no ▶ para iniciar'
+                    );
+                }
+            );
+    }
 
 
     atualizarItemAtivo();
@@ -2223,7 +2434,8 @@ function proximo() {
         playlist.length
     ) {
 
-        novoIndice = 0;
+        novoIndice =
+            0;
     }
 
 
@@ -2337,6 +2549,7 @@ const player =
 /*
  * PLAY
  */
+
 player.addEventListener(
     'play',
     function() {
@@ -2354,13 +2567,26 @@ player.addEventListener(
 /*
  * PAUSE
  */
+
 player.addEventListener(
     'pause',
     function() {
 
-        atualizarStatus(
-            'Pausado'
-        );
+        /*
+         * Não altera para "Pausado"
+         * se o áudio ainda não chegou
+         * a iniciar.
+         */
+
+        if (
+            player.currentTime > 0 &&
+            !player.ended
+        ) {
+
+            atualizarStatus(
+                'Pausado'
+            );
+        }
 
 
         pararHeartbeat();
@@ -2390,6 +2616,7 @@ player.addEventListener(
 /*
  * FIM
  */
+
 player.addEventListener(
     'ended',
     function() {
@@ -2429,13 +2656,25 @@ player.addEventListener(
 /*
  * ÁUDIO PRONTO
  */
+
 player.addEventListener(
     'canplay',
     function() {
 
-        atualizarStatus(
-            'Áudio pronto'
-        );
+        /*
+         * Só informa "Áudio pronto"
+         * quando ainda não estiver
+         * reproduzindo.
+         */
+
+        if (
+            player.paused
+        ) {
+
+            atualizarStatus(
+                'Áudio pronto'
+            );
+        }
     }
 );
 
@@ -2443,6 +2682,7 @@ player.addEventListener(
 /*
  * ERRO
  */
+
 player.addEventListener(
     'error',
     function() {
@@ -2505,6 +2745,10 @@ document.addEventListener(
         /*
          * TERCEIRO:
          * carregar playlist.
+         *
+         * Ao terminar o carregamento,
+         * tocarPrimeiroAudio() será
+         * executado automaticamente.
          */
 
         carregarPlaylist();
