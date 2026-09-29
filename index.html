@@ -424,7 +424,50 @@ footer {
     color:
         rgba(255,255,255,.42);
 }
+.share-btn {
 
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid
+        rgba(255,255,255,.12);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    color: white;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 16px;
+
+    transition: .2s ease;
+}
+
+.share-btn:hover {
+
+    background:
+        rgba(25,118,210,.35);
+
+    transform:
+        translateY(-1px);
+}
+
+.share-btn:active {
+
+    transform:
+        scale(.94);
+}
 @media(max-width:600px) {
 
     body {
@@ -1596,7 +1639,196 @@ function aplicarFiltro() {
     renderizarPlaylist();
 }
 
+/* =========================================================
+   COMPARTILHAR ÁUDIO
+   ========================================================= */
 
+async function compartilharAudio(index) {
+
+    if (
+        index < 0 ||
+        index >= playlist.length
+    ) {
+
+        return;
+    }
+
+
+    const item =
+        playlist[index];
+
+
+    if (!item) {
+
+        return;
+    }
+
+
+    const titulo =
+        item.titulo ||
+        'Áudio da Rádio Onda Livre';
+
+
+    const url =
+        item.url ||
+        window.location.href;
+
+
+    const texto =
+        '🎧 ' +
+        titulo +
+        '\n\nOuça na Rádio Onda Livre';
+
+
+    /*
+     * Compartilhamento nativo
+     * em celulares e navegadores
+     * compatíveis.
+     */
+
+    if (
+        navigator.share
+    ) {
+
+        try {
+
+            await navigator.share({
+
+                title:
+                    titulo,
+
+                text:
+                    texto,
+
+                url:
+                    url
+            });
+
+
+            registrarEvento(
+                'COMPARTILHAR',
+                item.id,
+                titulo
+            );
+
+
+            return;
+
+        } catch (erro) {
+
+            /*
+             * O usuário pode ter
+             * cancelado o compartilhamento.
+             */
+
+            if (
+                erro &&
+                erro.name ===
+                'AbortError'
+            ) {
+
+                return;
+            }
+
+
+            console.warn(
+                'Erro no compartilhamento:',
+                erro
+            );
+        }
+    }
+
+
+    /*
+     * Caso o navegador não tenha
+     * navigator.share, copia o
+     * endereço do áudio.
+     */
+
+    try {
+
+        await navigator.clipboard.writeText(
+            url
+        );
+
+
+        registrarEvento(
+            'COMPARTILHAR',
+            item.id,
+            titulo
+        );
+
+
+        alert(
+            'Link do áudio copiado!\n\n' +
+            'Agora você pode colar e enviar pelo WhatsApp ou outra rede.'
+        );
+
+    } catch (erro) {
+
+        /*
+         * Fallback para navegadores
+         * que não permitem clipboard.
+         */
+
+        const campo =
+            document.createElement(
+                'textarea'
+            );
+
+
+        campo.value =
+            url;
+
+
+        campo.style.position =
+            'fixed';
+
+        campo.style.left =
+            '-9999px';
+
+
+        document.body.appendChild(
+            campo
+        );
+
+
+        campo.select();
+
+
+        try {
+
+            document.execCommand(
+                'copy'
+            );
+
+
+            registrarEvento(
+                'COMPARTILHAR',
+                item.id,
+                titulo
+            );
+
+
+            alert(
+                'Link do áudio copiado!'
+            );
+
+        } catch (erroCopia) {
+
+            alert(
+                'Não foi possível copiar o link.\n\n' +
+                url
+            );
+
+        } finally {
+
+            document.body.removeChild(
+                campo
+            );
+        }
+    }
+}
 
 /* =========================================================
    RENDERIZAR PLAYLIST
@@ -1681,6 +1913,7 @@ function renderizarPlaylist() {
                             ${icone}
                         </div>
 
+
                         <div class="audio-info">
 
                             <div class="audio-title">
@@ -1702,6 +1935,19 @@ function renderizarPlaylist() {
                             </div>
 
                         </div>
+
+
+                        <button
+                            type="button"
+                            class="share-btn"
+                            title="Compartilhar áudio"
+                            aria-label="Compartilhar ${escaparHtml(
+                                item.titulo || 'áudio'
+                            )}"
+                            onclick="event.stopPropagation(); compartilharAudio(${originalIndex})"
+                        >
+                            🔗
+                        </button>
 
                     </div>
 
