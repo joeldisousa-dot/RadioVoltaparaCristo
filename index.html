@@ -1639,161 +1639,140 @@ function alterarStatus(
    JSONP
    ============================================================ */
 
-function chamarAPI(
-  acao,
-  parametros = {},
-  timeout = 15000
-) {
+function chamarAPI(acao, parametros = {}, timeout = 20000) {
 
-  return new Promise(
-    (resolve, reject) => {
+  return new Promise((resolve, reject) => {
 
-      const callback =
-        'callback_' +
-        Date.now() +
-        '_' +
-        Math.random()
-          .toString(36)
-          .substring(2, 8);
+    const callback =
+      'radioCallback_' +
+      Date.now() +
+      '_' +
+      Math.random().toString(36).substring(2, 9);
 
-      const script =
-        document.createElement(
-          'script'
-        );
+    const script =
+      document.createElement('script');
 
-      let finalizado =
-        false;
+    let finalizado = false;
 
-      const params =
-        new URLSearchParams();
+    const params =
+      new URLSearchParams();
 
-      params.set(
-        'acao',
-        acao
-      );
+    params.set('acao', acao);
+    params.set('callback', callback);
 
-      Object.keys(
-        parametros
-      ).forEach(
-        chave => {
+    Object.keys(parametros).forEach(chave => {
 
-          const valor =
-            parametros[chave];
+      const valor = parametros[chave];
 
-          if (
-            valor !== undefined &&
-            valor !== null
-          ) {
-
-            params.set(
-              chave,
-              valor
-            );
-
-          }
-
-        }
-      );
-
-      params.set(
-        'callback',
-        callback
-      );
-
-      const timer =
-        setTimeout(
-          () => {
-
-            finalizar(
-              new Error(
-                'Tempo de resposta excedido.'
-              )
-            );
-
-          },
-          timeout
-        );
-
-      function finalizar(
-        erro,
-        dados
+      if (
+        valor !== undefined &&
+        valor !== null
       ) {
 
-        if (finalizado) {
-          return;
-        }
-
-        finalizado = true;
-
-        clearTimeout(
-          timer
+        params.set(
+          chave,
+          String(valor)
         );
-
-        delete window[
-          callback
-        ];
-
-        if (
-          script.parentNode
-        ) {
-
-          script.parentNode
-            .removeChild(
-              script
-            );
-
-        }
-
-        if (erro) {
-
-          reject(
-            erro
-          );
-
-        } else {
-
-          resolve(
-            dados
-          );
-
-        }
 
       }
 
-      window[callback] =
-        function(dados) {
+    });
 
-          finalizar(
-            null,
-            dados
-          );
+    function finalizar(erro, resultado) {
 
-        };
+      if (finalizado) {
+        return;
+      }
 
-      script.onerror =
-        function() {
+      finalizado = true;
 
-          finalizar(
-            new Error(
-              'Erro ao comunicar com o servidor.'
-            )
-          );
+      clearTimeout(timer);
 
-        };
+      try {
+        delete window[callback];
+      } catch (e) {}
 
-      script.src =
-        URL_API +
-        (URL_API.includes('?')
-          ? '&'
-          : '?') +
-        params.toString();
+      if (script.parentNode) {
 
-      document.body.appendChild(
-        script
-      );
+        script.parentNode.removeChild(
+          script
+        );
+
+      }
+
+      if (erro) {
+
+        reject(erro);
+
+      } else {
+
+        resolve(resultado);
+
+      }
 
     }
-  );
+
+    window[callback] =
+      function(resultado) {
+
+        console.log(
+          'Resposta da API:',
+          resultado
+        );
+
+        finalizar(
+          null,
+          resultado
+        );
+
+      };
+
+
+    script.onerror =
+      function() {
+
+        finalizar(
+          new Error(
+            'Não foi possível acessar o Apps Script.'
+          )
+        );
+
+      };
+
+
+    const timer =
+      setTimeout(() => {
+
+        finalizar(
+          new Error(
+            'Tempo limite excedido ao carregar a playlist.'
+          )
+        );
+
+      }, timeout);
+
+
+    script.src =
+      URL_API +
+      (
+        URL_API.includes('?')
+          ? '&'
+          : '?'
+      ) +
+      params.toString();
+
+
+    console.log(
+      'Chamando API:',
+      script.src
+    );
+
+
+    document.body.appendChild(
+      script
+    );
+
+  });
 
 }
 
