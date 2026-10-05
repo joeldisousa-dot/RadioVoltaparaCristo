@@ -3,29 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora INSS e IRRF</title>
+
+<title>Rádio Onda Livre</title>
+
+<meta name="theme-color" content="#071a3d">
+<meta name="description"
+      content="Rádio Onda Livre - Louvores, orações e mensagens para abençoar sua vida.">
 
 <style>
-:root {
-  --primary: #0f4c81;
-  --primary-dark: #083657;
-  --secondary: #1f7a5c;
-  --danger: #b42318;
-  --warning: #b54708;
-  --purple: #6941c6;
-  --bg: #f4f7fb;
-  --card: #ffffff;
-  --border: #d9e2ec;
-  --text: #1f2937;
-  --muted: #667085;
-  --success-bg: #ecfdf3;
-  --danger-bg: #fff1f0;
-  --blue-bg: #eff8ff;
-  --purple-bg: #f4f3ff;
-  --warning-bg: #fffaeb;
-  --shadow: 0 8px 24px rgba(15, 76, 129, .08);
-  --radius: 14px;
-}
 
 * {
   box-sizing: border-box;
@@ -37,23 +22,30 @@ html {
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #12366e 0%,
+      #071a3d 42%,
+      #030b1b 100%
+    );
+
+  min-height: 100vh;
 }
 
-button,
-input,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
+/* ============================================================
+   CONTAINER
+   ============================================================ */
 
 .container {
-  width: min(1450px, calc(100% - 30px));
+  width: min(1180px, 94%);
   margin: 0 auto;
 }
 
@@ -61,761 +53,840 @@ button {
    CABEÇALHO
    ============================================================ */
 
-.header {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-  color: #fff;
-  padding: 25px 0;
-  box-shadow: 0 4px 18px rgba(8, 54, 87, .20);
+header {
+  padding: 25px 0 18px;
 }
 
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
+.header-card {
+  position: relative;
 
-.header-title {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+  padding: 25px;
 
-.header-icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,.14);
-  font-size: 28px;
-}
+  border-radius: 24px;
 
-.header h1 {
-  margin: 0 0 5px;
-  font-size: 27px;
-}
+  background:
+    linear-gradient(
+      135deg,
+      rgba(19, 63, 125, 0.95),
+      rgba(6, 22, 52, 0.95)
+    );
 
-.header p {
-  margin: 0;
-  opacity: .85;
-  font-size: 14px;
-}
+  border: 1px solid rgba(255,255,255,0.12);
 
-.header-badge {
-  padding: 9px 14px;
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 999px;
-  background: rgba(255,255,255,.10);
-  font-size: 13px;
-  white-space: nowrap;
-}
+  box-shadow:
+    0 15px 45px rgba(0,0,0,0.35);
 
-/* ============================================================
-   LAYOUT
-   ============================================================ */
-
-main {
-  padding: 25px 0 45px;
-}
-
-.grid {
-  display: grid;
-  gap: 20px;
-}
-
-.grid-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
   overflow: hidden;
 }
 
-.card-header {
-  padding: 17px 20px;
-  border-bottom: 1px solid var(--border);
+.header-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 240px;
+  height: 240px;
+
+  right: -100px;
+  top: -110px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 157, 255, 0.18);
+
+  filter: blur(10px);
+}
+
+.brand {
+  position: relative;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 15px;
+  gap: 18px;
 }
 
-.card-header h2 {
+.brand-icon {
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  font-size: 31px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #178cff,
+      #0751a5
+    );
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.25);
+}
+
+.brand h1 {
   margin: 0;
-  font-size: 18px;
+
+  font-size: clamp(24px, 4vw, 36px);
+
+  font-weight: 800;
 }
 
-.card-header small {
-  color: var(--muted);
-}
+.brand p {
+  margin: 5px 0 0;
 
-.card-body {
-  padding: 20px;
-}
+  color: #bcd4f4;
 
-/* ============================================================
-   FORMULÁRIO
-   ============================================================ */
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.field label {
-  font-size: 13px;
-  font-weight: 700;
-  color: #344054;
-}
-
-.field input,
-.field select {
-  width: 100%;
-  min-height: 43px;
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
-  padding: 9px 12px;
-  background: #fff;
-  color: var(--text);
-  outline: none;
-  transition: .2s;
-}
-
-.field input:focus,
-.field select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(15,76,129,.10);
-}
-
-.field input[readonly] {
-  background: #f8fafc;
-  font-weight: 700;
-}
-
-.field.full {
-  grid-column: 1 / -1;
-}
-
-/* ============================================================
-   BOTÕES
-   ============================================================ */
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.btn {
-  border: 0;
-  border-radius: 9px;
-  padding: 10px 16px;
-  min-height: 42px;
-  font-weight: 700;
-  transition: .2s;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-  filter: brightness(.97);
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: #fff;
-}
-
-.btn-secondary {
-  background: var(--secondary);
-  color: #fff;
-}
-
-.btn-light {
-  background: #eef2f6;
-  color: #344054;
-  border: 1px solid var(--border);
-}
-
-.btn-danger {
-  background: var(--danger);
-  color: #fff;
-}
-
-.btn-warning {
-  background: var(--warning);
-  color: #fff;
-}
-
-.btn-purple {
-  background: var(--purple);
-  color: #fff;
-}
-
-.btn-small {
-  min-height: 35px;
-  padding: 7px 11px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* ============================================================
    STATUS
    ============================================================ */
 
-.status {
+.status-area {
+  margin-top: 20px;
+
   display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.status {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 13px;
-  border-radius: 9px;
-  background: var(--blue-bg);
-  color: var(--primary);
+
+  padding: 9px 14px;
+
+  border-radius: 30px;
+
   font-size: 13px;
-  font-weight: 700;
+
+  background:
+    rgba(255,255,255,0.07);
+
+  color: #dceaff;
 }
 
 .status-dot {
   width: 9px;
   height: 9px;
+
   border-radius: 50%;
-  background: var(--secondary);
-  box-shadow: 0 0 0 4px rgba(31,122,92,.12);
+
+  background: #888;
+
+  box-shadow: 0 0 10px currentColor;
+}
+
+.status.online .status-dot {
+  background: #31e981;
+  color: #31e981;
+}
+
+.status.loading .status-dot {
+  background: #ffc107;
+  color: #ffc107;
+}
+
+.status.error .status-dot {
+  background: #ff4d5d;
+  color: #ff4d5d;
 }
 
 /* ============================================================
-   RESUMO PRINCIPAL
+   PLAYER
    ============================================================ */
 
-.summary-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 15px;
+.player-section {
+  margin-top: 22px;
 }
 
-.summary-card {
-  position: relative;
-  padding: 21px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 5px 18px rgba(16,24,40,.05);
-  overflow: hidden;
+.player-card {
+  padding: 25px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 38, 78, 0.97),
+      rgba(4, 15, 34, 0.98)
+    );
+
+  border: 1px solid rgba(255,255,255,0.10);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.35);
 }
 
-.summary-card::after {
-  content: "";
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  right: -35px;
-  top: -35px;
-  background: rgba(15,76,129,.05);
-}
-
-.summary-card.total {
-  background: linear-gradient(135deg, #083657, #0f4c81);
-  color: #fff;
-  border-color: transparent;
-}
-
-.summary-card.total::after {
-  background: rgba(255,255,255,.08);
-}
-
-.summary-label {
-  position: relative;
-  z-index: 1;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  font-weight: 800;
-  opacity: .75;
-}
-
-.summary-value {
-  position: relative;
-  z-index: 1;
-  margin-top: 8px;
-  font-size: 31px;
-  font-weight: 900;
-  letter-spacing: -.7px;
-}
-
-.summary-description {
-  position: relative;
-  z-index: 1;
-  margin-top: 6px;
-  font-size: 12px;
-  opacity: .78;
-}
-
-.summary-card.inss {
-  border-top: 4px solid var(--secondary);
-}
-
-.summary-card.irrf {
-  border-top: 4px solid var(--danger);
-}
-
-/* ============================================================
-   SEÇÕES DE CÁLCULO
-   ============================================================ */
-
-.calc-section {
-  margin-top: 20px;
-}
-
-.calc-section-header {
+.now-playing {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  padding: 15px 18px;
-  border-bottom: 1px solid var(--border);
-}
+  gap: 18px;
 
-.calc-section-header h3 {
-  margin: 0;
-  font-size: 16px;
-}
-
-.calc-section-header span {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.calc-section-body {
-  padding: 18px;
-}
-
-.calc-section.inss {
-  border-left: 5px solid var(--secondary);
-}
-
-.calc-section.irrf {
-  border-left: 5px solid var(--danger);
-}
-
-/* ============================================================
-   LINHAS DE CÁLCULO
-   ============================================================ */
-
-.calc-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.calc-line {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 20px;
-  padding: 11px 0;
-  border-bottom: 1px dashed #e2e8f0;
-  align-items: center;
-}
-
-.calc-line:last-child {
-  border-bottom: 0;
-}
-
-.calc-line .label {
-  color: #475467;
-  font-size: 13px;
-}
-
-.calc-line .value {
-  text-align: right;
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.calc-line.subtotal {
-  background: #f8fafc;
-  padding: 12px 10px;
-  border-radius: 8px;
-  border-bottom: 0;
-  margin: 5px 0;
-}
-
-.calc-line.highlight {
-  background: var(--warning-bg);
-  border: 1px solid #fedf89;
-  padding: 13px 12px;
-  border-radius: 9px;
-  margin: 7px 0;
-}
-
-.calc-line.total {
-  background: var(--success-bg);
-  border: 1px solid #abefc6;
-  padding: 15px 12px;
-  border-radius: 10px;
-  margin-top: 8px;
-}
-
-.calc-line.total .label {
-  font-weight: 900;
-  color: #067647;
-}
-
-.calc-line.total .value {
-  font-size: 21px;
-  color: #067647;
-}
-
-.calc-line.total-irrf {
-  background: var(--danger-bg);
-  border: 1px solid #fecdca;
-}
-
-.calc-line.total-irrf .label {
-  color: var(--danger);
-}
-
-.calc-line.total-irrf .value {
-  color: var(--danger);
-}
-
-.value-negative {
-  color: var(--danger) !important;
-}
-
-.formula {
-  margin-top: 12px;
-  padding: 11px 13px;
-  background: #f8fafc;
-  border: 1px solid #e4e7ec;
-  border-radius: 8px;
-  color: #475467;
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 12px;
-  overflow-x: auto;
-}
-
-/* ============================================================
-   DEDUÇÃO ESCOLHIDA
-   ============================================================ */
-
-.deducao-escolhida {
-  margin: 14px 0;
-  padding: 15px;
-  border-radius: 11px;
-  background: var(--purple-bg);
-  border: 1px solid #d9d6fe;
-}
-
-.deducao-escolhida .titulo {
-  color: var(--purple);
-  font-size: 12px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .4px;
-}
-
-.deducao-escolhida .valor {
-  margin-top: 5px;
-  color: #42307d;
-  font-size: 22px;
-  font-weight: 900;
-}
-
-.deducao-escolhida .explicacao {
-  margin-top: 5px;
-  color: #6941c6;
-  font-size: 12px;
-}
-
-/* ============================================================
-   TABELAS
-   ============================================================ */
-
-.table-wrapper {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 680px;
-}
-
-thead th {
-  background: #f8fafc;
-  color: #344054;
-  font-size: 12px;
-  text-align: left;
-  padding: 11px 10px;
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-
-tbody td {
-  padding: 10px;
-  border-bottom: 1px solid #eef2f6;
-  font-size: 13px;
-  vertical-align: middle;
-}
-
-tbody tr:hover {
-  background: #fafcff;
-}
-
-tfoot td {
-  padding: 13px 10px;
-  font-weight: 900;
-  border-top: 2px solid var(--border);
-}
-
-.money {
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-.rate {
-  text-align: center;
-  white-space: nowrap;
-}
-
-.faixa-usada {
-  background: #f0fdf4 !important;
-}
-
-.faixa-usada td {
-  font-weight: 700;
-}
-
-.td-total {
-  color: var(--primary);
-  font-size: 15px;
-}
-
-/* ============================================================
-   MEMÓRIA
-   ============================================================ */
-
-.memory-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 10px;
-}
-
-.memory-item {
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: #fafcff;
-}
-
-.memory-item .memory-label {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.memory-item .memory-value {
-  margin-top: 4px;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-/* ============================================================
-   LOG
-   ============================================================ */
-
-.log-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.log-calculo {
-  margin: 0;
-  min-height: 260px;
-  max-height: 650px;
-  overflow: auto;
-  padding: 18px;
-  border-radius: 10px;
-  background: #101828;
-  color: #e4e7ec;
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 12px;
-  line-height: 1.65;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.log-empty {
-  color: #98a2b3;
-}
-
-/* ============================================================
-   VIGÊNCIA
-   ============================================================ */
-
-.vigencia-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 13px;
-  border-radius: 9px;
-  background: var(--blue-bg);
-  color: var(--primary);
-  border: 1px solid #b2ddff;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-/* ============================================================
-   MODAL
-   ============================================================ */
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(16,24,40,.62);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 9999;
-}
-
-.modal.open {
-  display: flex;
-}
-
-.modal-content {
-  width: min(1100px, 100%);
-  max-height: 92vh;
-  overflow: auto;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 25px 70px rgba(0,0,0,.25);
-}
-
-.modal-header {
-  position: sticky;
-  top: 0;
-  z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  padding: 17px 20px;
-  background: #fff;
-  border-bottom: 1px solid var(--border);
-}
-
-.modal-header h2 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.close-modal {
-  width: 35px;
-  height: 35px;
-  border: 0;
-  border-radius: 8px;
-  background: #f2f4f7;
-  color: #344054;
-  font-size: 20px;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-/* ============================================================
-   TABS
-   ============================================================ */
-
-.tabs {
-  display: flex;
-  gap: 5px;
-  border-bottom: 1px solid var(--border);
   margin-bottom: 20px;
 }
 
-.tab {
-  border: 0;
-  background: transparent;
-  padding: 11px 16px;
-  color: var(--muted);
-  font-weight: 700;
-  border-bottom: 3px solid transparent;
+.album-icon {
+  flex-shrink: 0;
+
+  width: 70px;
+  height: 70px;
+
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #087cf1,
+      #083f88
+    );
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.3);
 }
 
-.tab.active {
-  color: var(--primary);
-  border-bottom-color: var(--primary);
+.now-info {
+  min-width: 0;
+}
+
+.now-label {
+  color: #78baff;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+.now-title {
+  margin-top: 5px;
+
+  font-size: 21px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.now-artist {
+  margin-top: 5px;
+
+  color: #a9c0df;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+audio {
+  width: 100%;
+
+  margin: 8px 0 18px;
+}
+
+.player-controls {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  border: 0;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  background:
+    rgba(255,255,255,0.09);
+
+  border: 1px solid rgba(255,255,255,0.10);
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+
+  background:
+    rgba(24, 139, 255, 0.35);
+}
+
+.play-main {
+  width: 62px;
+  height: 62px;
+
+  font-size: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #118cff,
+      #0751a6
+    );
+
+  box-shadow:
+    0 8px 25px rgba(0,120,255,0.30);
+}
+
+.player-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  border: 0;
+
+  padding: 10px 15px;
+
+  border-radius: 12px;
+
+  color: #dbeaff;
+
+  background:
+    rgba(255,255,255,0.07);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.action-btn:hover {
+  background:
+    rgba(17,140,255,0.25);
 }
 
 /* ============================================================
-   EDITOR DE FAIXAS
+   PESQUISA
    ============================================================ */
 
-.faixa-editor {
-  margin-top: 18px;
+.search-area {
+  margin-top: 22px;
 }
 
-.faixa-editor-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+.search-box {
+  position: relative;
 }
 
-.faixa-editor-header h3 {
-  margin: 0;
+.search-box input {
+  width: 100%;
+
+  padding: 16px 48px 16px 18px;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+
+  outline: none;
+
+  color: #fff;
+
+  background:
+    rgba(255,255,255,0.07);
+
   font-size: 15px;
 }
 
-.faixa-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr auto;
-  gap: 8px;
-  margin-bottom: 8px;
-  align-items: end;
+.search-box input::placeholder {
+  color: #91a7c6;
 }
 
-.faixa-row .field label {
-  font-size: 11px;
+.clear-search {
+  position: absolute;
+
+  right: 10px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 34px;
+  height: 34px;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  color: #fff;
+
+  cursor: pointer;
+
+  display: none;
 }
 
-.faixa-row .btn {
-  min-height: 40px;
+.search-results {
+  display: none;
+
+  margin-top: 8px;
+
+  padding: 8px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(4,15,35,0.98);
+
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
 /* ============================================================
-   RODAPÉ
+   FILTROS
    ============================================================ */
 
-.footer {
-  padding: 25px 0;
+.filters {
+  display: flex;
+
+  gap: 9px;
+
+  flex-wrap: wrap;
+
+  margin: 22px 0 18px;
+}
+
+.filter-btn {
+  border: 0;
+
+  padding: 10px 16px;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  color: #bcd0eb;
+
+  background:
+    rgba(255,255,255,0.07);
+
+  border: 1px solid rgba(255,255,255,0.07);
+
+  transition: .2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #118cff,
+      #0751a6
+    );
+
+  border-color: transparent;
+}
+
+/* ============================================================
+   PLAYLISTS
+   ============================================================ */
+
+.playlists {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-top: 22px;
+}
+
+.playlist-card {
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  background:
+    rgba(4, 18, 40, 0.88);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.22);
+}
+
+.playlist-header {
+  padding: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.07);
+}
+
+.playlist-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-weight: 700;
+}
+
+.playlist-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(18,140,255,0.18);
+
+  font-size: 19px;
+}
+
+.playlist-count {
+  min-width: 30px;
+
+  padding: 5px 8px;
+
   text-align: center;
-  color: var(--muted);
+
+  border-radius: 20px;
+
+  color: #bfe0ff;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  font-size: 12px;
+}
+
+.playlist-list {
+  padding: 8px;
+
+  max-height: 600px;
+
+  overflow-y: auto;
+}
+
+/* ============================================================
+   ITEM DE ÁUDIO
+   ============================================================ */
+
+.audio-item {
+  display: grid;
+
+  grid-template-columns: 36px 1fr auto;
+
+  gap: 10px;
+
+  align-items: center;
+
+  padding: 12px;
+
+  margin-bottom: 5px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.audio-item:hover {
+  background:
+    rgba(18,140,255,0.10);
+
+  transform: translateX(2px);
+}
+
+.audio-item.active {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(17,140,255,0.22),
+      rgba(17,140,255,0.07)
+    );
+
+  border-left:
+    3px solid #1592ff;
+}
+
+.audio-number {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  color: #8fb1d8;
+
+  background:
+    rgba(255,255,255,0.05);
+
+  font-size: 12px;
+}
+
+.audio-info {
+  min-width: 0;
+}
+
+.audio-title {
+  color: #fff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.audio-artist {
+  margin-top: 4px;
+
+  color: #8199ba;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.audio-type {
+  display: inline-block;
+
+  margin-top: 5px;
+
+  padding: 2px 7px;
+
+  border-radius: 8px;
+
+  color: #90c8ff;
+
+  background:
+    rgba(20,130,230,0.10);
+
+  font-size: 10px;
+}
+
+.audio-actions {
+  display: flex;
+
+  gap: 5px;
+}
+
+.share-btn {
+  width: 38px;
+  height: 38px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255,255,255,0.06);
+
+  color: #8fc8ff;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.share-btn:hover {
+  background:
+    #087ce9;
+
+  color: #fff;
+
+  transform: scale(1.04);
+}
+
+/* ============================================================
+   VAZIO
+   ============================================================ */
+
+.empty {
+  padding: 30px 15px;
+
+  text-align: center;
+
+  color: #7f96b8;
+
+  font-size: 13px;
+}
+
+/* ============================================================
+   INFORMAÇÕES
+   ============================================================ */
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0,1fr));
+
+  gap: 14px;
+
+  margin-top: 22px;
+}
+
+.info-card {
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.info-label {
+  color: #7595bd;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .8px;
+}
+
+.info-value {
+  margin-top: 7px;
+
+  color: #e7f1ff;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+/* ============================================================
+   NOTIFICAÇÃO
+   ============================================================ */
+
+.toast {
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 25px;
+
+  transform:
+    translate(-50%, 100px);
+
+  z-index: 9999;
+
+  max-width: min(450px, 90%);
+
+  padding: 13px 18px;
+
+  border-radius: 14px;
+
+  background:
+    rgba(5,20,44,0.97);
+
+  border:
+    1px solid rgba(255,255,255,0.12);
+
+  color: #fff;
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.4);
+
+  opacity: 0;
+
+  transition:
+    opacity .3s ease,
+    transform .3s ease;
+
+  font-size: 14px;
+}
+
+.toast.show {
+  opacity: 1;
+
+  transform:
+    translate(-50%, 0);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+footer {
+  padding: 35px 0 25px;
+
+  text-align: center;
+
+  color: #7088aa;
+
   font-size: 12px;
 }
 
@@ -823,2185 +894,903 @@ tfoot td {
    RESPONSIVO
    ============================================================ */
 
-@media (max-width: 1100px) {
-  .form-grid {
-    grid-template-columns: repeat(2, minmax(0,1fr));
+@media (max-width: 850px) {
+
+  .playlists {
+    grid-template-columns: 1fr;
   }
 
-  .summary-grid {
-    grid-template-columns: 1fr 1fr;
+  .playlist-list {
+    max-height: 500px;
   }
 
-  .summary-card.total {
-    grid-column: 1 / -1;
+  .info-grid {
+    grid-template-columns: 1fr;
   }
 
-  .memory-grid {
-    grid-template-columns: repeat(2, minmax(0,1fr));
-  }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 600px) {
+
   .container {
-    width: min(100% - 20px, 1450px);
+    width: 94%;
   }
 
-  .header-content {
-    align-items: flex-start;
-    flex-direction: column;
+  .header-card,
+  .player-card {
+    padding: 18px;
   }
 
-  .header-badge {
-    align-self: flex-start;
+  .brand-icon {
+    width: 55px;
+    height: 55px;
+
+    font-size: 26px;
   }
 
-  .header h1 {
-    font-size: 22px;
+  .now-playing {
+    gap: 12px;
   }
 
-  .grid-2,
-  .grid-3 {
-    grid-template-columns: 1fr;
+  .album-icon {
+    width: 58px;
+    height: 58px;
+
+    font-size: 25px;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
+  .now-title {
+    font-size: 17px;
   }
 
-  .field.full {
-    grid-column: auto;
+  .audio-item {
+    grid-template-columns: 32px 1fr auto;
   }
 
-  .summary-grid {
-    grid-template-columns: 1fr;
+  .audio-number {
+    width: 30px;
+    height: 30px;
   }
 
-  .summary-card.total {
-    grid-column: auto;
+  .share-btn {
+    width: 36px;
+    height: 36px;
   }
 
-  .summary-value {
-    font-size: 27px;
-  }
-
-  .memory-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .calc-line {
-    grid-template-columns: 1fr;
-    gap: 4px;
-  }
-
-  .calc-line .value {
-    text-align: left;
-  }
-
-  .faixa-row {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .faixa-row .remove-faixa {
-    grid-column: 1 / -1;
-  }
-
-  .actions .btn {
-    flex: 1 1 100%;
-  }
-
-  .log-toolbar .btn {
-    flex: 1 1 auto;
-  }
 }
 
-@media print {
-  body {
-    background: #fff;
+/* ============================================================
+   ANIMAÇÃO
+   ============================================================ */
+
+@keyframes pulse {
+
+  0% {
+    transform: scale(1);
   }
 
-  .header {
-    box-shadow: none;
+  50% {
+    transform: scale(1.04);
   }
 
-  .actions,
-  .log-toolbar,
-  .footer,
-  .no-print {
-    display: none !important;
+  100% {
+    transform: scale(1);
   }
 
-  .card,
-  .summary-card {
-    box-shadow: none;
-  }
-
-  .modal {
-    display: none !important;
-  }
-
-  main {
-    padding-top: 10px;
-  }
 }
+
+.playing {
+  animation: pulse 1.8s infinite;
+}
+
 </style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="container header-content">
-    <div class="header-title">
-      <div class="header-icon">🧮</div>
-      <div>
-        <h1>Calculadora INSS e IRRF</h1>
-        <p>Cálculo detalhado com tabelas configuráveis e memória de cálculo</p>
-      </div>
-    </div>
-
-    <div class="header-badge">
-      INSS + IRRF
-    </div>
-  </div>
-</header>
-
-<main>
 <div class="container">
 
   <!-- ========================================================
-       ENTRADA DE DADOS
+       CABEÇALHO
        ======================================================== -->
 
-  <section class="card">
-    <div class="card-header">
-      <div>
-        <h2>📋 Dados para cálculo</h2>
-        <small>Informe os valores utilizados no cálculo da folha.</small>
-      </div>
+  <header>
 
-      <div class="status">
-        <span class="status-dot"></span>
-        <span id="statusVigencia">Aguardando cálculo</span>
-      </div>
-    </div>
+    <div class="header-card">
 
-    <div class="card-body">
+      <div class="brand">
 
-      <div class="form-grid">
-
-        <div class="field">
-          <label for="competencia">Competência</label>
-          <input type="date" id="competencia">
+        <div class="brand-icon">
+          🎙️
         </div>
 
-        <div class="field">
-          <label for="baseINSS">Base INSS</label>
-          <input
-            type="number"
-            id="baseINSS"
-            step="0.01"
-            min="0"
-            placeholder="0,00">
-        </div>
+        <div>
 
-        <div class="field">
-          <label for="rendimentosIRRF">Rendimentos para IRRF</label>
-          <input
-            type="number"
-            id="rendimentosIRRF"
-            step="0.01"
-            min="0"
-            placeholder="0,00">
-        </div>
+          <h1>Rádio Onda Livre</h1>
 
-        <div class="field">
-          <label for="dependentes">Dependentes</label>
-          <input
-            type="number"
-            id="dependentes"
-            step="1"
-            min="0"
-            value="0">
-        </div>
+          <p>
+            Louvores, oração e mensagens para abençoar sua vida
+          </p>
 
-        <div class="field">
-          <label for="pensao">Pensão alimentícia</label>
-          <input
-            type="number"
-            id="pensao"
-            step="0.01"
-            min="0"
-            value="0"
-            placeholder="0,00">
-        </div>
-
-        <div class="field">
-          <label for="baseINSSExibida">Base INSS considerada</label>
-          <input
-            type="text"
-            id="baseINSSExibida"
-            readonly
-            value="R$ 0,00">
-        </div>
-
-        <div class="field">
-          <label for="baseIRRFExibida">Base IRRF considerada</label>
-          <input
-            type="text"
-            id="baseIRRFExibida"
-            readonly
-            value="R$ 0,00">
-        </div>
-
-        <div class="field">
-          <label>Vigência das tabelas</label>
-          <div class="vigencia-box">
-            <span>📅</span>
-            <span id="vigenciaResumo">Aguardando cálculo</span>
-          </div>
         </div>
 
       </div>
 
-      <div class="actions">
-        <button class="btn btn-primary" onclick="calcular()">
-          🧮 Calcular
-        </button>
+      <div class="status-area">
 
-        <button class="btn btn-secondary" onclick="atualizarTabelasVigentes()">
-          🔄 Atualizar tabelas
-        </button>
+        <div
+          id="statusSistema"
+          class="status loading"
+        >
 
-        <button class="btn btn-purple" onclick="abrirGerenciador()">
-          ⚙️ Gerenciar tabelas
-        </button>
+          <span class="status-dot"></span>
 
-        <button class="btn btn-light" onclick="carregarExemplo()">
-          🧪 Carregar exemplo
-        </button>
+          <span id="statusTexto">
+            Conectando...
+          </span>
 
-        <button class="btn btn-light" onclick="limpar()">
-          🧹 Limpar
-        </button>
+        </div>
 
-        <button class="btn btn-warning" onclick="window.print()">
-          🖨️ Imprimir
-        </button>
+        <div
+          id="statusLocalizacao"
+          class="status"
+        >
+
+          📍
+
+          <span id="localizacaoTexto">
+            Identificando localização...
+          </span>
+
+        </div>
+
       </div>
 
     </div>
-  </section>
+
+  </header>
+
 
   <!-- ========================================================
-       RESUMO
+       PLAYER
        ======================================================== -->
 
-  <section class="card" style="margin-top:20px;">
-    <div class="card-header">
-      <div>
-        <h2>📊 Resumo do cálculo</h2>
-        <small>Valores finais dos principais descontos.</small>
-      </div>
-    </div>
+  <section class="player-section">
 
-    <div class="card-body">
+    <div class="player-card">
 
-      <div class="summary-grid">
+      <div class="now-playing">
 
-        <div class="summary-card total">
-          <div class="summary-label">
-            Total de descontos
-          </div>
-
-          <div class="summary-value" id="resultadoTotal">
-            R$ 0,00
-          </div>
-
-          <div class="summary-description">
-            INSS + IRRF
-          </div>
+        <div
+          id="albumIcon"
+          class="album-icon"
+        >
+          🎵
         </div>
 
-        <div class="summary-card inss">
-          <div class="summary-label">
-            INSS
+        <div class="now-info">
+
+          <div class="now-label">
+            Tocando agora
           </div>
 
-          <div class="summary-value" id="resultadoINSS">
-            R$ 0,00
+          <div
+            id="nowTitle"
+            class="now-title"
+          >
+            Aguardando música...
           </div>
 
-          <div class="summary-description">
-            Contribuição previdenciária
-          </div>
-        </div>
-
-        <div class="summary-card irrf">
-          <div class="summary-label">
-            IRRF
-          </div>
-
-          <div class="summary-value" id="resultadoIRRF">
-            R$ 0,00
-          </div>
-
-          <div class="summary-description">
-            Imposto de renda devido
-          </div>
-        </div>
-
-      </div>
-
-      <div class="calc-section">
-        <div class="calc-section-header">
-          <h3>📌 Visão geral das bases</h3>
-          <span>Valores utilizados no cálculo</span>
-        </div>
-
-        <div class="calc-section-body">
-
-          <div class="calc-lines">
-
-            <div class="calc-line">
-              <div class="label">Base informada para INSS</div>
-              <div class="value" id="resumoBaseINSS">R$ 0,00</div>
-            </div>
-
-            <div class="calc-line">
-              <div class="label">Base limitada ao teto do INSS</div>
-              <div class="value" id="resumoBaseLimitada">R$ 0,00</div>
-            </div>
-
-            <div class="calc-line">
-              <div class="label">Rendimentos tributáveis para IRRF</div>
-              <div class="value" id="resumoRendimentos">R$ 0,00</div>
-            </div>
-
-            <div class="calc-line">
-              <div class="label">Base de cálculo do IRRF</div>
-              <div class="value" id="resultadoBaseIRRF">R$ 0,00</div>
-            </div>
-
-            <div class="calc-line total">
-              <div class="label">TOTAL INSS + IRRF</div>
-              <div class="value" id="resumoTotal">R$ 0,00</div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       DETALHAMENTO INSS
-       ======================================================== -->
-
-  <section class="card calc-section inss">
-
-    <div class="calc-section-header">
-      <h3>🟢 Detalhamento do INSS</h3>
-      <span>Apuração progressiva por faixa</span>
-    </div>
-
-    <div class="calc-section-body">
-
-      <div id="detalheINSS">
-
-        <div class="calc-lines">
-
-          <div class="calc-line">
-            <div class="label">Base informada</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">Teto utilizado</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line total">
-            <div class="label">TOTAL INSS</div>
-            <div class="value">R$ 0,00</div>
+          <div
+            id="nowArtist"
+            class="now-artist"
+          >
+            Rádio Onda Livre
           </div>
 
         </div>
 
       </div>
 
-    </div>
-  </section>
 
-  <!-- ========================================================
-       TABELA INSS
-       ======================================================== -->
+      <audio
+        id="audioPlayer"
+        controls
+        preload="auto"
+      ></audio>
 
-  <section class="card" style="margin-top:20px;">
-    <div class="card-header">
-      <div>
-        <h2>📑 Memória por faixa — INSS</h2>
-        <small>Detalhamento da contribuição progressiva.</small>
-      </div>
-    </div>
 
-    <div class="card-body">
+      <div class="player-controls">
 
-      <div class="table-wrapper">
-        <table id="tabelaINSS">
-          <thead>
-            <tr>
-              <th>Faixa</th>
-              <th>De</th>
-              <th>Até</th>
-              <th class="rate">Alíquota</th>
-              <th class="money">Valor da faixa</th>
-              <th class="money">Contribuição</th>
-            </tr>
-          </thead>
-
-          <tbody>
-          </tbody>
-
-          <tfoot>
-            <tr>
-              <td colspan="5">TOTAL INSS</td>
-              <td class="money td-total" id="totalTabelaINSS">R$ 0,00</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       DETALHAMENTO IRRF
-       ======================================================== -->
-
-  <section class="card calc-section irrf">
-
-    <div class="calc-section-header">
-      <h3>🔴 Detalhamento do IRRF</h3>
-      <span>Apuração da base, faixa, deduções e redução</span>
-    </div>
-
-    <div class="calc-section-body">
-
-      <div id="detalheIRRF">
-
-        <div class="calc-lines">
-
-          <div class="calc-line">
-            <div class="label">Rendimentos tributáveis</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">(-) INSS</div>
-            <div class="value value-negative">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">(-) Dependentes</div>
-            <div class="value value-negative">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">(-) Pensão alimentícia</div>
-            <div class="value value-negative">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line highlight">
-            <div class="label">Dedução efetivamente utilizada</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">Base de cálculo do IRRF</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">Alíquota</div>
-            <div class="value">0,00%</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">Parcela a deduzir</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">IRRF bruto</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line">
-            <div class="label">Redução aplicada</div>
-            <div class="value value-negative">R$ 0,00</div>
-          </div>
-
-          <div class="calc-line total total-irrf">
-            <div class="label">IRRF DEVIDO</div>
-            <div class="value">R$ 0,00</div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       TABELA IRRF
-       ======================================================== -->
-
-  <section class="card" style="margin-top:20px;">
-    <div class="card-header">
-      <div>
-        <h2>📑 Tabela vigente — IRRF</h2>
-        <small>Faixas utilizadas para enquadramento.</small>
-      </div>
-    </div>
-
-    <div class="card-body">
-
-      <div class="table-wrapper">
-        <table id="tabelaIRRF">
-          <thead>
-            <tr>
-              <th>Faixa</th>
-              <th>De</th>
-              <th>Até</th>
-              <th class="rate">Alíquota</th>
-              <th class="money">Parcela a deduzir</th>
-            </tr>
-          </thead>
-
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       MEMÓRIA RESUMIDA
-       ======================================================== -->
-
-  <section class="card" style="margin-top:20px;">
-
-    <div class="card-header">
-      <div>
-        <h2>🧾 Memória de cálculo</h2>
-        <small>Resumo estruturado dos valores utilizados.</small>
-      </div>
-    </div>
-
-    <div class="card-body">
-
-      <div id="memoriaCalculo">
-        <div class="memory-grid">
-          <div class="memory-item">
-            <div class="memory-label">Status</div>
-            <div class="memory-value">Aguardando cálculo</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       LOG DETALHADO
-       ======================================================== -->
-
-  <section class="card" style="margin-top:20px;">
-
-    <div class="card-header">
-
-      <div>
-        <h2>📝 Log detalhado do cálculo</h2>
-        <small>
-          Registro passo a passo das fórmulas e valores utilizados.
-        </small>
-      </div>
-
-      <div class="log-toolbar">
-        <button class="btn btn-small btn-primary" onclick="copiarLog()">
-          📋 Copiar log
+        <button
+          class="control-btn"
+          id="prevBtn"
+          title="Anterior"
+          aria-label="Anterior"
+        >
+          ⏮
         </button>
 
-        <button class="btn btn-small btn-light" onclick="limparLog()">
-          🧹 Limpar log
+        <button
+          class="control-btn play-main"
+          id="playBtn"
+          title="Reproduzir / Pausar"
+          aria-label="Reproduzir / Pausar"
+        >
+          ▶
         </button>
+
+        <button
+          class="control-btn"
+          id="nextBtn"
+          title="Próxima"
+          aria-label="Próxima"
+        >
+          ⏭
+        </button>
+
+      </div>
+
+
+      <div class="player-actions">
+
+        <button
+          class="action-btn"
+          id="shareRadioBtn"
+        >
+          📤 Compartilhar rádio
+        </button>
+
+        <button
+          class="action-btn"
+          id="stopBtn"
+        >
+          ⏹ Parar
+        </button>
+
       </div>
 
     </div>
 
-    <div class="card-body">
-
-      <pre id="logCalculo" class="log-calculo"><span class="log-empty">Aguardando cálculo...</span></pre>
-
-    </div>
   </section>
 
-</div>
-</main>
 
-<footer class="footer">
-  Calculadora INSS e IRRF • Tabelas configuráveis • Memória de cálculo
-</footer>
+  <!-- ========================================================
+       PESQUISA
+       ======================================================== -->
 
-<!-- ============================================================
-     MODAL GERENCIAMENTO
-     ============================================================ -->
+  <section class="search-area">
 
-<div id="modalTabelas" class="modal">
+    <div class="search-box">
 
-  <div class="modal-content">
-
-    <div class="modal-header">
-      <h2>⚙️ Gerenciar tabelas de INSS e IRRF</h2>
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Pesquisar louvor, cantor ou mensagem..."
+        autocomplete="off"
+      >
 
       <button
-        class="close-modal"
-        onclick="fecharGerenciador()">
-        ×
+        id="clearSearchBtn"
+        class="clear-search"
+        title="Limpar pesquisa"
+      >
+        ✕
       </button>
-    </div>
-
-    <div class="modal-body">
-
-      <div class="tabs">
-
-        <button
-          id="tabINSS"
-          class="tab active"
-          onclick="selecionarTipoTabela('INSS')">
-          INSS
-        </button>
-
-        <button
-          id="tabIRRF"
-          class="tab"
-          onclick="selecionarTipoTabela('IRRF')">
-          IRRF
-        </button>
-
-      </div>
-
-      <div class="form-grid">
-
-        <div class="field">
-          <label for="tabelaSelecionada">
-            Tabela existente
-          </label>
-
-          <select id="tabelaSelecionada"
-                  onchange="carregarTabelaSelecionada()">
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="nomeTabela">
-            Nome da tabela
-          </label>
-
-          <input
-            type="text"
-            id="nomeTabela"
-            placeholder="Ex.: INSS 2026">
-        </div>
-
-        <div class="field">
-          <label for="inicioVigencia">
-            Início da vigência
-          </label>
-
-          <input
-            type="date"
-            id="inicioVigencia">
-        </div>
-
-        <div class="field">
-          <label for="fimVigencia">
-            Fim da vigência
-          </label>
-
-          <input
-            type="date"
-            id="fimVigencia">
-        </div>
-
-      </div>
-
-      <div id="parametrosIRRF" style="margin-top:20px;">
-
-        <div class="calc-section">
-
-          <div class="calc-section-header">
-            <h3>Parâmetros do IRRF</h3>
-            <span>Valores utilizados nas deduções</span>
-          </div>
-
-          <div class="calc-section-body">
-
-            <div class="form-grid">
-
-              <div class="field">
-                <label for="valorDependente">
-                  Dedução por dependente
-                </label>
-
-                <input
-                  type="number"
-                  id="valorDependente"
-                  step="0.01"
-                  min="0">
-              </div>
-
-              <div class="field">
-                <label for="valorSimplificado">
-                  Desconto simplificado
-                </label>
-
-                <input
-                  type="number"
-                  id="valorSimplificado"
-                  step="0.01"
-                  min="0">
-              </div>
-
-              <div class="field">
-                <label for="reducaoAte5000">
-                  Redução máxima até R$ 5.000
-                </label>
-
-                <input
-                  type="number"
-                  id="reducaoAte5000"
-                  step="0.01"
-                  min="0">
-              </div>
-
-              <div class="field">
-                <label for="reducaoInicio">
-                  Início da faixa de redução
-                </label>
-
-                <input
-                  type="number"
-                  id="reducaoInicio"
-                  step="0.01"
-                  min="0">
-              </div>
-
-              <div class="field">
-                <label for="reducaoFim">
-                  Fim da faixa de redução
-                </label>
-
-                <input
-                  type="number"
-                  id="reducaoFim"
-                  step="0.01"
-                  min="0">
-              </div>
-
-              <div class="field">
-                <label for="reducaoConstante">
-                  Constante da redução
-                </label>
-
-                <input
-                  type="number"
-                  id="reducaoConstante"
-                  step="0.000001"
-                  min="0">
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="faixa-editor">
-
-        <div class="faixa-editor-header">
-
-          <h3>
-            📊 Faixas da tabela
-          </h3>
-
-          <button
-            class="btn btn-small btn-secondary"
-            onclick="adicionarFaixa()">
-            + Adicionar faixa
-          </button>
-
-        </div>
-
-        <div id="faixasEditor"></div>
-
-      </div>
-
-      <div class="actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="salvarTabela()">
-          💾 Salvar nova
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="atualizarTabelaExistente()">
-          ✏️ Atualizar
-        </button>
-
-        <button
-          class="btn btn-light"
-          onclick="restaurarTabela2026()">
-          ♻️ Restaurar 2026
-        </button>
-
-        <button
-          class="btn btn-danger"
-          onclick="excluirTabela()">
-          🗑️ Excluir
-        </button>
-
-      </div>
 
     </div>
+
+    <div
+      id="searchResults"
+      class="search-results"
+    ></div>
+
+  </section>
+
+
+  <!-- ========================================================
+       FILTROS
+       ======================================================== -->
+
+  <div class="filters">
+
+    <button
+      class="filter-btn active"
+      data-filter="todos"
+    >
+      Todos
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="musica"
+    >
+      🎵 Música
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="oracao"
+    >
+      🙏 Oração
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="mensagem"
+    >
+      📖 Mensagem
+    </button>
 
   </div>
 
+
+  <!-- ========================================================
+       PLAYLISTS
+       ======================================================== -->
+
+  <section
+    id="playlists"
+    class="playlists"
+  >
+
+    <div class="playlist-card">
+
+      <div class="playlist-header">
+
+        <div class="playlist-title">
+
+          <div class="playlist-icon">
+            🌅
+          </div>
+
+          <span>
+            Manhã
+          </span>
+
+        </div>
+
+        <span
+          id="countManha"
+          class="playlist-count"
+        >
+          0
+        </span>
+
+      </div>
+
+      <div
+        id="playlistManha"
+        class="playlist-list"
+      >
+
+        <div class="empty">
+          Carregando...
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="playlist-card">
+
+      <div class="playlist-header">
+
+        <div class="playlist-title">
+
+          <div class="playlist-icon">
+            ☀️
+          </div>
+
+          <span>
+            Tarde
+          </span>
+
+        </div>
+
+        <span
+          id="countTarde"
+          class="playlist-count"
+        >
+          0
+        </span>
+
+      </div>
+
+      <div
+        id="playlistTarde"
+        class="playlist-list"
+      >
+
+        <div class="empty">
+          Carregando...
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="playlist-card">
+
+      <div class="playlist-header">
+
+        <div class="playlist-title">
+
+          <div class="playlist-icon">
+            🌙
+          </div>
+
+          <span>
+            Noite
+          </span>
+
+        </div>
+
+        <span
+          id="countNoite"
+          class="playlist-count"
+        >
+          0
+        </span>
+
+      </div>
+
+      <div
+        id="playlistNoite"
+        class="playlist-list"
+      >
+
+        <div class="empty">
+          Carregando...
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       INFORMAÇÕES
+       ======================================================== -->
+
+  <section class="info-grid">
+
+    <div class="info-card">
+
+      <div class="info-label">
+        Total de conteúdos
+      </div>
+
+      <div
+        id="totalAudios"
+        class="info-value"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <div class="info-label">
+        Playlist atual
+      </div>
+
+      <div
+        id="playlistAtual"
+        class="info-value"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <div class="info-label">
+        Localização
+      </div>
+
+      <div
+        id="localAtual"
+        class="info-value"
+      >
+        —
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       RODAPÉ
+       ======================================================== -->
+
+  <footer>
+
+    Rádio Onda Livre • Joel Rodrigues
+
+  </footer>
+
 </div>
+
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
 
 <script>
 
 /* ============================================================
-   CONFIGURAÇÕES
+   CONFIGURAÇÃO
    ============================================================ */
 
-const STORAGE_KEY = "calculadora_inss_irrf_tabelas_v1";
-
-let tipoTabelaAtual = "INSS";
-
-let tabelas = {};
-
-let resultadoAtual = null;
+const URL_API =
+  'COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT';
 
 
 /* ============================================================
-   UTILITÁRIOS
+   VARIÁVEIS
    ============================================================ */
 
-function numero(valor) {
-  const n = Number(valor);
-  return Number.isFinite(n) ? n : 0;
-}
+let playlistOriginal = [];
 
-function arredondar(valor) {
-  return Math.round((numero(valor) + Number.EPSILON) * 100) / 100;
-}
+let playlistFiltrada = [];
 
-function moeda(valor) {
-  return numero(valor).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  });
-}
+let playlists = {
+  manha: [],
+  tarde: [],
+  noite: []
+};
 
-function percentual(valor) {
-  return numero(valor).toLocaleString("pt-BR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }) + "%";
-}
+let playlistAtualNome = '';
 
-function dataBR(data) {
+let indiceAtual = -1;
 
-  if (!data) {
-    return "";
-  }
+let filtroAtual = 'todos';
 
-  const partes = data.split("-");
-
-  if (partes.length !== 3) {
-    return data;
-  }
-
-  return `${partes[2]}/${partes[1]}/${partes[0]}`;
-}
-
-function escaparHTML(texto) {
-
-  return String(texto ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function hojeISO() {
-
-  const d = new Date();
-
-  const ano = d.getFullYear();
-
-  const mes = String(d.getMonth() + 1).padStart(2, "0");
-
-  const dia = String(d.getDate()).padStart(2, "0");
-
-  return `${ano}-${mes}-${dia}`;
-}
-
-
-/* ============================================================
-   TABELAS PADRÃO 2026
-   ============================================================ */
-
-function tabelasPadrao() {
-
-  return {
-
-    INSS: [
-
-      {
-        id: "inss_2026",
-        nome: "INSS 2026",
-        inicio: "2026-01-01",
-        fim: "2026-12-31",
-
-        teto: 8475.55,
-
-        faixas: [
-
-          {
-            de: 0,
-            ate: 1621.00,
-            aliquota: 7.5
-          },
-
-          {
-            de: 1621.01,
-            ate: 2902.84,
-            aliquota: 9
-          },
-
-          {
-            de: 2902.85,
-            ate: 4354.27,
-            aliquota: 12
-          },
-
-          {
-            de: 4354.28,
-            ate: 8475.55,
-            aliquota: 14
-          }
-
-        ]
-
-      }
-
-    ],
-
-    IRRF: [
-
-      {
-        id: "irrf_2026",
-        nome: "IRRF 2026",
-        inicio: "2026-01-01",
-        fim: "2026-12-31",
-
-        dependente: 189.59,
-
-        simplificado: 607.20,
-
-        reducaoAte5000: 312.89,
-
-        reducaoInicio: 5000.01,
-
-        reducaoFim: 7350,
-
-        reducaoConstante: 0.133145,
-
-        faixas: [
-
-          {
-            de: 0,
-            ate: 2428.80,
-            aliquota: 0,
-            deducao: 0
-          },
-
-          {
-            de: 2428.81,
-            ate: 2826.65,
-            aliquota: 7.5,
-            deducao: 182.16
-          },
-
-          {
-            de: 2826.66,
-            ate: 3751.05,
-            aliquota: 15,
-            deducao: 394.16
-          },
-
-          {
-            de: 3751.06,
-            ate: 4664.68,
-            aliquota: 22.5,
-            deducao: 675.49
-          },
-
-          {
-            de: 4664.69,
-            ate: Infinity,
-            aliquota: 27.5,
-            deducao: 908.73
-          }
-
-        ]
-
-      }
-
-    ]
-
-  };
-
-}
-
-
-/* ============================================================
-   LOCAL STORAGE
-   ============================================================ */
-
-function carregarTabelasStorage() {
-
-  try {
-
-    const salvo = localStorage.getItem(STORAGE_KEY);
-
-    if (!salvo) {
-
-      tabelas = tabelasPadrao();
-
-      salvarTabelasStorage();
-
-      return;
-    }
-
-    const obj = JSON.parse(salvo);
-
-    if (!obj.INSS || !Array.isArray(obj.INSS)) {
-      throw new Error("Estrutura INSS inválida");
-    }
-
-    if (!obj.IRRF || !Array.isArray(obj.IRRF)) {
-      throw new Error("Estrutura IRRF inválida");
-    }
-
-    tabelas = obj;
-
-  } catch (erro) {
-
-    console.error(erro);
-
-    tabelas = tabelasPadrao();
-
-    salvarTabelasStorage();
-  }
-}
-
-function salvarTabelasStorage() {
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(tabelas)
-  );
-}
-
-
-/* ============================================================
-   TABELA VIGENTE
-   ============================================================ */
-
-function obterTabelaVigente(tipo, competencia) {
-
-  const lista = tabelas[tipo] || [];
-
-  const data = competencia || hojeISO();
-
-  const encontradas = lista.filter(t => {
-
-    const inicio = t.inicio || "1900-01-01";
-
-    const fim = t.fim || "2999-12-31";
-
-    return data >= inicio && data <= fim;
-
-  });
-
-  if (encontradas.length) {
-
-    encontradas.sort((a, b) =>
-      String(b.inicio).localeCompare(String(a.inicio))
-    );
-
-    return encontradas[0];
-  }
-
-  if (lista.length) {
-
-    const ordenadas = [...lista].sort((a, b) =>
-      String(b.inicio).localeCompare(String(a.inicio))
-    );
-
-    return ordenadas[0];
-  }
-
-  return null;
-}
-
-
-/* ============================================================
-   CÁLCULO INSS
-   ============================================================ */
-
-function calcularINSS(base, tabela) {
-
-  const baseInformada = arredondar(base);
-
-  const teto = numero(tabela.teto);
-
-  const baseConsiderada = Math.min(
-    baseInformada,
-    teto
+let sessao =
+  sessionStorage.getItem(
+    'radio_onda_livre_sessao'
   );
 
-  let total = 0;
 
-  const faixas = [];
+/* ============================================================
+   SESSÃO
+   ============================================================ */
 
-  for (let i = 0; i < tabela.faixas.length; i++) {
+if (!sessao) {
 
-    const faixa = tabela.faixas[i];
+  sessao =
+    'sessao_' +
+    Date.now() +
+    '_' +
+    Math.random()
+      .toString(36)
+      .substring(2, 10);
 
-    const minimo = numero(faixa.de);
-
-    const limite = numero(faixa.ate);
-
-    if (baseConsiderada <= minimo) {
-      continue;
-    }
-
-    const valorFaixa = Math.min(
-      baseConsiderada,
-      limite
-    ) - minimo;
-
-    if (valorFaixa <= 0) {
-      continue;
-    }
-
-    const contribuicao = arredondar(
-      valorFaixa * numero(faixa.aliquota) / 100
-    );
-
-    total = arredondar(
-      total + contribuicao
-    );
-
-    faixas.push({
-
-      faixa: i + 1,
-
-      de: minimo,
-
-      ate: limite,
-
-      aliquota: numero(faixa.aliquota),
-
-      valorFaixa: arredondar(valorFaixa),
-
-      contribuicao
-
-    });
-
-  }
-
-  return {
-
-    baseInformada,
-
-    teto,
-
-    base: baseConsiderada,
-
-    total,
-
-    faixas
-
-  };
+  sessionStorage.setItem(
+    'radio_onda_livre_sessao',
+    sessao
+  );
 
 }
 
 
 /* ============================================================
-   CÁLCULO IRRF
+   ELEMENTOS
    ============================================================ */
 
-function calcularIRRF(
-  rendimentos,
-  inss,
-  dependentes,
-  pensao,
-  tabela
+const audioPlayer =
+  document.getElementById(
+    'audioPlayer'
+  );
+
+const playBtn =
+  document.getElementById(
+    'playBtn'
+  );
+
+const prevBtn =
+  document.getElementById(
+    'prevBtn'
+  );
+
+const nextBtn =
+  document.getElementById(
+    'nextBtn'
+  );
+
+const stopBtn =
+  document.getElementById(
+    'stopBtn'
+  );
+
+const nowTitle =
+  document.getElementById(
+    'nowTitle'
+  );
+
+const nowArtist =
+  document.getElementById(
+    'nowArtist'
+  );
+
+const albumIcon =
+  document.getElementById(
+    'albumIcon'
+  );
+
+const searchInput =
+  document.getElementById(
+    'searchInput'
+  );
+
+const clearSearchBtn =
+  document.getElementById(
+    'clearSearchBtn'
+  );
+
+const searchResults =
+  document.getElementById(
+    'searchResults'
+  );
+
+
+/* ============================================================
+   NORMALIZAR TEXTO
+   ============================================================ */
+
+function normalizarTexto(valor) {
+
+  return String(
+    valor || ''
+  )
+    .normalize('NFD')
+    .replace(
+      /[\u0300-\u036f]/g,
+      ''
+    )
+    .toLowerCase()
+    .trim();
+
+}
+
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+
+let toastTimer = null;
+
+function mostrarToast(mensagem) {
+
+  const toast =
+    document.getElementById(
+      'toast'
+    );
+
+  toast.textContent =
+    mensagem;
+
+  toast.classList.add(
+    'show'
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove(
+        'show'
+      );
+
+    }, 2800);
+
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+function alterarStatus(
+  texto,
+  tipo
 ) {
 
-  const rend = arredondar(rendimentos);
-
-  const valorINSS = arredondar(inss);
-
-  const qtdDependentes = Math.max(
-    0,
-    Math.floor(numero(dependentes))
-  );
-
-  const valorPensao = arredondar(pensao);
-
-  const deducaoDependentes = arredondar(
-    qtdDependentes * numero(tabela.dependente)
-  );
-
-  const deducaoLegal = arredondar(
-    valorINSS +
-    deducaoDependentes +
-    valorPensao
-  );
-
-  const descontoSimplificado = arredondar(
-    tabela.simplificado
-  );
-
-  const usarLegal =
-    deducaoLegal >= descontoSimplificado;
-
-  const deducaoUtilizada = usarLegal
-    ? deducaoLegal
-    : descontoSimplificado;
-
-  const tipoDeducao = usarLegal
-    ? "Deduções legais"
-    : "Desconto simplificado";
-
-  const base = arredondar(
-    Math.max(0, rend - deducaoUtilizada)
-  );
-
-  let faixaEncontrada = null;
-
-  for (const faixa of tabela.faixas) {
-
-    const de = numero(faixa.de);
-
-    const ate = faixa.ate === Infinity
-      ? Infinity
-      : numero(faixa.ate);
-
-    if (
-      base >= de &&
-      base <= ate
-    ) {
-
-      faixaEncontrada = faixa;
-
-      break;
-    }
-  }
-
-  if (!faixaEncontrada) {
-
-    faixaEncontrada =
-      tabela.faixas[tabela.faixas.length - 1];
-
-  }
-
-  const aliquota =
-    numero(faixaEncontrada.aliquota);
-
-  const parcela =
-    numero(faixaEncontrada.deducao);
-
-  const impostoBruto = arredondar(
-    Math.max(
-      0,
-      base * aliquota / 100 - parcela
-    )
-  );
-
-  let reducao = 0;
-
-  if (
-    rend <= 5000 &&
-    numero(tabela.reducaoAte5000) > 0
-  ) {
-
-    reducao = Math.min(
-      impostoBruto,
-      numero(tabela.reducaoAte5000)
+  const status =
+    document.getElementById(
+      'statusSistema'
     );
 
-  } else if (
-    rend >= numero(tabela.reducaoInicio) &&
-    rend <= numero(tabela.reducaoFim)
-  ) {
-
-    const calculada =
-      numero(tabela.reducaoConstante) > 0
-        ? numero(tabela.reducaoConstante) * rend
-        : 0;
-
-    const reducaoFormula =
-      978.62 - calculada;
-
-    reducao = Math.min(
-      impostoBruto,
-      Math.max(0, reducaoFormula)
+  const statusTexto =
+    document.getElementById(
+      'statusTexto'
     );
 
-  }
+  statusTexto.textContent =
+    texto;
 
-  const total = arredondar(
-    Math.max(
-      0,
-      impostoBruto - reducao
-    )
-  );
-
-  return {
-
-    rendimentos: rend,
-
-    inss: valorINSS,
-
-    dependentes: qtdDependentes,
-
-    valorDependente:
-      numero(tabela.dependente),
-
-    deducaoDependentes,
-
-    pensao: valorPensao,
-
-    deducaoLegal,
-
-    descontoSimplificado,
-
-    deducaoUtilizada,
-
-    tipoDeducao,
-
-    base,
-
-    aliquota,
-
-    parcela,
-
-    impostoBruto,
-
-    reducao,
-
-    total,
-
-    faixa: faixaEncontrada
-
-  };
+  status.className =
+    'status ' +
+    (tipo || '');
 
 }
 
 
 /* ============================================================
-   CALCULAR
+   JSONP
    ============================================================ */
 
-function calcular() {
-
-  try {
-
-    const competencia =
-      document.getElementById("competencia").value ||
-      hojeISO();
-
-    const baseINSSInput =
-      numero(
-        document.getElementById("baseINSS").value
-      );
-
-    const rendimentosInput =
-      numero(
-        document.getElementById("rendimentosIRRF").value
-      );
-
-    const dependentes =
-      numero(
-        document.getElementById("dependentes").value
-      );
-
-    const pensao =
-      numero(
-        document.getElementById("pensao").value
-      );
-
-    let baseINSS = baseINSSInput;
-
-    let rendimentos = rendimentosInput;
-
-    if (
-      baseINSS <= 0 &&
-      rendimentos > 0
-    ) {
-
-      baseINSS = rendimentos;
-
-      document.getElementById("baseINSS").value =
-        rendimentos.toFixed(2);
-
-    }
-
-    if (
-      rendimentos <= 0 &&
-      baseINSS > 0
-    ) {
-
-      rendimentos = baseINSS;
-
-      document.getElementById("rendimentosIRRF").value =
-        baseINSS.toFixed(2);
-
-    }
-
-    const tabelaINSS =
-      obterTabelaVigente(
-        "INSS",
-        competencia
-      );
-
-    const tabelaIRRF =
-      obterTabelaVigente(
-        "IRRF",
-        competencia
-      );
-
-    if (!tabelaINSS) {
-      throw new Error(
-        "Nenhuma tabela de INSS cadastrada."
-      );
-    }
-
-    if (!tabelaIRRF) {
-      throw new Error(
-        "Nenhuma tabela de IRRF cadastrada."
-      );
-    }
-
-    const inss =
-      calcularINSS(
-        baseINSS,
-        tabelaINSS
-      );
-
-    const irrf =
-      calcularIRRF(
-        rendimentos,
-        inss.total,
-        dependentes,
-        pensao,
-        tabelaIRRF
-      );
-
-    const total =
-      arredondar(
-        inss.total + irrf.total
-      );
-
-    resultadoAtual = {
-
-      competencia,
-
-      tabelaINSS,
-
-      tabelaIRRF,
-
-      inss,
-
-      irrf,
-
-      total
-
-    };
-
-    /* --------------------------------------------------------
-       CAMPOS
-       -------------------------------------------------------- */
-
-    document.getElementById(
-      "baseINSSExibida"
-    ).value = moeda(inss.base);
-
-    document.getElementById(
-      "baseIRRFExibida"
-    ).value = moeda(irrf.base);
-
-    /* --------------------------------------------------------
-       RESUMO
-       -------------------------------------------------------- */
-
-    document.getElementById(
-      "resultadoINSS"
-    ).textContent = moeda(inss.total);
-
-    document.getElementById(
-      "resultadoIRRF"
-    ).textContent = moeda(irrf.total);
-
-    document.getElementById(
-      "resultadoTotal"
-    ).textContent = moeda(total);
-
-    document.getElementById(
-      "resultadoBaseIRRF"
-    ).textContent = moeda(irrf.base);
-
-    document.getElementById(
-      "resumoBaseINSS"
-    ).textContent = moeda(inss.baseInformada);
-
-    document.getElementById(
-      "resumoBaseLimitada"
-    ).textContent = moeda(inss.base);
-
-    document.getElementById(
-      "resumoRendimentos"
-    ).textContent = moeda(irrf.rendimentos);
-
-    document.getElementById(
-      "resumoTotal"
-    ).textContent = moeda(total);
-
-    /* --------------------------------------------------------
-       STATUS
-       -------------------------------------------------------- */
-
-    document.getElementById(
-      "statusVigencia"
-    ).textContent =
-      `${tabelaINSS.nome} • ${tabelaIRRF.nome}`;
-
-    document.getElementById(
-      "vigenciaResumo"
-    ).textContent =
-      `${dataBR(tabelaINSS.inicio)} a ${dataBR(tabelaINSS.fim)}`;
-
-    /* --------------------------------------------------------
-       RENDER
-       -------------------------------------------------------- */
-
-    montarDetalhamentoINSS(inss);
-
-    montarTabelaINSS(
-      tabelaINSS,
-      inss
-    );
-
-    montarDetalhamentoIRRF(irrf);
-
-    montarTabelaIRRF(
-      tabelaIRRF,
-      irrf
-    );
-
-    montarMemoria(
-      competencia,
-      tabelaINSS,
-      tabelaIRRF,
-      inss,
-      irrf,
-      total
-    );
-
-    gerarLogCalculo(
-      competencia,
-      tabelaINSS,
-      tabelaIRRF,
-      inss,
-      irrf,
-      total
-    );
-
-  } catch (erro) {
-
-    console.error(erro);
-
-    alert(
-      "Não foi possível realizar o cálculo.\n\n" +
-      erro.message
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   DETALHAMENTO INSS
-   ============================================================ */
-
-function montarDetalhamentoINSS(inss) {
-
-  const faixasHTML = inss.faixas.length
-
-    ? inss.faixas.map(f => `
-
-        <div class="calc-line">
-
-          <div class="label">
-            Faixa ${f.faixa} —
-            ${moeda(f.valorFaixa)}
-            ×
-            ${percentual(f.aliquota)}
-          </div>
-
-          <div class="value">
-            ${moeda(f.contribuicao)}
-          </div>
-
-        </div>
-
-        <div class="formula">
-          ${moeda(f.valorFaixa)}
-          ×
-          ${percentual(f.aliquota)}
-          =
-          <strong>${moeda(f.contribuicao)}</strong>
-        </div>
-
-      `).join("")
-
-    : `
-
-      <div class="calc-line">
-
-        <div class="label">
-          Nenhuma faixa atingida
-        </div>
-
-        <div class="value">
-          R$ 0,00
-        </div>
-
-      </div>
-
-    `;
-
-  document.getElementById(
-    "detalheINSS"
-  ).innerHTML = `
-
-    <div class="calc-lines">
-
-      <div class="calc-line">
-
-        <div class="label">
-          Base informada
-        </div>
-
-        <div class="value">
-          ${moeda(inss.baseInformada)}
-        </div>
-
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          Teto do INSS
-        </div>
-
-        <div class="value">
-          ${moeda(inss.teto)}
-        </div>
-
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          Base considerada para cálculo
-        </div>
-
-        <div class="value">
-          ${moeda(inss.base)}
-        </div>
-
-      </div>
-
-      ${faixasHTML}
-
-      <div class="calc-line total">
-
-        <div class="label">
-          TOTAL INSS
-        </div>
-
-        <div class="value">
-          ${moeda(inss.total)}
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="formula">
-      O INSS é calculado progressivamente,
-      somando a contribuição de cada faixa atingida.
-    </div>
-  `;
-
-}
-
-
-/* ============================================================
-   TABELA INSS
-   ============================================================ */
-
-function montarTabelaINSS(
-  tabela,
-  resultado
+function chamarAPI(
+  acao,
+  parametros = {},
+  timeout = 15000
 ) {
 
-  const tbody =
-    document.querySelector(
-      "#tabelaINSS tbody"
-    );
-
-  tbody.innerHTML = "";
-
-  tabela.faixas.forEach(
-    (faixa, index) => {
-
-      const atingida =
-        resultado.base > numero(faixa.de);
-
-      const limite =
-        faixa.ate === Infinity
-          ? Infinity
-          : numero(faixa.ate);
-
-      const valorFaixa =
-        atingida
-          ? Math.max(
-              0,
-              Math.min(
-                resultado.base,
-                limite
-              ) - numero(faixa.de)
-            )
-          : 0;
-
-      const contribuicao =
-        atingida
-          ? arredondar(
-              valorFaixa *
-              numero(faixa.aliquota) /
-              100
-            )
-          : 0;
-
-      const tr =
-        document.createElement("tr");
-
-      if (atingida) {
-        tr.classList.add("faixa-usada");
-      }
-
-      tr.innerHTML = `
-
-        <td>
-          Faixa ${index + 1}
-        </td>
-
-        <td>
-          ${moeda(faixa.de)}
-        </td>
-
-        <td>
-          ${faixa.ate === Infinity
-            ? "Sem limite"
-            : moeda(faixa.ate)}
-        </td>
-
-        <td class="rate">
-          ${percentual(faixa.aliquota)}
-        </td>
-
-        <td class="money">
-          ${moeda(valorFaixa)}
-        </td>
-
-        <td class="money">
-          <strong>
-            ${moeda(contribuicao)}
-          </strong>
-        </td>
-
-      `;
-
-      tbody.appendChild(tr);
-
-    }
-  );
-
-  document.getElementById(
-    "totalTabelaINSS"
-  ).textContent =
-    moeda(resultado.total);
-
-}
-
-
-/* ============================================================
-   DETALHAMENTO IRRF
-   ============================================================ */
-
-function montarDetalhamentoIRRF(irrf) {
-
-  let reducaoExplicacao =
-    "Nenhuma redução aplicada.";
-
-  if (
-    irrf.rendimentos <= 5000 &&
-    irrf.reducao > 0
-  ) {
-
-    reducaoExplicacao =
-      `Redução limitada ao máximo de ${moeda(
-        irrf.reducao
-      )}.`;
-
-  } else if (
-    irrf.reducao > 0
-  ) {
-
-    reducaoExplicacao =
-      `Redução calculada conforme a faixa de rendimentos.`;
-
-  }
-
-  const deducaoLegal =
-    irrf.deducaoLegal;
-
-  const simplificado =
-    irrf.descontoSimplificado;
-
-  document.getElementById(
-    "detalheIRRF"
-  ).innerHTML = `
-
-    <div class="calc-lines">
-
-      <div class="calc-line">
-
-        <div class="label">
-          Rendimentos tributáveis
-        </div>
-
-        <div class="value">
-          ${moeda(irrf.rendimentos)}
-        </div>
-
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          (-) INSS
-        </div>
-
-        <div class="value value-negative">
-          ${moeda(irrf.inss)}
-        </div>
-
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          (-) Dependentes
-          (${irrf.dependentes} × ${moeda(irrf.valorDependente)})
-        </div>
-
-        <div class="value value-negative">
-          ${moeda(irrf.deducaoDependentes)}
-        </div>
-
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          (-) Pensão alimentícia
-        </div>
-
-        <div class="value value-negative">
-          ${moeda(irrf.pensao)}
-        </div>
-
-      </div>
-
-      <div class="calc-line subtotal">
-
-        <div class="label">
-          Deduções legais
-        </div>
-
-        <div class="value">
-          ${moeda(deducaoLegal)}
-        </div>
-
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          Desconto simplificado
-        </div>
-
-        <div class="value">
-          ${moeda(simplificado)}
-        </div>
-
-      </div>
-
-      <div class="deducao-escolhida">
-
-        <div class="titulo">
-          Dedução efetivamente utilizada
-        </div>
-
-        <div class="valor">
-          ${moeda(irrf.deducaoUtilizada)}
-        </div>
-
-        <div class="explicacao">
-          ${escaparHTML(irrf.tipoDeducao)}
-          — foi utilizada a maior dedução disponível.
-        </div>
-
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          Base de cálculo do IRRF
-        </div>
-
-        <div class="value">
-          ${moeda(irrf.base)}
-        </div>
-
-      </div>
-
-      <div class="formula">
-        ${moeda(irrf.rendimentos)}
-        −
-        ${moeda(irrf.deducaoUtilizada)}
-        =
-        <strong>${moeda(irrf.base)}</strong>
-      </div>
-
-      <div class="calc-line">
-
-        <div class="label">
-          Faixa do IRRF
-        </div>
-
-        <div class="value">
-          ${irrf.faixa
-            ? moeda(irrf.faixa.de) +
-              " a " +
-              (
-                irrf.faixa.ate === Infinity
-                  ? "acima"
-                  : moeda(irrf.faixa.ate)
+  return new Promise(
+    (resolve, reject) => {
+
+      const callback =
+        'callback_' +
+        Date.now() +
+        '_' +
+        Math.random()
+          .toString(36)
+          .substring(2, 8);
+
+      const script =
+        document.createElement(
+          'script'
+        );
+
+      let finalizado =
+        false;
+
+      const params =
+        new URLSearchParams();
+
+      params.set(
+        'acao',
+        acao
+      );
+
+      Object.keys(
+        parametros
+      ).forEach(
+        chave => {
+
+          const valor =
+            parametros[chave];
+
+          if (
+            valor !== undefined &&
+            valor !== null
+          ) {
+
+            params.set(
+              chave,
+              valor
+            );
+
+          }
+
+        }
+      );
+
+      params.set(
+        'callback',
+        callback
+      );
+
+      const timer =
+        setTimeout(
+          () => {
+
+            finalizar(
+              new Error(
+                'Tempo de resposta excedido.'
               )
-            : "-"}
-        </div>
+            );
 
-      </div>
+          },
+          timeout
+        );
 
-      <div class="calc-line">
+      function finalizar(
+        erro,
+        dados
+      ) {
 
-        <div class="label">
-          Alíquota
-        </div>
+        if (finalizado) {
+          return;
+        }
 
-        <div class="value">
-          ${percentual(irrf.aliquota)}
-        </div>
+        finalizado = true;
 
-      </div>
+        clearTimeout(
+          timer
+        );
 
-      <div class="calc-line">
+        delete window[
+          callback
+        ];
 
-        <div class="label">
-          Parcela a deduzir
-        </div>
+        if (
+          script.parentNode
+        ) {
 
-        <div class="value">
-          ${moeda(irrf.parcela)}
-        </div>
+          script.parentNode
+            .removeChild(
+              script
+            );
 
-      </div>
+        }
 
-      <div class="calc-line subtotal">
+        if (erro) {
 
-        <div class="label">
-          IRRF bruto
-        </div>
+          reject(
+            erro
+          );
 
-        <div class="value">
-          ${moeda(irrf.impostoBruto)}
-        </div>
+        } else {
 
-      </div>
+          resolve(
+            dados
+          );
 
-      <div class="formula">
-        ${moeda(irrf.base)}
-        ×
-        ${percentual(irrf.aliquota)}
-        −
-        ${moeda(irrf.parcela)}
-        =
-        <strong>${moeda(irrf.impostoBruto)}</strong>
-      </div>
+        }
 
-      <div class="calc-line">
-
-        <div class="label">
-          Redução aplicada
-        </div>
-
-        <div class="value value-negative">
-          ${moeda(irrf.reducao)}
-        </div>
-
-      </div>
-
-      <div class="formula">
-        ${escaparHTML(reducaoExplicacao)}
-      </div>
-
-      <div class="calc-line total total-irrf">
-
-        <div class="label">
-          IRRF DEVIDO
-        </div>
-
-        <div class="value">
-          ${moeda(irrf.total)}
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* ============================================================
-   TABELA IRRF
-   ============================================================ */
-
-function montarTabelaIRRF(
-  tabela,
-  resultado
-) {
-
-  const tbody =
-    document.querySelector(
-      "#tabelaIRRF tbody"
-    );
-
-  tbody.innerHTML = "";
-
-  tabela.faixas.forEach(
-    (faixa, index) => {
-
-      const de =
-        numero(faixa.de);
-
-      const ate =
-        faixa.ate === Infinity
-          ? Infinity
-          : numero(faixa.ate);
-
-      const usada =
-        resultado.base >= de &&
-        resultado.base <= ate;
-
-      const tr =
-        document.createElement("tr");
-
-      if (usada) {
-        tr.classList.add("faixa-usada");
       }
 
-      tr.innerHTML = `
+      window[callback] =
+        function(dados) {
 
-        <td>
-          Faixa ${index + 1}
-          ${usada ? "✓" : ""}
-        </td>
+          finalizar(
+            null,
+            dados
+          );
 
-        <td>
-          ${moeda(de)}
-        </td>
+        };
 
-        <td>
-          ${
-            ate === Infinity
-              ? "Acima de " + moeda(de)
-              : moeda(ate)
-          }
-        </td>
+      script.onerror =
+        function() {
 
-        <td class="rate">
-          ${percentual(faixa.aliquota)}
-        </td>
+          finalizar(
+            new Error(
+              'Erro ao comunicar com o servidor.'
+            )
+          );
 
-        <td class="money">
-          ${moeda(faixa.deducao)}
-        </td>
+        };
 
-      `;
+      script.src =
+        URL_API +
+        (URL_API.includes('?')
+          ? '&'
+          : '?') +
+        params.toString();
 
-      tbody.appendChild(tr);
+      document.body.appendChild(
+        script
+      );
 
     }
   );
@@ -3010,1545 +1799,2191 @@ function montarTabelaIRRF(
 
 
 /* ============================================================
-   MEMÓRIA DE CÁLCULO
+   CONVERTER URL DO GOOGLE DRIVE
    ============================================================ */
 
-function montarMemoria(
-  competencia,
-  tabelaINSS,
-  tabelaIRRF,
-  inss,
-  irrf,
-  total
+function converterUrlAudio(
+  url
 ) {
 
-  const itens = [
+  if (!url) {
+    return '';
+  }
 
-    [
-      "Competência",
-      dataBR(competencia)
-    ],
-
-    [
-      "Tabela INSS",
-      tabelaINSS.nome
-    ],
-
-    [
-      "Tabela IRRF",
-      tabelaIRRF.nome
-    ],
-
-    [
-      "Base INSS informada",
-      moeda(inss.baseInformada)
-    ],
-
-    [
-      "Base INSS considerada",
-      moeda(inss.base)
-    ],
-
-    [
-      "Teto INSS",
-      moeda(inss.teto)
-    ],
-
-    [
-      "INSS calculado",
-      moeda(inss.total)
-    ],
-
-    [
-      "Rendimentos IRRF",
-      moeda(irrf.rendimentos)
-    ],
-
-    [
-      "INSS deduzido no IRRF",
-      moeda(irrf.inss)
-    ],
-
-    [
-      "Dependentes",
-      String(irrf.dependentes)
-    ],
-
-    [
-      "Dedução dependentes",
-      moeda(irrf.deducaoDependentes)
-    ],
-
-    [
-      "Pensão",
-      moeda(irrf.pensao)
-    ],
-
-    [
-      "Deduções legais",
-      moeda(irrf.deducaoLegal)
-    ],
-
-    [
-      "Desconto simplificado",
-      moeda(irrf.descontoSimplificado)
-    ],
-
-    [
-      "Dedução utilizada",
-      moeda(irrf.deducaoUtilizada)
-    ],
-
-    [
-      "Tipo de dedução",
-      irrf.tipoDeducao
-    ],
-
-    [
-      "Base IRRF",
-      moeda(irrf.base)
-    ],
-
-    [
-      "Alíquota IRRF",
-      percentual(irrf.aliquota)
-    ],
-
-    [
-      "Parcela a deduzir",
-      moeda(irrf.parcela)
-    ],
-
-    [
-      "IRRF bruto",
-      moeda(irrf.impostoBruto)
-    ],
-
-    [
-      "Redução",
-      moeda(irrf.reducao)
-    ],
-
-    [
-      "IRRF devido",
-      moeda(irrf.total)
-    ],
-
-    [
-      "TOTAL INSS + IRRF",
-      moeda(total)
-    ]
-
-  ];
-
-  document.getElementById(
-    "memoriaCalculo"
-  ).innerHTML = `
-
-    <div class="memory-grid">
-
-      ${itens.map(item => `
-
-        <div class="memory-item">
-
-          <div class="memory-label">
-            ${escaparHTML(item[0])}
-          </div>
-
-          <div class="memory-value">
-            ${escaparHTML(item[1])}
-          </div>
-
-        </div>
-
-      `).join("")}
-
-    </div>
-
-  `;
-
-}
-
-
-/* ============================================================
-   LOG DETALHADO
-   ============================================================ */
-
-function gerarLogCalculo(
-  competencia,
-  tabelaINSS,
-  tabelaIRRF,
-  inss,
-  irrf,
-  total
-) {
-
-  const linhas = [];
-
-  const linha = texto =>
-    linhas.push(texto);
-
-  linha("============================================================");
-  linha("           LOG DETALHADO — INSS E IRRF");
-  linha("============================================================");
-
-  linha(
-    `Data/hora: ${new Date().toLocaleString("pt-BR")}`
-  );
-
-  linha(
-    `Competência: ${dataBR(competencia)}`
-  );
-
-  linha("");
-
-  linha("------------------------------------------------------------");
-  linha("1. TABELAS UTILIZADAS");
-  linha("------------------------------------------------------------");
-
-  linha(
-    `INSS: ${tabelaINSS.nome}`
-  );
-
-  linha(
-    `Vigência INSS: ${dataBR(tabelaINSS.inicio)} a ${dataBR(tabelaINSS.fim)}`
-  );
-
-  linha(
-    `IRRF: ${tabelaIRRF.nome}`
-  );
-
-  linha(
-    `Vigência IRRF: ${dataBR(tabelaIRRF.inicio)} a ${dataBR(tabelaIRRF.fim)}`
-  );
-
-  linha("");
-
-  linha("------------------------------------------------------------");
-  linha("2. DADOS INFORMADOS");
-  linha("------------------------------------------------------------");
-
-  linha(
-    `Base INSS informada........: ${moeda(inss.baseInformada)}`
-  );
-
-  linha(
-    `Rendimentos IRRF...........: ${moeda(irrf.rendimentos)}`
-  );
-
-  linha(
-    `Dependentes................: ${irrf.dependentes}`
-  );
-
-  linha(
-    `Pensão alimentícia.........: ${moeda(irrf.pensao)}`
-  );
-
-  linha("");
-
-  linha("------------------------------------------------------------");
-  linha("3. CÁLCULO DO INSS");
-  linha("------------------------------------------------------------");
-
-  linha(
-    `Teto do INSS...............: ${moeda(inss.teto)}`
-  );
-
-  linha(
-    `Base considerada...........: ${moeda(inss.base)}`
-  );
+  url =
+    String(url).trim();
 
   if (
-    inss.baseInformada > inss.teto
+    url.includes(
+      'drive.google.com'
+    )
   ) {
 
-    linha(
-      `A base foi limitada ao teto do INSS.`
-    );
+    let id = '';
 
-  }
-
-  linha("");
-
-  if (inss.faixas.length === 0) {
-
-    linha(
-      "Nenhuma faixa do INSS foi atingida."
-    );
-
-  } else {
-
-    inss.faixas.forEach(f => {
-
-      linha(
-        `Faixa ${f.faixa}:`
+    const match =
+      url.match(
+        /\/d\/([^/]+)/i
       );
 
-      linha(
-        `  Base da faixa............: ${moeda(f.valorFaixa)}`
-      );
+    if (match) {
 
-      linha(
-        `  Alíquota.................: ${percentual(f.aliquota)}`
-      );
-
-      linha(
-        `  Fórmula..................: ${moeda(f.valorFaixa)} × ${percentual(f.aliquota)}`
-      );
-
-      linha(
-        `  Contribuição.............: ${moeda(f.contribuicao)}`
-      );
-
-      linha("");
-
-    });
-
-  }
-
-  linha(
-    `TOTAL INSS.................: ${moeda(inss.total)}`
-  );
-
-  linha("");
-
-  linha("------------------------------------------------------------");
-  linha("4. CÁLCULO DO IRRF");
-  linha("------------------------------------------------------------");
-
-  linha(
-    `Rendimentos tributáveis....: ${moeda(irrf.rendimentos)}`
-  );
-
-  linha(
-    `(-) INSS...................: ${moeda(irrf.inss)}`
-  );
-
-  linha(
-    `(-) Dependentes.............: ${irrf.dependentes} × ${moeda(irrf.valorDependente)} = ${moeda(irrf.deducaoDependentes)}`
-  );
-
-  linha(
-    `(-) Pensão..................: ${moeda(irrf.pensao)}`
-  );
-
-  linha("");
-
-  linha(
-    `Deduções legais.............: ${moeda(irrf.deducaoLegal)}`
-  );
-
-  linha(
-    `Desconto simplificado.......: ${moeda(irrf.descontoSimplificado)}`
-  );
-
-  linha(
-    `Dedução utilizada...........: ${moeda(irrf.deducaoUtilizada)}`
-  );
-
-  linha(
-    `Critério.....................: ${irrf.tipoDeducao}`
-  );
-
-  linha("");
-
-  linha(
-    `Base IRRF....................: ${moeda(irrf.base)}`
-  );
-
-  linha(
-    `Fórmula: ${moeda(irrf.rendimentos)} - ${moeda(irrf.deducaoUtilizada)} = ${moeda(irrf.base)}`
-  );
-
-  linha("");
-
-  linha(
-    `Faixa IRRF...................: ${
-      irrf.faixa
-        ? moeda(irrf.faixa.de) +
-          " até " +
-          (
-            irrf.faixa.ate === Infinity
-              ? "acima"
-              : moeda(irrf.faixa.ate)
-          )
-        : "Não identificada"
-    }`
-  );
-
-  linha(
-    `Alíquota......................: ${percentual(irrf.aliquota)}`
-  );
-
-  linha(
-    `Parcela a deduzir............: ${moeda(irrf.parcela)}`
-  );
-
-  linha("");
-
-  linha(
-    `IRRF bruto....................: ${moeda(irrf.impostoBruto)}`
-  );
-
-  linha(
-    `Fórmula: ${moeda(irrf.base)} × ${percentual(irrf.aliquota)} - ${moeda(irrf.parcela)} = ${moeda(irrf.impostoBruto)}`
-  );
-
-  linha("");
-
-  if (irrf.reducao > 0) {
-
-    linha(
-      `Redução aplicada.............: ${moeda(irrf.reducao)}`
-    );
-
-    if (irrf.rendimentos <= 5000) {
-
-      linha(
-        `Critério: redução limitada ao valor máximo da tabela para rendimentos até R$ 5.000,00.`
-      );
+      id = match[1];
 
     } else {
 
-      linha(
-        `Critério: 978,62 - (0,133145 × rendimentos).`
+      const matchId =
+        url.match(
+          /[?&]id=([^&]+)/i
+        );
+
+      if (matchId) {
+        id =
+          matchId[1];
+      }
+
+    }
+
+    if (id) {
+
+      return (
+        'https://drive.usercontent.google.com/download?id=' +
+        encodeURIComponent(id) +
+        '&export=download&confirm=t'
       );
 
     }
 
-  } else {
-
-    linha(
-      "Redução aplicada.............: R$ 0,00"
-    );
-
   }
 
-  linha("");
-
-  linha(
-    `IRRF DEVIDO..................: ${moeda(irrf.total)}`
-  );
-
-  linha("");
-
-  linha("------------------------------------------------------------");
-  linha("5. RESULTADO FINAL");
-  linha("------------------------------------------------------------");
-
-  linha(
-    `INSS........................: ${moeda(inss.total)}`
-  );
-
-  linha(
-    `IRRF........................: ${moeda(irrf.total)}`
-  );
-
-  linha(
-    `TOTAL INSS + IRRF...........: ${moeda(total)}`
-  );
-
-  linha("");
-
-  linha("============================================================");
-  linha("                 FIM DO CÁLCULO");
-  linha("============================================================");
-
-  document.getElementById(
-    "logCalculo"
-  ).textContent =
-    linhas.join("\n");
+  return url;
 
 }
 
 
 /* ============================================================
-   COPIAR LOG
+   PREPARAR ITEM
    ============================================================ */
 
-async function copiarLog() {
-
-  const log =
-    document.getElementById(
-      "logCalculo"
-    ).textContent;
-
-  if (
-    !log ||
-    log.includes("Aguardando cálculo")
-  ) {
-
-    alert(
-      "Não existe um log de cálculo para copiar."
-    );
-
-    return;
-  }
-
-  try {
-
-    await navigator.clipboard.writeText(log);
-
-    alert(
-      "Log copiado para a área de transferência."
-    );
-
-  } catch (erro) {
-
-    const textarea =
-      document.createElement("textarea");
-
-    textarea.value = log;
-
-    document.body.appendChild(textarea);
-
-    textarea.select();
-
-    document.execCommand("copy");
-
-    textarea.remove();
-
-    alert(
-      "Log copiado para a área de transferência."
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   LIMPAR LOG
-   ============================================================ */
-
-function limparLog() {
-
-  document.getElementById(
-    "logCalculo"
-  ).innerHTML =
-    '<span class="log-empty">Aguardando cálculo...</span>';
-
-}
-
-
-/* ============================================================
-   ATUALIZAR TABELAS VIGENTES
-   ============================================================ */
-
-function atualizarTabelasVigentes() {
-
-  const competencia =
-    document.getElementById(
-      "competencia"
-    ).value || hojeISO();
-
-  const tabelaINSS =
-    obterTabelaVigente(
-      "INSS",
-      competencia
-    );
-
-  const tabelaIRRF =
-    obterTabelaVigente(
-      "IRRF",
-      competencia
-    );
-
-  if (!tabelaINSS || !tabelaIRRF) {
-
-    alert(
-      "Não existem tabelas vigentes para a competência informada."
-    );
-
-    return;
-  }
-
-  document.getElementById(
-    "statusVigencia"
-  ).textContent =
-    `${tabelaINSS.nome} • ${tabelaIRRF.nome}`;
-
-  document.getElementById(
-    "vigenciaResumo"
-  ).textContent =
-    `${dataBR(tabelaINSS.inicio)} a ${dataBR(tabelaINSS.fim)}`;
-
-  montarTabelaINSS(
-    tabelaINSS,
-    {
-      base: 0,
-      total: 0
-    }
-  );
-
-  montarTabelaIRRF(
-    tabelaIRRF,
-    {
-      base: 0
-    }
-  );
-
-  const temDados =
-    numero(
-      document.getElementById("baseINSS").value
-    ) > 0 ||
-    numero(
-      document.getElementById("rendimentosIRRF").value
-    ) > 0;
-
-  if (temDados) {
-    calcular();
-  }
-
-}
-
-
-/* ============================================================
-   GERENCIADOR DE TABELAS
-   ============================================================ */
-
-function abrirGerenciador() {
-
-  document.getElementById(
-    "modalTabelas"
-  ).classList.add("open");
-
-  selecionarTipoTabela(tipoTabelaAtual);
-}
-
-function fecharGerenciador() {
-
-  document.getElementById(
-    "modalTabelas"
-  ).classList.remove("open");
-
-}
-
-function selecionarTipoTabela(tipo) {
-
-  tipoTabelaAtual = tipo;
-
-  document.getElementById(
-    "tabINSS"
-  ).classList.toggle(
-    "active",
-    tipo === "INSS"
-  );
-
-  document.getElementById(
-    "tabIRRF"
-  ).classList.toggle(
-    "active",
-    tipo === "IRRF"
-  );
-
-  document.getElementById(
-    "parametrosIRRF"
-  ).style.display =
-    tipo === "IRRF"
-      ? "block"
-      : "none";
-
-  carregarListaTabelas();
-
-}
-
-function carregarListaTabelas() {
-
-  const select =
-    document.getElementById(
-      "tabelaSelecionada"
-    );
-
-  select.innerHTML = "";
-
-  const lista =
-    tabelas[tipoTabelaAtual] || [];
-
-  if (!lista.length) {
-
-    const option =
-      document.createElement("option");
-
-    option.value = "";
-
-    option.textContent =
-      "Nenhuma tabela cadastrada";
-
-    select.appendChild(option);
-
-    limparEditorTabela();
-
-    return;
-  }
-
-  lista.forEach(tabela => {
-
-    const option =
-      document.createElement("option");
-
-    option.value = tabela.id;
-
-    option.textContent =
-      `${tabela.nome} — ${dataBR(tabela.inicio)}`;
-
-    select.appendChild(option);
-
-  });
-
-  carregarTabelaSelecionada();
-
-}
-
-function carregarTabelaSelecionada() {
-
-  const id =
-    document.getElementById(
-      "tabelaSelecionada"
-    ).value;
-
-  const tabela =
-    (tabelas[tipoTabelaAtual] || [])
-      .find(t => t.id === id);
-
-  if (!tabela) {
-
-    limparEditorTabela();
-
-    return;
-  }
-
-  document.getElementById(
-    "nomeTabela"
-  ).value =
-    tabela.nome || "";
-
-  document.getElementById(
-    "inicioVigencia"
-  ).value =
-    tabela.inicio || "";
-
-  document.getElementById(
-    "fimVigencia"
-  ).value =
-    tabela.fim || "";
-
-  document.getElementById(
-    "valorDependente"
-  ).value =
-    tabela.dependente ?? "";
-
-  document.getElementById(
-    "valorSimplificado"
-  ).value =
-    tabela.simplificado ?? "";
-
-  document.getElementById(
-    "reducaoAte5000"
-  ).value =
-    tabela.reducaoAte5000 ?? "";
-
-  document.getElementById(
-    "reducaoInicio"
-  ).value =
-    tabela.reducaoInicio ?? "";
-
-  document.getElementById(
-    "reducaoFim"
-  ).value =
-    tabela.reducaoFim ?? "";
-
-  document.getElementById(
-    "reducaoConstante"
-  ).value =
-    tabela.reducaoConstante ?? "";
-
-  montarEditorFaixas(
-    tabela.faixas || []
-  );
-
-}
-
-function limparEditorTabela() {
-
-  document.getElementById(
-    "nomeTabela"
-  ).value = "";
-
-  document.getElementById(
-    "inicioVigencia"
-  ).value = "";
-
-  document.getElementById(
-    "fimVigencia"
-  ).value = "";
-
-  document.getElementById(
-    "valorDependente"
-  ).value = "";
-
-  document.getElementById(
-    "valorSimplificado"
-  ).value = "";
-
-  document.getElementById(
-    "reducaoAte5000"
-  ).value = "";
-
-  document.getElementById(
-    "reducaoInicio"
-  ).value = "";
-
-  document.getElementById(
-    "reducaoFim"
-  ).value = "";
-
-  document.getElementById(
-    "reducaoConstante"
-  ).value = "";
-
-  montarEditorFaixas([]);
-
-}
-
-
-/* ============================================================
-   EDITOR DE FAIXAS
-   ============================================================ */
-
-function montarEditorFaixas(faixas) {
-
-  const container =
-    document.getElementById(
-      "faixasEditor"
-    );
-
-  container.innerHTML = "";
-
-  faixas.forEach(
-    faixa => adicionarFaixa(faixa)
-  );
-
-}
-
-function adicionarFaixa(faixa = null) {
-
-  const container =
-    document.getElementById(
-      "faixasEditor"
-    );
-
-  const row =
-    document.createElement("div");
-
-  row.className =
-    "faixa-row";
-
-  const ate =
-    faixa && faixa.ate === Infinity
-      ? ""
-      : faixa
-        ? faixa.ate
-        : "";
-
-  row.innerHTML = `
-
-    <div class="field">
-
-      <label>De</label>
-
-      <input
-        type="number"
-        class="faixa-de"
-        step="0.01"
-        min="0"
-        value="${faixa ? faixa.de : ""}">
-    </div>
-
-    <div class="field">
-
-      <label>Até</label>
-
-      <input
-        type="number"
-        class="faixa-ate"
-        step="0.01"
-        min="0"
-        placeholder="Vazio = sem limite"
-        value="${ate}">
-    </div>
-
-    <div class="field">
-
-      <label>Alíquota (%)</label>
-
-      <input
-        type="number"
-        class="faixa-aliquota"
-        step="0.01"
-        min="0"
-        value="${faixa ? faixa.aliquota : ""}">
-    </div>
-
-    <div class="field">
-
-      <label>
-        ${
-          tipoTabelaAtual === "IRRF"
-            ? "Parcela a deduzir"
-            : "Observação"
-        }
-      </label>
-
-      <input
-        type="number"
-        class="${
-          tipoTabelaAtual === "IRRF"
-            ? "faixa-deducao"
-            : "faixa-deducao"
-        }"
-        step="0.01"
-        min="0"
-        value="${
-          faixa && faixa.deducao !== undefined
-            ? faixa.deducao
-            : 0
-        }"
-        ${
-          tipoTabelaAtual === "INSS"
-            ? "disabled"
-            : ""
-        }>
-    </div>
-
-    <button
-      type="button"
-      class="btn btn-small btn-danger remove-faixa"
-      onclick="this.parentElement.remove()">
-      🗑️ Remover
-    </button>
-
-  `;
-
-  container.appendChild(row);
-
-}
-
-function obterFaixasEditor() {
-
-  const rows =
-    document.querySelectorAll(
-      "#faixasEditor .faixa-row"
-    );
-
-  const faixas = [];
-
-  rows.forEach(row => {
-
-    const de =
-      numero(
-        row.querySelector(
-          ".faixa-de"
-        ).value
-      );
-
-    const ateInput =
-      row.querySelector(
-        ".faixa-ate"
-      ).value;
-
-    const ate =
-      ateInput === ""
-        ? Infinity
-        : numero(ateInput);
-
-    const aliquota =
-      numero(
-        row.querySelector(
-          ".faixa-aliquota"
-        ).value
-      );
-
-    const deducao =
-      numero(
-        row.querySelector(
-          ".faixa-deducao"
-        ).value
-      );
-
-    faixas.push({
-
-      de,
-
-      ate,
-
-      aliquota,
-
-      ...(tipoTabelaAtual === "IRRF"
-        ? { deducao }
-        : {})
-
-    });
-
-  });
-
-  return faixas;
-
-}
-
-
-/* ============================================================
-   OBJETO DA TABELA
-   ============================================================ */
-
-function coletarTabelaEditor() {
-
-  const nome =
-    document.getElementById(
-      "nomeTabela"
-    ).value.trim();
-
-  const inicio =
-    document.getElementById(
-      "inicioVigencia"
-    ).value;
-
-  const fim =
-    document.getElementById(
-      "fimVigencia"
-    ).value;
-
-  if (!nome) {
-    throw new Error(
-      "Informe o nome da tabela."
-    );
-  }
-
-  if (!inicio) {
-    throw new Error(
-      "Informe o início da vigência."
-    );
-  }
-
-  if (!fim) {
-    throw new Error(
-      "Informe o fim da vigência."
-    );
-  }
-
-  if (inicio > fim) {
-    throw new Error(
-      "O início da vigência não pode ser maior que o fim."
-    );
-  }
-
-  const faixas =
-    obterFaixasEditor();
-
-  if (!faixas.length) {
-    throw new Error(
-      "Informe pelo menos uma faixa."
-    );
-  }
-
-  faixas.sort(
-    (a, b) => a.de - b.de
-  );
-
-  const obj = {
+function prepararAudio(
+  item,
+  indice
+) {
+
+  return {
 
     id:
-      "tbl_" +
-      Date.now() +
-      "_" +
-      Math.random()
-        .toString(36)
-        .substring(2, 8),
+      item.id ||
+      item.ID ||
+      item.codigo ||
+      item.Codigo ||
+      String(indice + 1),
 
-    nome,
+    titulo:
+      item.titulo ||
+      item.Título ||
+      item.Titulo ||
+      item.nome ||
+      item.Nome ||
+      'Sem título',
 
-    inicio,
+    artista:
+      item.artista ||
+      item.Artista ||
+      item.autor ||
+      item.Autor ||
+      item.cantor ||
+      item.Cantor ||
+      '',
 
-    fim,
+    url:
+      converterUrlAudio(
+        item.url ||
+        item.URL ||
+        item.Url ||
+        item.link ||
+        item.Link ||
+        item.arquivo ||
+        item.Arquivo ||
+        item.audio ||
+        item.Audio ||
+        ''
+      ),
 
-    faixas
+    tipo:
+      item.tipo ||
+      item.Tipo ||
+      item.categoria ||
+      item.Categoria ||
+      'Música',
+
+    ordem:
+      Number(
+        item.ordem ||
+        item.Ordem ||
+        item.posicao ||
+        item.Posicao ||
+        indice + 1
+      )
 
   };
 
-  if (tipoTabelaAtual === "INSS") {
+}
 
-    obj.teto =
-      faixas.reduce(
-        (maior, faixa) => {
 
-          if (
-            faixa.ate !== Infinity &&
-            faixa.ate > maior
-          ) {
+/* ============================================================
+   DIVIDIR EM 3 PLAYLISTS
+   ============================================================
 
-            return faixa.ate;
-          }
+   REGRA:
 
-          return maior;
+   A quantidade total é dividida por 3.
 
-        },
-        0
-      );
+   O restante é distribuído começando pela MANHÃ.
 
-  } else {
+   Exemplos:
 
-    obj.dependente =
-      numero(
-        document.getElementById(
-          "valorDependente"
-        ).value
-      );
+   24 = 8 / 8 / 8
+   25 = 9 / 8 / 8
+   26 = 9 / 9 / 8
+   27 = 9 / 9 / 9
+   28 = 10 / 9 / 9
+   29 = 10 / 10 / 9
 
-    obj.simplificado =
-      numero(
-        document.getElementById(
-          "valorSimplificado"
-        ).value
-      );
+   Isso garante que a diferença entre os grupos
+   nunca seja maior que 1.
+   ============================================================ */
 
-    obj.reducaoAte5000 =
-      numero(
-        document.getElementById(
-          "reducaoAte5000"
-        ).value
-      );
+function dividirPlaylists(
+  audios
+) {
 
-    obj.reducaoInicio =
-      numero(
-        document.getElementById(
-          "reducaoInicio"
-        ).value
-      );
+  const total =
+    audios.length;
 
-    obj.reducaoFim =
-      numero(
-        document.getElementById(
-          "reducaoFim"
-        ).value
-      );
+  const base =
+    Math.floor(
+      total / 3
+    );
 
-    obj.reducaoConstante =
-      numero(
-        document.getElementById(
-          "reducaoConstante"
-        ).value
-      );
+  const resto =
+    total % 3;
 
+  let quantidadeManha =
+    base;
+
+  let quantidadeTarde =
+    base;
+
+  let quantidadeNoite =
+    base;
+
+
+  if (resto >= 1) {
+    quantidadeManha++;
   }
 
-  return obj;
+  if (resto >= 2) {
+    quantidadeTarde++;
+  }
+
+
+  playlists = {
+
+    manha:
+      audios.slice(
+        0,
+        quantidadeManha
+      ),
+
+    tarde:
+      audios.slice(
+        quantidadeManha,
+        quantidadeManha +
+        quantidadeTarde
+      ),
+
+    noite:
+      audios.slice(
+        quantidadeManha +
+        quantidadeTarde
+      )
+
+  };
 
 }
 
 
 /* ============================================================
-   SALVAR NOVA
+   RENDERIZAR PLAYLIST
    ============================================================ */
 
-function salvarTabela() {
+function renderizarPlaylist(
+  nome,
+  lista,
+  elementoId,
+  countId
+) {
 
-  try {
-
-    const tabela =
-      coletarTabelaEditor();
-
-    tabelas[tipoTabelaAtual].push(
-      tabela
+  const container =
+    document.getElementById(
+      elementoId
     );
 
-    salvarTabelasStorage();
-
-    carregarListaTabelas();
-
-    alert(
-      "Tabela salva com sucesso."
+  const contador =
+    document.getElementById(
+      countId
     );
 
-  } catch (erro) {
+  contador.textContent =
+    lista.length;
 
-    alert(
-      erro.message
-    );
+  container.innerHTML =
+    '';
+
+  if (!lista.length) {
+
+    container.innerHTML =
+      '<div class="empty">' +
+      'Nenhum conteúdo disponível.' +
+      '</div>';
+
+    return;
 
   }
 
-}
+  lista.forEach(
+    (audio, indice) => {
 
-
-/* ============================================================
-   ATUALIZAR EXISTENTE
-   ============================================================ */
-
-function atualizarTabelaExistente() {
-
-  try {
-
-    const id =
-      document.getElementById(
-        "tabelaSelecionada"
-      ).value;
-
-    if (!id) {
-
-      throw new Error(
-        "Selecione uma tabela."
-      );
-
-    }
-
-    const nova =
-      coletarTabelaEditor();
-
-    const indice =
-      tabelas[tipoTabelaAtual]
-        .findIndex(
-          t => t.id === id
+      const item =
+        document.createElement(
+          'div'
         );
 
-    if (indice < 0) {
+      item.className =
+        'audio-item';
 
-      throw new Error(
-        "Tabela não encontrada."
+      if (
+        audio.id ===
+        playlistFiltrada[indiceAtual]?.id
+      ) {
+
+        item.classList.add(
+          'active'
+        );
+
+      }
+
+      item.dataset.id =
+        audio.id;
+
+      const titulo =
+        escapeHtml(
+          audio.titulo
+        );
+
+      const artista =
+        escapeHtml(
+          audio.artista ||
+          'Rádio Onda Livre'
+        );
+
+      const tipo =
+        escapeHtml(
+          audio.tipo
+        );
+
+      item.innerHTML = `
+
+        <div class="audio-number">
+          ${indice + 1}
+        </div>
+
+        <div class="audio-info">
+
+          <div class="audio-title">
+            ${titulo}
+          </div>
+
+          <div class="audio-artist">
+            ${artista}
+          </div>
+
+          <span class="audio-type">
+            ${tipo}
+          </span>
+
+        </div>
+
+        <div class="audio-actions">
+
+          <button
+            class="share-btn"
+            title="Compartilhar"
+            aria-label="Compartilhar"
+          >
+            ↗
+          </button>
+
+        </div>
+
+      `;
+
+
+      item.addEventListener(
+        'click',
+        function(event) {
+
+          if (
+            event.target.closest(
+              '.share-btn'
+            )
+          ) {
+
+            return;
+
+          }
+
+          tocarAudio(
+            audio
+          );
+
+        }
+      );
+
+
+      const share =
+        item.querySelector(
+          '.share-btn'
+        );
+
+      share.addEventListener(
+        'click',
+        function(event) {
+
+          event.stopPropagation();
+
+          compartilharAudio(
+            audio
+          );
+
+        }
+      );
+
+
+      container.appendChild(
+        item
       );
 
     }
-
-    nova.id = id;
-
-    tabelas[tipoTabelaAtual][indice] =
-      nova;
-
-    salvarTabelasStorage();
-
-    carregarListaTabelas();
-
-    alert(
-      "Tabela atualizada com sucesso."
-    );
-
-  } catch (erro) {
-
-    alert(
-      erro.message
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   EXCLUIR
-   ============================================================ */
-
-function excluirTabela() {
-
-  const id =
-    document.getElementById(
-      "tabelaSelecionada"
-    ).value;
-
-  if (!id) {
-
-    alert(
-      "Selecione uma tabela."
-    );
-
-    return;
-  }
-
-  const tabela =
-    tabelas[tipoTabelaAtual]
-      .find(t => t.id === id);
-
-  if (!tabela) {
-    return;
-  }
-
-  const confirmar =
-    confirm(
-      `Deseja realmente excluir a tabela "${tabela.nome}"?`
-    );
-
-  if (!confirmar) {
-    return;
-  }
-
-  tabelas[tipoTabelaAtual] =
-    tabelas[tipoTabelaAtual]
-      .filter(t => t.id !== id);
-
-  salvarTabelasStorage();
-
-  carregarListaTabelas();
-
-  alert(
-    "Tabela excluída."
   );
 
 }
 
 
 /* ============================================================
-   RESTAURAR 2026
+   RENDERIZAR TODAS AS PLAYLISTS
    ============================================================ */
 
-function restaurarTabela2026() {
+function renderizarTodas() {
 
-  const padrao =
-    tabelasPadrao();
+  renderizarPlaylist(
+    'manha',
+    playlists.manha,
+    'playlistManha',
+    'countManha'
+  );
 
-  const tipo =
-    tipoTabelaAtual;
+  renderizarPlaylist(
+    'tarde',
+    playlists.tarde,
+    'playlistTarde',
+    'countTarde'
+  );
 
-  const tabelaPadrao =
-    padrao[tipo][0];
+  renderizarPlaylist(
+    'noite',
+    playlists.noite,
+    'playlistNoite',
+    'countNoite'
+  );
 
-  const confirmar =
-    confirm(
-      `Deseja restaurar a tabela padrão ${tabelaPadrao.nome}?`
+  document.getElementById(
+    'totalAudios'
+  ).textContent =
+    playlistOriginal.length;
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+   ============================================================ */
+
+function escapeHtml(
+  valor
+) {
+
+  return String(
+    valor || ''
+  )
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
     );
 
-  if (!confirmar) {
+}
+
+
+/* ============================================================
+   TOCAR ÁUDIO
+   ============================================================ */
+
+function tocarAudio(
+  audio
+) {
+
+  if (!audio || !audio.url) {
+
+    mostrarToast(
+      'Este conteúdo não possui um arquivo de áudio válido.'
+    );
+
     return;
+
   }
 
-  const existente =
-    tabelas[tipo]
-      .findIndex(
-        t => t.id === tabelaPadrao.id
+  indiceAtual =
+    playlistFiltrada.findIndex(
+      item =>
+        item.id === audio.id
+    );
+
+  if (
+    indiceAtual < 0
+  ) {
+
+    playlistFiltrada =
+      playlistOriginal.slice();
+
+    indiceAtual =
+      playlistFiltrada.findIndex(
+        item =>
+          item.id === audio.id
       );
 
-  if (existente >= 0) {
+  }
 
-    tabelas[tipo][existente] =
-      tabelaPadrao;
 
-  } else {
+  audioPlayer.src =
+    audio.url;
 
-    tabelas[tipo].push(
-      tabelaPadrao
+  audioPlayer.load();
+
+  nowTitle.textContent =
+    audio.titulo;
+
+  nowArtist.textContent =
+    audio.artista ||
+    'Rádio Onda Livre';
+
+  albumIcon.classList.add(
+    'playing'
+  );
+
+  document.getElementById(
+    'playlistAtual'
+  ).textContent =
+    descobrirPlaylist(
+      audio
     );
+
+
+  audioPlayer.play()
+    .then(
+      () => {
+
+        playBtn.textContent =
+          '⏸';
+
+        registrarEvento(
+          'PLAY',
+          audio
+        );
+
+      }
+    )
+    .catch(
+      () => {
+
+        playBtn.textContent =
+          '▶';
+
+        mostrarToast(
+          'Clique em reproduzir para iniciar o áudio.'
+        );
+
+      }
+    );
+
+  renderizarTodas();
+
+}
+
+
+/* ============================================================
+   DESCOBRIR PLAYLIST
+   ============================================================ */
+
+function descobrirPlaylist(
+  audio
+) {
+
+  if (
+    playlists.manha.some(
+      item =>
+        item.id === audio.id
+    )
+  ) {
+
+    return '🌅 Manhã';
 
   }
 
-  salvarTabelasStorage();
+  if (
+    playlists.tarde.some(
+      item =>
+        item.id === audio.id
+    )
+  ) {
 
-  carregarListaTabelas();
+    return '☀️ Tarde';
 
-  alert(
-    "Tabela padrão restaurada com sucesso."
-  );
+  }
 
-}
+  if (
+    playlists.noite.some(
+      item =>
+        item.id === audio.id
+    )
+  ) {
 
+    return '🌙 Noite';
 
-/* ============================================================
-   EXEMPLO
-   ============================================================ */
+  }
 
-function carregarExemplo() {
-
-  document.getElementById(
-    "competencia"
-  ).value = hojeISO();
-
-  document.getElementById(
-    "baseINSS"
-  ).value = "6000.00";
-
-  document.getElementById(
-    "rendimentosIRRF"
-  ).value = "6000.00";
-
-  document.getElementById(
-    "dependentes"
-  ).value = "1";
-
-  document.getElementById(
-    "pensao"
-  ).value = "0.00";
-
-  calcular();
+  return '—';
 
 }
 
 
 /* ============================================================
-   LIMPAR
+   PLAY / PAUSE
    ============================================================ */
 
-function limpar() {
+playBtn.addEventListener(
+  'click',
+  function() {
 
-  document.getElementById(
-    "competencia"
-  ).value = hojeISO();
+    if (
+      !audioPlayer.src
+    ) {
 
-  document.getElementById(
-    "baseINSS"
-  ).value = "";
+      tocarPrimeiroAudio();
 
-  document.getElementById(
-    "rendimentosIRRF"
-  ).value = "";
+      return;
 
-  document.getElementById(
-    "dependentes"
-  ).value = "0";
+    }
 
-  document.getElementById(
-    "pensao"
-  ).value = "0";
+    if (
+      audioPlayer.paused
+    ) {
 
-  document.getElementById(
-    "baseINSSExibida"
-  ).value = "R$ 0,00";
+      audioPlayer.play()
+        .then(
+          () => {
 
-  document.getElementById(
-    "baseIRRFExibida"
-  ).value = "R$ 0,00";
+            playBtn.textContent =
+              '⏸';
 
-  document.getElementById(
-    "resultadoINSS"
-  ).textContent = "R$ 0,00";
+          }
+        )
+        .catch(
+          () => {}
+        );
 
-  document.getElementById(
-    "resultadoIRRF"
-  ).textContent = "R$ 0,00";
+    } else {
 
-  document.getElementById(
-    "resultadoTotal"
-  ).textContent = "R$ 0,00";
+      audioPlayer.pause();
 
-  document.getElementById(
-    "resultadoBaseIRRF"
-  ).textContent = "R$ 0,00";
+      playBtn.textContent =
+        '▶';
 
-  document.getElementById(
-    "resumoBaseINSS"
-  ).textContent = "R$ 0,00";
-
-  document.getElementById(
-    "resumoBaseLimitada"
-  ).textContent = "R$ 0,00";
-
-  document.getElementById(
-    "resumoRendimentos"
-  ).textContent = "R$ 0,00";
-
-  document.getElementById(
-    "resumoTotal"
-  ).textContent = "R$ 0,00";
-
-  document.getElementById(
-    "statusVigencia"
-  ).textContent =
-    "Aguardando cálculo";
-
-  document.getElementById(
-    "vigenciaResumo"
-  ).textContent =
-    "Aguardando cálculo";
-
-  document.getElementById(
-    "detalheINSS"
-  ).innerHTML = `
-    <div class="calc-lines">
-      <div class="calc-line">
-        <div class="label">Aguardando cálculo</div>
-        <div class="value">R$ 0,00</div>
-      </div>
-    </div>
-  `;
-
-  document.getElementById(
-    "detalheIRRF"
-  ).innerHTML = `
-    <div class="calc-lines">
-      <div class="calc-line">
-        <div class="label">Aguardando cálculo</div>
-        <div class="value">R$ 0,00</div>
-      </div>
-    </div>
-  `;
-
-  document.querySelector(
-    "#tabelaINSS tbody"
-  ).innerHTML = "";
-
-  document.querySelector(
-    "#tabelaIRRF tbody"
-  ).innerHTML = "";
-
-  document.getElementById(
-    "totalTabelaINSS"
-  ).textContent =
-    "R$ 0,00";
-
-  document.getElementById(
-    "memoriaCalculo"
-  ).innerHTML = `
-    <div class="memory-grid">
-      <div class="memory-item">
-        <div class="memory-label">Status</div>
-        <div class="memory-value">
-          Aguardando cálculo
-        </div>
-      </div>
-    </div>
-  `;
-
-  limparLog();
-
-  resultadoAtual = null;
-
-}
-
-
-/* ============================================================
-   EVENTOS
-   ============================================================ */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    carregarTabelasStorage();
-
-    document.getElementById(
-      "competencia"
-    ).value = hojeISO();
-
-    atualizarTabelasVigentes();
+    }
 
   }
 );
 
 
 /* ============================================================
-   FECHAR MODAL CLICANDO FORA
+   PAUSE
    ============================================================ */
 
-document.getElementById(
-  "modalTabelas"
-).addEventListener(
-  "click",
-  function(event) {
+audioPlayer.addEventListener(
+  'pause',
+  function() {
 
-    if (
-      event.target === this
-    ) {
+    playBtn.textContent =
+      '▶';
 
-      fecharGerenciador();
+    albumIcon.classList.remove(
+      'playing'
+    );
+
+  }
+);
+
+
+/* ============================================================
+   PLAY
+   ============================================================ */
+
+audioPlayer.addEventListener(
+  'play',
+  function() {
+
+    playBtn.textContent =
+      '⏸';
+
+    albumIcon.classList.add(
+      'playing'
+    );
+
+  }
+);
+
+
+/* ============================================================
+   PRÓXIMO
+   ============================================================ */
+
+nextBtn.addEventListener(
+  'click',
+  proximoAudio
+);
+
+function proximoAudio() {
+
+  if (
+    !playlistFiltrada.length
+  ) {
+
+    return;
+
+  }
+
+  let proximo =
+    indiceAtual + 1;
+
+  if (
+    proximo >=
+    playlistFiltrada.length
+  ) {
+
+    proximo = 0;
+
+  }
+
+  tocarAudio(
+    playlistFiltrada[
+      proximo
+    ]
+  );
+
+}
+
+
+/* ============================================================
+   ANTERIOR
+   ============================================================ */
+
+prevBtn.addEventListener(
+  'click',
+  audioAnterior
+);
+
+function audioAnterior() {
+
+  if (
+    !playlistFiltrada.length
+  ) {
+
+    return;
+
+  }
+
+  let anterior =
+    indiceAtual - 1;
+
+  if (
+    anterior < 0
+  ) {
+
+    anterior =
+      playlistFiltrada.length - 1;
+
+  }
+
+  tocarAudio(
+    playlistFiltrada[
+      anterior
+    ]
+  );
+
+}
+
+
+/* ============================================================
+   FIM DO ÁUDIO
+   ============================================================ */
+
+audioPlayer.addEventListener(
+  'ended',
+  function() {
+
+    const atual =
+      playlistFiltrada[
+        indiceAtual
+      ];
+
+    if (atual) {
+
+      registrarEvento(
+        'FIM',
+        atual
+      );
+
+    }
+
+    proximoAudio();
+
+  }
+);
+
+
+/* ============================================================
+   STOP
+   ============================================================ */
+
+stopBtn.addEventListener(
+  'click',
+  function() {
+
+    audioPlayer.pause();
+
+    audioPlayer.currentTime =
+      0;
+
+    playBtn.textContent =
+      '▶';
+
+    albumIcon.classList.remove(
+      'playing'
+    );
+
+  }
+);
+
+
+/* ============================================================
+   PAUSE + EVENTO
+   ============================================================ */
+
+audioPlayer.addEventListener(
+  'pause',
+  function() {
+
+    const atual =
+      playlistFiltrada[
+        indiceAtual
+      ];
+
+    if (atual) {
+
+      registrarEvento(
+        'PAUSE',
+        atual
+      );
 
     }
 
   }
+);
+
+
+/* ============================================================
+   HEARTBEAT
+   ============================================================ */
+
+setInterval(
+  function() {
+
+    if (
+      audioPlayer &&
+      !audioPlayer.paused
+    ) {
+
+      const atual =
+        playlistFiltrada[
+          indiceAtual
+        ];
+
+      if (atual) {
+
+        registrarEvento(
+          'HEARTBEAT',
+          atual
+        );
+
+      }
+
+    }
+
+  },
+  60000
+);
+
+
+/* ============================================================
+   TOCAR PRIMEIRO ÁUDIO
+   ============================================================ */
+
+function tocarPrimeiroAudio() {
+
+  if (
+    !playlistOriginal.length
+  ) {
+
+    return;
+
+  }
+
+  playlistFiltrada =
+    playlistOriginal.slice();
+
+  indiceAtual = 0;
+
+  tocarAudio(
+    playlistFiltrada[0]
+  );
+
+}
+
+
+/* ============================================================
+   CARREGAR PLAYLIST
+   ============================================================ */
+
+async function carregarPlaylist() {
+
+  alterarStatus(
+    'Carregando playlist...',
+    'loading'
+  );
+
+  try {
+
+    const resposta =
+      await chamarAPI(
+        'listarPlaylist'
+      );
+
+    let dados =
+      resposta;
+
+    if (
+      dados &&
+      Array.isArray(
+        dados.playlist
+      )
+    ) {
+
+      dados =
+        dados.playlist;
+
+    }
+
+    if (
+      dados &&
+      Array.isArray(
+        dados.dados
+      )
+    ) {
+
+      dados =
+        dados.dados;
+
+    }
+
+    if (
+      !Array.isArray(
+        dados
+      )
+    ) {
+
+      throw new Error(
+        'Formato de playlist inválido.'
+      );
+
+    }
+
+
+    playlistOriginal =
+      dados
+        .map(
+          prepararAudio
+        )
+        .filter(
+          item =>
+            item.url
+        )
+        .sort(
+          (a,b) =>
+            a.ordem -
+            b.ordem ||
+            a.titulo.localeCompare(
+              b.titulo,
+              'pt-BR'
+            )
+        );
+
+
+    if (
+      !playlistOriginal.length
+    ) {
+
+      alterarStatus(
+        'Playlist vazia',
+        'error'
+      );
+
+      renderizarTodas();
+
+      return;
+
+    }
+
+
+    /* ========================================================
+       AQUI A DIVISÃO É FEITA AUTOMATICAMENTE
+       ======================================================== */
+
+    dividirPlaylists(
+      playlistOriginal
+    );
+
+
+    playlistFiltrada =
+      playlistOriginal.slice();
+
+
+    renderizarTodas();
+
+
+    alterarStatus(
+      'Rádio online',
+      'online'
+    );
+
+
+    document.getElementById(
+      'localizacaoTexto'
+    ).textContent =
+      'Localização identificada';
+
+
+    /*
+     * Conforme solicitado:
+     * inicia o primeiro áudio após
+     * o carregamento da playlist.
+     *
+     * O navegador pode bloquear
+     * autoplay com som. Nesse caso,
+     * o usuário poderá clicar em PLAY.
+     */
+
+    setTimeout(
+      function() {
+
+        tocarPrimeiroAudio();
+
+      },
+      500
+    );
+
+
+    registrarAcesso();
+
+  }
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    alterarStatus(
+      'Erro de comunicação',
+      'error'
+    );
+
+    document.getElementById(
+      'playlistManha'
+    ).innerHTML =
+      '<div class="empty">' +
+      'Não foi possível carregar a playlist.' +
+      '</div>';
+
+    document.getElementById(
+      'playlistTarde'
+    ).innerHTML =
+      '<div class="empty">' +
+      'Verifique a conexão com o servidor.' +
+      '</div>';
+
+    document.getElementById(
+      'playlistNoite'
+    ).innerHTML =
+      '<div class="empty">' +
+      'Tente novamente em alguns instantes.' +
+      '</div>';
+
+  }
+
+}
+
+
+/* ============================================================
+   FILTROS
+   ============================================================ */
+
+document.querySelectorAll(
+  '.filter-btn'
+).forEach(
+  botao => {
+
+    botao.addEventListener(
+      'click',
+      function() {
+
+        document.querySelectorAll(
+          '.filter-btn'
+        ).forEach(
+          b =>
+            b.classList.remove(
+              'active'
+            )
+        );
+
+        this.classList.add(
+          'active'
+        );
+
+        filtroAtual =
+          this.dataset.filter;
+
+        aplicarFiltro();
+
+      }
+    );
+
+  }
+);
+
+
+/* ============================================================
+   APLICAR FILTRO
+   ============================================================ */
+
+function aplicarFiltro() {
+
+  if (
+    filtroAtual ===
+    'todos'
+  ) {
+
+    playlistFiltrada =
+      playlistOriginal.slice();
+
+  } else {
+
+    playlistFiltrada =
+      playlistOriginal.filter(
+        audio => {
+
+          const tipo =
+            normalizarTexto(
+              audio.tipo
+            );
+
+          if (
+            filtroAtual ===
+            'musica'
+          ) {
+
+            return (
+              tipo.includes(
+                'musica'
+              ) ||
+              tipo.includes(
+                'louvor'
+              )
+            );
+
+          }
+
+          if (
+            filtroAtual ===
+            'oracao'
+          ) {
+
+            return tipo.includes(
+              'oracao'
+            );
+
+          }
+
+          if (
+            filtroAtual ===
+            'mensagem'
+          ) {
+
+            return tipo.includes(
+              'mensagem'
+            );
+
+          }
+
+          return true;
+
+        }
+      );
+
+  }
+
+
+  indiceAtual =
+    playlistFiltrada.findIndex(
+      audio =>
+        audioPlayer.src &&
+        audio.url ===
+        audioPlayer.src
+    );
+
+
+  renderizarPesquisa();
+
+}
+
+
+/* ============================================================
+   PESQUISA
+   ============================================================ */
+
+searchInput.addEventListener(
+  'input',
+  function() {
+
+    const termo =
+      normalizarTexto(
+        this.value
+      );
+
+    clearSearchBtn.style.display =
+      termo
+        ? 'block'
+        : 'none';
+
+    if (!termo) {
+
+      searchResults.style.display =
+        'none';
+
+      searchResults.innerHTML =
+        '';
+
+      return;
+
+    }
+
+    const resultados =
+      playlistOriginal.filter(
+        audio => {
+
+          const texto =
+            normalizarTexto(
+              audio.titulo +
+              ' ' +
+              audio.artista +
+              ' ' +
+              audio.tipo
+            );
+
+          return texto.includes(
+            termo
+          );
+
+        }
+      );
+
+    mostrarResultadosPesquisa(
+      resultados
+    );
+
+  }
+);
+
+
+/* ============================================================
+   LIMPAR PESQUISA
+   ============================================================ */
+
+function limparPesquisa() {
+
+  const campo =
+    document.getElementById(
+      'searchInput'
+    );
+
+  const caixa =
+    document.getElementById(
+      'searchResults'
+    );
+
+  campo.value = '';
+
+  caixa.innerHTML = '';
+
+  caixa.style.display =
+    'none';
+
+  document.getElementById(
+    'clearSearchBtn'
+  ).style.display =
+    'none';
+
+  campo.focus();
+
+}
+
+
+/* ============================================================
+   BOTÃO LIMPAR
+   ============================================================ */
+
+clearSearchBtn.addEventListener(
+  'click',
+  limparPesquisa
+);
+
+
+/* ============================================================
+   RESULTADOS DA PESQUISA
+   ============================================================ */
+
+function mostrarResultadosPesquisa(
+  resultados
+) {
+
+  searchResults.innerHTML =
+    '';
+
+  searchResults.style.display =
+    'block';
+
+  if (
+    !resultados.length
+  ) {
+
+    searchResults.innerHTML =
+      '<div class="empty">' +
+      'Nenhum resultado encontrado.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  resultados.forEach(
+    audio => {
+
+      const item =
+        document.createElement(
+          'div'
+        );
+
+      item.className =
+        'audio-item';
+
+      item.innerHTML = `
+
+        <div class="audio-number">
+          🎵
+        </div>
+
+        <div class="audio-info">
+
+          <div class="audio-title">
+            ${escapeHtml(audio.titulo)}
+          </div>
+
+          <div class="audio-artist">
+            ${escapeHtml(audio.artista)}
+          </div>
+
+          <span class="audio-type">
+            ${escapeHtml(audio.tipo)}
+          </span>
+
+        </div>
+
+        <div class="audio-actions">
+
+          <button
+            class="share-btn"
+            title="Compartilhar"
+          >
+            ↗
+          </button>
+
+        </div>
+
+      `;
+
+
+      item.addEventListener(
+        'click',
+        function(event) {
+
+          if (
+            event.target.closest(
+              '.share-btn'
+            )
+          ) {
+
+            return;
+
+          }
+
+          tocarAudio(
+            audio
+          );
+
+          limparPesquisa();
+
+        }
+      );
+
+
+      item.querySelector(
+        '.share-btn'
+      ).addEventListener(
+        'click',
+        function(event) {
+
+          event.stopPropagation();
+
+          compartilharAudio(
+            audio
+          );
+
+        }
+      );
+
+
+      searchResults.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   RENDERIZAR PESQUISA
+   ============================================================ */
+
+function renderizarPesquisa() {
+
+  if (
+    !searchInput.value
+  ) {
+
+    return;
+
+  }
+
+  const termo =
+    normalizarTexto(
+      searchInput.value
+    );
+
+  const resultados =
+    playlistOriginal.filter(
+      audio =>
+        normalizarTexto(
+          audio.titulo +
+          ' ' +
+          audio.artista +
+          ' ' +
+          audio.tipo
+        ).includes(
+          termo
+        )
+    );
+
+  mostrarResultadosPesquisa(
+    resultados
+  );
+
+}
+
+
+/* ============================================================
+   COMPARTILHAR ÁUDIO
+   ============================================================ */
+
+async function compartilharAudio(
+  audio
+) {
+
+  const url =
+    window.location.href;
+
+  const texto =
+    '🎵 Ouça "' +
+    audio.titulo +
+    '"' +
+    (
+      audio.artista
+        ? ' - ' + audio.artista
+        : ''
+    ) +
+    ' na Rádio Onda Livre.';
+
+
+  if (
+    navigator.share
+  ) {
+
+    try {
+
+      await navigator.share({
+
+        title:
+          audio.titulo,
+
+        text:
+          texto,
+
+        url:
+          url
+
+      });
+
+      return;
+
+    }
+    catch (erro) {
+
+      if (
+        erro.name ===
+        'AbortError'
+      ) {
+
+        return;
+
+      }
+
+    }
+
+  }
+
+
+  try {
+
+    await navigator.clipboard.writeText(
+      texto +
+      '\n' +
+      url
+    );
+
+    mostrarToast(
+      'Link do louvor copiado!'
+    );
+
+  }
+  catch (erro) {
+
+    mostrarToast(
+      'Não foi possível compartilhar.'
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   COMPARTILHAR RÁDIO
+   ============================================================ */
+
+document.getElementById(
+  'shareRadioBtn'
+).addEventListener(
+  'click',
+  compartilharRadio
+);
+
+
+async function compartilharRadio() {
+
+  const url =
+    window.location.href;
+
+  const texto =
+    '📻 Quero compartilhar uma rádio que pode abençoar sua vida. ' +
+    'Ouça a Rádio Onda Livre com louvores, orações e mensagens.';
+
+
+  if (
+    navigator.share
+  ) {
+
+    try {
+
+      await navigator.share({
+
+        title:
+          'Rádio Onda Livre',
+
+        text:
+          texto,
+
+        url:
+          url
+
+      });
+
+      return;
+
+    }
+    catch (erro) {
+
+      if (
+        erro.name ===
+        'AbortError'
+      ) {
+
+        return;
+
+      }
+
+    }
+
+  }
+
+
+  try {
+
+    await navigator.clipboard.writeText(
+      texto +
+      '\n' +
+      url
+    );
+
+    mostrarToast(
+      'Mensagem da rádio copiada!'
+    );
+
+  }
+  catch (erro) {
+
+    mostrarToast(
+      'Não foi possível compartilhar.'
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   LOCALIZAÇÃO
+   ============================================================ */
+
+let localizacaoObtida =
+  false;
+
+
+function obterLocalizacao() {
+
+  return new Promise(
+    resolve => {
+
+      const callback =
+        'localizacao_' +
+        Date.now() +
+        '_' +
+        Math.random()
+          .toString(36)
+          .substring(2,8);
+
+      const script =
+        document.createElement(
+          'script'
+        );
+
+      let finalizado =
+        false;
+
+      const timer =
+        setTimeout(
+          () => {
+
+            finalizar(
+              null
+            );
+
+          },
+          7000
+        );
+
+
+      function finalizar(
+        dados
+      ) {
+
+        if (finalizado) {
+          return;
+        }
+
+        finalizado =
+          true;
+
+        clearTimeout(
+          timer
+        );
+
+        delete window[
+          callback
+        ];
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode
+            .removeChild(
+              script
+            );
+
+        }
+
+        resolve(
+          dados
+        );
+
+      }
+
+
+      window[callback] =
+        function(
+          dados
+        ) {
+
+          finalizar(
+            dados
+          );
+
+        };
+
+
+      script.onerror =
+        function() {
+
+          finalizar(
+            null
+          );
+
+        };
+
+
+      script.src =
+        'https://ipapi.co/jsonp/?callback=' +
+        callback;
+
+
+      document.body.appendChild(
+        script
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   CARREGAR LOCALIZAÇÃO
+   ============================================================ */
+
+async function carregarLocalizacao() {
+
+  const texto =
+    document.getElementById(
+      'localizacaoTexto'
+    );
+
+  texto.textContent =
+    'Identificando localização...';
+
+
+  const salva =
+    localStorage.getItem(
+      'radio_onda_livre_localizacao'
+    );
+
+
+  if (salva) {
+
+    try {
+
+      const dados =
+        JSON.parse(
+          salva
+        );
+
+      if (
+        dados &&
+        (
+          dados.cidade ||
+          dados.estado
+        )
+      ) {
+
+        atualizarLocalizacao(
+          dados
+        );
+
+        localizacaoObtida =
+          true;
+
+        return dados;
+
+      }
+
+    }
+    catch (erro) {}
+
+  }
+
+
+  for (
+    let tentativa = 1;
+    tentativa <= 2;
+    tentativa++
+  ) {
+
+    const dados =
+      await obterLocalizacao();
+
+
+    if (
+      dados &&
+      (
+        dados.city ||
+        dados.region
+      )
+    ) {
+
+      const local =
+        {
+
+          cidade:
+            dados.city ||
+            '',
+
+          estado:
+            dados.region ||
+            ''
+
+        };
+
+
+      localStorage.setItem(
+        'radio_onda_livre_localizacao',
+        JSON.stringify(
+          local
+        )
+      );
+
+
+      atualizarLocalizacao(
+        local
+      );
+
+
+      localizacaoObtida =
+        true;
+
+
+      return local;
+
+    }
+
+
+    if (
+      tentativa === 1
+    ) {
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            800
+          )
+      );
+
+    }
+
+  }
+
+
+  texto.textContent =
+    'Localização não identificada';
+
+  return null;
+
+}
+
+
+/* ============================================================
+   ATUALIZAR LOCALIZAÇÃO
+   ============================================================ */
+
+function atualizarLocalizacao(
+  dados
+) {
+
+  const cidade =
+    dados.cidade ||
+    '';
+
+  const estado =
+    dados.estado ||
+    '';
+
+  let texto =
+    'Localização não identificada';
+
+
+  if (
+    cidade &&
+    estado
+  ) {
+
+    texto =
+      cidade +
+      ' - ' +
+      estado;
+
+  } else if (
+    cidade
+  ) {
+
+    texto =
+      cidade;
+
+  } else if (
+    estado
+  ) {
+
+    texto =
+      estado;
+
+  }
+
+
+  document.getElementById(
+    'localizacaoTexto'
+  ).textContent =
+    texto;
+
+  document.getElementById(
+    'localAtual'
+  ).textContent =
+    texto;
+
+}
+
+
+/* ============================================================
+   REGISTRAR ACESSO
+   ============================================================ */
+
+async function registrarAcesso() {
+
+  const chave =
+    'radio_onda_livre_acesso_registrado';
+
+
+  if (
+    sessionStorage.getItem(
+      chave
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  let local = null;
+
+  try {
+
+    const salvo =
+      localStorage.getItem(
+        'radio_onda_livre_localizacao'
+      );
+
+    if (salvo) {
+
+      local =
+        JSON.parse(
+          salvo
+        );
+
+    }
+
+  }
+  catch (erro) {}
+
+
+  try {
+
+    await chamarAPI(
+      'registrarEvento',
+      {
+
+        evento:
+          'ACESSO',
+
+        audioId:
+          '',
+
+        titulo:
+          '',
+
+        sessao:
+          sessao,
+
+        cidade:
+          local?.cidade ||
+          '',
+
+        estado:
+          local?.estado ||
+          ''
+
+      },
+      10000
+    );
+
+
+    sessionStorage.setItem(
+      chave,
+      '1'
+    );
+
+  }
+  catch (erro) {
+
+    console.warn(
+      'Não foi possível registrar o acesso.',
+      erro
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   REGISTRAR EVENTO
+   ============================================================ */
+
+async function registrarEvento(
+  evento,
+  audio
+) {
+
+  if (
+    !URL_API ||
+    URL_API.includes(
+      'COLE_AQUI'
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  let local = {
+
+    cidade: '',
+    estado: ''
+
+  };
+
+
+  try {
+
+    const salvo =
+      localStorage.getItem(
+        'radio_onda_livre_localizacao'
+      );
+
+    if (salvo) {
+
+      local =
+        JSON.parse(
+          salvo
+        );
+
+    }
+
+  }
+  catch (erro) {}
+
+
+  try {
+
+    await chamarAPI(
+      'registrarEvento',
+      {
+
+        evento:
+          evento,
+
+        audioId:
+          audio?.id ||
+          '',
+
+        titulo:
+          audio?.titulo ||
+          '',
+
+        sessao:
+          sessao,
+
+        cidade:
+          local.cidade ||
+          '',
+
+        estado:
+          local.estado ||
+          ''
+
+      },
+      10000
+    );
+
+  }
+  catch (erro) {
+
+    console.warn(
+      'Evento não registrado:',
+      evento,
+      erro
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   INICIALIZAÇÃO
+   ============================================================ */
+
+async function iniciarRadio() {
+
+  if (
+    !URL_API ||
+    URL_API.includes(
+      'COLE_AQUI'
+    )
+  ) {
+
+    alterarStatus(
+      'Configure a URL da API',
+      'error'
+    );
+
+    mostrarToast(
+      'Informe a URL do seu Apps Script no código.'
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * Primeiro tenta identificar
+   * a localização.
+   */
+
+  await carregarLocalizacao();
+
+
+  /*
+   * Depois carrega a playlist.
+   */
+
+  await carregarPlaylist();
+
+}
+
+
+/* ============================================================
+   INICIAR
+   ============================================================ */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  iniciarRadio
 );
 
 </script>
