@@ -1,3666 +1,4557 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<meta
-    name="theme-color"
-    content="#071a35"
->
-
-<title>Rádio Onda Livre</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora INSS e IRRF</title>
 
 <style>
-
-/* =========================================================
-   RESET
-   ========================================================= */
+:root {
+  --primary: #0f4c81;
+  --primary-dark: #083657;
+  --secondary: #1f7a5c;
+  --danger: #b42318;
+  --warning: #b54708;
+  --purple: #6941c6;
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --border: #d9e2ec;
+  --text: #1f2937;
+  --muted: #667085;
+  --success-bg: #ecfdf3;
+  --danger-bg: #fff1f0;
+  --blue-bg: #eff8ff;
+  --purple-bg: #f4f3ff;
+  --warning-bg: #fffaeb;
+  --shadow: 0 8px 24px rgba(15, 76, 129, .08);
+  --radius: 14px;
+}
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-
-    margin: 0;
-
-    min-height: 100vh;
-
-    font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    color: #fff;
-
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(34,120,255,.25),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 100% 50%,
-            rgba(0,184,255,.10),
-            transparent 30%
-        ),
-        linear-gradient(
-            145deg,
-            #030b18 0%,
-            #071a35 45%,
-            #06152b 100%
-        );
-
-    padding:
-        25px 15px 40px;
-
-    overflow-x: hidden;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
-
-/* =========================================================
-   EFEITO DE FUNDO
-   ========================================================= */
-
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    width: 420px;
-    height: 420px;
-
-    top: -180px;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(33,150,243,.16),
-            transparent 68%
-        );
-
-    pointer-events: none;
-
-    z-index: -1;
+button,
+input,
+select {
+  font: inherit;
 }
 
-
-/* =========================================================
-   CONTAINER
-   ========================================================= */
+button {
+  cursor: pointer;
+}
 
 .container {
-
-    width: 100%;
-
-    max-width: 820px;
-
-    margin: 0 auto;
+  width: min(1450px, calc(100% - 30px));
+  margin: 0 auto;
 }
 
-
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* ============================================================
+   CABEÇALHO
+   ============================================================ */
 
 .header {
-
-    text-align: center;
-
-    margin-bottom: 22px;
-
-    animation:
-        aparecer .7s ease;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: #fff;
+  padding: 25px 0;
+  box-shadow: 0 4px 18px rgba(8, 54, 87, .20);
 }
 
-
-/* =========================================================
-   LOGO / MICROFONE
-   ========================================================= */
-
-.microphone {
-
-    position: relative;
-
-    width: 76px;
-    height: 76px;
-
-    margin:
-        0 auto 14px;
-
-    border-radius: 24px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 36px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(39,124,255,.30),
-            rgba(0,184,255,.10)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.30),
-
-        0 0 35px
-        rgba(33,150,243,.12);
-
-    backdrop-filter:
-        blur(18px);
-
-    animation:
-        flutuar 4s ease-in-out infinite;
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-.microphone::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: -6px;
-
-    border-radius: 28px;
-
-    border:
-        1px solid
-        rgba(72,160,255,.12);
-
-    pointer-events: none;
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-
-/* =========================================================
-   TÍTULO
-   ========================================================= */
-
-h1 {
-
-    margin: 0;
-
-    font-size:
-        clamp(27px, 6vw, 36px);
-
-    font-weight: 800;
-
-    letter-spacing: -.8px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #b9dcff
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
+.header-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.14);
+  font-size: 28px;
 }
 
-.subtitle {
-
-    margin-top: 7px;
-
-    color:
-        rgba(255,255,255,.62);
-
-    font-size: 14px;
-
-    letter-spacing: .1px;
+.header h1 {
+  margin: 0 0 5px;
+  font-size: 27px;
 }
 
-
-/* =========================================================
-   PLAYER
-   ========================================================= */
-
-.player-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.12),
-            rgba(255,255,255,.055)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.13);
-
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
-
-    border-radius: 24px;
-
-    padding: 23px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.30),
-
-        inset 0 1px 0
-        rgba(255,255,255,.08);
-
-    animation:
-        aparecer .8s ease;
+.header p {
+  margin: 0;
+  opacity: .85;
+  font-size: 14px;
 }
 
-
-/* brilho */
-
-.player-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 260px;
-    height: 260px;
-
-    top: -170px;
-    right: -80px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(32,135,255,.25),
-            transparent 70%
-        );
-
-    pointer-events: none;
+.header-badge {
+  padding: 9px 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(255,255,255,.10);
+  font-size: 13px;
+  white-space: nowrap;
 }
 
+/* ============================================================
+   LAYOUT
+   ============================================================ */
 
-/* =========================================================
-   TOPO DO PLAYER
-   ========================================================= */
-
-.player-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 18px;
+main {
+  padding: 25px 0 45px;
 }
 
+.grid {
+  display: grid;
+  gap: 20px;
+}
 
-/* =========================================================
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 17px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.card-header small {
+  color: var(--muted);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* ============================================================
+   FORMULÁRIO
+   ============================================================ */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #344054;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 43px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 9px 12px;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: .2s;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15,76,129,.10);
+}
+
+.field input[readonly] {
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 16px;
+  min-height: 42px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(.97);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.btn-light {
+  background: #eef2f6;
+  color: #344054;
+  border: 1px solid var(--border);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-warning {
+  background: var(--warning);
+  color: #fff;
+}
+
+.btn-purple {
+  background: var(--purple);
+  color: #fff;
+}
+
+.btn-small {
+  min-height: 35px;
+  padding: 7px 11px;
+  font-size: 12px;
+}
+
+/* ============================================================
    STATUS
-   ========================================================= */
+   ============================================================ */
 
 .status {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    font-size: 11px;
-
-    color:
-        rgba(255,255,255,.65);
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        .08em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 13px;
+  border-radius: 9px;
+  background: var(--blue-bg);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .status-dot {
-
-    width: 9px;
-    height: 9px;
-
-    border-radius: 50%;
-
-    background: #54e88a;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(84,232,138,.10),
-
-        0 0 15px
-        rgba(84,232,138,.55);
-
-    animation:
-        pulsar 1.7s infinite;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--secondary);
+  box-shadow: 0 0 0 4px rgba(31,122,92,.12);
 }
 
+/* ============================================================
+   RESUMO PRINCIPAL
+   ============================================================ */
 
-/* =========================================================
-   BADGE
-   ========================================================= */
-
-.live-badge {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 6px;
-
-    padding:
-        6px 10px;
-
-    border-radius: 20px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    font-size: 10px;
-
-    color:
-        rgba(255,255,255,.65);
-
-    letter-spacing:
-        .08em;
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 15px;
 }
 
-
-/* =========================================================
-   ÁUDIO ATUAL
-   ========================================================= */
-
-.current-area {
-
-    display: flex;
-
-    gap: 16px;
-
-    align-items: center;
-
-    margin-bottom: 19px;
+.summary-card {
+  position: relative;
+  padding: 21px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(16,24,40,.05);
+  overflow: hidden;
 }
 
-
-/* =========================================================
-   CAPA
-   ========================================================= */
-
-.current-cover {
-
-    width: 76px;
-    height: 76px;
-
-    flex-shrink: 0;
-
-    border-radius: 18px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 31px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1769aa,
-            #082d5d
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    box-shadow:
-        0 12px 30px
-        rgba(0,0,0,.25);
+.summary-card::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  right: -35px;
+  top: -35px;
+  background: rgba(15,76,129,.05);
 }
 
-
-/* =========================================================
-   ONDAS
-   ========================================================= */
-
-.equalizer {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 3px;
-
-    height: 32px;
-
-    margin-top: 12px;
+.summary-card.total {
+  background: linear-gradient(135deg, #083657, #0f4c81);
+  color: #fff;
+  border-color: transparent;
 }
 
-.equalizer span {
-
-    width: 3px;
-
-    height: 8px;
-
-    border-radius: 4px;
-
-    background:
-        #62b5ff;
-
-    opacity: .35;
+.summary-card.total::after {
+  background: rgba(255,255,255,.08);
 }
 
-.equalizer.playing span {
-
-    opacity: 1;
-
-    animation:
-        onda .9s
-        ease-in-out
-        infinite;
+.summary-label {
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 800;
+  opacity: .75;
 }
 
-.equalizer span:nth-child(2) {
-    animation-delay: .1s;
+.summary-value {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+  font-size: 31px;
+  font-weight: 900;
+  letter-spacing: -.7px;
 }
 
-.equalizer span:nth-child(3) {
-    animation-delay: .2s;
+.summary-description {
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: .78;
 }
 
-.equalizer span:nth-child(4) {
-    animation-delay: .3s;
+.summary-card.inss {
+  border-top: 4px solid var(--secondary);
 }
 
-.equalizer span:nth-child(5) {
-    animation-delay: .15s;
+.summary-card.irrf {
+  border-top: 4px solid var(--danger);
 }
 
-.equalizer span:nth-child(6) {
-    animation-delay: .25s;
+/* ============================================================
+   SEÇÕES DE CÁLCULO
+   ============================================================ */
+
+.calc-section {
+  margin-top: 20px;
 }
 
-.equalizer span:nth-child(7) {
-    animation-delay: .05s;
+.calc-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--border);
 }
 
-
-/* =========================================================
-   INFORMAÇÕES ATUAIS
-   ========================================================= */
-
-.current-info {
-
-    min-width: 0;
-
-    flex: 1;
+.calc-section-header h3 {
+  margin: 0;
+  font-size: 16px;
 }
 
-.current-type {
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .12em;
-
-    color:
-        #71bfff;
-
-    font-weight: 700;
-
-    margin-bottom: 4px;
+.calc-section-header span {
+  font-size: 12px;
+  color: var(--muted);
 }
 
-.current-title {
-
-    font-size:
-        clamp(18px, 4vw, 23px);
-
-    font-weight: 750;
-
-    line-height: 1.2;
-
-    overflow: hidden;
-
-    display: -webkit-box;
-
-    -webkit-line-clamp: 2;
-
-    -webkit-box-orient: vertical;
+.calc-section-body {
+  padding: 18px;
 }
 
-.current-artist {
-
-    font-size: 13px;
-
-    color:
-        rgba(255,255,255,.57);
-
-    margin-top: 5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+.calc-section.inss {
+  border-left: 5px solid var(--secondary);
 }
 
-
-/* =========================================================
-   PLAYER NATIVO
-   ========================================================= */
-
-audio {
-
-    width: 100%;
-
-    height: 42px;
-
-    border-radius: 12px;
-
-    margin-top: 2px;
+.calc-section.irrf {
+  border-left: 5px solid var(--danger);
 }
 
+/* ============================================================
+   LINHAS DE CÁLCULO
+   ============================================================ */
 
-/* =========================================================
-   CONTROLES
-   ========================================================= */
-
-.controls {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-top: 17px;
+.calc-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.control-btn {
-
-    width: 45px;
-    height: 42px;
-
-    border: 1px solid
-        rgba(255,255,255,.11);
-
-    border-radius: 13px;
-
-    background:
-        rgba(255,255,255,.075);
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 17px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
+.calc-line {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 11px 0;
+  border-bottom: 1px dashed #e2e8f0;
+  align-items: center;
 }
 
-.control-btn:hover {
-
-    background:
-        rgba(44,140,255,.25);
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,.18);
+.calc-line:last-child {
+  border-bottom: 0;
 }
 
-.control-btn:active {
-
-    transform:
-        scale(.93);
+.calc-line .label {
+  color: #475467;
+  font-size: 13px;
 }
 
-
-/* botão central */
-
-.control-main {
-
-    width: 56px;
-    height: 50px;
-
-    border-radius: 16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1976d2,
-            #0d5ca8
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-
-    box-shadow:
-        0 8px 25px
-        rgba(25,118,210,.30);
+.calc-line .value {
+  text-align: right;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
-
-/* =========================================================
-   FILTROS
-   ========================================================= */
-
-.library-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin:
-        28px 3px 12px;
+.calc-line.subtotal {
+  background: #f8fafc;
+  padding: 12px 10px;
+  border-radius: 8px;
+  border-bottom: 0;
+  margin: 5px 0;
 }
 
-.library-title {
-
-    font-size: 16px;
-
-    font-weight: 750;
+.calc-line.highlight {
+  background: var(--warning-bg);
+  border: 1px solid #fedf89;
+  padding: 13px 12px;
+  border-radius: 9px;
+  margin: 7px 0;
 }
 
-.library-count {
-
-    font-size: 11px;
-
-    color:
-        rgba(255,255,255,.45);
+.calc-line.total {
+  background: var(--success-bg);
+  border: 1px solid #abefc6;
+  padding: 15px 12px;
+  border-radius: 10px;
+  margin-top: 8px;
 }
 
-
-.filters {
-
-    display: flex;
-
-    gap: 8px;
-
-    flex-wrap: wrap;
-
-    margin-bottom: 13px;
+.calc-line.total .label {
+  font-weight: 900;
+  color: #067647;
 }
 
-.filter-btn {
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    background:
-        rgba(255,255,255,.055);
-
-    color:
-        rgba(255,255,255,.68);
-
-    padding:
-        8px 13px;
-
-    border-radius: 22px;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    transition:
-        all .2s ease;
+.calc-line.total .value {
+  font-size: 21px;
+  color: #067647;
 }
 
-.filter-btn:hover {
-
-    background:
-        rgba(255,255,255,.11);
-
-    color: white;
+.calc-line.total-irrf {
+  background: var(--danger-bg);
+  border: 1px solid #fecdca;
 }
 
-.filter-btn.active {
-
-    background:
-        linear-gradient(
-            135deg,
-            #1976d2,
-            #1257a0
-        );
-
-    color: white;
-
-    border-color:
-        rgba(90,170,255,.55);
-
-    box-shadow:
-        0 6px 18px
-        rgba(25,118,210,.20);
+.calc-line.total-irrf .label {
+  color: var(--danger);
 }
 
-
-/* =========================================================
-   PLAYLIST
-   ========================================================= */
-
-.playlist {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
+.calc-line.total-irrf .value {
+  color: var(--danger);
 }
 
-
-/* =========================================================
-   ITEM
-   ========================================================= */
-
-.audio-item {
-
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding:
-        12px 13px;
-
-    border-radius: 16px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid
-        rgba(255,255,255,.065);
-
-    cursor: pointer;
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
-
-    animation:
-        itemEntrada .35s ease both;
+.value-negative {
+  color: var(--danger) !important;
 }
 
-.audio-item:hover {
-
-    background:
-        rgba(255,255,255,.085);
-
-    border-color:
-        rgba(255,255,255,.13);
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,.15);
+.formula {
+  margin-top: 12px;
+  padding: 11px 13px;
+  background: #f8fafc;
+  border: 1px solid #e4e7ec;
+  border-radius: 8px;
+  color: #475467;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12px;
+  overflow-x: auto;
 }
 
+/* ============================================================
+   DEDUÇÃO ESCOLHIDA
+   ============================================================ */
 
-/* =========================================================
-   ITEM ATIVO
-   ========================================================= */
-
-.audio-item.active {
-
-    background:
-        linear-gradient(
-            100deg,
-            rgba(25,118,210,.27),
-            rgba(25,118,210,.09)
-        );
-
-    border-color:
-        rgba(68,160,255,.42);
-
-    box-shadow:
-        inset 3px 0 0
-        #2d9bff,
-
-        0 8px 25px
-        rgba(0,0,0,.15);
+.deducao-escolhida {
+  margin: 14px 0;
+  padding: 15px;
+  border-radius: 11px;
+  background: var(--purple-bg);
+  border: 1px solid #d9d6fe;
 }
 
-
-/* =========================================================
-   ÍCONE
-   ========================================================= */
-
-.audio-icon {
-
-    width: 43px;
-    height: 43px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 13px;
-
-    background:
-        rgba(255,255,255,.075);
-
-    border:
-        1px solid
-        rgba(255,255,255,.06);
-
-    font-size: 18px;
-
-    transition:
-        .2s ease;
+.deducao-escolhida .titulo {
+  color: var(--purple);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .4px;
 }
 
-.audio-item:hover .audio-icon {
-
-    transform:
-        scale(1.05);
-
-    background:
-        rgba(25,118,210,.18);
+.deducao-escolhida .valor {
+  margin-top: 5px;
+  color: #42307d;
+  font-size: 22px;
+  font-weight: 900;
 }
 
-
-/* =========================================================
-   INFORMAÇÕES
-   ========================================================= */
-
-.audio-info {
-
-    min-width: 0;
-
-    flex: 1;
+.deducao-escolhida .explicacao {
+  margin-top: 5px;
+  color: #6941c6;
+  font-size: 12px;
 }
 
-.audio-title {
+/* ============================================================
+   TABELAS
+   ============================================================ */
 
-    font-size: 14px;
-
-    font-weight: 650;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+.table-wrapper {
+  overflow-x: auto;
 }
 
-.audio-artist {
-
-    font-size: 11px;
-
-    color:
-        rgba(255,255,255,.50);
-
-    margin-top: 3px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
 }
 
-.audio-type {
-
-    display: inline-block;
-
-    font-size: 9px;
-
-    color:
-        rgba(255,255,255,.42);
-
-    margin-top: 5px;
-
-    padding:
-        2px 6px;
-
-    border-radius: 5px;
-
-    background:
-        rgba(255,255,255,.045);
+thead th {
+  background: #f8fafc;
+  color: #344054;
+  font-size: 12px;
+  text-align: left;
+  padding: 11px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
 }
 
-
-/* =========================================================
-   SHARE
-   ========================================================= */
-
-.share-btn {
-
-    flex-shrink: 0;
-
-    width: 39px;
-    height: 39px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.09);
-
-    border-radius: 11px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    color:
-        rgba(255,255,255,.75);
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 15px;
-
-    transition:
-        .2s ease;
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #eef2f6;
+  font-size: 13px;
+  vertical-align: middle;
 }
 
-.share-btn:hover {
-
-    background:
-        rgba(25,118,210,.28);
-
-    color: white;
-
-    transform:
-        translateY(-2px);
+tbody tr:hover {
+  background: #fafcff;
 }
 
-.share-btn:active {
-
-    transform:
-        scale(.92);
+tfoot td {
+  padding: 13px 10px;
+  font-weight: 900;
+  border-top: 2px solid var(--border);
 }
 
-
-/* =========================================================
-   HINT
-   ========================================================= */
-
-.play-hint {
-
-    text-align: center;
-
-    padding:
-        17px 12px;
-
-    margin-top: 12px;
-
-    border-radius: 14px;
-
-    background:
-        rgba(255,255,255,.04);
-
-    border:
-        1px dashed
-        rgba(255,255,255,.10);
-
-    color:
-        rgba(255,255,255,.55);
-
-    font-size: 12px;
-
-    line-height: 1.7;
+.money {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
-.play-hint strong {
-
-    color:
-        rgba(255,255,255,.82);
+.rate {
+  text-align: center;
+  white-space: nowrap;
 }
 
-
-/* =========================================================
-   MENSAGEM
-   ========================================================= */
-
-.message {
-
-    text-align: center;
-
-    padding: 30px 15px;
-
-    color:
-        rgba(255,255,255,.55);
-
-    font-size: 13px;
-
-    border-radius: 15px;
-
-    background:
-        rgba(255,255,255,.04);
+.faixa-usada {
+  background: #f0fdf4 !important;
 }
 
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-footer {
-
-    text-align: center;
-
-    margin-top: 30px;
-
-    font-size: 11px;
-
-    color:
-        rgba(255,255,255,.35);
+.faixa-usada td {
+  font-weight: 700;
 }
 
-.footer-line {
-
-    width: 45px;
-
-    height: 1px;
-
-    margin:
-        0 auto 10px;
-
-    background:
-        rgba(255,255,255,.15);
+.td-total {
+  color: var(--primary);
+  font-size: 15px;
 }
 
+/* ============================================================
+   MEMÓRIA
+   ============================================================ */
 
-/* =========================================================
-   ANIMAÇÕES
-   ========================================================= */
-
-@keyframes pulsar {
-
-    0%,
-    100% {
-
-        transform:
-            scale(1);
-
-        opacity: 1;
-    }
-
-    50% {
-
-        transform:
-            scale(1.25);
-
-        opacity: .65;
-    }
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px;
 }
 
-
-@keyframes flutuar {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0);
-    }
-
-    50% {
-
-        transform:
-            translateY(-5px);
-    }
+.memory-item {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fafcff;
 }
 
-
-@keyframes onda {
-
-    0%,
-    100% {
-
-        height: 7px;
-    }
-
-    50% {
-
-        height: 28px;
-    }
+.memory-item .memory-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-
-@keyframes aparecer {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(12px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
+.memory-item .memory-value {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 800;
 }
 
+/* ============================================================
+   LOG
+   ============================================================ */
 
-@keyframes itemEntrada {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(6px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
+.log-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
+.log-calculo {
+  margin: 0;
+  min-height: 260px;
+  max-height: 650px;
+  overflow: auto;
+  padding: 18px;
+  border-radius: 10px;
+  background: #101828;
+  color: #e4e7ec;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
 
-/* =========================================================
+.log-empty {
+  color: #98a2b3;
+}
+
+/* ============================================================
+   VIGÊNCIA
+   ============================================================ */
+
+.vigencia-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 13px;
+  border-radius: 9px;
+  background: var(--blue-bg);
+  color: var(--primary);
+  border: 1px solid #b2ddff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(16,24,40,.62);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-content {
+  width: min(1100px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 17px 20px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-modal {
+  width: 35px;
+  height: 35px;
+  border: 0;
+  border-radius: 8px;
+  background: #f2f4f7;
+  color: #344054;
+  font-size: 20px;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+
+.tabs {
+  display: flex;
+  gap: 5px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.tab {
+  border: 0;
+  background: transparent;
+  padding: 11px 16px;
+  color: var(--muted);
+  font-weight: 700;
+  border-bottom: 3px solid transparent;
+}
+
+.tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ============================================================
+   EDITOR DE FAIXAS
+   ============================================================ */
+
+.faixa-editor {
+  margin-top: 18px;
+}
+
+.faixa-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.faixa-editor-header h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.faixa-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: end;
+}
+
+.faixa-row .field label {
+  font-size: 11px;
+}
+
+.faixa-row .btn {
+  min-height: 40px;
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+
+.footer {
+  padding: 25px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ============================================================
    RESPONSIVO
-   ========================================================= */
+   ============================================================ */
 
-@media(max-width:600px) {
+@media (max-width: 1100px) {
+  .form-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
 
-    body {
+  .summary-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 
-        padding:
-            17px 10px 30px;
-    }
+  .summary-card.total {
+    grid-column: 1 / -1;
+  }
 
-    .container {
-
-        max-width: 100%;
-    }
-
-    .microphone {
-
-        width: 68px;
-        height: 68px;
-
-        border-radius: 21px;
-
-        font-size: 32px;
-    }
-
-    .player-card {
-
-        padding: 17px;
-
-        border-radius: 20px;
-    }
-
-    .current-area {
-
-        gap: 12px;
-    }
-
-    .current-cover {
-
-        width: 64px;
-        height: 64px;
-
-        border-radius: 15px;
-
-        font-size: 26px;
-    }
-
-    .current-title {
-
-        font-size: 18px;
-    }
-
-    .current-artist {
-
-        font-size: 12px;
-    }
-
-    .control-btn {
-
-        width: 43px;
-        height: 41px;
-    }
-
-    .control-main {
-
-        width: 53px;
-        height: 48px;
-    }
-
-    .library-header {
-
-        margin-top: 24px;
-    }
-
-    .audio-item {
-
-        padding:
-            10px;
-
-        gap: 9px;
-
-        border-radius: 14px;
-    }
-
-    .audio-icon {
-
-        width: 40px;
-        height: 40px;
-    }
-
-    .audio-title {
-
-        font-size: 13px;
-    }
-
-    .share-btn {
-
-        width: 36px;
-        height: 36px;
-    }
+  .memory-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
 }
 
+@media (max-width: 760px) {
+  .container {
+    width: min(100% - 20px, 1450px);
+  }
 
-/* =========================================================
-   ACESSIBILIDADE
-   ========================================================= */
+  .header-content {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
-button:focus-visible {
+  .header-badge {
+    align-self: flex-start;
+  }
 
-    outline:
-        2px solid
-        #52a9ff;
+  .header h1 {
+    font-size: 22px;
+  }
 
-    outline-offset:
-        2px;
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: auto;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card.total {
+    grid-column: auto;
+  }
+
+  .summary-value {
+    font-size: 27px;
+  }
+
+  .memory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-line {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .calc-line .value {
+    text-align: left;
+  }
+
+  .faixa-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .faixa-row .remove-faixa {
+    grid-column: 1 / -1;
+  }
+
+  .actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .log-toolbar .btn {
+    flex: 1 1 auto;
+  }
 }
 
+@media print {
+  body {
+    background: #fff;
+  }
 
-/* =========================================================
-   REDUZIR ANIMAÇÕES
-   ========================================================= */
+  .header {
+    box-shadow: none;
+  }
 
-@media(prefers-reduced-motion: reduce) {
+  .actions,
+  .log-toolbar,
+  .footer,
+  .no-print {
+    display: none !important;
+  }
 
-    *,
-    *::before,
-    *::after {
+  .card,
+  .summary-card {
+    box-shadow: none;
+  }
 
-        animation-duration:
-            .01ms !important;
+  .modal {
+    display: none !important;
+  }
 
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            .01ms !important;
-    }
+  main {
+    padding-top: 10px;
+  }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<div class="container">
-
-
-<!-- =====================================================
-     CABEÇALHO
-     ===================================================== -->
-
 <header class="header">
-
-    <div class="microphone">
-        🎙️
+  <div class="container header-content">
+    <div class="header-title">
+      <div class="header-icon">🧮</div>
+      <div>
+        <h1>Calculadora INSS e IRRF</h1>
+        <p>Cálculo detalhado com tabelas configuráveis e memória de cálculo</p>
+      </div>
     </div>
 
-    <h1>
-        Rádio Onda Livre
-    </h1>
-
-    <div class="subtitle">
-        Música, oração e mensagens para o seu dia
+    <div class="header-badge">
+      INSS + IRRF
     </div>
-
+  </div>
 </header>
 
+<main>
+<div class="container">
 
-<!-- =====================================================
-     PLAYER
-     ===================================================== -->
+  <!-- ========================================================
+       ENTRADA DE DADOS
+       ======================================================== -->
 
-<section class="player-card">
+  <section class="card">
+    <div class="card-header">
+      <div>
+        <h2>📋 Dados para cálculo</h2>
+        <small>Informe os valores utilizados no cálculo da folha.</small>
+      </div>
 
-
-    <div class="player-top">
-
-        <div class="status">
-
-            <span
-                class="status-dot"
-                id="statusDot"
-            ></span>
-
-            <span id="statusText">
-                Conectando...
-            </span>
-
-        </div>
-
-
-        <div class="live-badge">
-
-            <span>●</span>
-
-            ONDA LIVRE
-
-        </div>
-
+      <div class="status">
+        <span class="status-dot"></span>
+        <span id="statusVigencia">Aguardando cálculo</span>
+      </div>
     </div>
 
+    <div class="card-body">
 
-    <div class="current-area">
+      <div class="form-grid">
 
-
-        <div class="current-cover">
-
-            🎧
-
+        <div class="field">
+          <label for="competencia">Competência</label>
+          <input type="date" id="competencia">
         </div>
 
-
-        <div class="current-info">
-
-            <div
-                class="current-type"
-                id="currentType"
-            >
-                ÁUDIO
-            </div>
-
-
-            <div
-                class="current-title"
-                id="currentTitle"
-            >
-                Rádio Onda Livre
-            </div>
-
-
-            <div
-                class="current-artist"
-                id="currentArtist"
-            >
-                Carregando primeiro áudio...
-            </div>
-
-
-            <div
-                class="equalizer"
-                id="equalizer"
-            >
-
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </div>
-
+        <div class="field">
+          <label for="baseINSS">Base INSS</label>
+          <input
+            type="number"
+            id="baseINSS"
+            step="0.01"
+            min="0"
+            placeholder="0,00">
         </div>
 
+        <div class="field">
+          <label for="rendimentosIRRF">Rendimentos para IRRF</label>
+          <input
+            type="number"
+            id="rendimentosIRRF"
+            step="0.01"
+            min="0"
+            placeholder="0,00">
+        </div>
 
-    </div>
+        <div class="field">
+          <label for="dependentes">Dependentes</label>
+          <input
+            type="number"
+            id="dependentes"
+            step="1"
+            min="0"
+            value="0">
+        </div>
 
+        <div class="field">
+          <label for="pensao">Pensão alimentícia</label>
+          <input
+            type="number"
+            id="pensao"
+            step="0.01"
+            min="0"
+            value="0"
+            placeholder="0,00">
+        </div>
 
-    <audio
-        id="audioPlayer"
-        controls
-        preload="auto"
-    ></audio>
+        <div class="field">
+          <label for="baseINSSExibida">Base INSS considerada</label>
+          <input
+            type="text"
+            id="baseINSSExibida"
+            readonly
+            value="R$ 0,00">
+        </div>
 
+        <div class="field">
+          <label for="baseIRRFExibida">Base IRRF considerada</label>
+          <input
+            type="text"
+            id="baseIRRFExibida"
+            readonly
+            value="R$ 0,00">
+        </div>
 
-    <div class="controls">
+        <div class="field">
+          <label>Vigência das tabelas</label>
+          <div class="vigencia-box">
+            <span>📅</span>
+            <span id="vigenciaResumo">Aguardando cálculo</span>
+          </div>
+        </div>
 
+      </div>
 
-        <button
-            class="control-btn"
-            onclick="anterior()"
-            title="Áudio anterior"
-            aria-label="Áudio anterior"
-        >
-            ⏮
+      <div class="actions">
+        <button class="btn btn-primary" onclick="calcular()">
+          🧮 Calcular
         </button>
 
-
-        <button
-            class="control-btn control-main"
-            onclick="alternarPlay()"
-            title="Reproduzir ou pausar"
-            aria-label="Reproduzir ou pausar"
-            id="mainPlayButton"
-        >
-            ▶
+        <button class="btn btn-secondary" onclick="atualizarTabelasVigentes()">
+          🔄 Atualizar tabelas
         </button>
 
-
-        <button
-            class="control-btn"
-            onclick="proximo()"
-            title="Próximo áudio"
-            aria-label="Próximo áudio"
-        >
-            ⏭
+        <button class="btn btn-purple" onclick="abrirGerenciador()">
+          ⚙️ Gerenciar tabelas
         </button>
 
+        <button class="btn btn-light" onclick="carregarExemplo()">
+          🧪 Carregar exemplo
+        </button>
+
+        <button class="btn btn-light" onclick="limpar()">
+          🧹 Limpar
+        </button>
+
+        <button class="btn btn-warning" onclick="window.print()">
+          🖨️ Imprimir
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       RESUMO
+       ======================================================== -->
+
+  <section class="card" style="margin-top:20px;">
+    <div class="card-header">
+      <div>
+        <h2>📊 Resumo do cálculo</h2>
+        <small>Valores finais dos principais descontos.</small>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="summary-grid">
+
+        <div class="summary-card total">
+          <div class="summary-label">
+            Total de descontos
+          </div>
+
+          <div class="summary-value" id="resultadoTotal">
+            R$ 0,00
+          </div>
+
+          <div class="summary-description">
+            INSS + IRRF
+          </div>
+        </div>
+
+        <div class="summary-card inss">
+          <div class="summary-label">
+            INSS
+          </div>
+
+          <div class="summary-value" id="resultadoINSS">
+            R$ 0,00
+          </div>
+
+          <div class="summary-description">
+            Contribuição previdenciária
+          </div>
+        </div>
+
+        <div class="summary-card irrf">
+          <div class="summary-label">
+            IRRF
+          </div>
+
+          <div class="summary-value" id="resultadoIRRF">
+            R$ 0,00
+          </div>
+
+          <div class="summary-description">
+            Imposto de renda devido
+          </div>
+        </div>
+
+      </div>
+
+      <div class="calc-section">
+        <div class="calc-section-header">
+          <h3>📌 Visão geral das bases</h3>
+          <span>Valores utilizados no cálculo</span>
+        </div>
+
+        <div class="calc-section-body">
+
+          <div class="calc-lines">
+
+            <div class="calc-line">
+              <div class="label">Base informada para INSS</div>
+              <div class="value" id="resumoBaseINSS">R$ 0,00</div>
+            </div>
+
+            <div class="calc-line">
+              <div class="label">Base limitada ao teto do INSS</div>
+              <div class="value" id="resumoBaseLimitada">R$ 0,00</div>
+            </div>
+
+            <div class="calc-line">
+              <div class="label">Rendimentos tributáveis para IRRF</div>
+              <div class="value" id="resumoRendimentos">R$ 0,00</div>
+            </div>
+
+            <div class="calc-line">
+              <div class="label">Base de cálculo do IRRF</div>
+              <div class="value" id="resultadoBaseIRRF">R$ 0,00</div>
+            </div>
+
+            <div class="calc-line total">
+              <div class="label">TOTAL INSS + IRRF</div>
+              <div class="value" id="resumoTotal">R$ 0,00</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       DETALHAMENTO INSS
+       ======================================================== -->
+
+  <section class="card calc-section inss">
+
+    <div class="calc-section-header">
+      <h3>🟢 Detalhamento do INSS</h3>
+      <span>Apuração progressiva por faixa</span>
+    </div>
+
+    <div class="calc-section-body">
+
+      <div id="detalheINSS">
+
+        <div class="calc-lines">
+
+          <div class="calc-line">
+            <div class="label">Base informada</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">Teto utilizado</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line total">
+            <div class="label">TOTAL INSS</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       TABELA INSS
+       ======================================================== -->
+
+  <section class="card" style="margin-top:20px;">
+    <div class="card-header">
+      <div>
+        <h2>📑 Memória por faixa — INSS</h2>
+        <small>Detalhamento da contribuição progressiva.</small>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="table-wrapper">
+        <table id="tabelaINSS">
+          <thead>
+            <tr>
+              <th>Faixa</th>
+              <th>De</th>
+              <th>Até</th>
+              <th class="rate">Alíquota</th>
+              <th class="money">Valor da faixa</th>
+              <th class="money">Contribuição</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="5">TOTAL INSS</td>
+              <td class="money td-total" id="totalTabelaINSS">R$ 0,00</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       DETALHAMENTO IRRF
+       ======================================================== -->
+
+  <section class="card calc-section irrf">
+
+    <div class="calc-section-header">
+      <h3>🔴 Detalhamento do IRRF</h3>
+      <span>Apuração da base, faixa, deduções e redução</span>
+    </div>
+
+    <div class="calc-section-body">
+
+      <div id="detalheIRRF">
+
+        <div class="calc-lines">
+
+          <div class="calc-line">
+            <div class="label">Rendimentos tributáveis</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">(-) INSS</div>
+            <div class="value value-negative">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">(-) Dependentes</div>
+            <div class="value value-negative">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">(-) Pensão alimentícia</div>
+            <div class="value value-negative">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line highlight">
+            <div class="label">Dedução efetivamente utilizada</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">Base de cálculo do IRRF</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">Alíquota</div>
+            <div class="value">0,00%</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">Parcela a deduzir</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">IRRF bruto</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line">
+            <div class="label">Redução aplicada</div>
+            <div class="value value-negative">R$ 0,00</div>
+          </div>
+
+          <div class="calc-line total total-irrf">
+            <div class="label">IRRF DEVIDO</div>
+            <div class="value">R$ 0,00</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       TABELA IRRF
+       ======================================================== -->
+
+  <section class="card" style="margin-top:20px;">
+    <div class="card-header">
+      <div>
+        <h2>📑 Tabela vigente — IRRF</h2>
+        <small>Faixas utilizadas para enquadramento.</small>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="table-wrapper">
+        <table id="tabelaIRRF">
+          <thead>
+            <tr>
+              <th>Faixa</th>
+              <th>De</th>
+              <th>Até</th>
+              <th class="rate">Alíquota</th>
+              <th class="money">Parcela a deduzir</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       MEMÓRIA RESUMIDA
+       ======================================================== -->
+
+  <section class="card" style="margin-top:20px;">
+
+    <div class="card-header">
+      <div>
+        <h2>🧾 Memória de cálculo</h2>
+        <small>Resumo estruturado dos valores utilizados.</small>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div id="memoriaCalculo">
+        <div class="memory-grid">
+          <div class="memory-item">
+            <div class="memory-label">Status</div>
+            <div class="memory-value">Aguardando cálculo</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       LOG DETALHADO
+       ======================================================== -->
+
+  <section class="card" style="margin-top:20px;">
+
+    <div class="card-header">
+
+      <div>
+        <h2>📝 Log detalhado do cálculo</h2>
+        <small>
+          Registro passo a passo das fórmulas e valores utilizados.
+        </small>
+      </div>
+
+      <div class="log-toolbar">
+        <button class="btn btn-small btn-primary" onclick="copiarLog()">
+          📋 Copiar log
+        </button>
+
+        <button class="btn btn-small btn-light" onclick="limparLog()">
+          🧹 Limpar log
+        </button>
+      </div>
 
     </div>
 
+    <div class="card-body">
 
-</section>
+      <pre id="logCalculo" class="log-calculo"><span class="log-empty">Aguardando cálculo...</span></pre>
 
-
-<!-- =====================================================
-     BIBLIOTECA
-     ===================================================== -->
-
-<div class="library-header">
-
-    <div class="library-title">
-        Biblioteca de áudios
     </div>
-
-    <div
-        class="library-count"
-        id="libraryCount"
-    >
-        Carregando...
-    </div>
+  </section>
 
 </div>
+</main>
 
-
-<!-- =====================================================
-     FILTROS
-     ===================================================== -->
-
-<div class="filters">
-
-
-    <button
-        class="filter-btn active"
-        onclick="filtrar('Todos', this)"
-    >
-        Todos
-    </button>
-
-
-    <button
-        class="filter-btn"
-        onclick="filtrar('Música', this)"
-    >
-        🎵 Músicas
-    </button>
-
-
-    <button
-        class="filter-btn"
-        onclick="filtrar('Oração', this)"
-    >
-        🙏 Orações
-    </button>
-
-
-    <button
-        class="filter-btn"
-        onclick="filtrar('Mensagem', this)"
-    >
-        💬 Mensagens
-    </button>
-
-
-</div>
-
-
-<!-- =====================================================
-     AVISO
-     ===================================================== -->
-
-<div
-    id="playHint"
-    class="play-hint"
->
-
-    <strong>
-        Preparando seu áudio...
-    </strong>
-
-    <br>
-
-    ▶ A reprodução automática será iniciada quando o navegador permitir.
-
-</div>
-
-
-<!-- =====================================================
-     PLAYLIST
-     ===================================================== -->
-
-<div
-    id="playlist"
-    class="playlist"
-></div>
-
-
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
-
-<footer>
-
-    <div class="footer-line"></div>
-
-    Rádio Onda Livre • Joel Rodrigues
-
+<footer class="footer">
+  Calculadora INSS e IRRF • Tabelas configuráveis • Memória de cálculo
 </footer>
 
+<!-- ============================================================
+     MODAL GERENCIAMENTO
+     ============================================================ -->
+
+<div id="modalTabelas" class="modal">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h2>⚙️ Gerenciar tabelas de INSS e IRRF</h2>
+
+      <button
+        class="close-modal"
+        onclick="fecharGerenciador()">
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="tabs">
+
+        <button
+          id="tabINSS"
+          class="tab active"
+          onclick="selecionarTipoTabela('INSS')">
+          INSS
+        </button>
+
+        <button
+          id="tabIRRF"
+          class="tab"
+          onclick="selecionarTipoTabela('IRRF')">
+          IRRF
+        </button>
+
+      </div>
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label for="tabelaSelecionada">
+            Tabela existente
+          </label>
+
+          <select id="tabelaSelecionada"
+                  onchange="carregarTabelaSelecionada()">
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="nomeTabela">
+            Nome da tabela
+          </label>
+
+          <input
+            type="text"
+            id="nomeTabela"
+            placeholder="Ex.: INSS 2026">
+        </div>
+
+        <div class="field">
+          <label for="inicioVigencia">
+            Início da vigência
+          </label>
+
+          <input
+            type="date"
+            id="inicioVigencia">
+        </div>
+
+        <div class="field">
+          <label for="fimVigencia">
+            Fim da vigência
+          </label>
+
+          <input
+            type="date"
+            id="fimVigencia">
+        </div>
+
+      </div>
+
+      <div id="parametrosIRRF" style="margin-top:20px;">
+
+        <div class="calc-section">
+
+          <div class="calc-section-header">
+            <h3>Parâmetros do IRRF</h3>
+            <span>Valores utilizados nas deduções</span>
+          </div>
+
+          <div class="calc-section-body">
+
+            <div class="form-grid">
+
+              <div class="field">
+                <label for="valorDependente">
+                  Dedução por dependente
+                </label>
+
+                <input
+                  type="number"
+                  id="valorDependente"
+                  step="0.01"
+                  min="0">
+              </div>
+
+              <div class="field">
+                <label for="valorSimplificado">
+                  Desconto simplificado
+                </label>
+
+                <input
+                  type="number"
+                  id="valorSimplificado"
+                  step="0.01"
+                  min="0">
+              </div>
+
+              <div class="field">
+                <label for="reducaoAte5000">
+                  Redução máxima até R$ 5.000
+                </label>
+
+                <input
+                  type="number"
+                  id="reducaoAte5000"
+                  step="0.01"
+                  min="0">
+              </div>
+
+              <div class="field">
+                <label for="reducaoInicio">
+                  Início da faixa de redução
+                </label>
+
+                <input
+                  type="number"
+                  id="reducaoInicio"
+                  step="0.01"
+                  min="0">
+              </div>
+
+              <div class="field">
+                <label for="reducaoFim">
+                  Fim da faixa de redução
+                </label>
+
+                <input
+                  type="number"
+                  id="reducaoFim"
+                  step="0.01"
+                  min="0">
+              </div>
+
+              <div class="field">
+                <label for="reducaoConstante">
+                  Constante da redução
+                </label>
+
+                <input
+                  type="number"
+                  id="reducaoConstante"
+                  step="0.000001"
+                  min="0">
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="faixa-editor">
+
+        <div class="faixa-editor-header">
+
+          <h3>
+            📊 Faixas da tabela
+          </h3>
+
+          <button
+            class="btn btn-small btn-secondary"
+            onclick="adicionarFaixa()">
+            + Adicionar faixa
+          </button>
+
+        </div>
+
+        <div id="faixasEditor"></div>
+
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="salvarTabela()">
+          💾 Salvar nova
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="atualizarTabelaExistente()">
+          ✏️ Atualizar
+        </button>
+
+        <button
+          class="btn btn-light"
+          onclick="restaurarTabela2026()">
+          ♻️ Restaurar 2026
+        </button>
+
+        <button
+          class="btn btn-danger"
+          onclick="excluirTabela()">
+          🗑️ Excluir
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
-
-
 
 <script>
 
+/* ============================================================
+   CONFIGURAÇÕES
+   ============================================================ */
 
-/* =========================================================
-   CONFIGURAÇÃO
-   ========================================================= */
+const STORAGE_KEY = "calculadora_inss_irrf_tabelas_v1";
 
-const URL_API =
-    'https://script.google.com/macros/s/AKfycby4tIS3B07OIcPVoCgKde_EL6PHkRXp46nMMNVh0yYxoYlpcSQeXbBqjLQ6vvVfnJcX4Q/exec';
+let tipoTabelaAtual = "INSS";
 
+let tabelas = {};
 
-
-/* =========================================================
-   VARIÁVEIS
-   ========================================================= */
-
-let playlist = [];
-
-let playlistFiltrada = [];
-
-let indiceAtual = -1;
-
-let filtroAtual = 'Todos';
-
-let ultimoEventoPlay = '';
-
-let heartbeatTimer = null;
-
-let acessoRegistrado = false;
+let resultadoAtual = null;
 
 
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
 
-/* =========================================================
-   LOCALIZAÇÃO
-   ========================================================= */
+function numero(valor) {
+  const n = Number(valor);
+  return Number.isFinite(n) ? n : 0;
+}
 
-let localizacaoVisitante = {
+function arredondar(valor) {
+  return Math.round((numero(valor) + Number.EPSILON) * 100) / 100;
+}
 
-    cidade: '',
+function moeda(valor) {
+  return numero(valor).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
 
-    estado: ''
-};
+function percentual(valor) {
+  return numero(valor).toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }) + "%";
+}
+
+function dataBR(data) {
+
+  if (!data) {
+    return "";
+  }
+
+  const partes = data.split("-");
+
+  if (partes.length !== 3) {
+    return data;
+  }
+
+  return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+function escaparHTML(texto) {
+
+  return String(texto ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function hojeISO() {
+
+  const d = new Date();
+
+  const ano = d.getFullYear();
+
+  const mes = String(d.getMonth() + 1).padStart(2, "0");
+
+  const dia = String(d.getDate()).padStart(2, "0");
+
+  return `${ano}-${mes}-${dia}`;
+}
 
 
+/* ============================================================
+   TABELAS PADRÃO 2026
+   ============================================================ */
 
-/* =========================================================
-   SESSÃO
-   ========================================================= */
+function tabelasPadrao() {
 
-function obterSessao() {
+  return {
 
-    const chave =
-        'radio_onda_livre_sessao';
+    INSS: [
+
+      {
+        id: "inss_2026",
+        nome: "INSS 2026",
+        inicio: "2026-01-01",
+        fim: "2026-12-31",
+
+        teto: 8475.55,
+
+        faixas: [
+
+          {
+            de: 0,
+            ate: 1621.00,
+            aliquota: 7.5
+          },
+
+          {
+            de: 1621.01,
+            ate: 2902.84,
+            aliquota: 9
+          },
+
+          {
+            de: 2902.85,
+            ate: 4354.27,
+            aliquota: 12
+          },
+
+          {
+            de: 4354.28,
+            ate: 8475.55,
+            aliquota: 14
+          }
+
+        ]
+
+      }
+
+    ],
+
+    IRRF: [
+
+      {
+        id: "irrf_2026",
+        nome: "IRRF 2026",
+        inicio: "2026-01-01",
+        fim: "2026-12-31",
+
+        dependente: 189.59,
+
+        simplificado: 607.20,
+
+        reducaoAte5000: 312.89,
+
+        reducaoInicio: 5000.01,
+
+        reducaoFim: 7350,
+
+        reducaoConstante: 0.133145,
+
+        faixas: [
+
+          {
+            de: 0,
+            ate: 2428.80,
+            aliquota: 0,
+            deducao: 0
+          },
+
+          {
+            de: 2428.81,
+            ate: 2826.65,
+            aliquota: 7.5,
+            deducao: 182.16
+          },
+
+          {
+            de: 2826.66,
+            ate: 3751.05,
+            aliquota: 15,
+            deducao: 394.16
+          },
+
+          {
+            de: 3751.06,
+            ate: 4664.68,
+            aliquota: 22.5,
+            deducao: 675.49
+          },
+
+          {
+            de: 4664.69,
+            ate: Infinity,
+            aliquota: 27.5,
+            deducao: 908.73
+          }
+
+        ]
+
+      }
+
+    ]
+
+  };
+
+}
 
 
-    let sessao =
-        sessionStorage.getItem(
-            chave
-        );
+/* ============================================================
+   LOCAL STORAGE
+   ============================================================ */
 
+function carregarTabelasStorage() {
 
-    if (!sessao) {
+  try {
 
-        sessao =
-            gerarId();
+    const salvo = localStorage.getItem(STORAGE_KEY);
 
+    if (!salvo) {
 
-        sessionStorage.setItem(
-            chave,
-            sessao
-        );
+      tabelas = tabelasPadrao();
+
+      salvarTabelasStorage();
+
+      return;
     }
 
+    const obj = JSON.parse(salvo);
 
-    return sessao;
-}
-
-
-
-function gerarId() {
-
-    return (
-        Date.now().toString(36) +
-        '_' +
-        Math.random()
-            .toString(36)
-            .substring(2, 14)
-    );
-}
-
-
-
-/* =========================================================
-   LOCALIZAÇÃO SALVA
-   ========================================================= */
-
-function obterLocalizacaoSalva() {
-
-    try {
-
-        const texto =
-            localStorage.getItem(
-                'radio_onda_livre_localizacao'
-            );
-
-
-        if (!texto) {
-
-            return false;
-        }
-
-
-        const dados =
-            JSON.parse(
-                texto
-            );
-
-
-        if (
-            dados &&
-            dados.cidade
-        ) {
-
-            localizacaoVisitante = {
-
-                cidade:
-                    String(
-                        dados.cidade ||
-                        ''
-                    ).trim(),
-
-                estado:
-                    String(
-                        dados.estado ||
-                        ''
-                    ).trim()
-            };
-
-
-            return true;
-        }
-
-    } catch (erro) {
-
-        console.warn(
-            'Erro ao ler localização salva:',
-            erro
-        );
+    if (!obj.INSS || !Array.isArray(obj.INSS)) {
+      throw new Error("Estrutura INSS inválida");
     }
 
-
-    return false;
-}
-
-
-
-/* =========================================================
-   SALVAR LOCALIZAÇÃO
-   ========================================================= */
-
-function salvarLocalizacao() {
-
-    try {
-
-        localStorage.setItem(
-
-            'radio_onda_livre_localizacao',
-
-            JSON.stringify(
-                localizacaoVisitante
-            )
-        );
-
-    } catch (erro) {
-
-        console.warn(
-            'Não foi possível salvar localização:',
-            erro
-        );
-    }
-}
-
-
-
-/* =========================================================
-   CONSULTAR LOCALIZAÇÃO POR IP
-   ========================================================= */
-
-function consultarLocalizacaoIP() {
-
-    return new Promise(
-        function(resolve) {
-
-            let concluido = false;
-
-
-            const callback =
-                'localizacao_' +
-                Date.now() +
-                '_' +
-                Math.floor(
-                    Math.random() * 100000
-                );
-
-
-            const script =
-                document.createElement(
-                    'script'
-                );
-
-
-            const timer =
-                setTimeout(
-                    function() {
-
-                        if (concluido) {
-
-                            return;
-                        }
-
-
-                        concluido = true;
-
-
-                        limpar();
-
-
-                        resolve(false);
-
-                    },
-                    7000
-                );
-
-
-
-            function limpar() {
-
-                clearTimeout(
-                    timer
-                );
-
-
-                try {
-
-                    delete window[
-                        callback
-                    ];
-
-                } catch(e) {}
-
-
-                if (
-                    script &&
-                    script.parentNode
-                ) {
-
-                    script.parentNode
-                        .removeChild(
-                            script
-                        );
-                }
-            }
-
-
-
-            window[callback] =
-                function(dados) {
-
-                    if (concluido) {
-
-                        return;
-                    }
-
-
-                    concluido = true;
-
-
-                    limpar();
-
-
-                    if (
-                        !dados ||
-                        dados.error
-                    ) {
-
-                        resolve(false);
-
-                        return;
-                    }
-
-
-                    const cidade =
-                        String(
-                            dados.city ||
-                            ''
-                        ).trim();
-
-
-                    const estado =
-                        String(
-                            dados.region_code ||
-                            dados.region ||
-                            ''
-                        ).trim();
-
-
-                    if (!cidade) {
-
-                        resolve(false);
-
-                        return;
-                    }
-
-
-                    localizacaoVisitante = {
-
-                        cidade:
-                            cidade,
-
-                        estado:
-                            estado
-                    };
-
-
-                    salvarLocalizacao();
-
-
-                    resolve(true);
-                };
-
-
-
-            script.onerror =
-                function() {
-
-                    if (concluido) {
-
-                        return;
-                    }
-
-
-                    concluido = true;
-
-
-                    limpar();
-
-
-                    resolve(false);
-                };
-
-
-
-            script.src =
-                'https://ipapi.co/jsonp/?callback=' +
-                encodeURIComponent(
-                    callback
-                ) +
-                '&_=' +
-                Date.now();
-
-
-            document.body.appendChild(
-                script
-            );
-
-        }
-    );
-}
-
-
-
-/* =========================================================
-   OBTER LOCALIZAÇÃO
-   ========================================================= */
-
-async function obterLocalizacao() {
-
-    if (
-        obterLocalizacaoSalva()
-    ) {
-
-        return true;
+    if (!obj.IRRF || !Array.isArray(obj.IRRF)) {
+      throw new Error("Estrutura IRRF inválida");
     }
 
+    tabelas = obj;
 
-    atualizarStatus(
-        'Identificando localização...'
+  } catch (erro) {
+
+    console.error(erro);
+
+    tabelas = tabelasPadrao();
+
+    salvarTabelasStorage();
+  }
+}
+
+function salvarTabelasStorage() {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(tabelas)
+  );
+}
+
+
+/* ============================================================
+   TABELA VIGENTE
+   ============================================================ */
+
+function obterTabelaVigente(tipo, competencia) {
+
+  const lista = tabelas[tipo] || [];
+
+  const data = competencia || hojeISO();
+
+  const encontradas = lista.filter(t => {
+
+    const inicio = t.inicio || "1900-01-01";
+
+    const fim = t.fim || "2999-12-31";
+
+    return data >= inicio && data <= fim;
+
+  });
+
+  if (encontradas.length) {
+
+    encontradas.sort((a, b) =>
+      String(b.inicio).localeCompare(String(a.inicio))
     );
 
+    return encontradas[0];
+  }
 
-    for (
-        let tentativa = 1;
-        tentativa <= 2;
-        tentativa++
-    ) {
+  if (lista.length) {
 
-        const sucesso =
-            await consultarLocalizacaoIP();
+    const ordenadas = [...lista].sort((a, b) =>
+      String(b.inicio).localeCompare(String(a.inicio))
+    );
 
+    return ordenadas[0];
+  }
 
-        if (sucesso) {
-
-            return true;
-        }
-
-
-        if (
-            tentativa === 1
-        ) {
-
-            await new Promise(
-                function(resolve) {
-
-                    setTimeout(
-                        resolve,
-                        800
-                    );
-                }
-            );
-        }
-    }
-
-
-    return false;
+  return null;
 }
 
 
+/* ============================================================
+   CÁLCULO INSS
+   ============================================================ */
 
-/* =========================================================
-   REGISTRAR EVENTO
-   ========================================================= */
+function calcularINSS(base, tabela) {
 
-function registrarEvento(
-    evento,
-    audioId = '',
-    titulo = ''
+  const baseInformada = arredondar(base);
+
+  const teto = numero(tabela.teto);
+
+  const baseConsiderada = Math.min(
+    baseInformada,
+    teto
+  );
+
+  let total = 0;
+
+  const faixas = [];
+
+  for (let i = 0; i < tabela.faixas.length; i++) {
+
+    const faixa = tabela.faixas[i];
+
+    const minimo = numero(faixa.de);
+
+    const limite = numero(faixa.ate);
+
+    if (baseConsiderada <= minimo) {
+      continue;
+    }
+
+    const valorFaixa = Math.min(
+      baseConsiderada,
+      limite
+    ) - minimo;
+
+    if (valorFaixa <= 0) {
+      continue;
+    }
+
+    const contribuicao = arredondar(
+      valorFaixa * numero(faixa.aliquota) / 100
+    );
+
+    total = arredondar(
+      total + contribuicao
+    );
+
+    faixas.push({
+
+      faixa: i + 1,
+
+      de: minimo,
+
+      ate: limite,
+
+      aliquota: numero(faixa.aliquota),
+
+      valorFaixa: arredondar(valorFaixa),
+
+      contribuicao
+
+    });
+
+  }
+
+  return {
+
+    baseInformada,
+
+    teto,
+
+    base: baseConsiderada,
+
+    total,
+
+    faixas
+
+  };
+
+}
+
+
+/* ============================================================
+   CÁLCULO IRRF
+   ============================================================ */
+
+function calcularIRRF(
+  rendimentos,
+  inss,
+  dependentes,
+  pensao,
+  tabela
 ) {
 
-    if (!URL_API) {
+  const rend = arredondar(rendimentos);
 
-        return;
-    }
+  const valorINSS = arredondar(inss);
 
+  const qtdDependentes = Math.max(
+    0,
+    Math.floor(numero(dependentes))
+  );
 
-    const callback =
-        'evento_' +
-        Date.now() +
-        '_' +
-        Math.floor(
-            Math.random() * 100000
-        );
+  const valorPensao = arredondar(pensao);
 
+  const deducaoDependentes = arredondar(
+    qtdDependentes * numero(tabela.dependente)
+  );
 
-    let script = null;
+  const deducaoLegal = arredondar(
+    valorINSS +
+    deducaoDependentes +
+    valorPensao
+  );
 
+  const descontoSimplificado = arredondar(
+    tabela.simplificado
+  );
 
-    window[callback] =
-        function(resposta) {
+  const usarLegal =
+    deducaoLegal >= descontoSimplificado;
 
-            try {
+  const deducaoUtilizada = usarLegal
+    ? deducaoLegal
+    : descontoSimplificado;
 
-                delete window[
-                    callback
-                ];
+  const tipoDeducao = usarLegal
+    ? "Deduções legais"
+    : "Desconto simplificado";
 
-            } catch(e) {}
+  const base = arredondar(
+    Math.max(0, rend - deducaoUtilizada)
+  );
 
+  let faixaEncontrada = null;
 
-            if (
-                script &&
-                script.parentNode
-            ) {
+  for (const faixa of tabela.faixas) {
 
-                script.parentNode
-                    .removeChild(
-                        script
-                    );
-            }
+    const de = numero(faixa.de);
 
-
-            if (
-                resposta &&
-                resposta.cidade
-            ) {
-
-                localizacaoVisitante.cidade =
-                    resposta.cidade;
-
-
-                localizacaoVisitante.estado =
-                    resposta.estado || '';
-
-
-                salvarLocalizacao();
-            }
-        };
-
-
-    const parametros =
-        new URLSearchParams({
-
-            acao:
-                'registrarEvento',
-
-            evento:
-                evento || '',
-
-            audioId:
-                audioId || '',
-
-            titulo:
-                titulo || '',
-
-            sessao:
-                obterSessao(),
-
-            cidade:
-                localizacaoVisitante.cidade,
-
-            estado:
-                localizacaoVisitante.estado,
-
-            callback:
-                callback,
-
-            _:
-                Date.now()
-        });
-
-
-    script =
-        document.createElement(
-            'script'
-        );
-
-
-    script.src =
-        URL_API +
-        '?' +
-        parametros.toString();
-
-
-    script.onerror =
-        function() {
-
-            try {
-
-                delete window[
-                    callback
-                ];
-
-            } catch(e) {}
-
-
-            if (
-                script &&
-                script.parentNode
-            ) {
-
-                script.parentNode
-                    .removeChild(
-                        script
-                    );
-            }
-        };
-
-
-    document.body.appendChild(
-        script
-    );
-}
-
-
-
-/* =========================================================
-   ACESSO
-   ========================================================= */
-
-function verificarAcessoAnterior() {
-
-    return (
-        sessionStorage.getItem(
-            'radio_onda_livre_acesso_registrado'
-        ) === '1'
-    );
-}
-
-
-
-async function registrarAcesso() {
+    const ate = faixa.ate === Infinity
+      ? Infinity
+      : numero(faixa.ate);
 
     if (
-        acessoRegistrado
+      base >= de &&
+      base <= ate
     ) {
 
-        return;
+      faixaEncontrada = faixa;
+
+      break;
     }
+  }
 
+  if (!faixaEncontrada) {
 
-    await obterLocalizacao();
+    faixaEncontrada =
+      tabela.faixas[tabela.faixas.length - 1];
 
+  }
 
-    registrarEvento(
-        'ACESSO'
+  const aliquota =
+    numero(faixaEncontrada.aliquota);
+
+  const parcela =
+    numero(faixaEncontrada.deducao);
+
+  const impostoBruto = arredondar(
+    Math.max(
+      0,
+      base * aliquota / 100 - parcela
+    )
+  );
+
+  let reducao = 0;
+
+  if (
+    rend <= 5000 &&
+    numero(tabela.reducaoAte5000) > 0
+  ) {
+
+    reducao = Math.min(
+      impostoBruto,
+      numero(tabela.reducaoAte5000)
     );
 
+  } else if (
+    rend >= numero(tabela.reducaoInicio) &&
+    rend <= numero(tabela.reducaoFim)
+  ) {
 
-    acessoRegistrado =
-        true;
+    const calculada =
+      numero(tabela.reducaoConstante) > 0
+        ? numero(tabela.reducaoConstante) * rend
+        : 0;
 
+    const reducaoFormula =
+      978.62 - calculada;
 
-    sessionStorage.setItem(
-        'radio_onda_livre_acesso_registrado',
-        '1'
+    reducao = Math.min(
+      impostoBruto,
+      Math.max(0, reducaoFormula)
     );
+
+  }
+
+  const total = arredondar(
+    Math.max(
+      0,
+      impostoBruto - reducao
+    )
+  );
+
+  return {
+
+    rendimentos: rend,
+
+    inss: valorINSS,
+
+    dependentes: qtdDependentes,
+
+    valorDependente:
+      numero(tabela.dependente),
+
+    deducaoDependentes,
+
+    pensao: valorPensao,
+
+    deducaoLegal,
+
+    descontoSimplificado,
+
+    deducaoUtilizada,
+
+    tipoDeducao,
+
+    base,
+
+    aliquota,
+
+    parcela,
+
+    impostoBruto,
+
+    reducao,
+
+    total,
+
+    faixa: faixaEncontrada
+
+  };
+
 }
 
 
+/* ============================================================
+   CALCULAR
+   ============================================================ */
 
-/* =========================================================
-   CARREGAR PLAYLIST
-   ========================================================= */
+function calcular() {
 
-function carregarPlaylist() {
+  try {
 
-    atualizarStatus(
-        'Carregando playlist...'
-    );
+    const competencia =
+      document.getElementById("competencia").value ||
+      hojeISO();
 
+    const baseINSSInput =
+      numero(
+        document.getElementById("baseINSS").value
+      );
 
-    const callback =
-        'playlist_' +
-        Date.now() +
-        '_' +
-        Math.floor(
-            Math.random() * 10000
-        );
+    const rendimentosInput =
+      numero(
+        document.getElementById("rendimentosIRRF").value
+      );
 
+    const dependentes =
+      numero(
+        document.getElementById("dependentes").value
+      );
 
-    let concluido = false;
+    const pensao =
+      numero(
+        document.getElementById("pensao").value
+      );
 
+    let baseINSS = baseINSSInput;
 
-    const script =
-        document.createElement(
-            'script'
-        );
+    let rendimentos = rendimentosInput;
 
+    if (
+      baseINSS <= 0 &&
+      rendimentos > 0
+    ) {
 
-    const timer =
-        setTimeout(
-            function() {
+      baseINSS = rendimentos;
 
-                if (concluido) {
+      document.getElementById("baseINSS").value =
+        rendimentos.toFixed(2);
 
-                    return;
-                }
-
-
-                concluido = true;
-
-
-                try {
-
-                    delete window[
-                        callback
-                    ];
-
-                } catch(e) {}
-
-
-                script.remove();
-
-
-                mostrarMensagem(
-                    'Não foi possível carregar a playlist.'
-                );
-
-            },
-            15000
-        );
-
-
-
-    window[callback] =
-        function(resposta) {
-
-            if (concluido) {
-
-                return;
-            }
-
-
-            concluido = true;
-
-
-            clearTimeout(
-                timer
-            );
-
-
-            try {
-
-                delete window[
-                    callback
-                ];
-
-            } catch(e) {}
-
-
-            script.remove();
-
-
-            if (
-                !resposta ||
-                !resposta.sucesso
-            ) {
-
-                mostrarMensagem(
-
-                    resposta &&
-                    resposta.mensagem
-                        ? resposta.mensagem
-                        : 'Erro ao carregar playlist.'
-                );
-
-
-                atualizarStatus(
-                    'Erro'
-                );
-
-
-                return;
-            }
-
-
-            playlist =
-                Array.isArray(
-                    resposta.playlist
-                )
-                    ? resposta.playlist
-                    : [];
-
-
-            atualizarContador();
-
-            aplicarFiltro();
-
-
-            atualizarStatus(
-                'Pronto'
-            );
-
-
-            if (
-                playlist.length > 0
-            ) {
-
-                setTimeout(
-                    function() {
-
-                        tocarPrimeiroAudio();
-
-                    },
-                    500
-                );
-
-            } else {
-
-                atualizarStatus(
-                    'Playlist vazia'
-                );
-            }
-        };
-
-
-
-    script.onerror =
-        function() {
-
-            if (concluido) {
-
-                return;
-            }
-
-
-            concluido = true;
-
-
-            clearTimeout(
-                timer
-            );
-
-
-            try {
-
-                delete window[
-                    callback
-                ];
-
-            } catch(e) {}
-
-
-            script.remove();
-
-
-            mostrarMensagem(
-                'Erro de comunicação com o servidor.'
-            );
-
-
-            atualizarStatus(
-                'Erro de comunicação'
-            );
-        };
-
-
-
-    script.src =
-        URL_API +
-        '?acao=listarPlaylist' +
-        '&callback=' +
-        encodeURIComponent(
-            callback
-        ) +
-        '&_=' +
-        Date.now();
-
-
-    document.body.appendChild(
-        script
-    );
-}
-
-
-
-/* =========================================================
-   CONTADOR
-   ========================================================= */
-
-function atualizarContador() {
-
-    const elemento =
-        document.getElementById(
-            'libraryCount'
-        );
-
-
-    if (!elemento) {
-
-        return;
     }
 
+    if (
+      rendimentos <= 0 &&
+      baseINSS > 0
+    ) {
+
+      rendimentos = baseINSS;
+
+      document.getElementById("rendimentosIRRF").value =
+        baseINSS.toFixed(2);
+
+    }
+
+    const tabelaINSS =
+      obterTabelaVigente(
+        "INSS",
+        competencia
+      );
+
+    const tabelaIRRF =
+      obterTabelaVigente(
+        "IRRF",
+        competencia
+      );
+
+    if (!tabelaINSS) {
+      throw new Error(
+        "Nenhuma tabela de INSS cadastrada."
+      );
+    }
+
+    if (!tabelaIRRF) {
+      throw new Error(
+        "Nenhuma tabela de IRRF cadastrada."
+      );
+    }
+
+    const inss =
+      calcularINSS(
+        baseINSS,
+        tabelaINSS
+      );
+
+    const irrf =
+      calcularIRRF(
+        rendimentos,
+        inss.total,
+        dependentes,
+        pensao,
+        tabelaIRRF
+      );
 
     const total =
-        playlist.length;
+      arredondar(
+        inss.total + irrf.total
+      );
 
+    resultadoAtual = {
 
-    elemento.textContent =
-        total +
-        (
-            total === 1
-                ? ' áudio'
-                : ' áudios'
-        );
+      competencia,
+
+      tabelaINSS,
+
+      tabelaIRRF,
+
+      inss,
+
+      irrf,
+
+      total
+
+    };
+
+    /* --------------------------------------------------------
+       CAMPOS
+       -------------------------------------------------------- */
+
+    document.getElementById(
+      "baseINSSExibida"
+    ).value = moeda(inss.base);
+
+    document.getElementById(
+      "baseIRRFExibida"
+    ).value = moeda(irrf.base);
+
+    /* --------------------------------------------------------
+       RESUMO
+       -------------------------------------------------------- */
+
+    document.getElementById(
+      "resultadoINSS"
+    ).textContent = moeda(inss.total);
+
+    document.getElementById(
+      "resultadoIRRF"
+    ).textContent = moeda(irrf.total);
+
+    document.getElementById(
+      "resultadoTotal"
+    ).textContent = moeda(total);
+
+    document.getElementById(
+      "resultadoBaseIRRF"
+    ).textContent = moeda(irrf.base);
+
+    document.getElementById(
+      "resumoBaseINSS"
+    ).textContent = moeda(inss.baseInformada);
+
+    document.getElementById(
+      "resumoBaseLimitada"
+    ).textContent = moeda(inss.base);
+
+    document.getElementById(
+      "resumoRendimentos"
+    ).textContent = moeda(irrf.rendimentos);
+
+    document.getElementById(
+      "resumoTotal"
+    ).textContent = moeda(total);
+
+    /* --------------------------------------------------------
+       STATUS
+       -------------------------------------------------------- */
+
+    document.getElementById(
+      "statusVigencia"
+    ).textContent =
+      `${tabelaINSS.nome} • ${tabelaIRRF.nome}`;
+
+    document.getElementById(
+      "vigenciaResumo"
+    ).textContent =
+      `${dataBR(tabelaINSS.inicio)} a ${dataBR(tabelaINSS.fim)}`;
+
+    /* --------------------------------------------------------
+       RENDER
+       -------------------------------------------------------- */
+
+    montarDetalhamentoINSS(inss);
+
+    montarTabelaINSS(
+      tabelaINSS,
+      inss
+    );
+
+    montarDetalhamentoIRRF(irrf);
+
+    montarTabelaIRRF(
+      tabelaIRRF,
+      irrf
+    );
+
+    montarMemoria(
+      competencia,
+      tabelaINSS,
+      tabelaIRRF,
+      inss,
+      irrf,
+      total
+    );
+
+    gerarLogCalculo(
+      competencia,
+      tabelaINSS,
+      tabelaIRRF,
+      inss,
+      irrf,
+      total
+    );
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    alert(
+      "Não foi possível realizar o cálculo.\n\n" +
+      erro.message
+    );
+
+  }
+
 }
 
 
+/* ============================================================
+   DETALHAMENTO INSS
+   ============================================================ */
 
-/* =========================================================
-   FILTRO
-   ========================================================= */
+function montarDetalhamentoINSS(inss) {
 
-function filtrar(
-    tipo,
-    botao
+  const faixasHTML = inss.faixas.length
+
+    ? inss.faixas.map(f => `
+
+        <div class="calc-line">
+
+          <div class="label">
+            Faixa ${f.faixa} —
+            ${moeda(f.valorFaixa)}
+            ×
+            ${percentual(f.aliquota)}
+          </div>
+
+          <div class="value">
+            ${moeda(f.contribuicao)}
+          </div>
+
+        </div>
+
+        <div class="formula">
+          ${moeda(f.valorFaixa)}
+          ×
+          ${percentual(f.aliquota)}
+          =
+          <strong>${moeda(f.contribuicao)}</strong>
+        </div>
+
+      `).join("")
+
+    : `
+
+      <div class="calc-line">
+
+        <div class="label">
+          Nenhuma faixa atingida
+        </div>
+
+        <div class="value">
+          R$ 0,00
+        </div>
+
+      </div>
+
+    `;
+
+  document.getElementById(
+    "detalheINSS"
+  ).innerHTML = `
+
+    <div class="calc-lines">
+
+      <div class="calc-line">
+
+        <div class="label">
+          Base informada
+        </div>
+
+        <div class="value">
+          ${moeda(inss.baseInformada)}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Teto do INSS
+        </div>
+
+        <div class="value">
+          ${moeda(inss.teto)}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Base considerada para cálculo
+        </div>
+
+        <div class="value">
+          ${moeda(inss.base)}
+        </div>
+
+      </div>
+
+      ${faixasHTML}
+
+      <div class="calc-line total">
+
+        <div class="label">
+          TOTAL INSS
+        </div>
+
+        <div class="value">
+          ${moeda(inss.total)}
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="formula">
+      O INSS é calculado progressivamente,
+      somando a contribuição de cada faixa atingida.
+    </div>
+  `;
+
+}
+
+
+/* ============================================================
+   TABELA INSS
+   ============================================================ */
+
+function montarTabelaINSS(
+  tabela,
+  resultado
 ) {
 
-    filtroAtual =
-        tipo;
+  const tbody =
+    document.querySelector(
+      "#tabelaINSS tbody"
+    );
 
+  tbody.innerHTML = "";
 
-    document
-        .querySelectorAll(
-            '.filter-btn'
-        )
-        .forEach(
-            function(btn) {
+  tabela.faixas.forEach(
+    (faixa, index) => {
 
-                btn.classList.remove(
-                    'active'
-                );
-            }
-        );
+      const atingida =
+        resultado.base > numero(faixa.de);
 
+      const limite =
+        faixa.ate === Infinity
+          ? Infinity
+          : numero(faixa.ate);
 
-    if (botao) {
+      const valorFaixa =
+        atingida
+          ? Math.max(
+              0,
+              Math.min(
+                resultado.base,
+                limite
+              ) - numero(faixa.de)
+            )
+          : 0;
 
-        botao.classList.add(
-            'active'
-        );
+      const contribuicao =
+        atingida
+          ? arredondar(
+              valorFaixa *
+              numero(faixa.aliquota) /
+              100
+            )
+          : 0;
+
+      const tr =
+        document.createElement("tr");
+
+      if (atingida) {
+        tr.classList.add("faixa-usada");
+      }
+
+      tr.innerHTML = `
+
+        <td>
+          Faixa ${index + 1}
+        </td>
+
+        <td>
+          ${moeda(faixa.de)}
+        </td>
+
+        <td>
+          ${faixa.ate === Infinity
+            ? "Sem limite"
+            : moeda(faixa.ate)}
+        </td>
+
+        <td class="rate">
+          ${percentual(faixa.aliquota)}
+        </td>
+
+        <td class="money">
+          ${moeda(valorFaixa)}
+        </td>
+
+        <td class="money">
+          <strong>
+            ${moeda(contribuicao)}
+          </strong>
+        </td>
+
+      `;
+
+      tbody.appendChild(tr);
+
     }
+  );
 
+  document.getElementById(
+    "totalTabelaINSS"
+  ).textContent =
+    moeda(resultado.total);
 
-    aplicarFiltro();
 }
 
 
+/* ============================================================
+   DETALHAMENTO IRRF
+   ============================================================ */
 
-function normalizarTipo(
-    tipo
+function montarDetalhamentoIRRF(irrf) {
+
+  let reducaoExplicacao =
+    "Nenhuma redução aplicada.";
+
+  if (
+    irrf.rendimentos <= 5000 &&
+    irrf.reducao > 0
+  ) {
+
+    reducaoExplicacao =
+      `Redução limitada ao máximo de ${moeda(
+        irrf.reducao
+      )}.`;
+
+  } else if (
+    irrf.reducao > 0
+  ) {
+
+    reducaoExplicacao =
+      `Redução calculada conforme a faixa de rendimentos.`;
+
+  }
+
+  const deducaoLegal =
+    irrf.deducaoLegal;
+
+  const simplificado =
+    irrf.descontoSimplificado;
+
+  document.getElementById(
+    "detalheIRRF"
+  ).innerHTML = `
+
+    <div class="calc-lines">
+
+      <div class="calc-line">
+
+        <div class="label">
+          Rendimentos tributáveis
+        </div>
+
+        <div class="value">
+          ${moeda(irrf.rendimentos)}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          (-) INSS
+        </div>
+
+        <div class="value value-negative">
+          ${moeda(irrf.inss)}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          (-) Dependentes
+          (${irrf.dependentes} × ${moeda(irrf.valorDependente)})
+        </div>
+
+        <div class="value value-negative">
+          ${moeda(irrf.deducaoDependentes)}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          (-) Pensão alimentícia
+        </div>
+
+        <div class="value value-negative">
+          ${moeda(irrf.pensao)}
+        </div>
+
+      </div>
+
+      <div class="calc-line subtotal">
+
+        <div class="label">
+          Deduções legais
+        </div>
+
+        <div class="value">
+          ${moeda(deducaoLegal)}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Desconto simplificado
+        </div>
+
+        <div class="value">
+          ${moeda(simplificado)}
+        </div>
+
+      </div>
+
+      <div class="deducao-escolhida">
+
+        <div class="titulo">
+          Dedução efetivamente utilizada
+        </div>
+
+        <div class="valor">
+          ${moeda(irrf.deducaoUtilizada)}
+        </div>
+
+        <div class="explicacao">
+          ${escaparHTML(irrf.tipoDeducao)}
+          — foi utilizada a maior dedução disponível.
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Base de cálculo do IRRF
+        </div>
+
+        <div class="value">
+          ${moeda(irrf.base)}
+        </div>
+
+      </div>
+
+      <div class="formula">
+        ${moeda(irrf.rendimentos)}
+        −
+        ${moeda(irrf.deducaoUtilizada)}
+        =
+        <strong>${moeda(irrf.base)}</strong>
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Faixa do IRRF
+        </div>
+
+        <div class="value">
+          ${irrf.faixa
+            ? moeda(irrf.faixa.de) +
+              " a " +
+              (
+                irrf.faixa.ate === Infinity
+                  ? "acima"
+                  : moeda(irrf.faixa.ate)
+              )
+            : "-"}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Alíquota
+        </div>
+
+        <div class="value">
+          ${percentual(irrf.aliquota)}
+        </div>
+
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Parcela a deduzir
+        </div>
+
+        <div class="value">
+          ${moeda(irrf.parcela)}
+        </div>
+
+      </div>
+
+      <div class="calc-line subtotal">
+
+        <div class="label">
+          IRRF bruto
+        </div>
+
+        <div class="value">
+          ${moeda(irrf.impostoBruto)}
+        </div>
+
+      </div>
+
+      <div class="formula">
+        ${moeda(irrf.base)}
+        ×
+        ${percentual(irrf.aliquota)}
+        −
+        ${moeda(irrf.parcela)}
+        =
+        <strong>${moeda(irrf.impostoBruto)}</strong>
+      </div>
+
+      <div class="calc-line">
+
+        <div class="label">
+          Redução aplicada
+        </div>
+
+        <div class="value value-negative">
+          ${moeda(irrf.reducao)}
+        </div>
+
+      </div>
+
+      <div class="formula">
+        ${escaparHTML(reducaoExplicacao)}
+      </div>
+
+      <div class="calc-line total total-irrf">
+
+        <div class="label">
+          IRRF DEVIDO
+        </div>
+
+        <div class="value">
+          ${moeda(irrf.total)}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ============================================================
+   TABELA IRRF
+   ============================================================ */
+
+function montarTabelaIRRF(
+  tabela,
+  resultado
 ) {
 
-    return String(
-        tipo || ''
-    )
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(
-            /[\u0300-\u036f]/g,
-            ''
-        )
-        .trim();
+  const tbody =
+    document.querySelector(
+      "#tabelaIRRF tbody"
+    );
+
+  tbody.innerHTML = "";
+
+  tabela.faixas.forEach(
+    (faixa, index) => {
+
+      const de =
+        numero(faixa.de);
+
+      const ate =
+        faixa.ate === Infinity
+          ? Infinity
+          : numero(faixa.ate);
+
+      const usada =
+        resultado.base >= de &&
+        resultado.base <= ate;
+
+      const tr =
+        document.createElement("tr");
+
+      if (usada) {
+        tr.classList.add("faixa-usada");
+      }
+
+      tr.innerHTML = `
+
+        <td>
+          Faixa ${index + 1}
+          ${usada ? "✓" : ""}
+        </td>
+
+        <td>
+          ${moeda(de)}
+        </td>
+
+        <td>
+          ${
+            ate === Infinity
+              ? "Acima de " + moeda(de)
+              : moeda(ate)
+          }
+        </td>
+
+        <td class="rate">
+          ${percentual(faixa.aliquota)}
+        </td>
+
+        <td class="money">
+          ${moeda(faixa.deducao)}
+        </td>
+
+      `;
+
+      tbody.appendChild(tr);
+
+    }
+  );
+
 }
 
 
+/* ============================================================
+   MEMÓRIA DE CÁLCULO
+   ============================================================ */
 
-function aplicarFiltro() {
+function montarMemoria(
+  competencia,
+  tabelaINSS,
+  tabelaIRRF,
+  inss,
+  irrf,
+  total
+) {
 
-    if (
-        filtroAtual === 'Todos'
-    ) {
+  const itens = [
 
-        playlistFiltrada =
-            playlist.slice();
+    [
+      "Competência",
+      dataBR(competencia)
+    ],
+
+    [
+      "Tabela INSS",
+      tabelaINSS.nome
+    ],
+
+    [
+      "Tabela IRRF",
+      tabelaIRRF.nome
+    ],
+
+    [
+      "Base INSS informada",
+      moeda(inss.baseInformada)
+    ],
+
+    [
+      "Base INSS considerada",
+      moeda(inss.base)
+    ],
+
+    [
+      "Teto INSS",
+      moeda(inss.teto)
+    ],
+
+    [
+      "INSS calculado",
+      moeda(inss.total)
+    ],
+
+    [
+      "Rendimentos IRRF",
+      moeda(irrf.rendimentos)
+    ],
+
+    [
+      "INSS deduzido no IRRF",
+      moeda(irrf.inss)
+    ],
+
+    [
+      "Dependentes",
+      String(irrf.dependentes)
+    ],
+
+    [
+      "Dedução dependentes",
+      moeda(irrf.deducaoDependentes)
+    ],
+
+    [
+      "Pensão",
+      moeda(irrf.pensao)
+    ],
+
+    [
+      "Deduções legais",
+      moeda(irrf.deducaoLegal)
+    ],
+
+    [
+      "Desconto simplificado",
+      moeda(irrf.descontoSimplificado)
+    ],
+
+    [
+      "Dedução utilizada",
+      moeda(irrf.deducaoUtilizada)
+    ],
+
+    [
+      "Tipo de dedução",
+      irrf.tipoDeducao
+    ],
+
+    [
+      "Base IRRF",
+      moeda(irrf.base)
+    ],
+
+    [
+      "Alíquota IRRF",
+      percentual(irrf.aliquota)
+    ],
+
+    [
+      "Parcela a deduzir",
+      moeda(irrf.parcela)
+    ],
+
+    [
+      "IRRF bruto",
+      moeda(irrf.impostoBruto)
+    ],
+
+    [
+      "Redução",
+      moeda(irrf.reducao)
+    ],
+
+    [
+      "IRRF devido",
+      moeda(irrf.total)
+    ],
+
+    [
+      "TOTAL INSS + IRRF",
+      moeda(total)
+    ]
+
+  ];
+
+  document.getElementById(
+    "memoriaCalculo"
+  ).innerHTML = `
+
+    <div class="memory-grid">
+
+      ${itens.map(item => `
+
+        <div class="memory-item">
+
+          <div class="memory-label">
+            ${escaparHTML(item[0])}
+          </div>
+
+          <div class="memory-value">
+            ${escaparHTML(item[1])}
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+}
+
+
+/* ============================================================
+   LOG DETALHADO
+   ============================================================ */
+
+function gerarLogCalculo(
+  competencia,
+  tabelaINSS,
+  tabelaIRRF,
+  inss,
+  irrf,
+  total
+) {
+
+  const linhas = [];
+
+  const linha = texto =>
+    linhas.push(texto);
+
+  linha("============================================================");
+  linha("           LOG DETALHADO — INSS E IRRF");
+  linha("============================================================");
+
+  linha(
+    `Data/hora: ${new Date().toLocaleString("pt-BR")}`
+  );
+
+  linha(
+    `Competência: ${dataBR(competencia)}`
+  );
+
+  linha("");
+
+  linha("------------------------------------------------------------");
+  linha("1. TABELAS UTILIZADAS");
+  linha("------------------------------------------------------------");
+
+  linha(
+    `INSS: ${tabelaINSS.nome}`
+  );
+
+  linha(
+    `Vigência INSS: ${dataBR(tabelaINSS.inicio)} a ${dataBR(tabelaINSS.fim)}`
+  );
+
+  linha(
+    `IRRF: ${tabelaIRRF.nome}`
+  );
+
+  linha(
+    `Vigência IRRF: ${dataBR(tabelaIRRF.inicio)} a ${dataBR(tabelaIRRF.fim)}`
+  );
+
+  linha("");
+
+  linha("------------------------------------------------------------");
+  linha("2. DADOS INFORMADOS");
+  linha("------------------------------------------------------------");
+
+  linha(
+    `Base INSS informada........: ${moeda(inss.baseInformada)}`
+  );
+
+  linha(
+    `Rendimentos IRRF...........: ${moeda(irrf.rendimentos)}`
+  );
+
+  linha(
+    `Dependentes................: ${irrf.dependentes}`
+  );
+
+  linha(
+    `Pensão alimentícia.........: ${moeda(irrf.pensao)}`
+  );
+
+  linha("");
+
+  linha("------------------------------------------------------------");
+  linha("3. CÁLCULO DO INSS");
+  linha("------------------------------------------------------------");
+
+  linha(
+    `Teto do INSS...............: ${moeda(inss.teto)}`
+  );
+
+  linha(
+    `Base considerada...........: ${moeda(inss.base)}`
+  );
+
+  if (
+    inss.baseInformada > inss.teto
+  ) {
+
+    linha(
+      `A base foi limitada ao teto do INSS.`
+    );
+
+  }
+
+  linha("");
+
+  if (inss.faixas.length === 0) {
+
+    linha(
+      "Nenhuma faixa do INSS foi atingida."
+    );
+
+  } else {
+
+    inss.faixas.forEach(f => {
+
+      linha(
+        `Faixa ${f.faixa}:`
+      );
+
+      linha(
+        `  Base da faixa............: ${moeda(f.valorFaixa)}`
+      );
+
+      linha(
+        `  Alíquota.................: ${percentual(f.aliquota)}`
+      );
+
+      linha(
+        `  Fórmula..................: ${moeda(f.valorFaixa)} × ${percentual(f.aliquota)}`
+      );
+
+      linha(
+        `  Contribuição.............: ${moeda(f.contribuicao)}`
+      );
+
+      linha("");
+
+    });
+
+  }
+
+  linha(
+    `TOTAL INSS.................: ${moeda(inss.total)}`
+  );
+
+  linha("");
+
+  linha("------------------------------------------------------------");
+  linha("4. CÁLCULO DO IRRF");
+  linha("------------------------------------------------------------");
+
+  linha(
+    `Rendimentos tributáveis....: ${moeda(irrf.rendimentos)}`
+  );
+
+  linha(
+    `(-) INSS...................: ${moeda(irrf.inss)}`
+  );
+
+  linha(
+    `(-) Dependentes.............: ${irrf.dependentes} × ${moeda(irrf.valorDependente)} = ${moeda(irrf.deducaoDependentes)}`
+  );
+
+  linha(
+    `(-) Pensão..................: ${moeda(irrf.pensao)}`
+  );
+
+  linha("");
+
+  linha(
+    `Deduções legais.............: ${moeda(irrf.deducaoLegal)}`
+  );
+
+  linha(
+    `Desconto simplificado.......: ${moeda(irrf.descontoSimplificado)}`
+  );
+
+  linha(
+    `Dedução utilizada...........: ${moeda(irrf.deducaoUtilizada)}`
+  );
+
+  linha(
+    `Critério.....................: ${irrf.tipoDeducao}`
+  );
+
+  linha("");
+
+  linha(
+    `Base IRRF....................: ${moeda(irrf.base)}`
+  );
+
+  linha(
+    `Fórmula: ${moeda(irrf.rendimentos)} - ${moeda(irrf.deducaoUtilizada)} = ${moeda(irrf.base)}`
+  );
+
+  linha("");
+
+  linha(
+    `Faixa IRRF...................: ${
+      irrf.faixa
+        ? moeda(irrf.faixa.de) +
+          " até " +
+          (
+            irrf.faixa.ate === Infinity
+              ? "acima"
+              : moeda(irrf.faixa.ate)
+          )
+        : "Não identificada"
+    }`
+  );
+
+  linha(
+    `Alíquota......................: ${percentual(irrf.aliquota)}`
+  );
+
+  linha(
+    `Parcela a deduzir............: ${moeda(irrf.parcela)}`
+  );
+
+  linha("");
+
+  linha(
+    `IRRF bruto....................: ${moeda(irrf.impostoBruto)}`
+  );
+
+  linha(
+    `Fórmula: ${moeda(irrf.base)} × ${percentual(irrf.aliquota)} - ${moeda(irrf.parcela)} = ${moeda(irrf.impostoBruto)}`
+  );
+
+  linha("");
+
+  if (irrf.reducao > 0) {
+
+    linha(
+      `Redução aplicada.............: ${moeda(irrf.reducao)}`
+    );
+
+    if (irrf.rendimentos <= 5000) {
+
+      linha(
+        `Critério: redução limitada ao valor máximo da tabela para rendimentos até R$ 5.000,00.`
+      );
 
     } else {
 
-        const filtro =
-            normalizarTipo(
-                filtroAtual
-            );
+      linha(
+        `Critério: 978,62 - (0,133145 × rendimentos).`
+      );
 
-
-        playlistFiltrada =
-            playlist.filter(
-                function(item) {
-
-                    return (
-                        normalizarTipo(
-                            item.tipo
-                        ) === filtro
-                    );
-                }
-            );
     }
 
+  } else {
 
-    renderizarPlaylist();
-}
-
-
-
-/* =========================================================
-   COMPARTILHAR
-   ========================================================= */
-
-async function compartilharAudio(index) {
-
-    if (
-        index < 0 ||
-        index >= playlist.length
-    ) {
-
-        return;
-    }
-
-
-    const item =
-        playlist[index];
-
-
-    if (!item) {
-
-        return;
-    }
-
-
-    const titulo =
-        item.titulo ||
-        'Áudio da Rádio Onda Livre';
-
-
-    const url =
-        item.url ||
-        window.location.href;
-
-
-    const texto =
-        '🎧 ' +
-        titulo +
-        '\n\nOuça na Rádio Onda Livre';
-
-
-    if (
-        navigator.share
-    ) {
-
-        try {
-
-            await navigator.share({
-
-                title:
-                    titulo,
-
-                text:
-                    texto,
-
-                url:
-                    url
-            });
-
-
-            registrarEvento(
-                'COMPARTILHAR',
-                item.id,
-                titulo
-            );
-
-
-            return;
-
-        } catch (erro) {
-
-            if (
-                erro &&
-                erro.name ===
-                'AbortError'
-            ) {
-
-                return;
-            }
-        }
-    }
-
-
-    try {
-
-        await navigator.clipboard.writeText(
-            url
-        );
-
-
-        registrarEvento(
-            'COMPARTILHAR',
-            item.id,
-            titulo
-        );
-
-
-        alert(
-            'Link do áudio copiado!\n\n' +
-            'Agora você pode colar e enviar pelo WhatsApp ou outra rede.'
-        );
-
-    } catch (erro) {
-
-        const campo =
-            document.createElement(
-                'textarea'
-            );
-
-
-        campo.value =
-            url;
-
-
-        campo.style.position =
-            'fixed';
-
-        campo.style.left =
-            '-9999px';
-
-
-        document.body.appendChild(
-            campo
-        );
-
-
-        campo.select();
-
-
-        try {
-
-            document.execCommand(
-                'copy'
-            );
-
-
-            registrarEvento(
-                'COMPARTILHAR',
-                item.id,
-                titulo
-            );
-
-
-            alert(
-                'Link do áudio copiado!'
-            );
-
-        } catch (erroCopia) {
-
-            alert(
-                'Não foi possível copiar o link.\n\n' +
-                url
-            );
-
-        } finally {
-
-            document.body.removeChild(
-                campo
-            );
-        }
-    }
-}
-
-
-
-/* =========================================================
-   RENDERIZAR PLAYLIST
-   ========================================================= */
-
-function renderizarPlaylist() {
-
-    const container =
-        document.getElementById(
-            'playlist'
-        );
-
-
-    if (
-        !playlistFiltrada.length
-    ) {
-
-        container.innerHTML =
-            '<div class="message">' +
-            'Nenhum áudio encontrado.' +
-            '</div>';
-
-
-        return;
-    }
-
-
-    container.innerHTML =
-        playlistFiltrada
-            .map(
-                function(item) {
-
-                    const originalIndex =
-                        playlist.indexOf(
-                            item
-                        );
-
-
-                    const tipo =
-                        normalizarTipo(
-                            item.tipo
-                        );
-
-
-                    let icone =
-                        '🎵';
-
-
-                    if (
-                        tipo === 'oracao'
-                    ) {
-
-                        icone =
-                            '🙏';
-                    }
-
-
-                    if (
-                        tipo === 'mensagem'
-                    ) {
-
-                        icone =
-                            '💬';
-                    }
-
-
-                    const ativo =
-                        originalIndex ===
-                        indiceAtual
-                            ? 'active'
-                            : '';
-
-
-                    return `
-
-                    <div
-                        class="audio-item ${ativo}"
-                        onclick="tocar(${originalIndex})"
-                    >
-
-                        <div class="audio-icon">
-
-                            ${icone}
-
-                        </div>
-
-
-                        <div class="audio-info">
-
-                            <div class="audio-title">
-
-                                ${escaparHtml(
-                                    item.titulo
-                                )}
-
-                            </div>
-
-
-                            <div class="audio-artist">
-
-                                ${escaparHtml(
-                                    item.artista || ''
-                                )}
-
-                            </div>
-
-
-                            <div class="audio-type">
-
-                                ${escaparHtml(
-                                    item.tipo || ''
-                                )}
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="share-btn"
-                            title="Compartilhar áudio"
-                            aria-label="Compartilhar áudio"
-                            onclick="event.stopPropagation(); compartilharAudio(${originalIndex})"
-                        >
-                            ↗
-                        </button>
-
-                    </div>
-
-                    `;
-                }
-            )
-            .join('');
-}
-
-
-
-/* =========================================================
-   PRIMEIRO ÁUDIO
-   ========================================================= */
-
-function tocarPrimeiroAudio() {
-
-    if (
-        !playlist ||
-        !playlist.length
-    ) {
-
-        return;
-    }
-
-
-    if (
-        indiceAtual >= 0
-    ) {
-
-        return;
-    }
-
-
-    indiceAtual =
-        0;
-
-
-    const item =
-        playlist[0];
-
-
-    const player =
-        document.getElementById(
-            'audioPlayer'
-        );
-
-
-    atualizarInformacoesAtuais(
-        item
+    linha(
+      "Redução aplicada.............: R$ 0,00"
     );
 
+  }
 
-    const hint =
-        document.getElementById(
-            'playHint'
-        );
+  linha("");
 
+  linha(
+    `IRRF DEVIDO..................: ${moeda(irrf.total)}`
+  );
 
-    if (hint) {
+  linha("");
 
-        hint.style.display =
-            'none';
-    }
+  linha("------------------------------------------------------------");
+  linha("5. RESULTADO FINAL");
+  linha("------------------------------------------------------------");
 
+  linha(
+    `INSS........................: ${moeda(inss.total)}`
+  );
 
-    player.src =
-        item.url;
+  linha(
+    `IRRF........................: ${moeda(irrf.total)}`
+  );
 
+  linha(
+    `TOTAL INSS + IRRF...........: ${moeda(total)}`
+  );
 
-    player.load();
+  linha("");
 
+  linha("============================================================");
+  linha("                 FIM DO CÁLCULO");
+  linha("============================================================");
 
-    atualizarItemAtivo();
+  document.getElementById(
+    "logCalculo"
+  ).textContent =
+    linhas.join("\n");
 
-
-    atualizarStatus(
-        'Iniciando primeiro áudio...'
-    );
-
-
-    const tentativa =
-        player.play();
-
-
-    if (
-        tentativa !== undefined
-    ) {
-
-        tentativa
-            .then(
-                function() {
-
-                    atualizarStatus(
-                        'Reproduzindo'
-                    );
-
-                }
-            )
-            .catch(
-                function() {
-
-                    atualizarStatus(
-                        'Clique no ▶ para iniciar'
-                    );
-                }
-            );
-    }
 }
 
 
+/* ============================================================
+   COPIAR LOG
+   ============================================================ */
 
-/* =========================================================
-   TOCAR
-   ========================================================= */
+async function copiarLog() {
 
-function tocar(index) {
-
-    if (
-        index < 0 ||
-        index >= playlist.length
-    ) {
-
-        return;
-    }
-
-
-    const item =
-        playlist[index];
-
-
-    indiceAtual =
-        index;
-
-
-    const player =
-        document.getElementById(
-            'audioPlayer'
-        );
-
-
-    atualizarInformacoesAtuais(
-        item
-    );
-
-
-    const hint =
-        document.getElementById(
-            'playHint'
-        );
-
-
-    if (hint) {
-
-        hint.style.display =
-            'none';
-    }
-
-
-    player.pause();
-
-
-    ultimoEventoPlay =
-        '';
-
-
-    player.src =
-        item.url;
-
-
-    player.load();
-
-
-    atualizarStatus(
-        'Carregando áudio...'
-    );
-
-
-    const tentativa =
-        player.play();
-
-
-    if (
-        tentativa !== undefined
-    ) {
-
-        tentativa
-            .then(
-                function() {
-
-                    atualizarStatus(
-                        'Reproduzindo'
-                    );
-
-                }
-            )
-            .catch(
-                function() {
-
-                    atualizarStatus(
-                        'Clique no ▶ para iniciar'
-                    );
-                }
-            );
-    }
-
-
-    atualizarItemAtivo();
-}
-
-
-
-/* =========================================================
-   ATUALIZAR INFORMAÇÕES
-   ========================================================= */
-
-function atualizarInformacoesAtuais(
-    item
-) {
-
+  const log =
     document.getElementById(
-        'currentTitle'
-    ).textContent =
-        item.titulo ||
-        'Áudio sem título';
+      "logCalculo"
+    ).textContent;
 
+  if (
+    !log ||
+    log.includes("Aguardando cálculo")
+  ) {
 
-    document.getElementById(
-        'currentArtist'
-    ).textContent =
-        item.artista || '';
+    alert(
+      "Não existe um log de cálculo para copiar."
+    );
 
+    return;
+  }
 
-    document.getElementById(
-        'currentType'
-    ).textContent =
-        item.tipo ||
-        'ÁUDIO';
+  try {
+
+    await navigator.clipboard.writeText(log);
+
+    alert(
+      "Log copiado para a área de transferência."
+    );
+
+  } catch (erro) {
+
+    const textarea =
+      document.createElement("textarea");
+
+    textarea.value = log;
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    document.execCommand("copy");
+
+    textarea.remove();
+
+    alert(
+      "Log copiado para a área de transferência."
+    );
+
+  }
+
 }
 
 
+/* ============================================================
+   LIMPAR LOG
+   ============================================================ */
 
-/* =========================================================
-   PLAY / PAUSE
-   ========================================================= */
+function limparLog() {
 
-function alternarPlay() {
+  document.getElementById(
+    "logCalculo"
+  ).innerHTML =
+    '<span class="log-empty">Aguardando cálculo...</span>';
 
-    const player =
+}
+
+
+/* ============================================================
+   ATUALIZAR TABELAS VIGENTES
+   ============================================================ */
+
+function atualizarTabelasVigentes() {
+
+  const competencia =
+    document.getElementById(
+      "competencia"
+    ).value || hojeISO();
+
+  const tabelaINSS =
+    obterTabelaVigente(
+      "INSS",
+      competencia
+    );
+
+  const tabelaIRRF =
+    obterTabelaVigente(
+      "IRRF",
+      competencia
+    );
+
+  if (!tabelaINSS || !tabelaIRRF) {
+
+    alert(
+      "Não existem tabelas vigentes para a competência informada."
+    );
+
+    return;
+  }
+
+  document.getElementById(
+    "statusVigencia"
+  ).textContent =
+    `${tabelaINSS.nome} • ${tabelaIRRF.nome}`;
+
+  document.getElementById(
+    "vigenciaResumo"
+  ).textContent =
+    `${dataBR(tabelaINSS.inicio)} a ${dataBR(tabelaINSS.fim)}`;
+
+  montarTabelaINSS(
+    tabelaINSS,
+    {
+      base: 0,
+      total: 0
+    }
+  );
+
+  montarTabelaIRRF(
+    tabelaIRRF,
+    {
+      base: 0
+    }
+  );
+
+  const temDados =
+    numero(
+      document.getElementById("baseINSS").value
+    ) > 0 ||
+    numero(
+      document.getElementById("rendimentosIRRF").value
+    ) > 0;
+
+  if (temDados) {
+    calcular();
+  }
+
+}
+
+
+/* ============================================================
+   GERENCIADOR DE TABELAS
+   ============================================================ */
+
+function abrirGerenciador() {
+
+  document.getElementById(
+    "modalTabelas"
+  ).classList.add("open");
+
+  selecionarTipoTabela(tipoTabelaAtual);
+}
+
+function fecharGerenciador() {
+
+  document.getElementById(
+    "modalTabelas"
+  ).classList.remove("open");
+
+}
+
+function selecionarTipoTabela(tipo) {
+
+  tipoTabelaAtual = tipo;
+
+  document.getElementById(
+    "tabINSS"
+  ).classList.toggle(
+    "active",
+    tipo === "INSS"
+  );
+
+  document.getElementById(
+    "tabIRRF"
+  ).classList.toggle(
+    "active",
+    tipo === "IRRF"
+  );
+
+  document.getElementById(
+    "parametrosIRRF"
+  ).style.display =
+    tipo === "IRRF"
+      ? "block"
+      : "none";
+
+  carregarListaTabelas();
+
+}
+
+function carregarListaTabelas() {
+
+  const select =
+    document.getElementById(
+      "tabelaSelecionada"
+    );
+
+  select.innerHTML = "";
+
+  const lista =
+    tabelas[tipoTabelaAtual] || [];
+
+  if (!lista.length) {
+
+    const option =
+      document.createElement("option");
+
+    option.value = "";
+
+    option.textContent =
+      "Nenhuma tabela cadastrada";
+
+    select.appendChild(option);
+
+    limparEditorTabela();
+
+    return;
+  }
+
+  lista.forEach(tabela => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = tabela.id;
+
+    option.textContent =
+      `${tabela.nome} — ${dataBR(tabela.inicio)}`;
+
+    select.appendChild(option);
+
+  });
+
+  carregarTabelaSelecionada();
+
+}
+
+function carregarTabelaSelecionada() {
+
+  const id =
+    document.getElementById(
+      "tabelaSelecionada"
+    ).value;
+
+  const tabela =
+    (tabelas[tipoTabelaAtual] || [])
+      .find(t => t.id === id);
+
+  if (!tabela) {
+
+    limparEditorTabela();
+
+    return;
+  }
+
+  document.getElementById(
+    "nomeTabela"
+  ).value =
+    tabela.nome || "";
+
+  document.getElementById(
+    "inicioVigencia"
+  ).value =
+    tabela.inicio || "";
+
+  document.getElementById(
+    "fimVigencia"
+  ).value =
+    tabela.fim || "";
+
+  document.getElementById(
+    "valorDependente"
+  ).value =
+    tabela.dependente ?? "";
+
+  document.getElementById(
+    "valorSimplificado"
+  ).value =
+    tabela.simplificado ?? "";
+
+  document.getElementById(
+    "reducaoAte5000"
+  ).value =
+    tabela.reducaoAte5000 ?? "";
+
+  document.getElementById(
+    "reducaoInicio"
+  ).value =
+    tabela.reducaoInicio ?? "";
+
+  document.getElementById(
+    "reducaoFim"
+  ).value =
+    tabela.reducaoFim ?? "";
+
+  document.getElementById(
+    "reducaoConstante"
+  ).value =
+    tabela.reducaoConstante ?? "";
+
+  montarEditorFaixas(
+    tabela.faixas || []
+  );
+
+}
+
+function limparEditorTabela() {
+
+  document.getElementById(
+    "nomeTabela"
+  ).value = "";
+
+  document.getElementById(
+    "inicioVigencia"
+  ).value = "";
+
+  document.getElementById(
+    "fimVigencia"
+  ).value = "";
+
+  document.getElementById(
+    "valorDependente"
+  ).value = "";
+
+  document.getElementById(
+    "valorSimplificado"
+  ).value = "";
+
+  document.getElementById(
+    "reducaoAte5000"
+  ).value = "";
+
+  document.getElementById(
+    "reducaoInicio"
+  ).value = "";
+
+  document.getElementById(
+    "reducaoFim"
+  ).value = "";
+
+  document.getElementById(
+    "reducaoConstante"
+  ).value = "";
+
+  montarEditorFaixas([]);
+
+}
+
+
+/* ============================================================
+   EDITOR DE FAIXAS
+   ============================================================ */
+
+function montarEditorFaixas(faixas) {
+
+  const container =
+    document.getElementById(
+      "faixasEditor"
+    );
+
+  container.innerHTML = "";
+
+  faixas.forEach(
+    faixa => adicionarFaixa(faixa)
+  );
+
+}
+
+function adicionarFaixa(faixa = null) {
+
+  const container =
+    document.getElementById(
+      "faixasEditor"
+    );
+
+  const row =
+    document.createElement("div");
+
+  row.className =
+    "faixa-row";
+
+  const ate =
+    faixa && faixa.ate === Infinity
+      ? ""
+      : faixa
+        ? faixa.ate
+        : "";
+
+  row.innerHTML = `
+
+    <div class="field">
+
+      <label>De</label>
+
+      <input
+        type="number"
+        class="faixa-de"
+        step="0.01"
+        min="0"
+        value="${faixa ? faixa.de : ""}">
+    </div>
+
+    <div class="field">
+
+      <label>Até</label>
+
+      <input
+        type="number"
+        class="faixa-ate"
+        step="0.01"
+        min="0"
+        placeholder="Vazio = sem limite"
+        value="${ate}">
+    </div>
+
+    <div class="field">
+
+      <label>Alíquota (%)</label>
+
+      <input
+        type="number"
+        class="faixa-aliquota"
+        step="0.01"
+        min="0"
+        value="${faixa ? faixa.aliquota : ""}">
+    </div>
+
+    <div class="field">
+
+      <label>
+        ${
+          tipoTabelaAtual === "IRRF"
+            ? "Parcela a deduzir"
+            : "Observação"
+        }
+      </label>
+
+      <input
+        type="number"
+        class="${
+          tipoTabelaAtual === "IRRF"
+            ? "faixa-deducao"
+            : "faixa-deducao"
+        }"
+        step="0.01"
+        min="0"
+        value="${
+          faixa && faixa.deducao !== undefined
+            ? faixa.deducao
+            : 0
+        }"
+        ${
+          tipoTabelaAtual === "INSS"
+            ? "disabled"
+            : ""
+        }>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-small btn-danger remove-faixa"
+      onclick="this.parentElement.remove()">
+      🗑️ Remover
+    </button>
+
+  `;
+
+  container.appendChild(row);
+
+}
+
+function obterFaixasEditor() {
+
+  const rows =
+    document.querySelectorAll(
+      "#faixasEditor .faixa-row"
+    );
+
+  const faixas = [];
+
+  rows.forEach(row => {
+
+    const de =
+      numero(
+        row.querySelector(
+          ".faixa-de"
+        ).value
+      );
+
+    const ateInput =
+      row.querySelector(
+        ".faixa-ate"
+      ).value;
+
+    const ate =
+      ateInput === ""
+        ? Infinity
+        : numero(ateInput);
+
+    const aliquota =
+      numero(
+        row.querySelector(
+          ".faixa-aliquota"
+        ).value
+      );
+
+    const deducao =
+      numero(
+        row.querySelector(
+          ".faixa-deducao"
+        ).value
+      );
+
+    faixas.push({
+
+      de,
+
+      ate,
+
+      aliquota,
+
+      ...(tipoTabelaAtual === "IRRF"
+        ? { deducao }
+        : {})
+
+    });
+
+  });
+
+  return faixas;
+
+}
+
+
+/* ============================================================
+   OBJETO DA TABELA
+   ============================================================ */
+
+function coletarTabelaEditor() {
+
+  const nome =
+    document.getElementById(
+      "nomeTabela"
+    ).value.trim();
+
+  const inicio =
+    document.getElementById(
+      "inicioVigencia"
+    ).value;
+
+  const fim =
+    document.getElementById(
+      "fimVigencia"
+    ).value;
+
+  if (!nome) {
+    throw new Error(
+      "Informe o nome da tabela."
+    );
+  }
+
+  if (!inicio) {
+    throw new Error(
+      "Informe o início da vigência."
+    );
+  }
+
+  if (!fim) {
+    throw new Error(
+      "Informe o fim da vigência."
+    );
+  }
+
+  if (inicio > fim) {
+    throw new Error(
+      "O início da vigência não pode ser maior que o fim."
+    );
+  }
+
+  const faixas =
+    obterFaixasEditor();
+
+  if (!faixas.length) {
+    throw new Error(
+      "Informe pelo menos uma faixa."
+    );
+  }
+
+  faixas.sort(
+    (a, b) => a.de - b.de
+  );
+
+  const obj = {
+
+    id:
+      "tbl_" +
+      Date.now() +
+      "_" +
+      Math.random()
+        .toString(36)
+        .substring(2, 8),
+
+    nome,
+
+    inicio,
+
+    fim,
+
+    faixas
+
+  };
+
+  if (tipoTabelaAtual === "INSS") {
+
+    obj.teto =
+      faixas.reduce(
+        (maior, faixa) => {
+
+          if (
+            faixa.ate !== Infinity &&
+            faixa.ate > maior
+          ) {
+
+            return faixa.ate;
+          }
+
+          return maior;
+
+        },
+        0
+      );
+
+  } else {
+
+    obj.dependente =
+      numero(
         document.getElementById(
-            'audioPlayer'
-        );
-
-
-    if (!player.src) {
-
-        if (playlist.length) {
-
-            tocar(
-                indiceAtual >= 0
-                    ? indiceAtual
-                    : 0
-            );
-        }
-
-        return;
-    }
-
-
-    if (player.paused) {
-
-        player.play();
-
-    } else {
-
-        player.pause();
-    }
-}
-
-
-
-/* =========================================================
-   REGISTRAR PLAY
-   ========================================================= */
-
-function registrarPlayAtual() {
-
-    if (
-        indiceAtual < 0 ||
-        !playlist[indiceAtual]
-    ) {
-
-        return;
-    }
-
-
-    const item =
-        playlist[
-            indiceAtual
-        ];
-
-
-    const chave =
-        String(
-            item.id
-        );
-
-
-    if (
-        ultimoEventoPlay ===
-        chave
-    ) {
-
-        return;
-    }
-
-
-    ultimoEventoPlay =
-        chave;
-
-
-    registrarEvento(
-        'PLAY',
-        item.id,
-        item.titulo
-    );
-
-
-    iniciarHeartbeat();
-}
-
-
-
-/* =========================================================
-   HEARTBEAT
-   ========================================================= */
-
-function iniciarHeartbeat() {
-
-    pararHeartbeat();
-
-
-    heartbeatTimer =
-        setInterval(
-            function() {
-
-                const player =
-                    document.getElementById(
-                        'audioPlayer'
-                    );
-
-
-                if (
-                    !player.paused &&
-                    indiceAtual >= 0 &&
-                    playlist[indiceAtual]
-                ) {
-
-                    const item =
-                        playlist[
-                            indiceAtual
-                        ];
-
-
-                    registrarEvento(
-                        'HEARTBEAT',
-                        item.id,
-                        item.titulo
-                    );
-                }
-
-            },
-            60000
-        );
-}
-
-
-
-function pararHeartbeat() {
-
-    if (
-        heartbeatTimer
-    ) {
-
-        clearInterval(
-            heartbeatTimer
-        );
-
-
-        heartbeatTimer =
-            null;
-    }
-}
-
-
-
-/* =========================================================
-   ANTERIOR
-   ========================================================= */
-
-function anterior() {
-
-    if (
-        !playlist.length
-    ) {
-
-        return;
-    }
-
-
-    let novoIndice =
-        indiceAtual - 1;
-
-
-    if (
-        novoIndice < 0
-    ) {
-
-        novoIndice =
-            playlist.length - 1;
-    }
-
-
-    tocar(
-        novoIndice
-    );
-}
-
-
-
-/* =========================================================
-   PRÓXIMO
-   ========================================================= */
-
-function proximo() {
-
-    if (
-        !playlist.length
-    ) {
-
-        return;
-    }
-
-
-    let novoIndice =
-        indiceAtual + 1;
-
-
-    if (
-        novoIndice >=
-        playlist.length
-    ) {
-
-        novoIndice =
-            0;
-    }
-
-
-    tocar(
-        novoIndice
-    );
-}
-
-
-
-/* =========================================================
-   ITEM ATIVO
-   ========================================================= */
-
-function atualizarItemAtivo() {
-
-    renderizarPlaylist();
-}
-
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-function atualizarStatus(
-    texto
-) {
-
-    const elemento =
+          "valorDependente"
+        ).value
+      );
+
+    obj.simplificado =
+      numero(
         document.getElementById(
-            'statusText'
-        );
+          "valorSimplificado"
+        ).value
+      );
 
+    obj.reducaoAte5000 =
+      numero(
+        document.getElementById(
+          "reducaoAte5000"
+        ).value
+      );
 
-    if (elemento) {
+    obj.reducaoInicio =
+      numero(
+        document.getElementById(
+          "reducaoInicio"
+        ).value
+      );
 
-        elemento.textContent =
-            texto;
-    }
+    obj.reducaoFim =
+      numero(
+        document.getElementById(
+          "reducaoFim"
+        ).value
+      );
+
+    obj.reducaoConstante =
+      numero(
+        document.getElementById(
+          "reducaoConstante"
+        ).value
+      );
+
+  }
+
+  return obj;
+
 }
 
 
+/* ============================================================
+   SALVAR NOVA
+   ============================================================ */
 
-/* =========================================================
-   MENSAGEM
-   ========================================================= */
+function salvarTabela() {
 
-function mostrarMensagem(
-    mensagem
-) {
+  try {
 
-    document.getElementById(
-        'playlist'
-    ).innerHTML =
+    const tabela =
+      coletarTabelaEditor();
 
-        '<div class="message">' +
-        escaparHtml(
-            mensagem
-        ) +
-        '</div>';
-}
-
-
-
-/* =========================================================
-   ESCAPAR HTML
-   ========================================================= */
-
-function escaparHtml(
-    texto
-) {
-
-    return String(
-        texto || ''
-    )
-        .replace(
-            /&/g,
-            '&amp;'
-        )
-        .replace(
-            /</g,
-            '&lt;'
-        )
-        .replace(
-            />/g,
-            '&gt;'
-        )
-        .replace(
-            /"/g,
-            '&quot;'
-        )
-        .replace(
-            /'/g,
-            '&#039;'
-        );
-}
-
-
-
-/* =========================================================
-   PLAYER
-   ========================================================= */
-
-const player =
-    document.getElementById(
-        'audioPlayer'
+    tabelas[tipoTabelaAtual].push(
+      tabela
     );
 
+    salvarTabelasStorage();
 
-/* PLAY */
+    carregarListaTabelas();
 
-player.addEventListener(
-    'play',
-    function() {
+    alert(
+      "Tabela salva com sucesso."
+    );
 
-        atualizarStatus(
-            'Reproduzindo'
+  } catch (erro) {
+
+    alert(
+      erro.message
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   ATUALIZAR EXISTENTE
+   ============================================================ */
+
+function atualizarTabelaExistente() {
+
+  try {
+
+    const id =
+      document.getElementById(
+        "tabelaSelecionada"
+      ).value;
+
+    if (!id) {
+
+      throw new Error(
+        "Selecione uma tabela."
+      );
+
+    }
+
+    const nova =
+      coletarTabelaEditor();
+
+    const indice =
+      tabelas[tipoTabelaAtual]
+        .findIndex(
+          t => t.id === id
         );
 
+    if (indice < 0) {
 
-        document
-            .getElementById(
-                'equalizer'
-            )
-            .classList.add(
-                'playing'
-            );
+      throw new Error(
+        "Tabela não encontrada."
+      );
 
-
-        document
-            .getElementById(
-                'mainPlayButton'
-            )
-            .textContent =
-            '❚❚';
-
-
-        registrarPlayAtual();
     }
-);
+
+    nova.id = id;
+
+    tabelas[tipoTabelaAtual][indice] =
+      nova;
+
+    salvarTabelasStorage();
+
+    carregarListaTabelas();
+
+    alert(
+      "Tabela atualizada com sucesso."
+    );
+
+  } catch (erro) {
+
+    alert(
+      erro.message
+    );
+
+  }
+
+}
 
 
-/* PAUSE */
+/* ============================================================
+   EXCLUIR
+   ============================================================ */
 
-player.addEventListener(
-    'pause',
-    function() {
+function excluirTabela() {
 
-        document
-            .getElementById(
-                'equalizer'
-            )
-            .classList.remove(
-                'playing'
-            );
+  const id =
+    document.getElementById(
+      "tabelaSelecionada"
+    ).value;
 
+  if (!id) {
 
-        document
-            .getElementById(
-                'mainPlayButton'
-            )
-            .textContent =
-            '▶';
+    alert(
+      "Selecione uma tabela."
+    );
 
+    return;
+  }
 
-        if (
-            player.currentTime > 0 &&
-            !player.ended
-        ) {
+  const tabela =
+    tabelas[tipoTabelaAtual]
+      .find(t => t.id === id);
 
-            atualizarStatus(
-                'Pausado'
-            );
-        }
+  if (!tabela) {
+    return;
+  }
 
+  const confirmar =
+    confirm(
+      `Deseja realmente excluir a tabela "${tabela.nome}"?`
+    );
 
-        pararHeartbeat();
+  if (!confirmar) {
+    return;
+  }
 
+  tabelas[tipoTabelaAtual] =
+    tabelas[tipoTabelaAtual]
+      .filter(t => t.id !== id);
 
-        if (
-            indiceAtual >= 0 &&
-            playlist[indiceAtual]
-        ) {
+  salvarTabelasStorage();
 
-            const item =
-                playlist[
-                    indiceAtual
-                ];
+  carregarListaTabelas();
 
+  alert(
+    "Tabela excluída."
+  );
 
-            registrarEvento(
-                'PAUSE',
-                item.id,
-                item.titulo
-            );
-        }
-    }
-);
+}
 
 
-/* FIM */
+/* ============================================================
+   RESTAURAR 2026
+   ============================================================ */
 
-player.addEventListener(
-    'ended',
-    function() {
+function restaurarTabela2026() {
 
-        atualizarStatus(
-            'Próximo áudio'
-        );
+  const padrao =
+    tabelasPadrao();
 
+  const tipo =
+    tipoTabelaAtual;
 
-        pararHeartbeat();
+  const tabelaPadrao =
+    padrao[tipo][0];
 
+  const confirmar =
+    confirm(
+      `Deseja restaurar a tabela padrão ${tabelaPadrao.nome}?`
+    );
 
-        if (
-            indiceAtual >= 0 &&
-            playlist[indiceAtual]
-        ) {
+  if (!confirmar) {
+    return;
+  }
 
-            const item =
-                playlist[
-                    indiceAtual
-                ];
+  const existente =
+    tabelas[tipo]
+      .findIndex(
+        t => t.id === tabelaPadrao.id
+      );
 
+  if (existente >= 0) {
 
-            registrarEvento(
-                'FIM',
-                item.id,
-                item.titulo
-            );
-        }
+    tabelas[tipo][existente] =
+      tabelaPadrao;
 
+  } else {
 
-        proximo();
-    }
-);
+    tabelas[tipo].push(
+      tabelaPadrao
+    );
 
+  }
 
-/* ÁUDIO PRONTO */
+  salvarTabelasStorage();
 
-player.addEventListener(
-    'canplay',
-    function() {
+  carregarListaTabelas();
 
-        if (
-            player.paused
-        ) {
+  alert(
+    "Tabela padrão restaurada com sucesso."
+  );
 
-            atualizarStatus(
-                'Áudio pronto'
-            );
-        }
-    }
-);
+}
 
 
-/* ERRO */
+/* ============================================================
+   EXEMPLO
+   ============================================================ */
 
-player.addEventListener(
-    'error',
-    function() {
+function carregarExemplo() {
 
-        atualizarStatus(
-            'Não foi possível reproduzir'
-        );
+  document.getElementById(
+    "competencia"
+  ).value = hojeISO();
+
+  document.getElementById(
+    "baseINSS"
+  ).value = "6000.00";
+
+  document.getElementById(
+    "rendimentosIRRF"
+  ).value = "6000.00";
+
+  document.getElementById(
+    "dependentes"
+  ).value = "1";
+
+  document.getElementById(
+    "pensao"
+  ).value = "0.00";
+
+  calcular();
+
+}
 
 
-        pararHeartbeat();
-    }
-);
+/* ============================================================
+   LIMPAR
+   ============================================================ */
+
+function limpar() {
+
+  document.getElementById(
+    "competencia"
+  ).value = hojeISO();
+
+  document.getElementById(
+    "baseINSS"
+  ).value = "";
+
+  document.getElementById(
+    "rendimentosIRRF"
+  ).value = "";
+
+  document.getElementById(
+    "dependentes"
+  ).value = "0";
+
+  document.getElementById(
+    "pensao"
+  ).value = "0";
+
+  document.getElementById(
+    "baseINSSExibida"
+  ).value = "R$ 0,00";
+
+  document.getElementById(
+    "baseIRRFExibida"
+  ).value = "R$ 0,00";
+
+  document.getElementById(
+    "resultadoINSS"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "resultadoIRRF"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "resultadoTotal"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "resultadoBaseIRRF"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "resumoBaseINSS"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "resumoBaseLimitada"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "resumoRendimentos"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "resumoTotal"
+  ).textContent = "R$ 0,00";
+
+  document.getElementById(
+    "statusVigencia"
+  ).textContent =
+    "Aguardando cálculo";
+
+  document.getElementById(
+    "vigenciaResumo"
+  ).textContent =
+    "Aguardando cálculo";
+
+  document.getElementById(
+    "detalheINSS"
+  ).innerHTML = `
+    <div class="calc-lines">
+      <div class="calc-line">
+        <div class="label">Aguardando cálculo</div>
+        <div class="value">R$ 0,00</div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById(
+    "detalheIRRF"
+  ).innerHTML = `
+    <div class="calc-lines">
+      <div class="calc-line">
+        <div class="label">Aguardando cálculo</div>
+        <div class="value">R$ 0,00</div>
+      </div>
+    </div>
+  `;
+
+  document.querySelector(
+    "#tabelaINSS tbody"
+  ).innerHTML = "";
+
+  document.querySelector(
+    "#tabelaIRRF tbody"
+  ).innerHTML = "";
+
+  document.getElementById(
+    "totalTabelaINSS"
+  ).textContent =
+    "R$ 0,00";
+
+  document.getElementById(
+    "memoriaCalculo"
+  ).innerHTML = `
+    <div class="memory-grid">
+      <div class="memory-item">
+        <div class="memory-label">Status</div>
+        <div class="memory-value">
+          Aguardando cálculo
+        </div>
+      </div>
+    </div>
+  `;
+
+  limparLog();
+
+  resultadoAtual = null;
+
+}
 
 
-
-/* =========================================================
-   INICIALIZAÇÃO
-   ========================================================= */
+/* ============================================================
+   EVENTOS
+   ============================================================ */
 
 document.addEventListener(
-    'DOMContentLoaded',
-    async function() {
+  "DOMContentLoaded",
+  () => {
 
-        if (
-            verificarAcessoAnterior()
-        ) {
+    carregarTabelasStorage();
 
-            acessoRegistrado =
-                true;
+    document.getElementById(
+      "competencia"
+    ).value = hojeISO();
 
-        } else {
+    atualizarTabelasVigentes();
 
-            await obterLocalizacao();
-
-            await registrarAcesso();
-        }
+  }
+);
 
 
-        carregarPlaylist();
+/* ============================================================
+   FECHAR MODAL CLICANDO FORA
+   ============================================================ */
+
+document.getElementById(
+  "modalTabelas"
+).addEventListener(
+  "click",
+  function(event) {
+
+    if (
+      event.target === this
+    ) {
+
+      fecharGerenciador();
 
     }
+
+  }
 );
 
 </script>
 
 </body>
-
 </html>
