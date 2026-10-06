@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Rádio Onda Livre</title>
 
@@ -11,38 +17,58 @@
     content="Rádio Onda Livre — Louvores, oração e mensagens para abençoar sua vida."
   >
 
-  <meta name="theme-color" content="#06152d">
+  <meta
+    name="theme-color"
+    content="#06152d"
+  >
 
   <style>
+
     :root {
+
       --bg: #06152d;
       --bg2: #0a2142;
-      --card: rgba(13, 39, 76, .88);
-      --card-soft: rgba(255, 255, 255, .055);
+
+      --card: rgba(13,39,76,.90);
+
       --primary: #1d73d5;
       --primary2: #4da3ff;
+
       --gold: #d7ae62;
       --gold2: #f1d18b;
+
       --text: #f7f9fc;
       --muted: #aebed3;
+
       --success: #4ade80;
       --danger: #fb7185;
+
       --border: rgba(255,255,255,.10);
-      --shadow: 0 18px 45px rgba(0,0,0,.28);
+
+      --shadow:
+        0 18px 45px rgba(0,0,0,.28);
+
       --radius: 22px;
+
     }
+
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
+
       margin: 0;
+
       min-height: 100vh;
+
       font-family:
         Inter,
         system-ui,
@@ -50,27 +76,57 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+
       color: var(--text);
+
       background:
-        radial-gradient(circle at 15% 10%, rgba(29,115,213,.22), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(215,174,98,.10), transparent 25%),
-        linear-gradient(135deg, #031022 0%, #06152d 48%, #092344 100%);
+
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(29,115,213,.22),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(215,174,98,.10),
+          transparent 25%
+        ),
+
+        linear-gradient(
+          135deg,
+          #031022 0%,
+          #06152d 48%,
+          #092344 100%
+        );
+
     }
+
 
     button,
     input {
       font: inherit;
     }
 
+
     button,
     a {
       -webkit-tap-highlight-color: transparent;
     }
 
+
     .container {
-      width: min(1180px, calc(100% - 32px));
+
+      width:
+        min(
+          1180px,
+          calc(100% - 32px)
+        );
+
       margin: 0 auto;
+
     }
+
 
     /* ============================================================
        HEADER
@@ -80,665 +136,1456 @@
       padding: 28px 0 20px;
     }
 
+
     .header-card {
+
       position: relative;
+
       overflow: hidden;
+
       padding: 28px;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 28px;
+
       background:
+
         linear-gradient(
           135deg,
-          rgba(17, 61, 117, .94),
-          rgba(4, 19, 42, .96)
+          rgba(17,61,117,.94),
+          rgba(4,19,42,.96)
         );
-      box-shadow: var(--shadow);
+
+      box-shadow:
+        var(--shadow);
+
     }
+
 
     .header-card::before {
+
       content: "";
+
       position: absolute;
+
       width: 260px;
       height: 260px;
+
       right: -100px;
       top: -130px;
+
       border-radius: 50%;
-      background: rgba(77,163,255,.14);
-      filter: blur(10px);
+
+      background:
+        rgba(77,163,255,.14);
+
+      filter:
+        blur(10px);
+
     }
+
 
     .header-content {
+
       position: relative;
+
       z-index: 1;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 24px;
+
     }
+
 
     .brand {
+
       display: flex;
+
       align-items: center;
+
       gap: 18px;
+
     }
+
 
     .brand-icon {
+
       width: 72px;
       height: 72px;
+
       flex: 0 0 72px;
+
       display: grid;
+
       place-items: center;
+
       border-radius: 22px;
+
       font-size: 34px;
+
       background:
-        linear-gradient(145deg, #1d73d5, #0d3c78);
+
+        linear-gradient(
+          145deg,
+          #1d73d5,
+          #0d3c78
+        );
+
       box-shadow:
+
         0 12px 30px rgba(0,0,0,.30),
-        inset 0 1px 0 rgba(255,255,255,.15);
+
+        inset 0 1px 0
+        rgba(255,255,255,.15);
+
     }
+
 
     .brand h1 {
+
       margin: 0;
-      font-size: clamp(26px, 4vw, 38px);
+
+      font-size:
+        clamp(
+          26px,
+          4vw,
+          38px
+        );
+
       line-height: 1.1;
+
       letter-spacing: -.8px;
+
     }
+
 
     .brand p {
-      margin: 7px 0 0;
-      color: var(--muted);
+
+      margin:
+        7px 0 0;
+
+      color:
+        var(--muted);
+
       font-size: 15px;
+
     }
+
 
     .header-live {
+
       display: inline-flex;
+
       align-items: center;
+
       gap: 8px;
-      padding: 10px 14px;
-      border: 1px solid rgba(74,222,128,.20);
+
+      padding:
+        10px 14px;
+
+      border:
+        1px solid
+        rgba(74,222,128,.20);
+
       border-radius: 999px;
-      background: rgba(74,222,128,.08);
-      color: #9bf0b7;
+
+      background:
+        rgba(74,222,128,.08);
+
+      color:
+        #9bf0b7;
+
       font-size: 13px;
+
       font-weight: 700;
+
       white-space: nowrap;
+
     }
+
 
     .live-dot {
+
       width: 9px;
       height: 9px;
+
       border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 5px rgba(74,222,128,.10);
-      animation: pulse 1.7s infinite;
+
+      background:
+        var(--success);
+
+      box-shadow:
+        0 0 0 5px
+        rgba(74,222,128,.10);
+
+      animation:
+        pulse 1.7s infinite;
+
     }
 
+
     @keyframes pulse {
+
       0%,100% {
         opacity: 1;
         transform: scale(1);
       }
+
       50% {
         opacity: .55;
         transform: scale(.78);
       }
+
     }
+
 
     /* ============================================================
        STATUS
        ============================================================ */
 
     .status-grid {
+
       display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0,1fr)
+        );
+
       gap: 14px;
+
       margin: 16px 0;
+
     }
+
 
     .status-card {
+
       display: flex;
+
       align-items: center;
+
       gap: 13px;
+
       min-height: 62px;
+
       padding: 14px 16px;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 17px;
-      background: rgba(255,255,255,.045);
+
+      background:
+        rgba(255,255,255,.045);
+
     }
+
 
     .status-icon {
+
       width: 38px;
       height: 38px;
+
       display: grid;
+
       place-items: center;
+
       flex: 0 0 38px;
+
       border-radius: 12px;
-      background: rgba(77,163,255,.10);
+
+      background:
+        rgba(77,163,255,.10);
+
     }
+
 
     .status-label {
-      color: var(--muted);
+
+      color:
+        var(--muted);
+
       font-size: 12px;
+
     }
 
+
     .status-value {
+
       margin-top: 2px;
+
       font-size: 14px;
+
       font-weight: 700;
+
     }
+
 
     /* ============================================================
        PLAYER
        ============================================================ */
 
     .player {
+
       position: relative;
+
       overflow: hidden;
+
       margin-top: 18px;
+
       padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
       background:
+
         linear-gradient(
           135deg,
           rgba(16,52,101,.95),
           rgba(7,27,57,.96)
         );
-      box-shadow: var(--shadow);
+
+      box-shadow:
+        var(--shadow);
+
     }
+
 
     .player-top {
+
       display: grid;
-      grid-template-columns: auto 1fr auto;
+
+      grid-template-columns:
+        auto 1fr auto;
+
       gap: 18px;
+
       align-items: center;
+
     }
+
 
     .album-icon {
+
       width: 84px;
       height: 84px;
+
       display: grid;
+
       place-items: center;
+
       border-radius: 22px;
+
       font-size: 38px;
+
       background:
-        linear-gradient(145deg, #164f94, #0b2d59);
+
+        linear-gradient(
+          145deg,
+          #164f94,
+          #0b2d59
+        );
+
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.13),
-        0 12px 25px rgba(0,0,0,.25);
+
+        inset 0 1px 0
+        rgba(255,255,255,.13),
+
+        0 12px 25px
+        rgba(0,0,0,.25);
+
     }
+
 
     .now-label {
-      color: var(--primary2);
+
+      color:
+        var(--primary2);
+
       font-size: 11px;
+
       font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
+
+      letter-spacing:
+        1.2px;
+
+      text-transform:
+        uppercase;
+
     }
+
 
     #nowTitle {
-      margin: 5px 0 3px;
-      font-size: clamp(18px, 3vw, 24px);
+
+      margin:
+        5px 0 3px;
+
+      font-size:
+        clamp(
+          18px,
+          3vw,
+          24px
+        );
+
       font-weight: 800;
+
     }
+
 
     #nowArtist {
-      color: var(--muted);
+
+      color:
+        var(--muted);
+
       font-size: 14px;
+
     }
+
 
     .share-btn {
-      border: 1px solid rgba(215,174,98,.25);
+
+      border:
+        1px solid
+        rgba(215,174,98,.25);
+
       border-radius: 14px;
-      padding: 11px 15px;
-      color: var(--gold2);
-      background: rgba(215,174,98,.08);
+
+      padding:
+        11px 15px;
+
+      color:
+        var(--gold2);
+
+      background:
+        rgba(215,174,98,.08);
+
       cursor: pointer;
+
       font-weight: 700;
+
       transition: .2s;
+
     }
+
 
     .share-btn:hover {
-      transform: translateY(-2px);
-      background: rgba(215,174,98,.14);
+
+      transform:
+        translateY(-2px);
+
+      background:
+        rgba(215,174,98,.14);
+
     }
+
 
     audio {
+
       width: 100%;
+
       margin-top: 20px;
+
       border-radius: 12px;
+
     }
+
 
     .controls {
+
       display: flex;
+
       justify-content: center;
+
       gap: 10px;
+
       margin-top: 16px;
+
     }
+
 
     .control-btn {
+
       min-width: 48px;
+
       height: 46px;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 14px;
-      color: var(--text);
-      background: rgba(255,255,255,.06);
+
+      color:
+        var(--text);
+
+      background:
+        rgba(255,255,255,.06);
+
       cursor: pointer;
+
       font-size: 18px;
+
       transition: .2s;
+
     }
+
 
     .control-btn:hover {
-      transform: translateY(-2px);
-      background: rgba(77,163,255,.15);
-      border-color: rgba(77,163,255,.35);
+
+      transform:
+        translateY(-2px);
+
+      background:
+        rgba(77,163,255,.15);
+
+      border-color:
+        rgba(77,163,255,.35);
+
     }
 
+
     .control-main {
+
       min-width: 58px;
-      background: linear-gradient(145deg, #1d73d5, #12539c);
-      border-color: rgba(255,255,255,.10);
+
+      background:
+        linear-gradient(
+          145deg,
+          #1d73d5,
+          #12539c
+        );
+
       font-size: 21px;
+
     }
+
 
     /* ============================================================
        PESQUISA
        ============================================================ */
 
     .search-section {
+
       margin-top: 22px;
+
     }
+
 
     .search-box {
+
       display: flex;
+
       gap: 10px;
+
     }
+
 
     .search-box input {
+
       width: 100%;
+
       min-height: 50px;
-      padding: 0 17px;
+
+      padding:
+        0 17px;
+
       outline: none;
-      color: var(--text);
-      border: 1px solid var(--border);
+
+      color:
+        var(--text);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 15px;
-      background: rgba(255,255,255,.055);
+
+      background:
+        rgba(255,255,255,.055);
+
     }
+
 
     .search-box input::placeholder {
-      color: #8094af;
+
+      color:
+        #8094af;
+
     }
+
 
     .search-box input:focus {
-      border-color: rgba(77,163,255,.45);
-      box-shadow: 0 0 0 3px rgba(77,163,255,.08);
+
+      border-color:
+        rgba(77,163,255,.45);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(77,163,255,.08);
+
     }
+
 
     .clear-search {
-      padding: 0 17px;
-      border: 1px solid var(--border);
+
+      padding:
+        0 17px;
+
+      border:
+        1px solid var(--border);
+
       border-radius: 15px;
-      color: var(--muted);
-      background: rgba(255,255,255,.055);
+
+      color:
+        var(--muted);
+
+      background:
+        rgba(255,255,255,.055);
+
       cursor: pointer;
+
       white-space: nowrap;
+
     }
+
 
     .search-results {
+
       display: none;
+
       margin-top: 10px;
+
       padding: 8px;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 17px;
-      background: rgba(3,15,32,.94);
+
+      background:
+        rgba(3,15,32,.94);
+
     }
+
 
     .search-result {
-      padding: 12px 14px;
+
+      padding:
+        12px 14px;
+
       border-radius: 12px;
+
       cursor: pointer;
+
     }
 
+
     .search-result:hover {
-      background: rgba(77,163,255,.10);
+
+      background:
+        rgba(77,163,255,.10);
+
     }
+
 
     /* ============================================================
        FILTROS
        ============================================================ */
 
     .filter-section {
+
       margin-top: 22px;
+
     }
+
 
     .section-title {
-      margin: 0 0 14px;
+
+      margin:
+        0 0 14px;
+
       font-size: 20px;
+
     }
+
 
     .filters {
+
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 9px;
+
     }
 
+
     .filter-btn {
-      padding: 10px 15px;
-      border: 1px solid var(--border);
+
+      padding:
+        10px 15px;
+
+      border:
+        1px solid var(--border);
+
       border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255,255,255,.045);
+
+      color:
+        var(--muted);
+
+      background:
+        rgba(255,255,255,.045);
+
       cursor: pointer;
+
       transition: .2s;
+
     }
+
 
     .filter-btn:hover,
     .filter-btn.active {
+
       color: #fff;
-      border-color: rgba(77,163,255,.38);
-      background: rgba(29,115,213,.18);
+
+      border-color:
+        rgba(77,163,255,.38);
+
+      background:
+        rgba(29,115,213,.18);
+
     }
+
 
     /* ============================================================
        PLAYLISTS
        ============================================================ */
 
     .playlists-section {
+
       margin-top: 28px;
+
     }
+
 
     .playlist-grid {
+
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0,1fr)
+        );
+
       gap: 18px;
+
     }
+
 
     .playlist-card {
+
       overflow: hidden;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 20px;
-      background: var(--card);
-      box-shadow: 0 12px 28px rgba(0,0,0,.17);
+
+      background:
+        var(--card);
+
+      box-shadow:
+        0 12px 28px
+        rgba(0,0,0,.17);
+
     }
+
 
     .playlist-header {
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       align-items: center;
+
       gap: 12px;
-      padding: 17px 18px;
-      border-bottom: 1px solid var(--border);
+
+      padding:
+        17px 18px;
+
+      border-bottom:
+        1px solid var(--border);
+
     }
+
 
     .playlist-name {
+
       font-weight: 800;
+
     }
+
 
     .playlist-count {
+
       min-width: 30px;
-      padding: 5px 9px;
+
+      padding:
+        5px 9px;
+
       text-align: center;
+
       border-radius: 999px;
-      color: var(--gold2);
-      background: rgba(215,174,98,.10);
+
+      color:
+        var(--gold2);
+
+      background:
+        rgba(215,174,98,.10);
+
       font-size: 12px;
+
       font-weight: 800;
+
     }
+
 
     .playlist-list {
+
       max-height: 360px;
+
       overflow-y: auto;
+
       padding: 8px;
+
     }
+
 
     .playlist-item {
+
       display: flex;
+
       align-items: center;
+
       gap: 11px;
+
       padding: 12px;
+
       border-radius: 13px;
+
       cursor: pointer;
+
       transition: .18s;
+
     }
+
 
     .playlist-item:hover {
-      background: rgba(77,163,255,.08);
+
+      background:
+        rgba(77,163,255,.08);
+
     }
+
 
     .playlist-item.active {
-      background: rgba(29,115,213,.16);
-      box-shadow: inset 3px 0 0 var(--primary2);
+
+      background:
+        rgba(29,115,213,.16);
+
+      box-shadow:
+        inset 3px 0 0
+        var(--primary2);
+
     }
+
 
     .track-number {
+
       width: 28px;
-      color: #7790ae;
+
+      color:
+        #7790ae;
+
       text-align: center;
+
       font-size: 12px;
+
     }
+
 
     .track-info {
+
       min-width: 0;
+
     }
+
 
     .track-title {
+
       overflow: hidden;
+
       text-overflow: ellipsis;
+
       white-space: nowrap;
+
       font-size: 14px;
+
       font-weight: 700;
+
     }
 
+
     .track-artist {
+
       overflow: hidden;
+
       text-overflow: ellipsis;
+
       white-space: nowrap;
+
       margin-top: 2px;
-      color: var(--muted);
+
+      color:
+        var(--muted);
+
       font-size: 12px;
+
     }
+
 
     /* ============================================================
        BÍBLIA
        ============================================================ */
 
     .bible-section {
-      margin-top: 28px;
+
+      margin-top: 30px;
+
     }
+
 
     .bible-card {
+
       position: relative;
+
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap: 28px;
+
       align-items: center;
+
       overflow: hidden;
-      padding: 30px;
-      border: 1px solid rgba(215,174,98,.20);
-      border-radius: 27px;
+
+      padding: 32px;
+
+      border:
+        1px solid
+        rgba(215,174,98,.22);
+
+      border-radius: 28px;
+
       background:
+
         linear-gradient(
           135deg,
-          rgba(19,63,125,.98),
-          rgba(4,16,38,.98)
+          rgba(27,67,119,.98),
+          rgba(4,17,38,.99)
         );
+
       box-shadow:
-        0 20px 50px rgba(0,0,0,.30),
-        inset 0 1px 0 rgba(255,255,255,.06);
+
+        0 25px 60px
+        rgba(0,0,0,.34),
+
+        inset 0 1px 0
+        rgba(255,255,255,.06);
+
     }
+
 
     .bible-card::before {
+
       content: "";
+
       position: absolute;
-      width: 360px;
-      height: 360px;
-      left: -170px;
+
+      width: 400px;
+      height: 400px;
+
+      right: -180px;
       bottom: -220px;
+
       border-radius: 50%;
-      background: rgba(215,174,98,.12);
-      filter: blur(30px);
+
+      background:
+        rgba(215,174,98,.11);
+
+      filter:
+        blur(35px);
+
     }
+
 
     .bible-content {
+
       position: relative;
-      z-index: 1;
+
+      z-index: 2;
+
     }
+
 
     .bible-badge {
+
       display: inline-flex;
+
       align-items: center;
+
       gap: 7px;
-      padding: 8px 12px;
-      border: 1px solid rgba(215,174,98,.24);
+
+      padding:
+        8px 13px;
+
+      border:
+        1px solid
+        rgba(215,174,98,.28);
+
       border-radius: 999px;
-      color: var(--gold2);
-      background: rgba(215,174,98,.08);
+
+      color:
+        var(--gold2);
+
+      background:
+        rgba(215,174,98,.08);
+
       font-size: 11px;
+
       font-weight: 800;
+
       letter-spacing: .8px;
+
     }
+
 
     .bible-content h2 {
-      margin: 14px 0 9px;
-      font-size: clamp(25px, 4vw, 36px);
-      letter-spacing: -.7px;
+
+      margin:
+        14px 0 9px;
+
+      font-size:
+        clamp(
+          26px,
+          4vw,
+          38px
+        );
+
+      letter-spacing:
+        -.8px;
+
     }
+
 
     .bible-content p {
+
       max-width: 570px;
-      margin: 0 0 21px;
-      color: #c0cede;
-      line-height: 1.7;
+
+      margin:
+        0 0 22px;
+
+      color:
+        #c0cede;
+
+      line-height:
+        1.75;
+
       font-size: 15px;
+
     }
+
 
     .bible-link {
+
       display: inline-flex;
+
       align-items: center;
+
       gap: 10px;
-      min-height: 50px;
-      padding: 0 19px;
+
+      min-height: 51px;
+
+      padding:
+        0 20px;
+
       border-radius: 15px;
+
       color: #fff;
+
       text-decoration: none;
+
       font-weight: 800;
+
       background:
-        linear-gradient(135deg, #d9ad62, #a87531);
+
+        linear-gradient(
+          135deg,
+          #dfb96f,
+          #a77330
+        );
+
       box-shadow:
-        0 10px 25px rgba(0,0,0,.25);
+
+        0 12px 28px
+        rgba(0,0,0,.28);
+
       transition: .2s;
+
     }
+
 
     .bible-link:hover {
-      transform: translateY(-2px);
+
+      transform:
+        translateY(-3px);
+
       box-shadow:
-        0 14px 30px rgba(0,0,0,.32);
+        0 17px 35px
+        rgba(0,0,0,.35);
+
     }
+
+
+    /* ============================================================
+       ILUSTRAÇÃO PROFISSIONAL DA BÍBLIA
+       ============================================================ */
 
     .bible-visual {
+
       position: relative;
-      z-index: 1;
-      min-height: 260px;
+
+      z-index: 2;
+
+      min-height: 320px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 22px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius: 24px;
+
       background:
+
         radial-gradient(
-          circle at center,
-          rgba(215,174,98,.11),
-          transparent 65%
+          ellipse at center,
+          rgba(215,174,98,.14),
+          transparent 67%
         ),
-        rgba(255,255,255,.035);
+
+        rgba(255,255,255,.025);
+
     }
 
-    .bible-visual svg {
-      width: min(100%, 440px);
+
+    .bible-svg {
+
+      width:
+        min(
+          100%,
+          520px
+        );
+
       height: auto;
+
+      overflow: visible;
+
       filter:
-        drop-shadow(0 20px 18px rgba(0,0,0,.40));
+        drop-shadow(
+          0 22px 18px
+          rgba(0,0,0,.45)
+        );
+
     }
+
+
+    /* brilho da ilustração */
+
+    .bible-glow {
+
+      fill:
+        rgba(245,211,137,.14);
+
+      filter:
+        blur(18px);
+
+    }
+
+
+    /* capa */
+
+    .book-cover {
+
+      fill:
+        url(#coverGradient);
+
+      stroke:
+        #4b2b15;
+
+      stroke-width: 3;
+
+    }
+
+
+    .book-cover-dark {
+
+      fill:
+        #4a2813;
+
+      opacity: .95;
+
+    }
+
+
+    /* páginas */
+
+    .book-page-left {
+
+      fill:
+        url(#pageGradientLeft);
+
+      stroke:
+        #c8a96e;
+
+      stroke-width: 2;
+
+    }
+
+
+    .book-page-right {
+
+      fill:
+        url(#pageGradientRight);
+
+      stroke:
+        #c8a96e;
+
+      stroke-width: 2;
+
+    }
+
+
+    .page-line {
+
+      fill: none;
+
+      stroke:
+        #a88b58;
+
+      stroke-width: 2;
+
+      opacity: .42;
+
+    }
+
+
+    .gold-detail {
+
+      fill:
+        #d8b46b;
+
+    }
+
+
+    .gold-stroke {
+
+      fill: none;
+
+      stroke:
+        #d8b46b;
+
+      stroke-width: 2;
+
+    }
+
 
     /* ============================================================
        INFORMAÇÕES
        ============================================================ */
 
     .info-section {
-      margin-top: 28px;
+
+      margin-top: 30px;
+
     }
+
 
     .info-grid {
+
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0,1fr)
+        );
+
       gap: 15px;
+
     }
+
 
     .info-card {
+
       padding: 20px;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 19px;
-      background: rgba(255,255,255,.045);
+
+      background:
+        rgba(255,255,255,.045);
+
     }
+
 
     .info-icon {
+
       font-size: 22px;
+
     }
+
 
     .info-label {
+
       margin-top: 10px;
-      color: var(--muted);
+
+      color:
+        var(--muted);
+
       font-size: 12px;
+
     }
 
+
     .info-value {
+
       margin-top: 4px;
+
       font-size: 18px;
+
       font-weight: 800;
+
     }
+
 
     /* ============================================================
        TOAST
        ============================================================ */
 
     #toast {
+
       position: fixed;
+
       left: 50%;
+
       bottom: 24px;
+
       z-index: 9999;
-      max-width: calc(100% - 30px);
-      padding: 13px 17px;
-      border: 1px solid var(--border);
+
+      max-width:
+        calc(100% - 30px);
+
+      padding:
+        13px 17px;
+
+      border:
+        1px solid var(--border);
+
       border-radius: 14px;
+
       color: #fff;
-      background: rgba(4,17,36,.96);
-      box-shadow: 0 15px 35px rgba(0,0,0,.35);
+
+      background:
+        rgba(4,17,36,.96);
+
+      box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.35);
+
       opacity: 0;
+
       pointer-events: none;
-      transform: translate(-50%, 20px);
+
+      transform:
+        translate(-50%,20px);
+
       transition: .25s;
+
     }
 
+
     #toast.show {
+
       opacity: 1;
-      transform: translate(-50%, 0);
+
+      transform:
+        translate(-50%,0);
+
     }
+
 
     /* ============================================================
        FOOTER
        ============================================================ */
 
     footer {
-      padding: 32px 0 28px;
-      color: #8093ad;
-      text-align: center;
+
+      padding:
+        32px 0 28px;
+
+      color:
+        #8093ad;
+
+      text-align:
+        center;
+
       font-size: 13px;
+
     }
 
+
     footer strong {
-      color: #b9c8da;
+
+      color:
+        #b9c8da;
+
     }
+
 
     /* ============================================================
        RESPONSIVO
@@ -758,722 +1605,488 @@
         grid-template-columns: 1fr;
       }
 
-      .bible-visual {
-        min-height: 230px;
-      }
     }
+
 
     @media (max-width: 680px) {
 
       .container {
-        width: min(100% - 20px, 1180px);
+
+        width:
+          min(
+            100% - 20px,
+            1180px
+          );
+
       }
+
 
       header {
         padding-top: 10px;
       }
 
+
       .header-card {
+
         padding: 20px;
+
         border-radius: 22px;
+
       }
 
+
       .header-content {
-        align-items: flex-start;
+
+        align-items:
+          flex-start;
+
       }
+
 
       .header-live {
         display: none;
       }
 
+
       .brand-icon {
+
         width: 58px;
         height: 58px;
+
         flex-basis: 58px;
+
         border-radius: 17px;
+
         font-size: 27px;
+
       }
+
 
       .brand h1 {
         font-size: 25px;
       }
 
+
       .brand p {
         font-size: 13px;
       }
 
+
       .status-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .player {
         padding: 18px;
       }
 
+
       .player-top {
-        grid-template-columns: auto 1fr;
+
+        grid-template-columns:
+          auto 1fr;
+
       }
+
 
       .share-btn {
-        grid-column: 1 / -1;
+
+        grid-column:
+          1 / -1;
+
         width: 100%;
+
       }
 
+
       .album-icon {
+
         width: 68px;
         height: 68px;
+
         font-size: 30px;
+
       }
+
 
       .search-box {
         flex-direction: column;
       }
 
+
       .clear-search {
         min-height: 46px;
       }
 
+
       .bible-card {
+
         padding: 22px;
+
       }
+
 
       .bible-visual {
-        min-height: 190px;
+
+        min-height: 230px;
+
       }
 
+
       .info-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="container">
 
-    <!-- ==========================================================
-         CABEÇALHO
-         ========================================================== -->
-
-    <header>
-      <div class="header-card">
-
-        <div class="header-content">
-
-          <div class="brand">
-
-            <div class="brand-icon" aria-hidden="true">
-              🎙️
-            </div>
-
-            <div>
-              <h1>Rádio Onda Livre</h1>
-
-              <p>
-                Louvores, oração e mensagens para abençoar sua vida
-              </p>
-            </div>
-
-          </div>
-
-          <div class="header-live">
-            <span class="live-dot"></span>
-            RÁDIO ONLINE
-          </div>
-
-        </div>
-
-      </div>
-    </header>
+<div class="container">
 
 
-    <!-- ==========================================================
-         STATUS
-         ========================================================== -->
+  <!-- ==========================================================
+       CABEÇALHO
+       ========================================================== -->
 
-    <section class="status-grid">
+  <header>
 
-      <div class="status-card">
+    <div class="header-card">
 
-        <div class="status-icon">
-          📡
-        </div>
+      <div class="header-content">
 
-        <div>
-          <div class="status-label">
-            Sistema
-          </div>
+        <div class="brand">
 
           <div
-            class="status-value"
-            id="statusSistema"
+            class="brand-icon"
+            aria-hidden="true"
           >
-            Verificando...
+            🎙️
           </div>
+
+          <div>
+
+            <h1>
+              Rádio Onda Livre
+            </h1>
+
+            <p>
+              Louvores, oração e mensagens para abençoar sua vida
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="header-live">
+
+          <span class="live-dot"></span>
+
+          RÁDIO ONLINE
+
         </div>
 
       </div>
 
+    </div>
 
-      <div class="status-card">
+  </header>
 
-        <div class="status-icon">
-          📍
-        </div>
 
-        <div>
-          <div class="status-label">
-            Localização
-          </div>
+  <!-- ==========================================================
+       STATUS
+       ========================================================== -->
 
-          <div
-            class="status-value"
-            id="statusLocalizacao"
-          >
-            Localizando...
-          </div>
+  <section class="status-grid">
 
-          <div
-            id="localizacaoTexto"
-            style="
-              color:#8093ad;
-              font-size:11px;
-              margin-top:2px;
-            "
-          ></div>
-        </div>
 
+    <div class="status-card">
+
+      <div class="status-icon">
+        📡
       </div>
 
-    </section>
+      <div>
 
-
-    <!-- ==========================================================
-         PLAYER
-         ========================================================== -->
-
-    <section class="player">
-
-      <div class="player-top">
+        <div class="status-label">
+          Sistema
+        </div>
 
         <div
-          class="album-icon"
-          id="albumIcon"
-          aria-hidden="true"
+          class="status-value"
+          id="statusSistema"
         >
-          🎵
+          Conectando...
         </div>
 
+      </div>
 
-        <div>
+    </div>
 
-          <div class="now-label">
-            Tocando agora
-          </div>
 
-          <div id="nowTitle">
-            Carregando...
-          </div>
+    <div class="status-card">
 
-          <div id="nowArtist">
-            Rádio Onda Livre
-          </div>
+      <div class="status-icon">
+        📍
+      </div>
 
+      <div>
+
+        <div class="status-label">
+          Localização
         </div>
 
-
-        <button
-          type="button"
-          class="share-btn"
-          id="shareRadioBtn"
+        <div
+          class="status-value"
+          id="statusLocalizacao"
         >
-          📤 Compartilhar rádio
-        </button>
+          Localizando...
+        </div>
+
+        <div
+          id="localizacaoTexto"
+          style="
+            color:#8093ad;
+            font-size:11px;
+            margin-top:2px;
+          "
+        ></div>
 
       </div>
 
-
-      <audio
-        id="audioPlayer"
-        controls
-        preload="none"
-      ></audio>
+    </div>
 
 
-      <div class="controls">
-
-        <button
-          type="button"
-          class="control-btn"
-          id="prevBtn"
-          title="Áudio anterior"
-        >
-          ⏮
-        </button>
-
-        <button
-          type="button"
-          class="control-btn control-main"
-          id="playBtn"
-          title="Reproduzir"
-        >
-          ▶
-        </button>
-
-        <button
-          type="button"
-          class="control-btn"
-          id="nextBtn"
-          title="Próximo áudio"
-        >
-          ⏭
-        </button>
-
-        <button
-          type="button"
-          class="control-btn"
-          id="stopBtn"
-          title="Parar"
-        >
-          ⏹
-        </button>
-
-      </div>
-
-    </section>
+  </section>
 
 
-    <!-- ==========================================================
-         PESQUISA
-         ========================================================== -->
+  <!-- ==========================================================
+       PLAYER
+       ========================================================== -->
 
-    <section class="search-section">
+  <section class="player">
 
-      <div class="search-box">
 
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="🔎 Pesquisar louvor, artista ou mensagem..."
-          autocomplete="off"
-        >
-
-        <button
-          type="button"
-          id="clearSearchBtn"
-          class="clear-search"
-        >
-          Limpar pesquisa
-        </button>
-
-      </div>
+    <div class="player-top">
 
 
       <div
-        id="searchResults"
-        class="search-results"
-      ></div>
-
-    </section>
-
-
-    <!-- ==========================================================
-         FILTROS
-         ========================================================== -->
-
-    <section class="filter-section">
-
-      <h2 class="section-title">
-        🎧 Categorias
-      </h2>
-
-      <div class="filters">
-
-        <button
-          type="button"
-          class="filter-btn active"
-          data-filter="todos"
-        >
-          Todos
-        </button>
-
-        <button
-          type="button"
-          class="filter-btn"
-          data-filter="musica"
-        >
-          🎵 Música
-        </button>
-
-        <button
-          type="button"
-          class="filter-btn"
-          data-filter="oracao"
-        >
-          🙏 Oração
-        </button>
-
-        <button
-          type="button"
-          class="filter-btn"
-          data-filter="mensagem"
-        >
-          📖 Mensagem
-        </button>
-
+        class="album-icon"
+        id="albumIcon"
+      >
+        🎵
       </div>
 
-    </section>
 
+      <div>
 
-    <!-- ==========================================================
-         PLAYLISTS
-         ========================================================== -->
-
-    <section class="playlists-section">
-
-      <h2 class="section-title">
-        🎶 Nossos louvores
-      </h2>
-
-
-      <div class="playlist-grid">
-
-        <!-- MANHÃ -->
-
-        <div class="playlist-card">
-
-          <div class="playlist-header">
-
-            <div class="playlist-name">
-              🌅 Manhã
-            </div>
-
-            <div
-              class="playlist-count"
-              id="countManha"
-            >
-              0
-            </div>
-
-          </div>
-
-          <div
-            class="playlist-list"
-            id="playlistManha"
-          ></div>
-
+        <div class="now-label">
+          Tocando agora
         </div>
 
-
-        <!-- TARDE -->
-
-        <div class="playlist-card">
-
-          <div class="playlist-header">
-
-            <div class="playlist-name">
-              ☀️ Tarde
-            </div>
-
-            <div
-              class="playlist-count"
-              id="countTarde"
-            >
-              0
-            </div>
-
-          </div>
-
-          <div
-            class="playlist-list"
-            id="playlistTarde"
-          ></div>
-
+        <div id="nowTitle">
+          Carregando áudio...
         </div>
 
-
-        <!-- NOITE -->
-
-        <div class="playlist-card">
-
-          <div class="playlist-header">
-
-            <div class="playlist-name">
-              🌙 Noite
-            </div>
-
-            <div
-              class="playlist-count"
-              id="countNoite"
-            >
-              0
-            </div>
-
-          </div>
-
-          <div
-            class="playlist-list"
-            id="playlistNoite"
-          ></div>
-
+        <div id="nowArtist">
+          Rádio Onda Livre
         </div>
 
       </div>
 
-    </section>
+
+      <button
+        type="button"
+        class="share-btn"
+        id="shareRadioBtn"
+      >
+        📤 Compartilhar rádio
+      </button>
 
 
-    <!-- ==========================================================
-         BÍBLIA KING JAMES
-         ========================================================== -->
-
-    <section
-      class="bible-section"
-      aria-labelledby="bibleTitulo"
-    >
-
-      <div class="bible-card">
-
-        <div class="bible-content">
-
-          <span class="bible-badge">
-            📖 PALAVRA DE DEUS
-          </span>
-
-          <h2 id="bibleTitulo">
-            Bíblia King James
-          </h2>
-
-          <p>
-            Leia, medite e estude as Escrituras. Acesse a Bíblia
-            King James diretamente pelo seu navegador e encontre
-            uma palavra de fé, esperança e fortalecimento para
-            cada dia.
-          </p>
-
-          <a
-            id="bibleLink"
-            class="bible-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            📖 Acessar Bíblia King James
-            <span>↗</span>
-          </a>
-
-        </div>
+    </div>
 
 
-        <!-- ======================================================
-             IMAGEM DA BÍBLIA — SVG EMBUTIDO
-             ====================================================== -->
-
-        <div
-          class="bible-visual"
-          aria-label="Imagem ilustrativa de uma Bíblia aberta"
-        >
-
-          <svg
-            viewBox="0 0 600 360"
-            role="img"
-            aria-labelledby="svgBibleTitle svgBibleDesc"
-          >
-
-            <title id="svgBibleTitle">
-              Bíblia aberta
-            </title>
-
-            <desc id="svgBibleDesc">
-              Ilustração de uma Bíblia aberta com páginas douradas
-              e capa marrom.
-            </desc>
+    <audio
+      id="audioPlayer"
+      controls
+      preload="none"
+    ></audio>
 
 
-            <!-- BRILHO -->
+    <div class="controls">
 
-            <ellipse
-              cx="300"
-              cy="300"
-              rx="230"
-              ry="30"
-              fill="rgba(0,0,0,.25)"
-            />
-
-
-            <!-- CAPA INFERIOR -->
-
-            <path
-              d="
-                M70 262
-                C145 235 220 238 300 275
-                C380 238 455 235 530 262
-                L510 306
-                C430 280 365 281 300 315
-                C235 281 170 280 90 306 Z
-              "
-              fill="#70451f"
-            />
+      <button
+        type="button"
+        class="control-btn"
+        id="prevBtn"
+        title="Áudio anterior"
+      >
+        ⏮
+      </button>
 
 
-            <!-- LADO ESQUERDO DA CAPA -->
-
-            <path
-              d="
-                M82 250
-                C155 225 225 230 300 267
-                L300 304
-                C220 266 150 265 90 290 Z
-              "
-              fill="#8f5d2a"
-            />
+      <button
+        type="button"
+        class="control-btn control-main"
+        id="playBtn"
+        title="Reproduzir"
+      >
+        ▶
+      </button>
 
 
-            <!-- LADO DIREITO DA CAPA -->
-
-            <path
-              d="
-                M300 267
-                C375 230 445 225 518 250
-                L510 290
-                C450 265 380 266 300 304 Z
-              "
-              fill="#70451f"
-            />
+      <button
+        type="button"
+        class="control-btn"
+        id="nextBtn"
+        title="Próximo áudio"
+      >
+        ⏭
+      </button>
 
 
-            <!-- PÁGINAS ESQUERDA -->
+      <button
+        type="button"
+        class="control-btn"
+        id="stopBtn"
+        title="Parar"
+      >
+        ⏹
+      </button>
 
-            <path
-              d="
-                M92 112
-                C155 87 225 92 300 132
-                L300 268
-                C225 228 155 222 92 246 Z
-              "
-              fill="#fff4d6"
-            />
+    </div>
 
-
-            <!-- PÁGINAS DIREITA -->
-
-            <path
-              d="
-                M300 132
-                C375 92 445 87 508 112
-                L508 246
-                C445 222 375 228 300 268 Z
-              "
-              fill="#f8e9c5"
-            />
+  </section>
 
 
-            <!-- LINHA CENTRAL -->
+  <!-- ==========================================================
+       PESQUISA
+       ========================================================== -->
 
-            <path
-              d="M300 132 L300 268"
-              stroke="#c9a76a"
-              stroke-width="4"
-            />
+  <section class="search-section">
 
+    <div class="search-box">
 
-            <!-- LINHAS ESQUERDA -->
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="🔎 Pesquisar louvor, artista ou mensagem..."
+        autocomplete="off"
+      >
 
-            <g
-              stroke="#c7ae7e"
-              stroke-width="3"
-              opacity=".7"
-            >
-              <path d="M125 135 C178 120 225 126 276 151"/>
-              <path d="M125 153 C178 138 225 144 276 169"/>
-              <path d="M125 171 C178 156 225 162 276 187"/>
-              <path d="M125 189 C178 174 225 180 276 205"/>
-              <path d="M125 207 C178 192 225 198 276 223"/>
-              <path d="M125 225 C178 210 225 216 276 241"/>
-            </g>
+      <button
+        type="button"
+        id="clearSearchBtn"
+        class="clear-search"
+      >
+        Limpar pesquisa
+      </button>
 
-
-            <!-- LINHAS DIREITA -->
-
-            <g
-              stroke="#c0a570"
-              stroke-width="3"
-              opacity=".7"
-            >
-              <path d="M324 151 C375 126 422 120 475 135"/>
-              <path d="M324 169 C375 144 422 138 475 153"/>
-              <path d="M324 187 C375 162 422 156 475 171"/>
-              <path d="M324 205 C375 180 422 174 475 189"/>
-              <path d="M324 223 C375 198 422 192 475 207"/>
-              <path d="M324 241 C375 216 422 210 475 225"/>
-            </g>
+    </div>
 
 
-            <!-- DETALHE DOURADO -->
+    <div
+      id="searchResults"
+      class="search-results"
+    ></div>
 
-            <path
-              d="
-                M300 105
-                C302 105 304 108 304 112
-                L304 268
-                C304 272 302 274 300 275
-                C298 274 296 272 296 268
-                L296 112
-                C296 108 298 105 300 105 Z
-              "
-              fill="#d6ad5c"
-            />
+  </section>
 
 
-            <!-- PEQUENO MARCADOR -->
+  <!-- ==========================================================
+       FILTROS
+       ========================================================== -->
 
-            <path
-              d="
-                M430 100
-                L451 100
-                L451 160
-                L440 150
-                L430 160 Z
-              "
-              fill="#b33b38"
-            />
+  <section class="filter-section">
 
-          </svg>
-
-        </div>
-
-      </div>
-
-    </section>
+    <h2 class="section-title">
+      🎧 Categorias
+    </h2>
 
 
-    <!-- ==========================================================
-         INFORMAÇÕES
-         ========================================================== -->
+    <div class="filters">
 
-    <section class="info-section">
+      <button
+        type="button"
+        class="filter-btn active"
+        data-filter="todos"
+      >
+        Todos
+      </button>
 
-      <h2 class="section-title">
-        ℹ️ Informações
-      </h2>
 
-      <div class="info-grid">
+      <button
+        type="button"
+        class="filter-btn"
+        data-filter="musica"
+      >
+        🎵 Música
+      </button>
 
-        <div class="info-card">
 
-          <div class="info-icon">
-            🎵
-          </div>
+      <button
+        type="button"
+        class="filter-btn"
+        data-filter="oracao"
+      >
+        🙏 Oração
+      </button>
 
-          <div class="info-label">
-            Total de áudios
+
+      <button
+        type="button"
+        class="filter-btn"
+        data-filter="mensagem"
+      >
+        📖 Mensagem
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       PLAYLISTS
+       ========================================================== -->
+
+  <section class="playlists-section">
+
+    <h2 class="section-title">
+      🎶 Nossos louvores
+    </h2>
+
+
+    <div class="playlist-grid">
+
+
+      <!-- MANHÃ -->
+
+      <div class="playlist-card">
+
+        <div class="playlist-header">
+
+          <div class="playlist-name">
+            🌅 Manhã
           </div>
 
           <div
-            class="info-value"
-            id="totalAudios"
+            class="playlist-count"
+            id="countManha"
           >
             0
           </div>
@@ -1481,214 +2094,1425 @@
         </div>
 
 
-        <div class="info-card">
+        <div
+          class="playlist-list"
+          id="playlistManha"
+        >
 
-          <div class="info-icon">
-            🎧
-          </div>
-
-          <div class="info-label">
-            Playlist atual
-          </div>
-
-          <div
-            class="info-value"
-            id="playlistAtual"
-          >
-            Manhã
-          </div>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <div class="info-icon">
-            📍
-          </div>
-
-          <div class="info-label">
-            Local atual
-          </div>
-
-          <div
-            class="info-value"
-            id="localAtual"
-          >
-            Localizando...
+          <div style="
+            padding:20px;
+            text-align:center;
+            color:#8093ad;
+            font-size:13px;
+          ">
+            Carregando áudios...
           </div>
 
         </div>
 
       </div>
 
-    </section>
+
+      <!-- TARDE -->
+
+      <div class="playlist-card">
+
+        <div class="playlist-header">
+
+          <div class="playlist-name">
+            ☀️ Tarde
+          </div>
+
+          <div
+            class="playlist-count"
+            id="countTarde"
+          >
+            0
+          </div>
+
+        </div>
 
 
-    <!-- ==========================================================
-         RODAPÉ
-         ========================================================== -->
+        <div
+          class="playlist-list"
+          id="playlistTarde"
+        >
 
-    <footer>
-      Rádio Onda Livre • <strong>Joel Rodrigues</strong>
-    </footer>
+          <div style="
+            padding:20px;
+            text-align:center;
+            color:#8093ad;
+            font-size:13px;
+          ">
+            Aguardando...
+          </div>
 
-  </div>
+        </div>
 
-
-  <!-- ============================================================
-       TOAST
-       ============================================================ -->
-
-  <div id="toast"></div>
-
-
-  <script>
-
-    /* ============================================================
-       CONFIGURAÇÕES
-       ============================================================ */
-
-    const URL_API =
-      'https://script.google.com/macros/s/AKfycbxhGy5lnk2Y1dIdpKEzZMvjmAFoS-oql8m-Eh6ZuwatyvRleaaqUbBvfkv825EbWWdC7g/exec';
+      </div>
 
 
-    /*
-     * ============================================================
-     * LINK DA BÍBLIA
-     * ============================================================
-     *
-     * COLOQUE AQUI O LINK PUBLICADO DO SEU PROJETO
-     * "BÍBLIA KING JAMES".
-     *
-     * Exemplo:
-     *
-     * const URL_BIBLIA =
-     *   'https://seusite.com/biblia';
-     *
-     */
+      <!-- NOITE -->
 
-    const URL_BIBLIA =
-      'https://joeldisousa-dot.github.io/bibliakj/';
+      <div class="playlist-card">
+
+        <div class="playlist-header">
+
+          <div class="playlist-name">
+            🌙 Noite
+          </div>
+
+          <div
+            class="playlist-count"
+            id="countNoite"
+          >
+            0
+          </div>
+
+        </div>
 
 
-    /* ============================================================
-       VARIÁVEIS
-       ============================================================ */
+        <div
+          class="playlist-list"
+          id="playlistNoite"
+        >
 
-    let playlist = [];
+          <div style="
+            padding:20px;
+            text-align:center;
+            color:#8093ad;
+            font-size:13px;
+          ">
+            Aguardando...
+          </div>
 
-    let playlistFiltrada = [];
+        </div>
 
-    let indiceAtual = 0;
+      </div>
 
-    let filtroAtual = 'todos';
 
-    let callbackAPI = null;
+    </div>
 
-    let timeoutAPI = null;
+  </section>
 
-    let heartbeatTimer = null;
 
-    let sessao =
-      localStorage.getItem(
-        'radio_onda_livre_sessao'
+  <!-- ==========================================================
+       BÍBLIA KING JAMES
+       ========================================================== -->
+
+  <section
+    class="bible-section"
+    aria-labelledby="bibleTitulo"
+  >
+
+
+    <div class="bible-card">
+
+
+      <div class="bible-content">
+
+        <span class="bible-badge">
+          📖 PALAVRA DE DEUS
+        </span>
+
+
+        <h2 id="bibleTitulo">
+          Bíblia King James
+        </h2>
+
+
+        <p>
+          Leia, medite e estude as Escrituras.
+          Acesse a Bíblia King James e encontre
+          uma palavra de fé, esperança e
+          fortalecimento para cada dia.
+        </p>
+
+
+        <a
+          id="bibleLink"
+          class="bible-link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          📖 Acessar Bíblia King James
+
+          <span>
+            ↗
+          </span>
+
+        </a>
+
+      </div>
+
+
+      <!-- ========================================================
+           BÍBLIA REALISTA EM SVG
+           ======================================================== -->
+
+      <div
+        class="bible-visual"
+        aria-label="Bíblia aberta"
+      >
+
+
+        <svg
+          class="bible-svg"
+          viewBox="0 0 700 470"
+          role="img"
+          aria-labelledby="tituloBibliaSVG descricaoBibliaSVG"
+        >
+
+
+          <title id="tituloBibliaSVG">
+            Bíblia aberta
+          </title>
+
+
+          <desc id="descricaoBibliaSVG">
+            Ilustração sofisticada de uma Bíblia aberta,
+            com capa marrom, páginas creme, detalhes dourados
+            e marcador vermelho.
+          </desc>
+
+
+          <defs>
+
+
+            <!-- brilho -->
+
+            <radialGradient
+              id="glow"
+              cx="50%"
+              cy="50%"
+              r="50%"
+            >
+
+              <stop
+                offset="0%"
+                stop-color="#e9c77d"
+                stop-opacity=".30"
+              />
+
+              <stop
+                offset="100%"
+                stop-color="#e9c77d"
+                stop-opacity="0"
+              />
+
+            </radialGradient>
+
+
+            <!-- capa -->
+
+            <linearGradient
+              id="coverGradient"
+              x1="0"
+              y1="0"
+              x2="1"
+              y2="1"
+            >
+
+              <stop
+                offset="0%"
+                stop-color="#9a6332"
+              />
+
+              <stop
+                offset="45%"
+                stop-color="#633817"
+              />
+
+              <stop
+                offset="100%"
+                stop-color="#351b0c"
+              />
+
+            </linearGradient>
+
+
+            <!-- páginas esquerda -->
+
+            <linearGradient
+              id="pageGradientLeft"
+              x1="0"
+              y1="0"
+              x2="1"
+              y2="1"
+            >
+
+              <stop
+                offset="0%"
+                stop-color="#fff9e8"
+              />
+
+              <stop
+                offset="65%"
+                stop-color="#f0dfb9"
+              />
+
+              <stop
+                offset="100%"
+                stop-color="#c8a76c"
+              />
+
+            </linearGradient>
+
+
+            <!-- páginas direita -->
+
+            <linearGradient
+              id="pageGradientRight"
+              x1="1"
+              y1="0"
+              x2="0"
+              y2="1"
+            >
+
+              <stop
+                offset="0%"
+                stop-color="#fff9e8"
+              />
+
+              <stop
+                offset="65%"
+                stop-color="#eddbb1"
+              />
+
+              <stop
+                offset="100%"
+                stop-color="#b99559"
+              />
+
+            </linearGradient>
+
+
+            <!-- sombra -->
+
+            <filter
+              id="shadow"
+              x="-30%"
+              y="-30%"
+              width="160%"
+              height="180%"
+            >
+
+              <feDropShadow
+                dx="0"
+                dy="18"
+                stdDeviation="13"
+                flood-color="#000000"
+                flood-opacity=".48"
+              />
+
+            </filter>
+
+
+            <!-- sombra suave -->
+
+            <filter
+              id="softShadow"
+            >
+
+              <feGaussianBlur
+                stdDeviation="10"
+              />
+
+            </filter>
+
+
+          </defs>
+
+
+          <!-- brilho atrás da Bíblia -->
+
+          <ellipse
+            cx="350"
+            cy="220"
+            rx="285"
+            ry="190"
+            fill="url(#glow)"
+          />
+
+
+          <!-- sombra no chão -->
+
+          <ellipse
+            cx="350"
+            cy="390"
+            rx="260"
+            ry="32"
+            fill="#000"
+            opacity=".35"
+            filter="url(#softShadow)"
+          />
+
+
+          <!-- ====================================================
+               CAPA INFERIOR
+               ==================================================== -->
+
+          <path
+            class="book-cover-dark"
+            filter="url(#shadow)"
+            d="
+              M85 278
+              C170 250 255 257 350 306
+              C445 257 530 250 615 278
+              L594 365
+              C500 337 425 341 350 387
+              C275 341 200 337 106 365
+              Z
+            "
+          />
+
+
+          <!-- borda dourada da capa -->
+
+          <path
+            d="
+              M102 286
+              C182 262 260 270 350 315
+              C440 270 518 262 598 286
+              L582 344
+              C497 319 423 324 350 366
+              C277 324 203 319 118 344
+              Z
+            "
+            fill="none"
+            stroke="#c79b50"
+            stroke-width="3"
+            opacity=".75"
+          />
+
+
+          <!-- ====================================================
+               PÁGINA ESQUERDA
+               ==================================================== -->
+
+          <path
+            class="book-page-left"
+            filter="url(#shadow)"
+            d="
+              M102 116
+              C178 83 262 91 350 137
+              L350 311
+              C262 265 178 258 102 287
+              Z
+            "
+          />
+
+
+          <!-- ====================================================
+               PÁGINA DIREITA
+               ==================================================== -->
+
+          <path
+            class="book-page-right"
+            filter="url(#shadow)"
+            d="
+              M350 137
+              C438 91 522 83 598 116
+              L598 287
+              C522 258 438 265 350 311
+              Z
+            "
+          />
+
+
+          <!-- linhas das páginas esquerda -->
+
+          <g>
+
+            <path
+              class="page-line"
+              d="M135 139 C195 118 258 125 325 158"
+            />
+
+            <path
+              class="page-line"
+              d="M135 157 C195 136 258 143 325 176"
+            />
+
+            <path
+              class="page-line"
+              d="M135 175 C195 154 258 161 325 194"
+            />
+
+            <path
+              class="page-line"
+              d="M135 193 C195 172 258 179 325 212"
+            />
+
+            <path
+              class="page-line"
+              d="M135 211 C195 190 258 197 325 230"
+            />
+
+            <path
+              class="page-line"
+              d="M135 229 C195 208 258 215 325 248"
+            />
+
+            <path
+              class="page-line"
+              d="M135 247 C195 226 258 233 325 266"
+            />
+
+          </g>
+
+
+          <!-- linhas das páginas direita -->
+
+          <g>
+
+            <path
+              class="page-line"
+              d="M375 158 C442 125 505 118 565 139"
+            />
+
+            <path
+              class="page-line"
+              d="M375 176 C442 143 505 136 565 157"
+            />
+
+            <path
+              class="page-line"
+              d="M375 194 C442 161 505 154 565 175"
+            />
+
+            <path
+              class="page-line"
+              d="M375 212 C442 179 505 172 565 193"
+            />
+
+            <path
+              class="page-line"
+              d="M375 230 C442 197 505 190 565 211"
+            />
+
+            <path
+              class="page-line"
+              d="M375 248 C442 215 505 208 565 229"
+            />
+
+            <path
+              class="page-line"
+              d="M375 266 C442 233 505 226 565 247"
+            />
+
+          </g>
+
+
+          <!-- ====================================================
+               LOMBADA CENTRAL
+               ==================================================== -->
+
+          <path
+            d="
+              M350 137
+              C343 150 343 291 350 311
+              C357 291 357 150 350 137
+              Z
+            "
+            fill="#8a5827"
+          />
+
+
+          <path
+            d="
+              M350 145
+              C347 175 347 272 350 300
+            "
+            stroke="#e0bd74"
+            stroke-width="3"
+            opacity=".8"
+          />
+
+
+          <!-- ====================================================
+               DETALHE DOURADO DA CAPA
+               ==================================================== -->
+
+          <path
+            class="gold-stroke"
+            d="
+              M126 300
+              C195 280 260 288 328 323
+            "
+            opacity=".8"
+          />
+
+
+          <path
+            class="gold-stroke"
+            d="
+              M372 323
+              C440 288 505 280 574 300
+            "
+            opacity=".8"
+          />
+
+
+          <!-- pequeno símbolo dourado -->
+
+          <circle
+            cx="350"
+            cy="330"
+            r="8"
+            fill="#d9b66c"
+          />
+
+
+          <path
+            d="
+              M350 316
+              L353 326
+              L364 326
+              L355 333
+              L359 343
+              L350 337
+              L341 343
+              L345 333
+              L336 326
+              L347 326
+              Z
+            "
+            fill="#e4c47a"
+          />
+
+
+          <!-- ====================================================
+               MARCADOR VERMELHO
+               ==================================================== -->
+
+          <path
+            d="
+              M535 103
+              L559 103
+              L559 211
+              L547 198
+              L535 211
+              Z
+            "
+            fill="#8e2e29"
+          />
+
+
+          <path
+            d="
+              M539 107
+              L555 107
+              L555 200
+              L547 190
+              L539 200
+              Z
+            "
+            fill="#b63b34"
+          />
+
+
+          <!-- pequenos reflexos -->
+
+          <path
+            d="
+              M128 121
+              C180 101 235 106 275 122
+            "
+            fill="none"
+            stroke="#fff"
+            stroke-width="4"
+            opacity=".22"
+            stroke-linecap="round"
+          />
+
+
+          <path
+            d="
+              M425 122
+              C465 106 520 101 572 121
+            "
+            fill="none"
+            stroke="#fff"
+            stroke-width="4"
+            opacity=".18"
+            stroke-linecap="round"
+          />
+
+        </svg>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       INFORMAÇÕES
+       ========================================================== -->
+
+  <section class="info-section">
+
+    <h2 class="section-title">
+      ℹ️ Informações
+    </h2>
+
+
+    <div class="info-grid">
+
+
+      <div class="info-card">
+
+        <div class="info-icon">
+          🎵
+        </div>
+
+        <div class="info-label">
+          Total de áudios
+        </div>
+
+        <div
+          class="info-value"
+          id="totalAudios"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="info-card">
+
+        <div class="info-icon">
+          🎧
+        </div>
+
+        <div class="info-label">
+          Playlist atual
+        </div>
+
+        <div
+          class="info-value"
+          id="playlistAtual"
+        >
+          Manhã
+        </div>
+
+      </div>
+
+
+      <div class="info-card">
+
+        <div class="info-icon">
+          📍
+        </div>
+
+        <div class="info-label">
+          Local atual
+        </div>
+
+        <div
+          class="info-value"
+          id="localAtual"
+        >
+          Localizando...
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       RODAPÉ
+       ========================================================== -->
+
+  <footer>
+
+    Rádio Onda Livre •
+    <strong>
+      Joel Rodrigues
+    </strong>
+
+  </footer>
+
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+<script>
+
+
+/* ================================================================
+   CONFIGURAÇÕES
+   ================================================================ */
+
+
+/*
+ * API DO GOOGLE APPS SCRIPT
+ */
+
+const URL_API =
+  'https://script.google.com/macros/s/AKfycbxhGy5lnk2Y1dIdpKEzZMvjmAFoS-oql8m-Eh6ZuwatyvRleaaqUbBvfkv825EbWWdC7g/exec';
+
+
+/*
+ * LINK DA BÍBLIA
+ *
+ * COLOQUE AQUI O LINK PUBLICADO DA SUA BÍBLIA KING JAMES.
+ */
+
+const URL_BIBLIA =
+  'COLE_AQUI_O_LINK_DA_BIBLIA_KING_JAMES';
+
+
+/* ================================================================
+   VARIÁVEIS
+   ================================================================ */
+
+let playlist = [];
+
+let playlistFiltrada = [];
+
+let indiceAtual = 0;
+
+let filtroAtual = 'todos';
+
+let heartbeatTimer = null;
+
+let requisicaoPlaylistEmAndamento = false;
+
+
+/* ================================================================
+   SESSÃO
+   ================================================================ */
+
+let sessao =
+  localStorage.getItem(
+    'radio_onda_livre_sessao'
+  );
+
+
+if (!sessao) {
+
+  sessao =
+    'sessao_' +
+    Date.now() +
+    '_' +
+    Math.random()
+      .toString(36)
+      .substring(2,10);
+
+  localStorage.setItem(
+    'radio_onda_livre_sessao',
+    sessao
+  );
+
+}
+
+
+/* ================================================================
+   FUNÇÃO $
+   ================================================================ */
+
+function $(id) {
+
+  return document.getElementById(id);
+
+}
+
+
+/* ================================================================
+   ESCAPAR HTML
+   ================================================================ */
+
+function escaparHTML(valor) {
+
+  return String(valor ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+}
+
+
+/* ================================================================
+   TOAST
+   ================================================================ */
+
+function mostrarToast(mensagem) {
+
+  const toast =
+    $('toast');
+
+  if (!toast) return;
+
+  toast.textContent =
+    mensagem;
+
+  toast.classList.add('show');
+
+  clearTimeout(
+    mostrarToast.timer
+  );
+
+  mostrarToast.timer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          'show'
+        );
+
+      },
+      3500
+    );
+
+}
+
+
+/* ================================================================
+   BÍBLIA
+   ================================================================ */
+
+function configurarLinkBiblia() {
+
+  const link =
+    $('bibleLink');
+
+  if (!link) return;
+
+
+  if (
+    !URL_BIBLIA ||
+    URL_BIBLIA.includes(
+      'COLE_AQUI_O_LINK'
+    )
+  ) {
+
+    link.href = '#';
+
+    link.addEventListener(
+      'click',
+      function(event) {
+
+        event.preventDefault();
+
+        mostrarToast(
+          'Configure o link da Bíblia King James no código.'
+        );
+
+      }
+    );
+
+    return;
+
+  }
+
+
+  link.href =
+    URL_BIBLIA;
+
+}
+
+
+/* ================================================================
+   API JSONP
+   ================================================================ */
+
+function chamarAPI(
+  acao,
+  parametros = {},
+  sucesso,
+  erro
+) {
+
+  const callbackName =
+    'radioCallback_' +
+    Date.now() +
+    '_' +
+    Math.random()
+      .toString(36)
+      .substring(2,9);
+
+
+  const script =
+    document.createElement(
+      'script'
+    );
+
+
+  let finalizado =
+    false;
+
+
+  const timeout =
+    setTimeout(
+      function() {
+
+        if (finalizado) return;
+
+        finalizado = true;
+
+        cleanup();
+
+        if (erro) {
+
+          erro(
+            'Tempo limite de conexão excedido.'
+          );
+
+        }
+
+      },
+      15000
+    );
+
+
+  function cleanup() {
+
+    clearTimeout(
+      timeout
+    );
+
+    try {
+
+      delete window[
+        callbackName
+      ];
+
+    } catch(e) {}
+
+    if (script.parentNode) {
+
+      script.parentNode.removeChild(
+        script
       );
 
-    if (!sessao) {
-
-      sessao =
-        'sessao_' +
-        Date.now() +
-        '_' +
-        Math.random()
-          .toString(36)
-          .substring(2, 10);
-
-      localStorage.setItem(
-        'radio_onda_livre_sessao',
-        sessao
-      );
-
     }
 
+  }
 
-    /* ============================================================
-       UTILITÁRIOS
-       ============================================================ */
 
-    function $(id) {
-      return document.getElementById(id);
+  window[callbackName] =
+    function(resposta) {
+
+      if (finalizado) return;
+
+      finalizado = true;
+
+      cleanup();
+
+      if (sucesso) {
+
+        sucesso(
+          resposta
+        );
+
+      }
+
+    };
+
+
+  const query =
+    new URLSearchParams();
+
+
+  query.set(
+    'acao',
+    acao
+  );
+
+
+  query.set(
+    'callback',
+    callbackName
+  );
+
+
+  Object.keys(
+    parametros
+  ).forEach(
+    chave => {
+
+      const valor =
+        parametros[chave];
+
+      if (
+        valor !== undefined &&
+        valor !== null
+      ) {
+
+        query.set(
+          chave,
+          valor
+        );
+
+      }
+
     }
+  );
 
 
-    function escaparHTML(texto) {
-
-      return String(texto ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-
-    }
+  script.src =
+    URL_API +
+    '?' +
+    query.toString();
 
 
-    function mostrarToast(mensagem) {
+  script.onerror =
+    function() {
 
-      const toast = $('toast');
+      if (finalizado) return;
 
-      if (!toast) return;
+      finalizado = true;
 
-      toast.textContent = mensagem;
+      cleanup();
 
-      toast.classList.add('show');
+      if (erro) {
 
-      clearTimeout(
-        mostrarToast.timer
-      );
+        erro(
+          'Falha ao acessar o Apps Script.'
+        );
 
-      mostrarToast.timer =
-        setTimeout(() => {
+      }
 
-          toast.classList.remove('show');
-
-        }, 3000);
-
-    }
+    };
 
 
-    /* ============================================================
-       CONFIGURAR BÍBLIA
-       ============================================================ */
+  document.body.appendChild(
+    script
+  );
 
-    function configurarLinkBiblia() {
+}
 
-      const link = $('bibleLink');
 
-      if (!link) return;
+/* ================================================================
+   NORMALIZAR URL DE ÁUDIO
+   ================================================================ */
+
+function converterUrlAudio(url) {
+
+  if (!url) return '';
+
+  url =
+    String(url)
+      .trim();
+
+
+  /*
+   * Google Drive /d/ID
+   */
+
+  let match =
+    url.match(
+      /\/d\/([a-zA-Z0-9_-]+)/
+    );
+
+
+  if (
+    match &&
+    match[1]
+  ) {
+
+    return (
+      'https://drive.google.com/uc?export=download&id=' +
+      match[1]
+    );
+
+  }
+
+
+  /*
+   * Google Drive ?id=ID
+   */
+
+  match =
+    url.match(
+      /[?&]id=([a-zA-Z0-9_-]+)/
+    );
+
+
+  if (
+    match &&
+    match[1]
+  ) {
+
+    return (
+      'https://drive.google.com/uc?export=download&id=' +
+      match[1]
+    );
+
+  }
+
+
+  return url;
+
+}
+
+
+/* ================================================================
+   NORMALIZAR ÁUDIO
+   ================================================================ */
+
+function normalizarAudio(item) {
+
+  if (!item) return null;
+
+
+  /*
+   * Aceita tanto maiúsculas quanto minúsculas
+   * e os nomes usados pela sua planilha.
+   */
+
+  const id =
+    item.id ??
+    item.ID ??
+    item.codigo ??
+    item.Código ??
+    item.codigoAudio ??
+    item.AudioID ??
+    '';
+
+
+  const titulo =
+    item.titulo ??
+    item.Título ??
+    item.nome ??
+    item.Nome ??
+    item.title ??
+    'Áudio sem título';
+
+
+  const artista =
+    item.artista ??
+    item.Artista ??
+    item.autor ??
+    item.Autor ??
+    item.cantor ??
+    item.Cantor ??
+    item.artist ??
+    'Rádio Onda Livre';
+
+
+  const urlOriginal =
+    item.url ??
+    item.URL ??
+    item.link ??
+    item.Link ??
+    item.arquivo ??
+    item.Arquivo ??
+    item.audio ??
+    item.Audio ??
+    item.src ??
+    item.SRC ??
+    '';
+
+
+  const tipo =
+    item.tipo ??
+    item.Tipo ??
+    item.categoria ??
+    item.Categoria ??
+    'Música';
+
+
+  const ordem =
+    Number(
+      item.ordem ??
+      item.Ordem ??
+      item.posicao ??
+      item.Posição ??
+      0
+    );
+
+
+  return {
+
+    id:
+      String(id),
+
+    titulo:
+      String(titulo),
+
+    artista:
+      String(artista),
+
+    url:
+      converterUrlAudio(
+        urlOriginal
+      ),
+
+    tipo:
+      String(tipo),
+
+    ordem:
+      ordem
+
+  };
+
+}
+
+
+/* ================================================================
+   EXTRAIR LISTA DA RESPOSTA
+   ================================================================ */
+
+function extrairListaPlaylist(resposta) {
+
+  /*
+   * O Apps Script pode retornar:
+   *
+   * [...]
+   *
+   * {dados:[...]}
+   *
+   * {playlist:[...]}
+   *
+   * {resultado:[...]}
+   *
+   * {audios:[...]}
+   *
+   * {sucesso:true,dados:[...]}
+   */
+
+  if (
+    Array.isArray(
+      resposta
+    )
+  ) {
+
+    return resposta;
+
+  }
+
+
+  if (
+    resposta &&
+    Array.isArray(
+      resposta.playlist
+    )
+  ) {
+
+    return resposta.playlist;
+
+  }
+
+
+  if (
+    resposta &&
+    Array.isArray(
+      resposta.dados
+    )
+  ) {
+
+    return resposta.dados;
+
+  }
+
+
+  if (
+    resposta &&
+    Array.isArray(
+      resposta.resultado
+    )
+  ) {
+
+    return resposta.resultado;
+
+  }
+
+
+  if (
+    resposta &&
+    Array.isArray(
+      resposta.audios
+    )
+  ) {
+
+    return resposta.audios;
+
+  }
+
+
+  if (
+    resposta &&
+    Array.isArray(
+      resposta.lista
+    )
+  ) {
+
+    return resposta.lista;
+
+  }
+
+
+  return [];
+
+}
+
+
+/* ================================================================
+   CARREGAR PLAYLIST
+   ================================================================ */
+
+function carregarPlaylist() {
+
+  if (
+    requisicaoPlaylistEmAndamento
+  ) {
+
+    return;
+
+  }
+
+
+  requisicaoPlaylistEmAndamento =
+    true;
+
+
+  $('statusSistema').textContent =
+    'Carregando áudios...';
+
+
+  /*
+   * PRIMEIRA TENTATIVA:
+   *
+   * ação usada pelo Apps Script mais recente:
+   *
+   * playlist
+   */
+
+  chamarAPI(
+    'playlist',
+    {},
+    function(resposta) {
+
+      const lista =
+        extrairListaPlaylist(
+          resposta
+        );
 
 
       if (
-        !URL_BIBLIA ||
-        URL_BIBLIA.includes(
-          'COLE_AQUI_O_LINK'
-        )
+        lista.length > 0
       ) {
 
-        link.href = '#';
-
-        link.addEventListener(
-          'click',
-          function(event) {
-
-            event.preventDefault();
-
-            mostrarToast(
-              'Configure o link da Bíblia King James no código.'
-            );
-
-          }
+        finalizarCarregamentoPlaylist(
+          lista
         );
 
         return;
@@ -1696,304 +3520,28 @@
       }
 
 
-      link.href = URL_BIBLIA;
-
-    }
-
-
-    /* ============================================================
-       API JSONP
-       ============================================================ */
-
-    function chamarAPI(
-      acao,
-      parametros = {},
-      callback
-    ) {
-
-      const callbackName =
-        'callbackRadio_' +
-        Date.now() +
-        '_' +
-        Math.random()
-          .toString(36)
-          .substring(2, 8);
-
-
-      callbackAPI = callback;
-
-      const script =
-        document.createElement('script');
-
-
-      const params =
-        new URLSearchParams();
-
-      params.set(
-        'acao',
-        acao
-      );
-
-      params.set(
-        'callback',
-        callbackName
-      );
-
-
-      Object.keys(parametros)
-        .forEach(chave => {
-
-          const valor =
-            parametros[chave];
-
-          if (
-            valor !== undefined &&
-            valor !== null
-          ) {
-
-            params.set(
-              chave,
-              valor
-            );
-
-          }
-
-        });
-
-
-      window[callbackName] =
-        function(resposta) {
-
-          clearTimeout(
-            timeoutAPI
-          );
-
-          try {
-
-            if (callbackAPI) {
-
-              callbackAPI(
-                resposta
-              );
-
-            }
-
-          } finally {
-
-            delete window[callbackName];
-
-            script.remove();
-
-          }
-
-        };
-
-
-      script.src =
-        URL_API +
-        '?' +
-        params.toString();
-
-
-      script.onerror =
-        function() {
-
-          clearTimeout(
-            timeoutAPI
-          );
-
-          delete window[callbackName];
-
-          script.remove();
-
-          if (callbackAPI) {
-
-            callbackAPI({
-              sucesso: false,
-              erro:
-                'Não foi possível conectar ao servidor.'
-            });
-
-          }
-
-        };
-
-
-      timeoutAPI =
-        setTimeout(() => {
-
-          delete window[callbackName];
-
-          script.remove();
-
-          if (callbackAPI) {
-
-            callbackAPI({
-              sucesso: false,
-              erro:
-                'Tempo limite de conexão excedido.'
-            });
-
-          }
-
-        }, 15000);
-
-
-      document.body.appendChild(
-        script
-      );
-
-    }
-
-
-    /* ============================================================
-       CONVERTER URL GOOGLE DRIVE
-       ============================================================ */
-
-    function converterUrlAudio(url) {
-
-      if (!url) return '';
-
-      url = String(url).trim();
-
-
-      const match =
-        url.match(
-          /\/d\/([a-zA-Z0-9_-]+)/
-        );
-
-      if (match && match[1]) {
-
-        return (
-          'https://drive.google.com/uc?export=download&id=' +
-          match[1]
-        );
-
-      }
-
-
-      const idMatch =
-        url.match(
-          /[?&]id=([a-zA-Z0-9_-]+)/
-        );
-
-      if (
-        idMatch &&
-        idMatch[1]
-      ) {
-
-        return (
-          'https://drive.google.com/uc?export=download&id=' +
-          idMatch[1]
-        );
-
-      }
-
-
-      return url;
-
-    }
-
-
-    /* ============================================================
-       NORMALIZAR ÁUDIO
-       ============================================================ */
-
-    function normalizarAudio(item) {
-
-      if (!item) return null;
-
-
-      return {
-
-        id:
-          item.id ??
-          item.ID ??
-          item.codigo ??
-          item.Código ??
-          '',
-
-        titulo:
-          item.titulo ??
-          item.Título ??
-          item.nome ??
-          item.Nome ??
-          'Áudio',
-
-        artista:
-          item.artista ??
-          item.Artista ??
-          item.autor ??
-          item.Autor ??
-          item.cantor ??
-          item.Cantor ??
-          'Rádio Onda Livre',
-
-        url:
-          converterUrlAudio(
-            item.url ??
-            item.URL ??
-            item.link ??
-            item.Link ??
-            item.arquivo ??
-            item.Arquivo ??
-            ''
-          ),
-
-        tipo:
-          String(
-            item.tipo ??
-            item.Tipo ??
-            item.categoria ??
-            item.Categoria ??
-            'Música'
-          ).toLowerCase(),
-
-        ativo:
-          item.ativo ??
-          item.Ativo ??
-          true,
-
-        ordem:
-          Number(
-            item.ordem ??
-            item.Ordem ??
-            item.posicao ??
-            item.Posição ??
-            0
-          )
-
-      };
-
-    }
-
-
-    /* ============================================================
-       CARREGAR PLAYLIST
-       ============================================================ */
-
-    function carregarPlaylist() {
-
-      $('statusSistema').textContent =
-        'Carregando playlist...';
-
+      /*
+       * Se playlist não retornou registros,
+       * tenta o nome antigo.
+       */
 
       chamarAPI(
         'listarPlaylist',
         {},
-        function(resposta) {
+        function(resposta2) {
+
+          const lista2 =
+            extrairListaPlaylist(
+              resposta2
+            );
+
 
           if (
-            !resposta ||
-            resposta.sucesso === false
+            lista2.length > 0
           ) {
 
-            $('statusSistema').textContent =
-              'Erro ao carregar playlist';
-
-            mostrarToast(
-              resposta?.erro ||
-              'Não foi possível carregar os áudios.'
+            finalizarCarregamentoPlaylist(
+              lista2
             );
 
             return;
@@ -2001,1292 +3549,1616 @@
           }
 
 
-          const dados =
-            Array.isArray(resposta)
-              ? resposta
-              : (
-                  resposta.playlist ||
-                  resposta.dados ||
-                  resposta.resultado ||
-                  []
-                );
+          finalizarErroPlaylist(
+            resposta,
+            resposta2
+          );
+
+        },
+        function() {
+
+          finalizarErroPlaylist(
+            resposta,
+            null
+          );
+
+        }
+      );
+
+    },
+    function() {
+
+      /*
+       * Se a ação playlist falhar,
+       * tenta listarPlaylist.
+       */
+
+      chamarAPI(
+        'listarPlaylist',
+        {},
+        function(resposta2) {
+
+          const lista2 =
+            extrairListaPlaylist(
+              resposta2
+            );
 
 
-          playlist =
-            dados
-              .map(normalizarAudio)
-              .filter(audio =>
-                audio &&
-                audio.url
-              )
-              .sort(
-                (a,b) =>
-                  a.ordem - b.ordem
-              );
+          if (
+            lista2.length > 0
+          ) {
+
+            finalizarCarregamentoPlaylist(
+              lista2
+            );
+
+            return;
+
+          }
 
 
-          $('totalAudios').textContent =
-            playlist.length;
+          finalizarErroPlaylist(
+            null,
+            resposta2
+          );
+
+        },
+        function(erro2) {
+
+          requisicaoPlaylistEmAndamento =
+            false;
 
 
           $('statusSistema').textContent =
-            playlist.length
-              ? 'Sistema funcionando'
-              : 'Nenhum áudio encontrado';
+            'Erro ao carregar áudios';
 
 
-          dividirPlaylists();
-
-          aplicarFiltro();
-
-          indiceAtual = 0;
-
-          atualizarPlayer();
-
-
-          setTimeout(() => {
-
-            tocarAtual();
-
-          }, 500);
-
-
-          registrarAcesso();
+          mostrarToast(
+            erro2 ||
+            'Não foi possível carregar a playlist.'
+          );
 
         }
       );
 
     }
+  );
+
+}
 
 
-    /* ============================================================
-       DIVIDIR PLAYLIST EM 3
-       ============================================================ */
+/* ================================================================
+   FINALIZAR CARREGAMENTO
+   ================================================================ */
 
-    function dividirPlaylists() {
+function finalizarCarregamentoPlaylist(
+  lista
+) {
 
-      const total =
-        playlist.length;
-
-
-      const base =
-        Math.floor(
-          total / 3
-        );
+  requisicaoPlaylistEmAndamento =
+    false;
 
 
-      const resto =
-        total % 3;
-
-
-      const qtdManha =
-        base +
-        (resto >= 1 ? 1 : 0);
-
-
-      const qtdTarde =
-        base +
-        (resto >= 2 ? 1 : 0);
-
-
-      const qtdNoite =
-        base;
-
-
-      const manha =
-        playlist.slice(
-          0,
-          qtdManha
-        );
-
-
-      const tarde =
-        playlist.slice(
-          qtdManha,
-          qtdManha + qtdTarde
-        );
-
-
-      const noite =
-        playlist.slice(
-          qtdManha + qtdTarde
-        );
-
-
-      renderizarPlaylist(
-        'playlistManha',
-        'countManha',
-        manha
+  playlist =
+    lista
+      .map(
+        normalizarAudio
+      )
+      .filter(
+        audio =>
+          audio &&
+          audio.url
+      )
+      .sort(
+        (a,b) =>
+          a.ordem - b.ordem
       );
 
 
-      renderizarPlaylist(
-        'playlistTarde',
-        'countTarde',
-        tarde
-      );
+  $('totalAudios').textContent =
+    playlist.length;
 
 
-      renderizarPlaylist(
-        'playlistNoite',
-        'countNoite',
-        noite
-      );
+  if (
+    playlist.length === 0
+  ) {
 
-    }
+    finalizarErroPlaylist(
+      null,
+      null
+    );
 
+    return;
 
-    /* ============================================================
-       RENDERIZAR PLAYLIST
-       ============================================================ */
+  }
 
-    function renderizarPlaylist(
-      containerId,
-      countId,
-      lista
-    ) {
 
-      const container =
-        $(containerId);
+  $('statusSistema').textContent =
+    playlist.length +
+    ' áudio' +
+    (
+      playlist.length === 1
+        ? ''
+        : 's'
+    ) +
+    ' carregado' +
+    (
+      playlist.length === 1
+        ? ''
+        : 's'
+    );
 
-      const count =
-        $(countId);
 
+  dividirPlaylists();
 
-      if (!container) return;
 
+  aplicarFiltro();
 
-      count.textContent =
-        lista.length;
 
+  indiceAtual = 0;
 
-      if (!lista.length) {
 
-        container.innerHTML =
-          `
-            <div style="
-              padding:20px;
-              color:#8093ad;
-              text-align:center;
-              font-size:13px;
-            ">
-              Nenhum áudio nesta playlist.
-            </div>
-          `;
+  atualizarPlayer();
 
-        return;
 
-      }
+  registrarAcesso();
 
 
-      container.innerHTML =
-        lista
-          .map(
-            (audio, indice) => {
+  /*
+   * Autoplay continua sendo tentado,
+   * mas o navegador pode bloquear.
+   */
 
-              const indiceGlobal =
-                playlist.findIndex(
-                  item =>
-                    String(item.id) ===
-                    String(audio.id)
-                );
-
-
-              return `
-                <div
-                  class="playlist-item"
-                  data-index="${indiceGlobal}"
-                  onclick="selecionarAudio(${indiceGlobal})"
-                >
-
-                  <div class="track-number">
-                    ${String(indice + 1).padStart(2,'0')}
-                  </div>
-
-                  <div class="track-info">
-
-                    <div class="track-title">
-                      ${escaparHTML(audio.titulo)}
-                    </div>
-
-                    <div class="track-artist">
-                      ${escaparHTML(audio.artista)}
-                    </div>
-
-                  </div>
-
-                </div>
-              `;
-
-            }
-          )
-          .join('');
-
-    }
-
-
-    /* ============================================================
-       FILTRO
-       ============================================================ */
-
-    function aplicarFiltro() {
-
-      if (
-        filtroAtual ===
-        'todos'
-      ) {
-
-        playlistFiltrada =
-          [...playlist];
-
-      } else {
-
-        playlistFiltrada =
-          playlist.filter(audio =>
-            normalizarTipo(
-              audio.tipo
-            ) === filtroAtual
-          );
-
-      }
-
-
-      atualizarItensAtivos();
-
-    }
-
-
-    function normalizarTipo(tipo) {
-
-      tipo =
-        String(tipo || '')
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(
-            /[\u0300-\u036f]/g,
-            ''
-          );
-
-
-      if (
-        tipo.includes('oracao')
-      ) {
-
-        return 'oracao';
-
-      }
-
-
-      if (
-        tipo.includes('mensagem')
-      ) {
-
-        return 'mensagem';
-
-      }
-
-
-      return 'musica';
-
-    }
-
-
-    /* ============================================================
-       ITENS ATIVOS
-       ============================================================ */
-
-    function atualizarItensAtivos() {
-
-      document
-        .querySelectorAll(
-          '.playlist-item'
-        )
-        .forEach(item => {
-
-          const indice =
-            Number(
-              item.dataset.index
-            );
-
-
-          item.classList.toggle(
-            'active',
-            indice === indiceAtual
-          );
-
-        });
-
-    }
-
-
-    /* ============================================================
-       SELECIONAR ÁUDIO
-       ============================================================ */
-
-    function selecionarAudio(
-      indice
-    ) {
-
-      if (
-        indice < 0 ||
-        indice >= playlist.length
-      ) {
-
-        return;
-
-      }
-
-
-      indiceAtual =
-        indice;
-
-
-      atualizarPlayer();
+  setTimeout(
+    function() {
 
       tocarAtual();
 
-    }
+    },
+    700
+  );
+
+}
 
 
-    /* ============================================================
-       ATUALIZAR PLAYER
-       ============================================================ */
+/* ================================================================
+   ERRO DA PLAYLIST
+   ================================================================ */
 
-    function atualizarPlayer() {
+function finalizarErroPlaylist(
+  resposta1,
+  resposta2
+) {
 
-      const audio =
-        playlist[indiceAtual];
-
-
-      if (!audio) return;
-
-
-      $('nowTitle').textContent =
-        audio.titulo;
+  requisicaoPlaylistEmAndamento =
+    false;
 
 
-      $('nowArtist').textContent =
-        audio.artista;
+  $('statusSistema').textContent =
+    'Nenhum áudio encontrado';
 
 
-      $('audioPlayer').src =
-        audio.url;
+  $('totalAudios').textContent =
+    '0';
 
 
-      atualizarItensAtivos();
+  const mensagem =
+    resposta2?.erro ||
+    resposta1?.erro ||
+    'A API não retornou nenhum arquivo de áudio.';
 
 
-      $('playlistAtual').textContent =
-        identificarPlaylistAtual();
+  mostrarToast(
+    mensagem
+  );
 
 
-    }
+  [
+    'playlistManha',
+    'playlistTarde',
+    'playlistNoite'
+  ]
+  .forEach(
+    id => {
 
+      const elemento =
+        $(id);
 
-    /* ============================================================
-       IDENTIFICAR PLAYLIST ATUAL
-       ============================================================ */
+      if (!elemento) return;
 
-    function identificarPlaylistAtual() {
-
-      const total =
-        playlist.length;
-
-
-      if (!total) {
-        return 'Manhã';
-      }
-
-
-      const base =
-        Math.floor(
-          total / 3
-        );
-
-
-      const resto =
-        total % 3;
-
-
-      const manha =
-        base +
-        (resto >= 1 ? 1 : 0);
-
-
-      const tarde =
-        base +
-        (resto >= 2 ? 1 : 0);
-
-
-      if (
-        indiceAtual < manha
-      ) {
-
-        return '🌅 Manhã';
-
-      }
-
-
-      if (
-        indiceAtual <
-        manha + tarde
-      ) {
-
-        return '☀️ Tarde';
-
-      }
-
-
-      return '🌙 Noite';
+      elemento.innerHTML =
+        `
+          <div style="
+            padding:25px 15px;
+            text-align:center;
+            color:#8093ad;
+            font-size:13px;
+          ">
+            Nenhum áudio disponível.
+          </div>
+        `;
 
     }
+  );
+
+}
 
 
-    /* ============================================================
-       TOCAR ATUAL
-       ============================================================ */
+/* ================================================================
+   DIVIDIR EM MANHÃ / TARDE / NOITE
+   ================================================================ */
 
-    function tocarAtual() {
+function dividirPlaylists() {
 
-      const player =
-        $('audioPlayer');
-
-
-      if (!player.src) return;
+  const total =
+    playlist.length;
 
 
-      player.play()
-        .then(() => {
+  const base =
+    Math.floor(
+      total / 3
+    );
 
-          $('playBtn').textContent =
-            '⏸';
 
-          registrarEvento(
-            'PLAY'
+  const resto =
+    total % 3;
+
+
+  /*
+   * O restante é distribuído começando
+   * pela manhã.
+   */
+
+  const qtdManha =
+    base +
+    (
+      resto >= 1
+        ? 1
+        : 0
+    );
+
+
+  const qtdTarde =
+    base +
+    (
+      resto >= 2
+        ? 1
+        : 0
+    );
+
+
+  const qtdNoite =
+    base;
+
+
+  const manha =
+    playlist.slice(
+      0,
+      qtdManha
+    );
+
+
+  const tarde =
+    playlist.slice(
+      qtdManha,
+      qtdManha + qtdTarde
+    );
+
+
+  const noite =
+    playlist.slice(
+      qtdManha + qtdTarde
+    );
+
+
+  renderizarPlaylist(
+    'playlistManha',
+    'countManha',
+    manha
+  );
+
+
+  renderizarPlaylist(
+    'playlistTarde',
+    'countTarde',
+    tarde
+  );
+
+
+  renderizarPlaylist(
+    'playlistNoite',
+    'countNoite',
+    noite
+  );
+
+}
+
+
+/* ================================================================
+   RENDERIZAR PLAYLIST
+   ================================================================ */
+
+function renderizarPlaylist(
+  containerId,
+  countId,
+  lista
+) {
+
+  const container =
+    $(containerId);
+
+  const contador =
+    $(countId);
+
+
+  if (!container) return;
+
+
+  if (contador) {
+
+    contador.textContent =
+      lista.length;
+
+  }
+
+
+  if (!lista.length) {
+
+    container.innerHTML =
+      `
+        <div style="
+          padding:20px;
+          text-align:center;
+          color:#8093ad;
+          font-size:13px;
+        ">
+          Nenhum áudio nesta playlist.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    lista
+      .map(
+        (audio, indice) => {
+
+          const indiceGlobal =
+            playlist.findIndex(
+              item =>
+                String(item.id) ===
+                String(audio.id)
+            );
+
+
+          return `
+            <div
+              class="playlist-item"
+              data-index="${indiceGlobal}"
+              onclick="selecionarAudio(${indiceGlobal})"
+            >
+
+              <div class="track-number">
+                ${String(
+                  indice + 1
+                ).padStart(2,'0')}
+              </div>
+
+
+              <div class="track-info">
+
+                <div class="track-title">
+                  ${escaparHTML(
+                    audio.titulo
+                  )}
+                </div>
+
+                <div class="track-artist">
+                  ${escaparHTML(
+                    audio.artista
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+          `;
+
+        }
+      )
+      .join('');
+
+}
+
+
+/* ================================================================
+   FILTRO
+   ================================================================ */
+
+function aplicarFiltro() {
+
+  if (
+    filtroAtual ===
+    'todos'
+  ) {
+
+    playlistFiltrada =
+      [...playlist];
+
+  } else {
+
+    playlistFiltrada =
+      playlist.filter(
+        audio =>
+          normalizarTipo(
+            audio.tipo
+          ) ===
+          filtroAtual
+      );
+
+  }
+
+
+  atualizarItensAtivos();
+
+}
+
+
+/* ================================================================
+   NORMALIZAR TIPO
+   ================================================================ */
+
+function normalizarTipo(
+  tipo
+) {
+
+  const texto =
+    String(
+      tipo || ''
+    )
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(
+      /[\u0300-\u036f]/g,
+      ''
+    );
+
+
+  if (
+    texto.includes(
+      'oracao'
+    )
+  ) {
+
+    return 'oracao';
+
+  }
+
+
+  if (
+    texto.includes(
+      'mensagem'
+    )
+  ) {
+
+    return 'mensagem';
+
+  }
+
+
+  return 'musica';
+
+}
+
+
+/* ================================================================
+   ITENS ATIVOS
+   ================================================================ */
+
+function atualizarItensAtivos() {
+
+  document
+    .querySelectorAll(
+      '.playlist-item'
+    )
+    .forEach(
+      item => {
+
+        const indice =
+          Number(
+            item.dataset.index
           );
 
-        })
-        .catch(() => {
 
-          $('playBtn').textContent =
-            '▶';
+        item.classList.toggle(
+          'active',
+          indice === indiceAtual
+        );
 
-        });
+      }
+    );
 
-    }
-
-
-    /* ============================================================
-       PLAY / PAUSE
-       ============================================================ */
-
-    function alternarPlay() {
-
-      const player =
-        $('audioPlayer');
+}
 
 
-      if (
-        player.paused
-      ) {
+/* ================================================================
+   SELECIONAR ÁUDIO
+   ================================================================ */
 
-        tocarAtual();
+function selecionarAudio(
+  indice
+) {
 
-      } else {
+  if (
+    indice < 0 ||
+    indice >= playlist.length
+  ) {
 
-        player.pause();
+    return;
+
+  }
+
+
+  indiceAtual =
+    indice;
+
+
+  atualizarPlayer();
+
+  tocarAtual();
+
+}
+
+
+/* ================================================================
+   ATUALIZAR PLAYER
+   ================================================================ */
+
+function atualizarPlayer() {
+
+  const audio =
+    playlist[
+      indiceAtual
+    ];
+
+
+  if (!audio) return;
+
+
+  $('nowTitle').textContent =
+    audio.titulo;
+
+
+  $('nowArtist').textContent =
+    audio.artista;
+
+
+  $('audioPlayer').src =
+    audio.url;
+
+
+  $('playlistAtual').textContent =
+    identificarPlaylistAtual();
+
+
+  atualizarItensAtivos();
+
+}
+
+
+/* ================================================================
+   IDENTIFICAR PLAYLIST
+   ================================================================ */
+
+function identificarPlaylistAtual() {
+
+  const total =
+    playlist.length;
+
+
+  if (!total) {
+
+    return '🌅 Manhã';
+
+  }
+
+
+  const base =
+    Math.floor(
+      total / 3
+    );
+
+
+  const resto =
+    total % 3;
+
+
+  const manha =
+    base +
+    (
+      resto >= 1
+        ? 1
+        : 0
+    );
+
+
+  const tarde =
+    base +
+    (
+      resto >= 2
+        ? 1
+        : 0
+    );
+
+
+  if (
+    indiceAtual <
+    manha
+  ) {
+
+    return '🌅 Manhã';
+
+  }
+
+
+  if (
+    indiceAtual <
+    manha + tarde
+  ) {
+
+    return '☀️ Tarde';
+
+  }
+
+
+  return '🌙 Noite';
+
+}
+
+
+/* ================================================================
+   TOCAR
+   ================================================================ */
+
+function tocarAtual() {
+
+  const player =
+    $('audioPlayer');
+
+
+  if (
+    !player ||
+    !player.src
+  ) {
+
+    return;
+
+  }
+
+
+  player.play()
+    .then(
+      function() {
+
+        $('playBtn').textContent =
+          '⏸';
+
+        registrarEvento(
+          'PLAY'
+        );
+
+      }
+    )
+    .catch(
+      function() {
+
+        /*
+         * Navegadores podem bloquear
+         * autoplay.
+         */
 
         $('playBtn').textContent =
           '▶';
 
-        registrarEvento(
-          'PAUSE'
-        );
-
       }
+    );
+
+}
+
+
+/* ================================================================
+   PLAY / PAUSE
+   ================================================================ */
+
+function alternarPlay() {
+
+  const player =
+    $('audioPlayer');
+
+
+  if (
+    player.paused
+  ) {
+
+    tocarAtual();
+
+  } else {
+
+    player.pause();
+
+    $('playBtn').textContent =
+      '▶';
+
+    registrarEvento(
+      'PAUSE'
+    );
+
+  }
+
+}
+
+
+/* ================================================================
+   PRÓXIMO
+   ================================================================ */
+
+function proximoAudio() {
+
+  if (
+    !playlist.length
+  ) return;
+
+
+  indiceAtual =
+    (
+      indiceAtual + 1
+    ) %
+    playlist.length;
+
+
+  atualizarPlayer();
+
+  tocarAtual();
+
+}
+
+
+/* ================================================================
+   ANTERIOR
+   ================================================================ */
+
+function audioAnterior() {
+
+  if (
+    !playlist.length
+  ) return;
+
+
+  indiceAtual =
+    (
+      indiceAtual -
+      1 +
+      playlist.length
+    ) %
+    playlist.length;
+
+
+  atualizarPlayer();
+
+  tocarAtual();
+
+}
+
+
+/* ================================================================
+   PARAR
+   ================================================================ */
+
+function pararAudio() {
+
+  const player =
+    $('audioPlayer');
+
+
+  player.pause();
+
+  player.currentTime =
+    0;
+
+
+  $('playBtn').textContent =
+    '▶';
+
+
+  registrarEvento(
+    'PAUSE'
+  );
+
+}
+
+
+/* ================================================================
+   CONFIGURAR PLAYER
+   ================================================================ */
+
+function configurarPlayer() {
+
+  const player =
+    $('audioPlayer');
+
+
+  $('playBtn')
+    .addEventListener(
+      'click',
+      alternarPlay
+    );
+
+
+  $('prevBtn')
+    .addEventListener(
+      'click',
+      audioAnterior
+    );
+
+
+  $('nextBtn')
+    .addEventListener(
+      'click',
+      proximoAudio
+    );
+
+
+  $('stopBtn')
+    .addEventListener(
+      'click',
+      pararAudio
+    );
+
+
+  player.addEventListener(
+    'play',
+    function() {
+
+      $('playBtn').textContent =
+        '⏸';
 
     }
+  );
 
 
-    /* ============================================================
-       PRÓXIMO
-       ============================================================ */
-
-    function proximoAudio() {
-
-      if (!playlist.length) return;
-
-
-      indiceAtual =
-        (
-          indiceAtual + 1
-        ) %
-        playlist.length;
-
-
-      atualizarPlayer();
-
-      tocarAtual();
-
-    }
-
-
-    /* ============================================================
-       ANTERIOR
-       ============================================================ */
-
-    function audioAnterior() {
-
-      if (!playlist.length) return;
-
-
-      indiceAtual =
-        (
-          indiceAtual - 1 +
-          playlist.length
-        ) %
-        playlist.length;
-
-
-      atualizarPlayer();
-
-      tocarAtual();
-
-    }
-
-
-    /* ============================================================
-       PARAR
-       ============================================================ */
-
-    function pararAudio() {
-
-      const player =
-        $('audioPlayer');
-
-
-      player.pause();
-
-      player.currentTime = 0;
-
+  player.addEventListener(
+    'pause',
+    function() {
 
       $('playBtn').textContent =
         '▶';
 
+    }
+  );
+
+
+  player.addEventListener(
+    'ended',
+    function() {
 
       registrarEvento(
-        'PAUSE'
+        'FIM'
+      );
+
+      proximoAudio();
+
+    }
+  );
+
+
+  player.addEventListener(
+    'error',
+    function() {
+
+      mostrarToast(
+        'Não foi possível reproduzir este áudio.'
       );
 
     }
+  );
+
+}
 
 
-    /* ============================================================
-       EVENTOS DO PLAYER
-       ============================================================ */
+/* ================================================================
+   HEARTBEAT
+   ================================================================ */
 
-    function configurarPlayer() {
+function iniciarHeartbeat() {
 
-      const player =
-        $('audioPlayer');
+  if (
+    heartbeatTimer
+  ) {
 
+    return;
 
-      $('playBtn')
-        .addEventListener(
-          'click',
-          alternarPlay
-        );
+  }
 
 
-      $('prevBtn')
-        .addEventListener(
-          'click',
-          audioAnterior
-        );
+  heartbeatTimer =
+    setInterval(
+      function() {
+
+        const player =
+          $('audioPlayer');
 
 
-      $('nextBtn')
-        .addEventListener(
-          'click',
-          proximoAudio
-        );
-
-
-      $('stopBtn')
-        .addEventListener(
-          'click',
-          pararAudio
-        );
-
-
-      player.addEventListener(
-        'play',
-        function() {
-
-          $('playBtn').textContent =
-            '⏸';
-
-        }
-      );
-
-
-      player.addEventListener(
-        'pause',
-        function() {
-
-          $('playBtn').textContent =
-            '▶';
-
-        }
-      );
-
-
-      player.addEventListener(
-        'ended',
-        function() {
+        if (
+          player &&
+          !player.paused &&
+          player.currentTime > 0
+        ) {
 
           registrarEvento(
-            'FIM'
+            'HEARTBEAT'
           );
 
-          proximoAudio();
-
         }
-      );
+
+      },
+      60000
+    );
+
+}
 
 
-      player.addEventListener(
-        'timeupdate',
-        function() {
+/* ================================================================
+   REGISTRAR EVENTO
+   ================================================================ */
 
-          iniciarHeartbeat();
+function registrarEvento(
+  evento
+) {
 
-        }
-      );
-
-    }
-
-
-    /* ============================================================
-       HEARTBEAT
-       ============================================================ */
-
-    function iniciarHeartbeat() {
-
-      if (heartbeatTimer) {
-        return;
-      }
+  const audio =
+    playlist[
+      indiceAtual
+    ];
 
 
-      heartbeatTimer =
-        setInterval(
-          () => {
-
-            const player =
-              $('audioPlayer');
+  if (!audio) return;
 
 
-            if (
-              player &&
-              !player.paused &&
-              player.currentTime > 0
-            ) {
+  chamarAPI(
+    'registrarEvento',
+    {
 
-              registrarEvento(
-                'HEARTBEAT'
-              );
+      id:
+        sessao,
 
-            }
+      evento:
+        evento,
 
-          },
-          60000
-        );
+      audioId:
+        audio.id,
 
-    }
+      titulo:
+        audio.titulo,
 
+      sessao:
+        sessao,
 
-    /* ============================================================
-       EVENTOS API
-       ============================================================ */
-
-    function registrarEvento(
-      evento
-    ) {
-
-      const audio =
-        playlist[indiceAtual];
-
-
-      if (!audio) return;
-
-
-      chamarAPI(
-        'registrarEvento',
-        {
-          id: sessao,
-          evento: evento,
-          audioId: audio.id,
-          titulo: audio.titulo,
-          sessao: sessao,
-          cidade:
-            localStorage.getItem(
-              'radio_onda_livre_cidade'
-            ) || '',
-          estado:
-            localStorage.getItem(
-              'radio_onda_livre_estado'
-            ) || ''
-        },
-        function() {}
-      );
-
-    }
-
-
-    /* ============================================================
-       REGISTRAR ACESSO
-       ============================================================ */
-
-    function registrarAcesso() {
-
-      const chave =
-        'radio_onda_livre_acesso_registrado';
-
-
-      if (
-        sessionStorage.getItem(
-          chave
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      sessionStorage.setItem(
-        chave,
-        '1'
-      );
-
-
-      const audio =
-        playlist[0];
-
-
-      if (!audio) return;
-
-
-      chamarAPI(
-        'registrarEvento',
-        {
-          id: sessao,
-          evento: 'ACESSO',
-          audioId: audio.id,
-          titulo: audio.titulo,
-          sessao: sessao,
-          cidade:
-            localStorage.getItem(
-              'radio_onda_livre_cidade'
-            ) || '',
-          estado:
-            localStorage.getItem(
-              'radio_onda_livre_estado'
-            ) || ''
-        },
-        function() {}
-      );
-
-    }
-
-
-    /* ============================================================
-       LOCALIZAÇÃO
-       ============================================================ */
-
-    function carregarLocalizacao() {
-
-      const cidadeSalva =
+      cidade:
         localStorage.getItem(
           'radio_onda_livre_cidade'
-        );
+        ) || '',
 
-
-      const estadoSalvo =
+      estado:
         localStorage.getItem(
           'radio_onda_livre_estado'
-        );
+        ) || ''
+
+    },
+    function() {},
+    function() {}
+  );
+
+}
 
 
-      if (
-        cidadeSalva
-      ) {
+/* ================================================================
+   REGISTRAR ACESSO
+   ================================================================ */
 
-        atualizarLocalizacao(
-          cidadeSalva,
-          estadoSalvo
-        );
+function registrarAcesso() {
 
-        return;
-
-      }
+  const chave =
+    'radio_onda_livre_acesso_registrado';
 
 
-      $('statusLocalizacao').textContent =
-        'Localizando...';
+  if (
+    sessionStorage.getItem(
+      chave
+    )
+  ) {
+
+    return;
+
+  }
 
 
-      const callback =
-        'callbackLocalizacao_' +
-        Date.now();
+  sessionStorage.setItem(
+    chave,
+    '1'
+  );
 
 
-      window[callback] =
-        function(data) {
-
-          try {
-
-            const cidade =
-              data?.city ||
-              data?.cidade ||
-              '';
+  const audio =
+    playlist[0];
 
 
-            const estado =
-              data?.region ||
-              data?.estado ||
-              '';
+  if (!audio) return;
 
 
-            if (cidade) {
+  chamarAPI(
+    'registrarEvento',
+    {
 
-              localStorage.setItem(
-                'radio_onda_livre_cidade',
-                cidade
-              );
+      id:
+        sessao,
 
-            }
+      evento:
+        'ACESSO',
 
+      audioId:
+        audio.id,
 
-            if (estado) {
+      titulo:
+        audio.titulo,
 
-              localStorage.setItem(
-                'radio_onda_livre_estado',
-                estado
-              );
+      sessao:
+        sessao,
 
-            }
+      cidade:
+        localStorage.getItem(
+          'radio_onda_livre_cidade'
+        ) || '',
 
+      estado:
+        localStorage.getItem(
+          'radio_onda_livre_estado'
+        ) || ''
 
-            atualizarLocalizacao(
-              cidade,
-              estado
-            );
+    },
+    function() {},
+    function() {}
+  );
 
-          } finally {
-
-            delete window[callback];
-
-          }
-
-        };
-
-
-      const script =
-        document.createElement('script');
-
-
-      script.src =
-        'https://ipapi.co/jsonp/?callback=' +
-        callback;
+}
 
 
-      script.onerror =
-        function() {
+/* ================================================================
+   LOCALIZAÇÃO
+   ================================================================ */
 
-          $('statusLocalizacao').textContent =
-            'Não identificada';
+function carregarLocalizacao() {
 
-          $('localAtual').textContent =
-            'Não identificada';
-
-          delete window[callback];
-
-          script.remove();
-
-        };
+  const cidade =
+    localStorage.getItem(
+      'radio_onda_livre_cidade'
+    );
 
 
-      document.body.appendChild(
-        script
-      );
+  const estado =
+    localStorage.getItem(
+      'radio_onda_livre_estado'
+    );
 
-    }
 
+  if (cidade) {
 
-    /* ============================================================
-       ATUALIZAR LOCALIZAÇÃO
-       ============================================================ */
-
-    function atualizarLocalizacao(
+    atualizarLocalizacao(
       cidade,
       estado
-    ) {
+    );
 
-      let texto =
-        cidade || 'Local não identificado';
+    return;
 
+  }
 
-      if (estado) {
 
-        texto +=
-          ' - ' +
-          estado;
+  const callback =
+    'localizacaoRadio_' +
+    Date.now();
 
-      }
 
-
-      $('statusLocalizacao').textContent =
-        'Identificada';
-
-
-      $('localizacaoTexto').textContent =
-        texto;
-
-
-      $('localAtual').textContent =
-        texto;
-
-    }
-
-
-    /* ============================================================
-       PESQUISA
-       ============================================================ */
-
-    function pesquisar() {
-
-      const campo =
-        $('searchInput');
-
-
-      const caixa =
-        $('searchResults');
-
-
-      const termo =
-        campo.value
-          .trim()
-          .toLowerCase();
-
-
-      if (!termo) {
-
-        limparPesquisa();
-
-        return;
-
-      }
-
-
-      const resultados =
-        playlist.filter(
-          audio =>
-            audio.titulo
-              .toLowerCase()
-              .includes(termo) ||
-            audio.artista
-              .toLowerCase()
-              .includes(termo) ||
-            audio.tipo
-              .toLowerCase()
-              .includes(termo)
-        );
-
-
-      if (!resultados.length) {
-
-        caixa.innerHTML =
-          `
-            <div style="
-              padding:16px;
-              color:#8093ad;
-              text-align:center;
-            ">
-              Nenhum áudio encontrado.
-            </div>
-          `;
-
-      } else {
-
-        caixa.innerHTML =
-          resultados
-            .slice(0, 20)
-            .map(audio => {
-
-              const indice =
-                playlist.findIndex(
-                  item =>
-                    String(item.id) ===
-                    String(audio.id)
-                );
-
-
-              return `
-                <div
-                  class="search-result"
-                  onclick="selecionarResultado(${indice})"
-                >
-
-                  <strong>
-                    ${escaparHTML(audio.titulo)}
-                  </strong>
-
-                  <div style="
-                    margin-top:3px;
-                    color:#8093ad;
-                    font-size:12px;
-                  ">
-                    ${escaparHTML(audio.artista)}
-                  </div>
-
-                </div>
-              `;
-
-            })
-            .join('');
-
-      }
-
-
-      caixa.style.display =
-        'block';
-
-    }
-
-
-    /* ============================================================
-       SELECIONAR RESULTADO
-       ============================================================ */
-
-    function selecionarResultado(
-      indice
-    ) {
-
-      indiceAtual =
-        indice;
-
-
-      aplicarFiltro();
-
-      atualizarPlayer();
-
-      tocarAtual();
-
-      $('searchResults')
-        .style.display =
-        'none';
-
-    }
-
-
-    /* ============================================================
-       LIMPAR PESQUISA
-       ============================================================ */
-
-    function limparPesquisa() {
-
-      const campo =
-        document.getElementById(
-          'searchInput'
-        );
-
-
-      const caixa =
-        document.getElementById(
-          'searchResults'
-        );
-
-
-      campo.value = '';
-
-      caixa.innerHTML = '';
-
-      caixa.style.display =
-        'none';
-
-      campo.focus();
-
-    }
-
-
-    /* ============================================================
-       COMPARTILHAR RÁDIO
-       ============================================================ */
-
-    async function compartilharRadio() {
-
-      const url =
-        window.location.href;
-
-
-      const texto =
-        'Ouça a Rádio Onda Livre e seja abençoado com louvores, oração e mensagens. 🎵🙏';
-
-
-      if (
-        navigator.share
-      ) {
-
-        try {
-
-          await navigator.share({
-            title:
-              'Rádio Onda Livre',
-            text:
-              texto,
-            url:
-              url
-          });
-
-        } catch (erro) {
-
-          // Compartilhamento cancelado.
-
-        }
-
-        return;
-
-      }
-
+  window[callback] =
+    function(data) {
 
       try {
 
-        await navigator.clipboard.writeText(
-          url
+        const cidadeNova =
+          data?.city ||
+          data?.cidade ||
+          '';
+
+
+        const estadoNovo =
+          data?.region ||
+          data?.estado ||
+          '';
+
+
+        if (cidadeNova) {
+
+          localStorage.setItem(
+            'radio_onda_livre_cidade',
+            cidadeNova
+          );
+
+        }
+
+
+        if (estadoNovo) {
+
+          localStorage.setItem(
+            'radio_onda_livre_estado',
+            estadoNovo
+          );
+
+        }
+
+
+        atualizarLocalizacao(
+          cidadeNova,
+          estadoNovo
         );
 
-        mostrarToast(
-          'Link da rádio copiado!'
-        );
+      } finally {
 
-      } catch (erro) {
-
-        mostrarToast(
-          'Copie o endereço desta página para compartilhar.'
-        );
+        delete window[
+          callback
+        ];
 
       }
 
-    }
+    };
 
 
-    /* ============================================================
-       FILTROS
-       ============================================================ */
-
-    function configurarFiltros() {
-
-      document
-        .querySelectorAll(
-          '.filter-btn'
-        )
-        .forEach(botao => {
-
-          botao.addEventListener(
-            'click',
-            function() {
-
-              document
-                .querySelectorAll(
-                  '.filter-btn'
-                )
-                .forEach(btn =>
-                  btn.classList.remove(
-                    'active'
-                  )
-                );
+  const script =
+    document.createElement(
+      'script'
+    );
 
 
-              this.classList.add(
-                'active'
+  script.src =
+    'https://ipapi.co/jsonp/?callback=' +
+    callback;
+
+
+  script.onerror =
+    function() {
+
+      $('statusLocalizacao')
+        .textContent =
+        'Não identificada';
+
+      $('localAtual')
+        .textContent =
+        'Não identificada';
+
+      delete window[
+        callback
+      ];
+
+      script.remove();
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
+
+
+/* ================================================================
+   ATUALIZAR LOCALIZAÇÃO
+   ================================================================ */
+
+function atualizarLocalizacao(
+  cidade,
+  estado
+) {
+
+  let texto =
+    cidade ||
+    'Local não identificado';
+
+
+  if (estado) {
+
+    texto +=
+      ' - ' +
+      estado;
+
+  }
+
+
+  $('statusLocalizacao')
+    .textContent =
+    'Identificada';
+
+
+  $('localizacaoTexto')
+    .textContent =
+    texto;
+
+
+  $('localAtual')
+    .textContent =
+    texto;
+
+}
+
+
+/* ================================================================
+   PESQUISA
+   ================================================================ */
+
+function pesquisar() {
+
+  const campo =
+    $('searchInput');
+
+
+  const caixa =
+    $('searchResults');
+
+
+  const termo =
+    campo.value
+      .trim()
+      .toLowerCase();
+
+
+  if (!termo) {
+
+    limparPesquisa();
+
+    return;
+
+  }
+
+
+  const resultados =
+    playlist.filter(
+      audio =>
+
+        audio.titulo
+          .toLowerCase()
+          .includes(termo)
+
+        ||
+
+        audio.artista
+          .toLowerCase()
+          .includes(termo)
+
+        ||
+
+        audio.tipo
+          .toLowerCase()
+          .includes(termo)
+
+    );
+
+
+  if (!resultados.length) {
+
+    caixa.innerHTML =
+      `
+        <div style="
+          padding:16px;
+          color:#8093ad;
+          text-align:center;
+        ">
+          Nenhum áudio encontrado.
+        </div>
+      `;
+
+  } else {
+
+    caixa.innerHTML =
+      resultados
+        .slice(0,20)
+        .map(
+          audio => {
+
+            const indice =
+              playlist.findIndex(
+                item =>
+                  String(item.id) ===
+                  String(audio.id)
               );
 
 
-              filtroAtual =
-                this.dataset.filter;
+            return `
+              <div
+                class="search-result"
+                onclick="selecionarResultado(${indice})"
+              >
+
+                <strong>
+                  ${escaparHTML(
+                    audio.titulo
+                  )}
+                </strong>
+
+                <div style="
+                  margin-top:3px;
+                  color:#8093ad;
+                  font-size:12px;
+                ">
+                  ${escaparHTML(
+                    audio.artista
+                  )}
+                </div>
+
+              </div>
+            `;
+
+          }
+        )
+        .join('');
+
+  }
 
 
-              aplicarFiltro();
+  caixa.style.display =
+    'block';
 
-            }
-          );
-
-        });
-
-    }
+}
 
 
-    /* ============================================================
-       EVENTOS DE INTERFACE
-       ============================================================ */
+/* ================================================================
+   SELECIONAR RESULTADO
+   ================================================================ */
 
-    function configurarInterface() {
+function selecionarResultado(
+  indice
+) {
 
-      $('searchInput')
-        .addEventListener(
-          'input',
-          pesquisar
-        );
+  if (
+    indice < 0 ||
+    indice >= playlist.length
+  ) {
 
+    return;
 
-      $('clearSearchBtn')
-        .addEventListener(
-          'click',
-          limparPesquisa
-        );
+  }
 
 
-      $('shareRadioBtn')
-        .addEventListener(
-          'click',
-          compartilharRadio
-        );
-
-    }
+  indiceAtual =
+    indice;
 
 
-    /* ============================================================
-       INICIAR
-       ============================================================ */
+  atualizarPlayer();
 
-    function iniciarRadio() {
-
-      configurarLinkBiblia();
-
-      configurarPlayer();
-
-      configurarFiltros();
-
-      configurarInterface();
-
-      carregarLocalizacao();
-
-      carregarPlaylist();
-
-    }
+  tocarAtual();
 
 
-    /* ============================================================
-       DOM READY
-       ============================================================ */
+  $('searchResults')
+    .style.display =
+    'none';
 
-    document.addEventListener(
-      'DOMContentLoaded',
-      iniciarRadio
+}
+
+
+/* ================================================================
+   LIMPAR PESQUISA
+   ================================================================ */
+
+function limparPesquisa() {
+
+  const campo =
+    document.getElementById(
+      'searchInput'
     );
 
-  </script>
+
+  const caixa =
+    document.getElementById(
+      'searchResults'
+    );
+
+
+  campo.value = '';
+
+  caixa.innerHTML = '';
+
+  caixa.style.display =
+    'none';
+
+  campo.focus();
+
+}
+
+
+/* ================================================================
+   COMPARTILHAR
+   ================================================================ */
+
+async function compartilharRadio() {
+
+  const url =
+    window.location.href;
+
+
+  const texto =
+    'Ouça a Rádio Onda Livre e seja abençoado com louvores, oração e mensagens. 🎵🙏';
+
+
+  if (
+    navigator.share
+  ) {
+
+    try {
+
+      await navigator.share({
+
+        title:
+          'Rádio Onda Livre',
+
+        text:
+          texto,
+
+        url:
+          url
+
+      });
+
+    } catch(e) {}
+
+    return;
+
+  }
+
+
+  try {
+
+    await navigator.clipboard.writeText(
+      url
+    );
+
+    mostrarToast(
+      'Link da rádio copiado!'
+    );
+
+  } catch(e) {
+
+    mostrarToast(
+      'Copie o endereço desta página para compartilhar.'
+    );
+
+  }
+
+}
+
+
+/* ================================================================
+   FILTROS
+   ================================================================ */
+
+function configurarFiltros() {
+
+  document
+    .querySelectorAll(
+      '.filter-btn'
+    )
+    .forEach(
+      botao => {
+
+        botao.addEventListener(
+          'click',
+          function() {
+
+            document
+              .querySelectorAll(
+                '.filter-btn'
+              )
+              .forEach(
+                btn =>
+                  btn.classList.remove(
+                    'active'
+                  )
+              );
+
+
+            this.classList.add(
+              'active'
+            );
+
+
+            filtroAtual =
+              this.dataset.filter;
+
+
+            aplicarFiltro();
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+/* ================================================================
+   INTERFACE
+   ================================================================ */
+
+function configurarInterface() {
+
+  $('searchInput')
+    .addEventListener(
+      'input',
+      pesquisar
+    );
+
+
+  $('clearSearchBtn')
+    .addEventListener(
+      'click',
+      limparPesquisa
+    );
+
+
+  $('shareRadioBtn')
+    .addEventListener(
+      'click',
+      compartilharRadio
+    );
+
+}
+
+
+/* ================================================================
+   INICIAR
+   ================================================================ */
+
+function iniciarRadio() {
+
+  configurarLinkBiblia();
+
+  configurarPlayer();
+
+  configurarFiltros();
+
+  configurarInterface();
+
+  carregarLocalizacao();
+
+  carregarPlaylist();
+
+  iniciarHeartbeat();
+
+}
+
+
+/* ================================================================
+   DOM READY
+   ================================================================ */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  iniciarRadio
+);
+
+
+</script>
+
 
 </body>
+
 </html>
