@@ -1,1094 +1,995 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Rádio Onda Livre</title>
-
-<meta name="theme-color" content="#071a3d">
-<meta name="description"
-      content="Rádio Onda Livre - Louvores, orações e mensagens para abençoar sua vida.">
-
-<style>
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  color: #ffffff;
-
-  background:
-    radial-gradient(
-      circle at top,
-      #12366e 0%,
-      #071a3d 42%,
-      #030b1b 100%
-    );
-
-  min-height: 100vh;
-}
-
-/* ============================================================
-   CONTAINER
-   ============================================================ */
-
-.container {
-  width: min(1180px, 94%);
-  margin: 0 auto;
-}
-
-/* ============================================================
-   CABEÇALHO
-   ============================================================ */
-
-header {
-  padding: 25px 0 18px;
-}
-
-.header-card {
-  position: relative;
-
-  padding: 25px;
-
-  border-radius: 24px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(19, 63, 125, 0.95),
-      rgba(6, 22, 52, 0.95)
-    );
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  box-shadow:
-    0 15px 45px rgba(0,0,0,0.35);
-
-  overflow: hidden;
-}
-
-.header-card::before {
-  content: "";
-
-  position: absolute;
-
-  width: 240px;
-  height: 240px;
-
-  right: -100px;
-  top: -110px;
-
-  border-radius: 50%;
-
-  background:
-    rgba(0, 157, 255, 0.18);
-
-  filter: blur(10px);
-}
-
-.brand {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.brand-icon {
-  width: 64px;
-  height: 64px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 18px;
-
-  font-size: 31px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #178cff,
-      #0751a5
-    );
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.25);
-}
-
-.brand h1 {
-  margin: 0;
-
-  font-size: clamp(24px, 4vw, 36px);
-
-  font-weight: 800;
-}
-
-.brand p {
-  margin: 5px 0 0;
-
-  color: #bcd4f4;
-
-  font-size: 14px;
-}
-
-/* ============================================================
-   STATUS
-   ============================================================ */
-
-.status-area {
-  margin-top: 20px;
-
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 10px;
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 9px 14px;
-
-  border-radius: 30px;
-
-  font-size: 13px;
-
-  background:
-    rgba(255,255,255,0.07);
-
-  color: #dceaff;
-}
-
-.status-dot {
-  width: 9px;
-  height: 9px;
-
-  border-radius: 50%;
-
-  background: #888;
-
-  box-shadow: 0 0 10px currentColor;
-}
-
-.status.online .status-dot {
-  background: #31e981;
-  color: #31e981;
-}
-
-.status.loading .status-dot {
-  background: #ffc107;
-  color: #ffc107;
-}
-
-.status.error .status-dot {
-  background: #ff4d5d;
-  color: #ff4d5d;
-}
-
-/* ============================================================
-   PLAYER
-   ============================================================ */
-
-.player-section {
-  margin-top: 22px;
-}
-
-.player-card {
-  padding: 25px;
-
-  border-radius: 24px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(10, 38, 78, 0.97),
-      rgba(4, 15, 34, 0.98)
-    );
-
-  border: 1px solid rgba(255,255,255,0.10);
-
-  box-shadow:
-    0 20px 50px rgba(0,0,0,0.35);
-}
-
-.now-playing {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-
-  margin-bottom: 20px;
-}
-
-.album-icon {
-  flex-shrink: 0;
-
-  width: 70px;
-  height: 70px;
-
-  border-radius: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 30px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #087cf1,
-      #083f88
-    );
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.3);
-}
-
-.now-info {
-  min-width: 0;
-}
-
-.now-label {
-  color: #78baff;
-
-  font-size: 12px;
-
-  text-transform: uppercase;
-
-  letter-spacing: 1px;
-}
-
-.now-title {
-  margin-top: 5px;
-
-  font-size: 21px;
-
-  font-weight: 700;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-.now-artist {
-  margin-top: 5px;
-
-  color: #a9c0df;
-
-  font-size: 14px;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-audio {
-  width: 100%;
-
-  margin: 8px 0 18px;
-}
-
-.player-controls {
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  gap: 12px;
-
-  flex-wrap: wrap;
-}
-
-.control-btn {
-  border: 0;
-
-  width: 48px;
-  height: 48px;
-
-  border-radius: 50%;
-
-  color: #fff;
-
-  cursor: pointer;
-
-  background:
-    rgba(255,255,255,0.09);
-
-  border: 1px solid rgba(255,255,255,0.10);
-
-  transition:
-    transform .2s ease,
-    background .2s ease;
-}
-
-.control-btn:hover {
-  transform: translateY(-2px);
-
-  background:
-    rgba(24, 139, 255, 0.35);
-}
-
-.play-main {
-  width: 62px;
-  height: 62px;
-
-  font-size: 22px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #118cff,
-      #0751a6
-    );
-
-  box-shadow:
-    0 8px 25px rgba(0,120,255,0.30);
-}
-
-.player-actions {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 10px;
-
-  margin-top: 18px;
-
-  flex-wrap: wrap;
-}
-
-.action-btn {
-  border: 0;
-
-  padding: 10px 15px;
-
-  border-radius: 12px;
-
-  color: #dbeaff;
-
-  background:
-    rgba(255,255,255,0.07);
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  cursor: pointer;
-
-  transition: .2s;
-}
-
-.action-btn:hover {
-  background:
-    rgba(17,140,255,0.25);
-}
-
-/* ============================================================
-   PESQUISA
-   ============================================================ */
-
-.search-area {
-  margin-top: 22px;
-}
-
-.search-box {
-  position: relative;
-}
-
-.search-box input {
-  width: 100%;
-
-  padding: 16px 48px 16px 18px;
-
-  border-radius: 16px;
-
-  border: 1px solid rgba(255,255,255,0.10);
-
-  outline: none;
-
-  color: #fff;
-
-  background:
-    rgba(255,255,255,0.07);
-
-  font-size: 15px;
-}
-
-.search-box input::placeholder {
-  color: #91a7c6;
-}
-
-.clear-search {
-  position: absolute;
-
-  right: 10px;
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  width: 34px;
-  height: 34px;
-
-  border: 0;
-
-  border-radius: 50%;
-
-  background:
-    rgba(255,255,255,0.08);
-
-  color: #fff;
-
-  cursor: pointer;
-
-  display: none;
-}
-
-.search-results {
-  display: none;
-
-  margin-top: 8px;
-
-  padding: 8px;
-
-  border-radius: 15px;
-
-  background:
-    rgba(4,15,35,0.98);
-
-  border: 1px solid rgba(255,255,255,0.10);
-}
-
-/* ============================================================
-   FILTROS
-   ============================================================ */
-
-.filters {
-  display: flex;
-
-  gap: 9px;
-
-  flex-wrap: wrap;
-
-  margin: 22px 0 18px;
-}
-
-.filter-btn {
-  border: 0;
-
-  padding: 10px 16px;
-
-  border-radius: 30px;
-
-  cursor: pointer;
-
-  color: #bcd0eb;
-
-  background:
-    rgba(255,255,255,0.07);
-
-  border: 1px solid rgba(255,255,255,0.07);
-
-  transition: .2s;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  color: #fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #118cff,
-      #0751a6
-    );
-
-  border-color: transparent;
-}
-
-/* ============================================================
-   PLAYLISTS
-   ============================================================ */
-
-.playlists {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 18px;
-
-  margin-top: 22px;
-}
-
-.playlist-card {
-  border-radius: 22px;
-
-  overflow: hidden;
-
-  background:
-    rgba(4, 18, 40, 0.88);
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,0.22);
-}
-
-.playlist-header {
-  padding: 18px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 10px;
-
-  border-bottom:
-    1px solid rgba(255,255,255,0.07);
-}
-
-.playlist-title {
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  font-weight: 700;
-}
-
-.playlist-icon {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 12px;
-
-  background:
-    rgba(18,140,255,0.18);
-
-  font-size: 19px;
-}
-
-.playlist-count {
-  min-width: 30px;
-
-  padding: 5px 8px;
-
-  text-align: center;
-
-  border-radius: 20px;
-
-  color: #bfe0ff;
-
-  background:
-    rgba(255,255,255,0.08);
-
-  font-size: 12px;
-}
-
-.playlist-list {
-  padding: 8px;
-
-  max-height: 600px;
-
-  overflow-y: auto;
-}
-
-/* ============================================================
-   ITEM DE ÁUDIO
-   ============================================================ */
-
-.audio-item {
-  display: grid;
-
-  grid-template-columns: 36px 1fr auto;
-
-  gap: 10px;
-
-  align-items: center;
-
-  padding: 12px;
-
-  margin-bottom: 5px;
-
-  border-radius: 14px;
-
-  cursor: pointer;
-
-  transition:
-    background .2s ease,
-    transform .2s ease;
-}
-
-.audio-item:hover {
-  background:
-    rgba(18,140,255,0.10);
-
-  transform: translateX(2px);
-}
-
-.audio-item.active {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(17,140,255,0.22),
-      rgba(17,140,255,0.07)
-    );
-
-  border-left:
-    3px solid #1592ff;
-}
-
-.audio-number {
-  width: 34px;
-  height: 34px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 10px;
-
-  color: #8fb1d8;
-
-  background:
-    rgba(255,255,255,0.05);
-
-  font-size: 12px;
-}
-
-.audio-info {
-  min-width: 0;
-}
-
-.audio-title {
-  color: #fff;
-
-  font-size: 14px;
-
-  font-weight: 600;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-.audio-artist {
-  margin-top: 4px;
-
-  color: #8199ba;
-
-  font-size: 12px;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-}
-
-.audio-type {
-  display: inline-block;
-
-  margin-top: 5px;
-
-  padding: 2px 7px;
-
-  border-radius: 8px;
-
-  color: #90c8ff;
-
-  background:
-    rgba(20,130,230,0.10);
-
-  font-size: 10px;
-}
-
-.audio-actions {
-  display: flex;
-
-  gap: 5px;
-}
-
-.share-btn {
-  width: 38px;
-  height: 38px;
-
-  border: 0;
-
-  border-radius: 10px;
-
-  background:
-    rgba(255,255,255,0.06);
-
-  color: #8fc8ff;
-
-  cursor: pointer;
-
-  transition: .2s;
-}
-
-.share-btn:hover {
-  background:
-    #087ce9;
-
-  color: #fff;
-
-  transform: scale(1.04);
-}
-
-/* ============================================================
-   VAZIO
-   ============================================================ */
-
-.empty {
-  padding: 30px 15px;
-
-  text-align: center;
-
-  color: #7f96b8;
-
-  font-size: 13px;
-}
-
-/* ============================================================
-   INFORMAÇÕES
-   ============================================================ */
-
-.info-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0,1fr));
-
-  gap: 14px;
-
-  margin-top: 22px;
-}
-
-.info-card {
-  padding: 18px;
-
-  border-radius: 18px;
-
-  background:
-    rgba(255,255,255,0.05);
-
-  border: 1px solid rgba(255,255,255,0.07);
-}
-
-.info-label {
-  color: #7595bd;
-
-  font-size: 11px;
-
-  text-transform: uppercase;
-
-  letter-spacing: .8px;
-}
-
-.info-value {
-  margin-top: 7px;
-
-  color: #e7f1ff;
-
-  font-size: 18px;
-
-  font-weight: 700;
-}
-
-/* ============================================================
-   NOTIFICAÇÃO
-   ============================================================ */
-
-.toast {
-  position: fixed;
-
-  left: 50%;
-
-  bottom: 25px;
-
-  transform:
-    translate(-50%, 100px);
-
-  z-index: 9999;
-
-  max-width: min(450px, 90%);
-
-  padding: 13px 18px;
-
-  border-radius: 14px;
-
-  background:
-    rgba(5,20,44,0.97);
-
-  border:
-    1px solid rgba(255,255,255,0.12);
-
-  color: #fff;
-
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.4);
-
-  opacity: 0;
-
-  transition:
-    opacity .3s ease,
-    transform .3s ease;
-
-  font-size: 14px;
-}
-
-.toast.show {
-  opacity: 1;
-
-  transform:
-    translate(-50%, 0);
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-
-footer {
-  padding: 35px 0 25px;
-
-  text-align: center;
-
-  color: #7088aa;
-
-  font-size: 12px;
-}
-
-/* ============================================================
-   RESPONSIVO
-   ============================================================ */
-
-@media (max-width: 850px) {
-
-  .playlists {
-    grid-template-columns: 1fr;
-  }
-
-  .playlist-list {
-    max-height: 500px;
-  }
-
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-@media (max-width: 600px) {
-
-  .container {
-    width: 94%;
-  }
-
-  .header-card,
-  .player-card {
-    padding: 18px;
-  }
-
-  .brand-icon {
-    width: 55px;
-    height: 55px;
-
-    font-size: 26px;
-  }
-
-  .now-playing {
-    gap: 12px;
-  }
-
-  .album-icon {
-    width: 58px;
-    height: 58px;
-
-    font-size: 25px;
-  }
-
-  .now-title {
-    font-size: 17px;
-  }
-
-  .audio-item {
-    grid-template-columns: 32px 1fr auto;
-  }
-
-  .audio-number {
-    width: 30px;
-    height: 30px;
-  }
-
-  .share-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-}
-
-/* ============================================================
-   ANIMAÇÃO
-   ============================================================ */
-
-@keyframes pulse {
-
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.04);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-
-}
-
-.playing {
-  animation: pulse 1.8s infinite;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Rádio Onda Livre</title>
+
+  <meta
+    name="description"
+    content="Rádio Onda Livre — Louvores, oração e mensagens para abençoar sua vida."
+  >
+
+  <meta name="theme-color" content="#06152d">
+
+  <style>
+    :root {
+      --bg: #06152d;
+      --bg2: #0a2142;
+      --card: rgba(13, 39, 76, .88);
+      --card-soft: rgba(255, 255, 255, .055);
+      --primary: #1d73d5;
+      --primary2: #4da3ff;
+      --gold: #d7ae62;
+      --gold2: #f1d18b;
+      --text: #f7f9fc;
+      --muted: #aebed3;
+      --success: #4ade80;
+      --danger: #fb7185;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(29,115,213,.22), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(215,174,98,.10), transparent 25%),
+        linear-gradient(135deg, #031022 0%, #06152d 48%, #092344 100%);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+
+    header {
+      padding: 28px 0 20px;
+    }
+
+    .header-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(17, 61, 117, .94),
+          rgba(4, 19, 42, .96)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .header-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -100px;
+      top: -130px;
+      border-radius: 50%;
+      background: rgba(77,163,255,.14);
+      filter: blur(10px);
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-icon {
+      width: 72px;
+      height: 72px;
+      flex: 0 0 72px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      font-size: 34px;
+      background:
+        linear-gradient(145deg, #1d73d5, #0d3c78);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.15);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.1;
+      letter-spacing: -.8px;
+    }
+
+    .brand p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .header-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(74,222,128,.20);
+      border-radius: 999px;
+      background: rgba(74,222,128,.08);
+      color: #9bf0b7;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 5px rgba(74,222,128,.10);
+      animation: pulse 1.7s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: .55;
+        transform: scale(.78);
+      }
+    }
+
+    /* ============================================================
+       STATUS
+       ============================================================ */
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .status-card {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-height: 62px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: rgba(255,255,255,.045);
+    }
+
+    .status-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 38px;
+      border-radius: 12px;
+      background: rgba(77,163,255,.10);
+    }
+
+    .status-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-value {
+      margin-top: 2px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       PLAYER
+       ============================================================ */
+
+    .player {
+      position: relative;
+      overflow: hidden;
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(16,52,101,.95),
+          rgba(7,27,57,.96)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .player-top {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .album-icon {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      font-size: 38px;
+      background:
+        linear-gradient(145deg, #164f94, #0b2d59);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.13),
+        0 12px 25px rgba(0,0,0,.25);
+    }
+
+    .now-label {
+      color: var(--primary2);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    #nowTitle {
+      margin: 5px 0 3px;
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 800;
+    }
+
+    #nowArtist {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .share-btn {
+      border: 1px solid rgba(215,174,98,.25);
+      border-radius: 14px;
+      padding: 11px 15px;
+      color: var(--gold2);
+      background: rgba(215,174,98,.08);
+      cursor: pointer;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(215,174,98,.14);
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .control-btn {
+      min-width: 48px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      cursor: pointer;
+      font-size: 18px;
+      transition: .2s;
+    }
+
+    .control-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(77,163,255,.15);
+      border-color: rgba(77,163,255,.35);
+    }
+
+    .control-main {
+      min-width: 58px;
+      background: linear-gradient(145deg, #1d73d5, #12539c);
+      border-color: rgba(255,255,255,.10);
+      font-size: 21px;
+    }
+
+    /* ============================================================
+       PESQUISA
+       ============================================================ */
+
+    .search-section {
+      margin-top: 22px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-box input {
+      width: 100%;
+      min-height: 50px;
+      padding: 0 17px;
+      outline: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255,255,255,.055);
+    }
+
+    .search-box input::placeholder {
+      color: #8094af;
+    }
+
+    .search-box input:focus {
+      border-color: rgba(77,163,255,.45);
+      box-shadow: 0 0 0 3px rgba(77,163,255,.08);
+    }
+
+    .clear-search {
+      padding: 0 17px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      color: var(--muted);
+      background: rgba(255,255,255,.055);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .search-results {
+      display: none;
+      margin-top: 10px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: rgba(3,15,32,.94);
+    }
+
+    .search-result {
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .search-result:hover {
+      background: rgba(77,163,255,.10);
+    }
+
+    /* ============================================================
+       FILTROS
+       ============================================================ */
+
+    .filter-section {
+      margin-top: 22px;
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .filter-btn {
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.045);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: #fff;
+      border-color: rgba(77,163,255,.38);
+      background: rgba(29,115,213,.18);
+    }
+
+    /* ============================================================
+       PLAYLISTS
+       ============================================================ */
+
+    .playlists-section {
+      margin-top: 28px;
+    }
+
+    .playlist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .playlist-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: 0 12px 28px rgba(0,0,0,.17);
+    }
+
+    .playlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .playlist-name {
+      font-weight: 800;
+    }
+
+    .playlist-count {
+      min-width: 30px;
+      padding: 5px 9px;
+      text-align: center;
+      border-radius: 999px;
+      color: var(--gold2);
+      background: rgba(215,174,98,.10);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .playlist-list {
+      max-height: 360px;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 12px;
+      border-radius: 13px;
+      cursor: pointer;
+      transition: .18s;
+    }
+
+    .playlist-item:hover {
+      background: rgba(77,163,255,.08);
+    }
+
+    .playlist-item.active {
+      background: rgba(29,115,213,.16);
+      box-shadow: inset 3px 0 0 var(--primary2);
+    }
+
+    .track-number {
+      width: 28px;
+      color: #7790ae;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .track-info {
+      min-width: 0;
+    }
+
+    .track-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .track-artist {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ============================================================
+       BÍBLIA
+       ============================================================ */
+
+    .bible-section {
+      margin-top: 28px;
+    }
+
+    .bible-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 28px;
+      align-items: center;
+      overflow: hidden;
+      padding: 30px;
+      border: 1px solid rgba(215,174,98,.20);
+      border-radius: 27px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(19,63,125,.98),
+          rgba(4,16,38,.98)
+        );
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .bible-card::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      left: -170px;
+      bottom: -220px;
+      border-radius: 50%;
+      background: rgba(215,174,98,.12);
+      filter: blur(30px);
+    }
+
+    .bible-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .bible-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      border: 1px solid rgba(215,174,98,.24);
+      border-radius: 999px;
+      color: var(--gold2);
+      background: rgba(215,174,98,.08);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .8px;
+    }
+
+    .bible-content h2 {
+      margin: 14px 0 9px;
+      font-size: clamp(25px, 4vw, 36px);
+      letter-spacing: -.7px;
+    }
+
+    .bible-content p {
+      max-width: 570px;
+      margin: 0 0 21px;
+      color: #c0cede;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .bible-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 19px;
+      border-radius: 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      background:
+        linear-gradient(135deg, #d9ad62, #a87531);
+      box-shadow:
+        0 10px 25px rgba(0,0,0,.25);
+      transition: .2s;
+    }
+
+    .bible-link:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,.32);
+    }
+
+    .bible-visual {
+      position: relative;
+      z-index: 1;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 22px;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(215,174,98,.11),
+          transparent 65%
+        ),
+        rgba(255,255,255,.035);
+    }
+
+    .bible-visual svg {
+      width: min(100%, 440px);
+      height: auto;
+      filter:
+        drop-shadow(0 20px 18px rgba(0,0,0,.40));
+    }
+
+    /* ============================================================
+       INFORMAÇÕES
+       ============================================================ */
+
+    .info-section {
+      margin-top: 28px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 15px;
+    }
+
+    .info-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: rgba(255,255,255,.045);
+    }
+
+    .info-icon {
+      font-size: 22px;
+    }
+
+    .info-label {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .info-value {
+      margin-top: 4px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      z-index: 9999;
+      max-width: calc(100% - 30px);
+      padding: 13px 17px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: #fff;
+      background: rgba(4,17,36,.96);
+      box-shadow: 0 15px 35px rgba(0,0,0,.35);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 20px);
+      transition: .25s;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+
+    footer {
+      padding: 32px 0 28px;
+      color: #8093ad;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: #b9c8da;
+    }
+
+    /* ============================================================
+       RESPONSIVO
+       ============================================================ */
+
+    @media (max-width: 900px) {
+
+      .playlist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .playlist-list {
+        max-height: 300px;
+      }
+
+      .bible-card {
+        grid-template-columns: 1fr;
+      }
+
+      .bible-visual {
+        min-height: 230px;
+      }
+    }
+
+    @media (max-width: 680px) {
+
+      .container {
+        width: min(100% - 20px, 1180px);
+      }
+
+      header {
+        padding-top: 10px;
+      }
+
+      .header-card {
+        padding: 20px;
+        border-radius: 22px;
+      }
+
+      .header-content {
+        align-items: flex-start;
+      }
+
+      .header-live {
+        display: none;
+      }
+
+      .brand-icon {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+        border-radius: 17px;
+        font-size: 27px;
+      }
+
+      .brand h1 {
+        font-size: 25px;
+      }
+
+      .brand p {
+        font-size: 13px;
+      }
+
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .player {
+        padding: 18px;
+      }
+
+      .player-top {
+        grid-template-columns: auto 1fr;
+      }
+
+      .share-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+
+      .album-icon {
+        width: 68px;
+        height: 68px;
+        font-size: 30px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .clear-search {
+        min-height: 46px;
+      }
+
+      .bible-card {
+        padding: 22px;
+      }
+
+      .bible-visual {
+        min-height: 190px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <!-- ========================================================
-       CABEÇALHO
-       ======================================================== -->
+    <!-- ==========================================================
+         CABEÇALHO
+         ========================================================== -->
 
-  <header>
+    <header>
+      <div class="header-card">
 
-    <div class="header-card">
+        <div class="header-content">
 
-      <div class="brand">
+          <div class="brand">
 
-        <div class="brand-icon">
-          🎙️
+            <div class="brand-icon" aria-hidden="true">
+              🎙️
+            </div>
+
+            <div>
+              <h1>Rádio Onda Livre</h1>
+
+              <p>
+                Louvores, oração e mensagens para abençoar sua vida
+              </p>
+            </div>
+
+          </div>
+
+          <div class="header-live">
+            <span class="live-dot"></span>
+            RÁDIO ONLINE
+          </div>
+
+        </div>
+
+      </div>
+    </header>
+
+
+    <!-- ==========================================================
+         STATUS
+         ========================================================== -->
+
+    <section class="status-grid">
+
+      <div class="status-card">
+
+        <div class="status-icon">
+          📡
         </div>
 
         <div>
+          <div class="status-label">
+            Sistema
+          </div>
 
-          <h1>Rádio Onda Livre</h1>
-
-          <p>
-            Louvores, oração e mensagens para abençoar sua vida
-          </p>
-
+          <div
+            class="status-value"
+            id="statusSistema"
+          >
+            Verificando...
+          </div>
         </div>
 
       </div>
 
-      <div class="status-area">
 
-        <div
-          id="statusSistema"
-          class="status loading"
-        >
+      <div class="status-card">
 
-          <span class="status-dot"></span>
-
-          <span id="statusTexto">
-            Conectando...
-          </span>
-
-        </div>
-
-        <div
-          id="statusLocalizacao"
-          class="status"
-        >
-
+        <div class="status-icon">
           📍
+        </div>
 
-          <span id="localizacaoTexto">
-            Identificando localização...
-          </span>
+        <div>
+          <div class="status-label">
+            Localização
+          </div>
 
+          <div
+            class="status-value"
+            id="statusLocalizacao"
+          >
+            Localizando...
+          </div>
+
+          <div
+            id="localizacaoTexto"
+            style="
+              color:#8093ad;
+              font-size:11px;
+              margin-top:2px;
+            "
+          ></div>
         </div>
 
       </div>
 
-    </div>
-
-  </header>
+    </section>
 
 
-  <!-- ========================================================
-       PLAYER
-       ======================================================== -->
+    <!-- ==========================================================
+         PLAYER
+         ========================================================== -->
 
-  <section class="player-section">
+    <section class="player">
 
-    <div class="player-card">
-
-      <div class="now-playing">
+      <div class="player-top">
 
         <div
-          id="albumIcon"
           class="album-icon"
+          id="albumIcon"
+          aria-hidden="true"
         >
           🎵
         </div>
 
-        <div class="now-info">
+
+        <div>
 
           <div class="now-label">
             Tocando agora
           </div>
 
-          <div
-            id="nowTitle"
-            class="now-title"
-          >
-            Aguardando música...
+          <div id="nowTitle">
+            Carregando...
           </div>
 
-          <div
-            id="nowArtist"
-            class="now-artist"
-          >
+          <div id="nowArtist">
             Rádio Onda Livre
           </div>
 
         </div>
+
+
+        <button
+          type="button"
+          class="share-btn"
+          id="shareRadioBtn"
+        >
+          📤 Compartilhar rádio
+        </button>
 
       </div>
 
@@ -1096,2429 +997,846 @@ footer {
       <audio
         id="audioPlayer"
         controls
-        preload="auto"
+        preload="none"
       ></audio>
 
 
-      <div class="player-controls">
+      <div class="controls">
 
         <button
+          type="button"
           class="control-btn"
           id="prevBtn"
-          title="Anterior"
-          aria-label="Anterior"
+          title="Áudio anterior"
         >
           ⏮
         </button>
 
         <button
-          class="control-btn play-main"
+          type="button"
+          class="control-btn control-main"
           id="playBtn"
-          title="Reproduzir / Pausar"
-          aria-label="Reproduzir / Pausar"
+          title="Reproduzir"
         >
           ▶
         </button>
 
         <button
+          type="button"
           class="control-btn"
           id="nextBtn"
-          title="Próxima"
-          aria-label="Próxima"
+          title="Próximo áudio"
         >
           ⏭
         </button>
 
-      </div>
-
-
-      <div class="player-actions">
-
         <button
-          class="action-btn"
-          id="shareRadioBtn"
-        >
-          📤 Compartilhar rádio
-        </button>
-
-        <button
-          class="action-btn"
+          type="button"
+          class="control-btn"
           id="stopBtn"
+          title="Parar"
         >
-          ⏹ Parar
+          ⏹
         </button>
 
       </div>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- ========================================================
-       PESQUISA
-       ======================================================== -->
+    <!-- ==========================================================
+         PESQUISA
+         ========================================================== -->
 
-  <section class="search-area">
+    <section class="search-section">
 
-    <div class="search-box">
+      <div class="search-box">
 
-      <input
-        type="search"
-        id="searchInput"
-        placeholder="Pesquisar louvor, cantor ou mensagem..."
-        autocomplete="off"
-      >
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="🔎 Pesquisar louvor, artista ou mensagem..."
+          autocomplete="off"
+        >
 
-      <button
-        id="clearSearchBtn"
-        class="clear-search"
-        title="Limpar pesquisa"
-      >
-        ✕
-      </button>
+        <button
+          type="button"
+          id="clearSearchBtn"
+          class="clear-search"
+        >
+          Limpar pesquisa
+        </button>
 
-    </div>
-
-    <div
-      id="searchResults"
-      class="search-results"
-    ></div>
-
-  </section>
+      </div>
 
 
-  <!-- ========================================================
-       FILTROS
-       ======================================================== -->
+      <div
+        id="searchResults"
+        class="search-results"
+      ></div>
 
-  <div class="filters">
+    </section>
 
-    <button
-      class="filter-btn active"
-      data-filter="todos"
+
+    <!-- ==========================================================
+         FILTROS
+         ========================================================== -->
+
+    <section class="filter-section">
+
+      <h2 class="section-title">
+        🎧 Categorias
+      </h2>
+
+      <div class="filters">
+
+        <button
+          type="button"
+          class="filter-btn active"
+          data-filter="todos"
+        >
+          Todos
+        </button>
+
+        <button
+          type="button"
+          class="filter-btn"
+          data-filter="musica"
+        >
+          🎵 Música
+        </button>
+
+        <button
+          type="button"
+          class="filter-btn"
+          data-filter="oracao"
+        >
+          🙏 Oração
+        </button>
+
+        <button
+          type="button"
+          class="filter-btn"
+          data-filter="mensagem"
+        >
+          📖 Mensagem
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================================
+         PLAYLISTS
+         ========================================================== -->
+
+    <section class="playlists-section">
+
+      <h2 class="section-title">
+        🎶 Nossos louvores
+      </h2>
+
+
+      <div class="playlist-grid">
+
+        <!-- MANHÃ -->
+
+        <div class="playlist-card">
+
+          <div class="playlist-header">
+
+            <div class="playlist-name">
+              🌅 Manhã
+            </div>
+
+            <div
+              class="playlist-count"
+              id="countManha"
+            >
+              0
+            </div>
+
+          </div>
+
+          <div
+            class="playlist-list"
+            id="playlistManha"
+          ></div>
+
+        </div>
+
+
+        <!-- TARDE -->
+
+        <div class="playlist-card">
+
+          <div class="playlist-header">
+
+            <div class="playlist-name">
+              ☀️ Tarde
+            </div>
+
+            <div
+              class="playlist-count"
+              id="countTarde"
+            >
+              0
+            </div>
+
+          </div>
+
+          <div
+            class="playlist-list"
+            id="playlistTarde"
+          ></div>
+
+        </div>
+
+
+        <!-- NOITE -->
+
+        <div class="playlist-card">
+
+          <div class="playlist-header">
+
+            <div class="playlist-name">
+              🌙 Noite
+            </div>
+
+            <div
+              class="playlist-count"
+              id="countNoite"
+            >
+              0
+            </div>
+
+          </div>
+
+          <div
+            class="playlist-list"
+            id="playlistNoite"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================================
+         BÍBLIA KING JAMES
+         ========================================================== -->
+
+    <section
+      class="bible-section"
+      aria-labelledby="bibleTitulo"
     >
-      Todos
-    </button>
 
-    <button
-      class="filter-btn"
-      data-filter="musica"
-    >
-      🎵 Música
-    </button>
+      <div class="bible-card">
 
-    <button
-      class="filter-btn"
-      data-filter="oracao"
-    >
-      🙏 Oração
-    </button>
+        <div class="bible-content">
 
-    <button
-      class="filter-btn"
-      data-filter="mensagem"
-    >
-      📖 Mensagem
-    </button>
+          <span class="bible-badge">
+            📖 PALAVRA DE DEUS
+          </span>
+
+          <h2 id="bibleTitulo">
+            Bíblia King James
+          </h2>
+
+          <p>
+            Leia, medite e estude as Escrituras. Acesse a Bíblia
+            King James diretamente pelo seu navegador e encontre
+            uma palavra de fé, esperança e fortalecimento para
+            cada dia.
+          </p>
+
+          <a
+            id="bibleLink"
+            class="bible-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📖 Acessar Bíblia King James
+            <span>↗</span>
+          </a>
+
+        </div>
+
+
+        <!-- ======================================================
+             IMAGEM DA BÍBLIA — SVG EMBUTIDO
+             ====================================================== -->
+
+        <div
+          class="bible-visual"
+          aria-label="Imagem ilustrativa de uma Bíblia aberta"
+        >
+
+          <svg
+            viewBox="0 0 600 360"
+            role="img"
+            aria-labelledby="svgBibleTitle svgBibleDesc"
+          >
+
+            <title id="svgBibleTitle">
+              Bíblia aberta
+            </title>
+
+            <desc id="svgBibleDesc">
+              Ilustração de uma Bíblia aberta com páginas douradas
+              e capa marrom.
+            </desc>
+
+
+            <!-- BRILHO -->
+
+            <ellipse
+              cx="300"
+              cy="300"
+              rx="230"
+              ry="30"
+              fill="rgba(0,0,0,.25)"
+            />
+
+
+            <!-- CAPA INFERIOR -->
+
+            <path
+              d="
+                M70 262
+                C145 235 220 238 300 275
+                C380 238 455 235 530 262
+                L510 306
+                C430 280 365 281 300 315
+                C235 281 170 280 90 306 Z
+              "
+              fill="#70451f"
+            />
+
+
+            <!-- LADO ESQUERDO DA CAPA -->
+
+            <path
+              d="
+                M82 250
+                C155 225 225 230 300 267
+                L300 304
+                C220 266 150 265 90 290 Z
+              "
+              fill="#8f5d2a"
+            />
+
+
+            <!-- LADO DIREITO DA CAPA -->
+
+            <path
+              d="
+                M300 267
+                C375 230 445 225 518 250
+                L510 290
+                C450 265 380 266 300 304 Z
+              "
+              fill="#70451f"
+            />
+
+
+            <!-- PÁGINAS ESQUERDA -->
+
+            <path
+              d="
+                M92 112
+                C155 87 225 92 300 132
+                L300 268
+                C225 228 155 222 92 246 Z
+              "
+              fill="#fff4d6"
+            />
+
+
+            <!-- PÁGINAS DIREITA -->
+
+            <path
+              d="
+                M300 132
+                C375 92 445 87 508 112
+                L508 246
+                C445 222 375 228 300 268 Z
+              "
+              fill="#f8e9c5"
+            />
+
+
+            <!-- LINHA CENTRAL -->
+
+            <path
+              d="M300 132 L300 268"
+              stroke="#c9a76a"
+              stroke-width="4"
+            />
+
+
+            <!-- LINHAS ESQUERDA -->
+
+            <g
+              stroke="#c7ae7e"
+              stroke-width="3"
+              opacity=".7"
+            >
+              <path d="M125 135 C178 120 225 126 276 151"/>
+              <path d="M125 153 C178 138 225 144 276 169"/>
+              <path d="M125 171 C178 156 225 162 276 187"/>
+              <path d="M125 189 C178 174 225 180 276 205"/>
+              <path d="M125 207 C178 192 225 198 276 223"/>
+              <path d="M125 225 C178 210 225 216 276 241"/>
+            </g>
+
+
+            <!-- LINHAS DIREITA -->
+
+            <g
+              stroke="#c0a570"
+              stroke-width="3"
+              opacity=".7"
+            >
+              <path d="M324 151 C375 126 422 120 475 135"/>
+              <path d="M324 169 C375 144 422 138 475 153"/>
+              <path d="M324 187 C375 162 422 156 475 171"/>
+              <path d="M324 205 C375 180 422 174 475 189"/>
+              <path d="M324 223 C375 198 422 192 475 207"/>
+              <path d="M324 241 C375 216 422 210 475 225"/>
+            </g>
+
+
+            <!-- DETALHE DOURADO -->
+
+            <path
+              d="
+                M300 105
+                C302 105 304 108 304 112
+                L304 268
+                C304 272 302 274 300 275
+                C298 274 296 272 296 268
+                L296 112
+                C296 108 298 105 300 105 Z
+              "
+              fill="#d6ad5c"
+            />
+
+
+            <!-- PEQUENO MARCADOR -->
+
+            <path
+              d="
+                M430 100
+                L451 100
+                L451 160
+                L440 150
+                L430 160 Z
+              "
+              fill="#b33b38"
+            />
+
+          </svg>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================================
+         INFORMAÇÕES
+         ========================================================== -->
+
+    <section class="info-section">
+
+      <h2 class="section-title">
+        ℹ️ Informações
+      </h2>
+
+      <div class="info-grid">
+
+        <div class="info-card">
+
+          <div class="info-icon">
+            🎵
+          </div>
+
+          <div class="info-label">
+            Total de áudios
+          </div>
+
+          <div
+            class="info-value"
+            id="totalAudios"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-icon">
+            🎧
+          </div>
+
+          <div class="info-label">
+            Playlist atual
+          </div>
+
+          <div
+            class="info-value"
+            id="playlistAtual"
+          >
+            Manhã
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-icon">
+            📍
+          </div>
+
+          <div class="info-label">
+            Local atual
+          </div>
+
+          <div
+            class="info-value"
+            id="localAtual"
+          >
+            Localizando...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================================
+         RODAPÉ
+         ========================================================== -->
+
+    <footer>
+      Rádio Onda Livre • <strong>Joel Rodrigues</strong>
+    </footer>
 
   </div>
 
 
-  <!-- ========================================================
-       PLAYLISTS
-       ======================================================== -->
+  <!-- ============================================================
+       TOAST
+       ============================================================ -->
 
-  <section
-    id="playlists"
-    class="playlists"
-  >
+  <div id="toast"></div>
 
-    <div class="playlist-card">
 
-      <div class="playlist-header">
+  <script>
 
-        <div class="playlist-title">
+    /* ============================================================
+       CONFIGURAÇÕES
+       ============================================================ */
 
-          <div class="playlist-icon">
-            🌅
-          </div>
-
-          <span>
-            Manhã
-          </span>
-
-        </div>
-
-        <span
-          id="countManha"
-          class="playlist-count"
-        >
-          0
-        </span>
-
-      </div>
-
-      <div
-        id="playlistManha"
-        class="playlist-list"
-      >
-
-        <div class="empty">
-          Carregando...
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="playlist-card">
-
-      <div class="playlist-header">
-
-        <div class="playlist-title">
-
-          <div class="playlist-icon">
-            ☀️
-          </div>
-
-          <span>
-            Tarde
-          </span>
-
-        </div>
-
-        <span
-          id="countTarde"
-          class="playlist-count"
-        >
-          0
-        </span>
-
-      </div>
-
-      <div
-        id="playlistTarde"
-        class="playlist-list"
-      >
-
-        <div class="empty">
-          Carregando...
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="playlist-card">
-
-      <div class="playlist-header">
-
-        <div class="playlist-title">
-
-          <div class="playlist-icon">
-            🌙
-          </div>
-
-          <span>
-            Noite
-          </span>
-
-        </div>
-
-        <span
-          id="countNoite"
-          class="playlist-count"
-        >
-          0
-        </span>
-
-      </div>
-
-      <div
-        id="playlistNoite"
-        class="playlist-list"
-      >
-
-        <div class="empty">
-          Carregando...
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ========================================================
-       INFORMAÇÕES
-       ======================================================== -->
-
-  <section class="info-grid">
-
-    <div class="info-card">
-
-      <div class="info-label">
-        Total de conteúdos
-      </div>
-
-      <div
-        id="totalAudios"
-        class="info-value"
-      >
-        0
-      </div>
-
-    </div>
-
-
-    <div class="info-card">
-
-      <div class="info-label">
-        Playlist atual
-      </div>
-
-      <div
-        id="playlistAtual"
-        class="info-value"
-      >
-        —
-      </div>
-
-    </div>
-
-
-    <div class="info-card">
-
-      <div class="info-label">
-        Localização
-      </div>
-
-      <div
-        id="localAtual"
-        class="info-value"
-      >
-        —
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ========================================================
-       RODAPÉ
-       ======================================================== -->
-
-  <footer>
-
-    Rádio Onda Livre • Joel Rodrigues
-
-  </footer>
-
-</div>
-
-
-<!-- ============================================================
-     TOAST
-     ============================================================ -->
-
-<div
-  id="toast"
-  class="toast"
-></div>
-
-
-<script>
-
-/* ============================================================
-   CONFIGURAÇÃO
-   ============================================================ */
-
-const URL_API =
-  'https://script.google.com/macros/s/AKfycbxhGy5lnk2Y1dIdpKEzZMvjmAFoS-oql8m-Eh6ZuwatyvRleaaqUbBvfkv825EbWWdC7g/exec';
-
-
-/* ============================================================
-   VARIÁVEIS
-   ============================================================ */
-
-let playlistOriginal = [];
-
-let playlistFiltrada = [];
-
-let playlists = {
-  manha: [],
-  tarde: [],
-  noite: []
-};
-
-let playlistAtualNome = '';
-
-let indiceAtual = -1;
-
-let filtroAtual = 'todos';
-
-let sessao =
-  sessionStorage.getItem(
-    'radio_onda_livre_sessao'
-  );
-
-
-/* ============================================================
-   SESSÃO
-   ============================================================ */
-
-if (!sessao) {
-
-  sessao =
-    'sessao_' +
-    Date.now() +
-    '_' +
-    Math.random()
-      .toString(36)
-      .substring(2, 10);
-
-  sessionStorage.setItem(
-    'radio_onda_livre_sessao',
-    sessao
-  );
-
-}
-
-
-/* ============================================================
-   ELEMENTOS
-   ============================================================ */
-
-const audioPlayer =
-  document.getElementById(
-    'audioPlayer'
-  );
-
-const playBtn =
-  document.getElementById(
-    'playBtn'
-  );
-
-const prevBtn =
-  document.getElementById(
-    'prevBtn'
-  );
-
-const nextBtn =
-  document.getElementById(
-    'nextBtn'
-  );
-
-const stopBtn =
-  document.getElementById(
-    'stopBtn'
-  );
-
-const nowTitle =
-  document.getElementById(
-    'nowTitle'
-  );
-
-const nowArtist =
-  document.getElementById(
-    'nowArtist'
-  );
-
-const albumIcon =
-  document.getElementById(
-    'albumIcon'
-  );
-
-const searchInput =
-  document.getElementById(
-    'searchInput'
-  );
-
-const clearSearchBtn =
-  document.getElementById(
-    'clearSearchBtn'
-  );
-
-const searchResults =
-  document.getElementById(
-    'searchResults'
-  );
-
-
-/* ============================================================
-   NORMALIZAR TEXTO
-   ============================================================ */
-
-function normalizarTexto(valor) {
-
-  return String(
-    valor || ''
-  )
-    .normalize('NFD')
-    .replace(
-      /[\u0300-\u036f]/g,
-      ''
-    )
-    .toLowerCase()
-    .trim();
-
-}
-
-
-/* ============================================================
-   TOAST
-   ============================================================ */
-
-let toastTimer = null;
-
-function mostrarToast(mensagem) {
-
-  const toast =
-    document.getElementById(
-      'toast'
-    );
-
-  toast.textContent =
-    mensagem;
-
-  toast.classList.add(
-    'show'
-  );
-
-  clearTimeout(
-    toastTimer
-  );
-
-  toastTimer =
-    setTimeout(() => {
-
-      toast.classList.remove(
-        'show'
-      );
-
-    }, 2800);
-
-}
-
-
-/* ============================================================
-   STATUS
-   ============================================================ */
-
-function alterarStatus(
-  texto,
-  tipo
-) {
-
-  const status =
-    document.getElementById(
-      'statusSistema'
-    );
-
-  const statusTexto =
-    document.getElementById(
-      'statusTexto'
-    );
-
-  statusTexto.textContent =
-    texto;
-
-  status.className =
-    'status ' +
-    (tipo || '');
-
-}
-
-
-/* ============================================================
-   JSONP
-   ============================================================ */
-
-function chamarAPI(acao, parametros = {}, timeout = 20000) {
-
-  return new Promise((resolve, reject) => {
-
-    const callback =
-      'radioCallback_' +
-      Date.now() +
-      '_' +
-      Math.random().toString(36).substring(2, 9);
-
-    const script =
-      document.createElement('script');
-
-    let finalizado = false;
-
-    const params =
-      new URLSearchParams();
-
-    params.set('acao', acao);
-    params.set('callback', callback);
-
-    Object.keys(parametros).forEach(chave => {
-
-      const valor = parametros[chave];
-
-      if (
-        valor !== undefined &&
-        valor !== null
-      ) {
-
-        params.set(
-          chave,
-          String(valor)
-        );
-
-      }
-
-    });
-
-    function finalizar(erro, resultado) {
-
-      if (finalizado) {
-        return;
-      }
-
-      finalizado = true;
-
-      clearTimeout(timer);
-
-      try {
-        delete window[callback];
-      } catch (e) {}
-
-      if (script.parentNode) {
-
-        script.parentNode.removeChild(
-          script
-        );
-
-      }
-
-      if (erro) {
-
-        reject(erro);
-
-      } else {
-
-        resolve(resultado);
-
-      }
-
-    }
-
-    window[callback] =
-      function(resultado) {
-
-        console.log(
-          'Resposta da API:',
-          resultado
-        );
-
-        finalizar(
-          null,
-          resultado
-        );
-
-      };
-
-
-    script.onerror =
-      function() {
-
-        finalizar(
-          new Error(
-            'Não foi possível acessar o Apps Script.'
-          )
-        );
-
-      };
-
-
-    const timer =
-      setTimeout(() => {
-
-        finalizar(
-          new Error(
-            'Tempo limite excedido ao carregar a playlist.'
-          )
-        );
-
-      }, timeout);
-
-
-    script.src =
-      URL_API +
-      (
-        URL_API.includes('?')
-          ? '&'
-          : '?'
-      ) +
-      params.toString();
-
-
-    console.log(
-      'Chamando API:',
-      script.src
-    );
-
-
-    document.body.appendChild(
-      script
-    );
-
-  });
-
-}
-
-
-/* ============================================================
-   CONVERTER URL DO GOOGLE DRIVE
-   ============================================================ */
-
-function converterUrlAudio(
-  url
-) {
-
-  if (!url) {
-    return '';
-  }
-
-  url =
-    String(url).trim();
-
-  if (
-    url.includes(
-      'drive.google.com'
-    )
-  ) {
-
-    let id = '';
-
-    const match =
-      url.match(
-        /\/d\/([^/]+)/i
-      );
-
-    if (match) {
-
-      id = match[1];
-
-    } else {
-
-      const matchId =
-        url.match(
-          /[?&]id=([^&]+)/i
-        );
-
-      if (matchId) {
-        id =
-          matchId[1];
-      }
-
-    }
-
-    if (id) {
-
-      return (
-        'https://drive.usercontent.google.com/download?id=' +
-        encodeURIComponent(id) +
-        '&export=download&confirm=t'
-      );
-
-    }
-
-  }
-
-  return url;
-
-}
-
-
-/* ============================================================
-   PREPARAR ITEM
-   ============================================================ */
-
-function prepararAudio(
-  item,
-  indice
-) {
-
-  return {
-
-    id:
-      item.id ||
-      item.ID ||
-      item.codigo ||
-      item.Codigo ||
-      String(indice + 1),
-
-    titulo:
-      item.titulo ||
-      item.Título ||
-      item.Titulo ||
-      item.nome ||
-      item.Nome ||
-      'Sem título',
-
-    artista:
-      item.artista ||
-      item.Artista ||
-      item.autor ||
-      item.Autor ||
-      item.cantor ||
-      item.Cantor ||
-      '',
-
-    url:
-      converterUrlAudio(
-        item.url ||
-        item.URL ||
-        item.Url ||
-        item.link ||
-        item.Link ||
-        item.arquivo ||
-        item.Arquivo ||
-        item.audio ||
-        item.Audio ||
-        ''
-      ),
-
-    tipo:
-      item.tipo ||
-      item.Tipo ||
-      item.categoria ||
-      item.Categoria ||
-      'Música',
-
-    ordem:
-      Number(
-        item.ordem ||
-        item.Ordem ||
-        item.posicao ||
-        item.Posicao ||
-        indice + 1
-      )
-
-  };
-
-}
-
-
-/* ============================================================
-   DIVIDIR EM 3 PLAYLISTS
-   ============================================================
-
-   REGRA:
-
-   A quantidade total é dividida por 3.
-
-   O restante é distribuído começando pela MANHÃ.
-
-   Exemplos:
-
-   24 = 8 / 8 / 8
-   25 = 9 / 8 / 8
-   26 = 9 / 9 / 8
-   27 = 9 / 9 / 9
-   28 = 10 / 9 / 9
-   29 = 10 / 10 / 9
-
-   Isso garante que a diferença entre os grupos
-   nunca seja maior que 1.
-   ============================================================ */
-
-function dividirPlaylists(
-  audios
-) {
-
-  const total =
-    audios.length;
-
-  const base =
-    Math.floor(
-      total / 3
-    );
-
-  const resto =
-    total % 3;
-
-  let quantidadeManha =
-    base;
-
-  let quantidadeTarde =
-    base;
-
-  let quantidadeNoite =
-    base;
-
-
-  if (resto >= 1) {
-    quantidadeManha++;
-  }
-
-  if (resto >= 2) {
-    quantidadeTarde++;
-  }
-
-
-  playlists = {
-
-    manha:
-      audios.slice(
-        0,
-        quantidadeManha
-      ),
-
-    tarde:
-      audios.slice(
-        quantidadeManha,
-        quantidadeManha +
-        quantidadeTarde
-      ),
-
-    noite:
-      audios.slice(
-        quantidadeManha +
-        quantidadeTarde
-      )
-
-  };
-
-}
-
-
-/* ============================================================
-   RENDERIZAR PLAYLIST
-   ============================================================ */
-
-function renderizarPlaylist(
-  nome,
-  lista,
-  elementoId,
-  countId
-) {
-
-  const container =
-    document.getElementById(
-      elementoId
-    );
-
-  const contador =
-    document.getElementById(
-      countId
-    );
-
-  contador.textContent =
-    lista.length;
-
-  container.innerHTML =
-    '';
-
-  if (!lista.length) {
-
-    container.innerHTML =
-      '<div class="empty">' +
-      'Nenhum conteúdo disponível.' +
-      '</div>';
-
-    return;
-
-  }
-
-  lista.forEach(
-    (audio, indice) => {
-
-      const item =
-        document.createElement(
-          'div'
-        );
-
-      item.className =
-        'audio-item';
-
-      if (
-        audio.id ===
-        playlistFiltrada[indiceAtual]?.id
-      ) {
-
-        item.classList.add(
-          'active'
-        );
-
-      }
-
-      item.dataset.id =
-        audio.id;
-
-      const titulo =
-        escapeHtml(
-          audio.titulo
-        );
-
-      const artista =
-        escapeHtml(
-          audio.artista ||
-          'Rádio Onda Livre'
-        );
-
-      const tipo =
-        escapeHtml(
-          audio.tipo
-        );
-
-      item.innerHTML = `
-
-        <div class="audio-number">
-          ${indice + 1}
-        </div>
-
-        <div class="audio-info">
-
-          <div class="audio-title">
-            ${titulo}
-          </div>
-
-          <div class="audio-artist">
-            ${artista}
-          </div>
-
-          <span class="audio-type">
-            ${tipo}
-          </span>
-
-        </div>
-
-        <div class="audio-actions">
-
-          <button
-            class="share-btn"
-            title="Compartilhar"
-            aria-label="Compartilhar"
-          >
-            ↗
-          </button>
-
-        </div>
-
-      `;
-
-
-      item.addEventListener(
-        'click',
-        function(event) {
-
-          if (
-            event.target.closest(
-              '.share-btn'
-            )
-          ) {
-
-            return;
-
-          }
-
-          tocarAudio(
-            audio
-          );
-
-        }
-      );
-
-
-      const share =
-        item.querySelector(
-          '.share-btn'
-        );
-
-      share.addEventListener(
-        'click',
-        function(event) {
-
-          event.stopPropagation();
-
-          compartilharAudio(
-            audio
-          );
-
-        }
-      );
-
-
-      container.appendChild(
-        item
-      );
-
-    }
-  );
-
-}
-
-
-/* ============================================================
-   RENDERIZAR TODAS AS PLAYLISTS
-   ============================================================ */
-
-function renderizarTodas() {
-
-  renderizarPlaylist(
-    'manha',
-    playlists.manha,
-    'playlistManha',
-    'countManha'
-  );
-
-  renderizarPlaylist(
-    'tarde',
-    playlists.tarde,
-    'playlistTarde',
-    'countTarde'
-  );
-
-  renderizarPlaylist(
-    'noite',
-    playlists.noite,
-    'playlistNoite',
-    'countNoite'
-  );
-
-  document.getElementById(
-    'totalAudios'
-  ).textContent =
-    playlistOriginal.length;
-
-}
-
-
-/* ============================================================
-   ESCAPE HTML
-   ============================================================ */
-
-function escapeHtml(
-  valor
-) {
-
-  return String(
-    valor || ''
-  )
-    .replace(
-      /&/g,
-      '&amp;'
-    )
-    .replace(
-      /</g,
-      '&lt;'
-    )
-    .replace(
-      />/g,
-      '&gt;'
-    )
-    .replace(
-      /"/g,
-      '&quot;'
-    )
-    .replace(
-      /'/g,
-      '&#039;'
-    );
-
-}
-
-
-/* ============================================================
-   TOCAR ÁUDIO
-   ============================================================ */
-
-function tocarAudio(
-  audio
-) {
-
-  if (!audio || !audio.url) {
-
-    mostrarToast(
-      'Este conteúdo não possui um arquivo de áudio válido.'
-    );
-
-    return;
-
-  }
-
-  indiceAtual =
-    playlistFiltrada.findIndex(
-      item =>
-        item.id === audio.id
-    );
-
-  if (
-    indiceAtual < 0
-  ) {
-
-    playlistFiltrada =
-      playlistOriginal.slice();
-
-    indiceAtual =
-      playlistFiltrada.findIndex(
-        item =>
-          item.id === audio.id
-      );
-
-  }
-
-
-  audioPlayer.src =
-    audio.url;
-
-  audioPlayer.load();
-
-  nowTitle.textContent =
-    audio.titulo;
-
-  nowArtist.textContent =
-    audio.artista ||
-    'Rádio Onda Livre';
-
-  albumIcon.classList.add(
-    'playing'
-  );
-
-  document.getElementById(
-    'playlistAtual'
-  ).textContent =
-    descobrirPlaylist(
-      audio
-    );
-
-
-  audioPlayer.play()
-    .then(
-      () => {
-
-        playBtn.textContent =
-          '⏸';
-
-        registrarEvento(
-          'PLAY',
-          audio
-        );
-
-      }
-    )
-    .catch(
-      () => {
-
-        playBtn.textContent =
-          '▶';
-
-        mostrarToast(
-          'Clique em reproduzir para iniciar o áudio.'
-        );
-
-      }
-    );
-
-  renderizarTodas();
-
-}
-
-
-/* ============================================================
-   DESCOBRIR PLAYLIST
-   ============================================================ */
-
-function descobrirPlaylist(
-  audio
-) {
-
-  if (
-    playlists.manha.some(
-      item =>
-        item.id === audio.id
-    )
-  ) {
-
-    return '🌅 Manhã';
-
-  }
-
-  if (
-    playlists.tarde.some(
-      item =>
-        item.id === audio.id
-    )
-  ) {
-
-    return '☀️ Tarde';
-
-  }
-
-  if (
-    playlists.noite.some(
-      item =>
-        item.id === audio.id
-    )
-  ) {
-
-    return '🌙 Noite';
-
-  }
-
-  return '—';
-
-}
-
-
-/* ============================================================
-   PLAY / PAUSE
-   ============================================================ */
-
-playBtn.addEventListener(
-  'click',
-  function() {
-
-    if (
-      !audioPlayer.src
-    ) {
-
-      tocarPrimeiroAudio();
-
-      return;
-
-    }
-
-    if (
-      audioPlayer.paused
-    ) {
-
-      audioPlayer.play()
-        .then(
-          () => {
-
-            playBtn.textContent =
-              '⏸';
-
-          }
-        )
-        .catch(
-          () => {}
-        );
-
-    } else {
-
-      audioPlayer.pause();
-
-      playBtn.textContent =
-        '▶';
-
-    }
-
-  }
-);
-
-
-/* ============================================================
-   PAUSE
-   ============================================================ */
-
-audioPlayer.addEventListener(
-  'pause',
-  function() {
-
-    playBtn.textContent =
-      '▶';
-
-    albumIcon.classList.remove(
-      'playing'
-    );
-
-  }
-);
-
-
-/* ============================================================
-   PLAY
-   ============================================================ */
-
-audioPlayer.addEventListener(
-  'play',
-  function() {
-
-    playBtn.textContent =
-      '⏸';
-
-    albumIcon.classList.add(
-      'playing'
-    );
-
-  }
-);
-
-
-/* ============================================================
-   PRÓXIMO
-   ============================================================ */
-
-nextBtn.addEventListener(
-  'click',
-  proximoAudio
-);
-
-function proximoAudio() {
-
-  if (
-    !playlistFiltrada.length
-  ) {
-
-    return;
-
-  }
-
-  let proximo =
-    indiceAtual + 1;
-
-  if (
-    proximo >=
-    playlistFiltrada.length
-  ) {
-
-    proximo = 0;
-
-  }
-
-  tocarAudio(
-    playlistFiltrada[
-      proximo
-    ]
-  );
-
-}
-
-
-/* ============================================================
-   ANTERIOR
-   ============================================================ */
-
-prevBtn.addEventListener(
-  'click',
-  audioAnterior
-);
-
-function audioAnterior() {
-
-  if (
-    !playlistFiltrada.length
-  ) {
-
-    return;
-
-  }
-
-  let anterior =
-    indiceAtual - 1;
-
-  if (
-    anterior < 0
-  ) {
-
-    anterior =
-      playlistFiltrada.length - 1;
-
-  }
-
-  tocarAudio(
-    playlistFiltrada[
-      anterior
-    ]
-  );
-
-}
-
-
-/* ============================================================
-   FIM DO ÁUDIO
-   ============================================================ */
-
-audioPlayer.addEventListener(
-  'ended',
-  function() {
-
-    const atual =
-      playlistFiltrada[
-        indiceAtual
-      ];
-
-    if (atual) {
-
-      registrarEvento(
-        'FIM',
-        atual
-      );
-
-    }
-
-    proximoAudio();
-
-  }
-);
-
-
-/* ============================================================
-   STOP
-   ============================================================ */
-
-stopBtn.addEventListener(
-  'click',
-  function() {
-
-    audioPlayer.pause();
-
-    audioPlayer.currentTime =
-      0;
-
-    playBtn.textContent =
-      '▶';
-
-    albumIcon.classList.remove(
-      'playing'
-    );
-
-  }
-);
-
-
-/* ============================================================
-   PAUSE + EVENTO
-   ============================================================ */
-
-audioPlayer.addEventListener(
-  'pause',
-  function() {
-
-    const atual =
-      playlistFiltrada[
-        indiceAtual
-      ];
-
-    if (atual) {
-
-      registrarEvento(
-        'PAUSE',
-        atual
-      );
-
-    }
-
-  }
-);
-
-
-/* ============================================================
-   HEARTBEAT
-   ============================================================ */
-
-setInterval(
-  function() {
-
-    if (
-      audioPlayer &&
-      !audioPlayer.paused
-    ) {
-
-      const atual =
-        playlistFiltrada[
-          indiceAtual
-        ];
-
-      if (atual) {
-
-        registrarEvento(
-          'HEARTBEAT',
-          atual
-        );
-
-      }
-
-    }
-
-  },
-  60000
-);
-
-
-/* ============================================================
-   TOCAR PRIMEIRO ÁUDIO
-   ============================================================ */
-
-function tocarPrimeiroAudio() {
-
-  if (
-    !playlistOriginal.length
-  ) {
-
-    return;
-
-  }
-
-  playlistFiltrada =
-    playlistOriginal.slice();
-
-  indiceAtual = 0;
-
-  tocarAudio(
-    playlistFiltrada[0]
-  );
-
-}
-
-
-/* ============================================================
-   CARREGAR PLAYLIST
-   ============================================================ */
-
-async function carregarPlaylist() {
-
-  alterarStatus(
-    'Carregando playlist...',
-    'loading'
-  );
-
-  try {
-
-    const resposta =
-      await chamarAPI(
-        'listarPlaylist'
-      );
-
-    let dados =
-      resposta;
-
-    if (
-      dados &&
-      Array.isArray(
-        dados.playlist
-      )
-    ) {
-
-      dados =
-        dados.playlist;
-
-    }
-
-    if (
-      dados &&
-      Array.isArray(
-        dados.dados
-      )
-    ) {
-
-      dados =
-        dados.dados;
-
-    }
-
-    if (
-      !Array.isArray(
-        dados
-      )
-    ) {
-
-      throw new Error(
-        'Formato de playlist inválido.'
-      );
-
-    }
-
-
-    playlistOriginal =
-      dados
-        .map(
-          prepararAudio
-        )
-        .filter(
-          item =>
-            item.url
-        )
-        .sort(
-          (a,b) =>
-            a.ordem -
-            b.ordem ||
-            a.titulo.localeCompare(
-              b.titulo,
-              'pt-BR'
-            )
-        );
-
-
-    if (
-      !playlistOriginal.length
-    ) {
-
-      alterarStatus(
-        'Playlist vazia',
-        'error'
-      );
-
-      renderizarTodas();
-
-      return;
-
-    }
-
-
-    /* ========================================================
-       AQUI A DIVISÃO É FEITA AUTOMATICAMENTE
-       ======================================================== */
-
-    dividirPlaylists(
-      playlistOriginal
-    );
-
-
-    playlistFiltrada =
-      playlistOriginal.slice();
-
-
-    renderizarTodas();
-
-
-    alterarStatus(
-      'Rádio online',
-      'online'
-    );
-
-
-    document.getElementById(
-      'localizacaoTexto'
-    ).textContent =
-      'Localização identificada';
+    const URL_API =
+      'https://script.google.com/macros/s/AKfycbxhGy5lnk2Y1dIdpKEzZMvjmAFoS-oql8m-Eh6ZuwatyvRleaaqUbBvfkv825EbWWdC7g/exec';
 
 
     /*
-     * Conforme solicitado:
-     * inicia o primeiro áudio após
-     * o carregamento da playlist.
+     * ============================================================
+     * LINK DA BÍBLIA
+     * ============================================================
      *
-     * O navegador pode bloquear
-     * autoplay com som. Nesse caso,
-     * o usuário poderá clicar em PLAY.
+     * COLOQUE AQUI O LINK PUBLICADO DO SEU PROJETO
+     * "BÍBLIA KING JAMES".
+     *
+     * Exemplo:
+     *
+     * const URL_BIBLIA =
+     *   'https://seusite.com/biblia';
+     *
      */
 
-    setTimeout(
-      function() {
-
-        tocarPrimeiroAudio();
-
-      },
-      500
-    );
+    const URL_BIBLIA =
+      'COLE_AQUI_O_LINK_DA_BIBLIA_KING_JAMES';
 
 
-    registrarAcesso();
+    /* ============================================================
+       VARIÁVEIS
+       ============================================================ */
 
-  }
-  catch (erro) {
+    let playlist = [];
 
-    console.error(
-      erro
-    );
+    let playlistFiltrada = [];
 
-    alterarStatus(
-      'Erro de comunicação',
-      'error'
-    );
+    let indiceAtual = 0;
 
-    document.getElementById(
-      'playlistManha'
-    ).innerHTML =
-      '<div class="empty">' +
-      'Não foi possível carregar a playlist.' +
-      '</div>';
+    let filtroAtual = 'todos';
 
-    document.getElementById(
-      'playlistTarde'
-    ).innerHTML =
-      '<div class="empty">' +
-      'Verifique a conexão com o servidor.' +
-      '</div>';
+    let callbackAPI = null;
 
-    document.getElementById(
-      'playlistNoite'
-    ).innerHTML =
-      '<div class="empty">' +
-      'Tente novamente em alguns instantes.' +
-      '</div>';
+    let timeoutAPI = null;
 
-  }
+    let heartbeatTimer = null;
 
-}
-
-
-/* ============================================================
-   FILTROS
-   ============================================================ */
-
-document.querySelectorAll(
-  '.filter-btn'
-).forEach(
-  botao => {
-
-    botao.addEventListener(
-      'click',
-      function() {
-
-        document.querySelectorAll(
-          '.filter-btn'
-        ).forEach(
-          b =>
-            b.classList.remove(
-              'active'
-            )
-        );
-
-        this.classList.add(
-          'active'
-        );
-
-        filtroAtual =
-          this.dataset.filter;
-
-        aplicarFiltro();
-
-      }
-    );
-
-  }
-);
-
-
-/* ============================================================
-   APLICAR FILTRO
-   ============================================================ */
-
-function aplicarFiltro() {
-
-  if (
-    filtroAtual ===
-    'todos'
-  ) {
-
-    playlistFiltrada =
-      playlistOriginal.slice();
-
-  } else {
-
-    playlistFiltrada =
-      playlistOriginal.filter(
-        audio => {
-
-          const tipo =
-            normalizarTexto(
-              audio.tipo
-            );
-
-          if (
-            filtroAtual ===
-            'musica'
-          ) {
-
-            return (
-              tipo.includes(
-                'musica'
-              ) ||
-              tipo.includes(
-                'louvor'
-              )
-            );
-
-          }
-
-          if (
-            filtroAtual ===
-            'oracao'
-          ) {
-
-            return tipo.includes(
-              'oracao'
-            );
-
-          }
-
-          if (
-            filtroAtual ===
-            'mensagem'
-          ) {
-
-            return tipo.includes(
-              'mensagem'
-            );
-
-          }
-
-          return true;
-
-        }
+    let sessao =
+      localStorage.getItem(
+        'radio_onda_livre_sessao'
       );
 
-  }
+    if (!sessao) {
 
-
-  indiceAtual =
-    playlistFiltrada.findIndex(
-      audio =>
-        audioPlayer.src &&
-        audio.url ===
-        audioPlayer.src
-    );
-
-
-  renderizarPesquisa();
-
-}
-
-
-/* ============================================================
-   PESQUISA
-   ============================================================ */
-
-searchInput.addEventListener(
-  'input',
-  function() {
-
-    const termo =
-      normalizarTexto(
-        this.value
-      );
-
-    clearSearchBtn.style.display =
-      termo
-        ? 'block'
-        : 'none';
-
-    if (!termo) {
-
-      searchResults.style.display =
-        'none';
-
-      searchResults.innerHTML =
-        '';
-
-      return;
-
-    }
-
-    const resultados =
-      playlistOriginal.filter(
-        audio => {
-
-          const texto =
-            normalizarTexto(
-              audio.titulo +
-              ' ' +
-              audio.artista +
-              ' ' +
-              audio.tipo
-            );
-
-          return texto.includes(
-            termo
-          );
-
-        }
-      );
-
-    mostrarResultadosPesquisa(
-      resultados
-    );
-
-  }
-);
-
-
-/* ============================================================
-   LIMPAR PESQUISA
-   ============================================================ */
-
-function limparPesquisa() {
-
-  const campo =
-    document.getElementById(
-      'searchInput'
-    );
-
-  const caixa =
-    document.getElementById(
-      'searchResults'
-    );
-
-  campo.value = '';
-
-  caixa.innerHTML = '';
-
-  caixa.style.display =
-    'none';
-
-  document.getElementById(
-    'clearSearchBtn'
-  ).style.display =
-    'none';
-
-  campo.focus();
-
-}
-
-
-/* ============================================================
-   BOTÃO LIMPAR
-   ============================================================ */
-
-clearSearchBtn.addEventListener(
-  'click',
-  limparPesquisa
-);
-
-
-/* ============================================================
-   RESULTADOS DA PESQUISA
-   ============================================================ */
-
-function mostrarResultadosPesquisa(
-  resultados
-) {
-
-  searchResults.innerHTML =
-    '';
-
-  searchResults.style.display =
-    'block';
-
-  if (
-    !resultados.length
-  ) {
-
-    searchResults.innerHTML =
-      '<div class="empty">' +
-      'Nenhum resultado encontrado.' +
-      '</div>';
-
-    return;
-
-  }
-
-
-  resultados.forEach(
-    audio => {
-
-      const item =
-        document.createElement(
-          'div'
-        );
-
-      item.className =
-        'audio-item';
-
-      item.innerHTML = `
-
-        <div class="audio-number">
-          🎵
-        </div>
-
-        <div class="audio-info">
-
-          <div class="audio-title">
-            ${escapeHtml(audio.titulo)}
-          </div>
-
-          <div class="audio-artist">
-            ${escapeHtml(audio.artista)}
-          </div>
-
-          <span class="audio-type">
-            ${escapeHtml(audio.tipo)}
-          </span>
-
-        </div>
-
-        <div class="audio-actions">
-
-          <button
-            class="share-btn"
-            title="Compartilhar"
-          >
-            ↗
-          </button>
-
-        </div>
-
-      `;
-
-
-      item.addEventListener(
-        'click',
-        function(event) {
-
-          if (
-            event.target.closest(
-              '.share-btn'
-            )
-          ) {
-
-            return;
-
-          }
-
-          tocarAudio(
-            audio
-          );
-
-          limparPesquisa();
-
-        }
-      );
-
-
-      item.querySelector(
-        '.share-btn'
-      ).addEventListener(
-        'click',
-        function(event) {
-
-          event.stopPropagation();
-
-          compartilharAudio(
-            audio
-          );
-
-        }
-      );
-
-
-      searchResults.appendChild(
-        item
-      );
-
-    }
-  );
-
-}
-
-
-/* ============================================================
-   RENDERIZAR PESQUISA
-   ============================================================ */
-
-function renderizarPesquisa() {
-
-  if (
-    !searchInput.value
-  ) {
-
-    return;
-
-  }
-
-  const termo =
-    normalizarTexto(
-      searchInput.value
-    );
-
-  const resultados =
-    playlistOriginal.filter(
-      audio =>
-        normalizarTexto(
-          audio.titulo +
-          ' ' +
-          audio.artista +
-          ' ' +
-          audio.tipo
-        ).includes(
-          termo
-        )
-    );
-
-  mostrarResultadosPesquisa(
-    resultados
-  );
-
-}
-
-
-/* ============================================================
-   COMPARTILHAR ÁUDIO
-   ============================================================ */
-
-async function compartilharAudio(
-  audio
-) {
-
-  const url =
-    window.location.href;
-
-  const texto =
-    '🎵 Ouça "' +
-    audio.titulo +
-    '"' +
-    (
-      audio.artista
-        ? ' - ' + audio.artista
-        : ''
-    ) +
-    ' na Rádio Onda Livre.';
-
-
-  if (
-    navigator.share
-  ) {
-
-    try {
-
-      await navigator.share({
-
-        title:
-          audio.titulo,
-
-        text:
-          texto,
-
-        url:
-          url
-
-      });
-
-      return;
-
-    }
-    catch (erro) {
-
-      if (
-        erro.name ===
-        'AbortError'
-      ) {
-
-        return;
-
-      }
-
-    }
-
-  }
-
-
-  try {
-
-    await navigator.clipboard.writeText(
-      texto +
-      '\n' +
-      url
-    );
-
-    mostrarToast(
-      'Link do louvor copiado!'
-    );
-
-  }
-  catch (erro) {
-
-    mostrarToast(
-      'Não foi possível compartilhar.'
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   COMPARTILHAR RÁDIO
-   ============================================================ */
-
-document.getElementById(
-  'shareRadioBtn'
-).addEventListener(
-  'click',
-  compartilharRadio
-);
-
-
-async function compartilharRadio() {
-
-  const url =
-    window.location.href;
-
-  const texto =
-    '📻 Quero compartilhar uma rádio que pode abençoar sua vida. ' +
-    'Ouça a Rádio Onda Livre com louvores, orações e mensagens.';
-
-
-  if (
-    navigator.share
-  ) {
-
-    try {
-
-      await navigator.share({
-
-        title:
-          'Rádio Onda Livre',
-
-        text:
-          texto,
-
-        url:
-          url
-
-      });
-
-      return;
-
-    }
-    catch (erro) {
-
-      if (
-        erro.name ===
-        'AbortError'
-      ) {
-
-        return;
-
-      }
-
-    }
-
-  }
-
-
-  try {
-
-    await navigator.clipboard.writeText(
-      texto +
-      '\n' +
-      url
-    );
-
-    mostrarToast(
-      'Mensagem da rádio copiada!'
-    );
-
-  }
-  catch (erro) {
-
-    mostrarToast(
-      'Não foi possível compartilhar.'
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   LOCALIZAÇÃO
-   ============================================================ */
-
-let localizacaoObtida =
-  false;
-
-
-function obterLocalizacao() {
-
-  return new Promise(
-    resolve => {
-
-      const callback =
-        'localizacao_' +
+      sessao =
+        'sessao_' +
         Date.now() +
         '_' +
         Math.random()
           .toString(36)
-          .substring(2,8);
+          .substring(2, 10);
 
-      const script =
-        document.createElement(
-          'script'
-        );
+      localStorage.setItem(
+        'radio_onda_livre_sessao',
+        sessao
+      );
 
-      let finalizado =
-        false;
-
-      const timer =
-        setTimeout(
-          () => {
-
-            finalizar(
-              null
-            );
-
-          },
-          7000
-        );
+    }
 
 
-      function finalizar(
-        dados
+    /* ============================================================
+       UTILITÁRIOS
+       ============================================================ */
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+
+    function escaparHTML(texto) {
+
+      return String(texto ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+    }
+
+
+    function mostrarToast(mensagem) {
+
+      const toast = $('toast');
+
+      if (!toast) return;
+
+      toast.textContent = mensagem;
+
+      toast.classList.add('show');
+
+      clearTimeout(
+        mostrarToast.timer
+      );
+
+      mostrarToast.timer =
+        setTimeout(() => {
+
+          toast.classList.remove('show');
+
+        }, 3000);
+
+    }
+
+
+    /* ============================================================
+       CONFIGURAR BÍBLIA
+       ============================================================ */
+
+    function configurarLinkBiblia() {
+
+      const link = $('bibleLink');
+
+      if (!link) return;
+
+
+      if (
+        !URL_BIBLIA ||
+        URL_BIBLIA.includes(
+          'COLE_AQUI_O_LINK'
+        )
       ) {
 
-        if (finalizado) {
-          return;
-        }
+        link.href = '#';
 
-        finalizado =
-          true;
+        link.addEventListener(
+          'click',
+          function(event) {
 
-        clearTimeout(
-          timer
-        );
+            event.preventDefault();
 
-        delete window[
-          callback
-        ];
-
-        if (
-          script.parentNode
-        ) {
-
-          script.parentNode
-            .removeChild(
-              script
+            mostrarToast(
+              'Configure o link da Bíblia King James no código.'
             );
 
-        }
-
-        resolve(
-          dados
+          }
         );
+
+        return;
 
       }
 
 
-      window[callback] =
-        function(
-          dados
-        ) {
+      link.href = URL_BIBLIA;
 
-          finalizar(
-            dados
+    }
+
+
+    /* ============================================================
+       API JSONP
+       ============================================================ */
+
+    function chamarAPI(
+      acao,
+      parametros = {},
+      callback
+    ) {
+
+      const callbackName =
+        'callbackRadio_' +
+        Date.now() +
+        '_' +
+        Math.random()
+          .toString(36)
+          .substring(2, 8);
+
+
+      callbackAPI = callback;
+
+      const script =
+        document.createElement('script');
+
+
+      const params =
+        new URLSearchParams();
+
+      params.set(
+        'acao',
+        acao
+      );
+
+      params.set(
+        'callback',
+        callbackName
+      );
+
+
+      Object.keys(parametros)
+        .forEach(chave => {
+
+          const valor =
+            parametros[chave];
+
+          if (
+            valor !== undefined &&
+            valor !== null
+          ) {
+
+            params.set(
+              chave,
+              valor
+            );
+
+          }
+
+        });
+
+
+      window[callbackName] =
+        function(resposta) {
+
+          clearTimeout(
+            timeoutAPI
           );
 
-        };
+          try {
 
+            if (callbackAPI) {
 
-      script.onerror =
-        function() {
+              callbackAPI(
+                resposta
+              );
 
-          finalizar(
-            null
-          );
+            }
+
+          } finally {
+
+            delete window[callbackName];
+
+            script.remove();
+
+          }
 
         };
 
 
       script.src =
-        'https://ipapi.co/jsonp/?callback=' +
-        callback;
+        URL_API +
+        '?' +
+        params.toString();
+
+
+      script.onerror =
+        function() {
+
+          clearTimeout(
+            timeoutAPI
+          );
+
+          delete window[callbackName];
+
+          script.remove();
+
+          if (callbackAPI) {
+
+            callbackAPI({
+              sucesso: false,
+              erro:
+                'Não foi possível conectar ao servidor.'
+            });
+
+          }
+
+        };
+
+
+      timeoutAPI =
+        setTimeout(() => {
+
+          delete window[callbackName];
+
+          script.remove();
+
+          if (callbackAPI) {
+
+            callbackAPI({
+              sucesso: false,
+              erro:
+                'Tempo limite de conexão excedido.'
+            });
+
+          }
+
+        }, 15000);
 
 
       document.body.appendChild(
@@ -3526,446 +1844,1449 @@ function obterLocalizacao() {
       );
 
     }
-  );
-
-}
 
 
-/* ============================================================
-   CARREGAR LOCALIZAÇÃO
-   ============================================================ */
+    /* ============================================================
+       CONVERTER URL GOOGLE DRIVE
+       ============================================================ */
 
-async function carregarLocalizacao() {
+    function converterUrlAudio(url) {
 
-  const texto =
-    document.getElementById(
-      'localizacaoTexto'
-    );
+      if (!url) return '';
 
-  texto.textContent =
-    'Identificando localização...';
+      url = String(url).trim();
 
 
-  const salva =
-    localStorage.getItem(
-      'radio_onda_livre_localizacao'
-    );
+      const match =
+        url.match(
+          /\/d\/([a-zA-Z0-9_-]+)/
+        );
+
+      if (match && match[1]) {
+
+        return (
+          'https://drive.google.com/uc?export=download&id=' +
+          match[1]
+        );
+
+      }
 
 
-  if (salva) {
-
-    try {
-
-      const dados =
-        JSON.parse(
-          salva
+      const idMatch =
+        url.match(
+          /[?&]id=([a-zA-Z0-9_-]+)/
         );
 
       if (
-        dados &&
-        (
-          dados.cidade ||
-          dados.estado
-        )
+        idMatch &&
+        idMatch[1]
       ) {
 
-        atualizarLocalizacao(
-          dados
+        return (
+          'https://drive.google.com/uc?export=download&id=' +
+          idMatch[1]
         );
 
-        localizacaoObtida =
-          true;
+      }
 
-        return dados;
+
+      return url;
+
+    }
+
+
+    /* ============================================================
+       NORMALIZAR ÁUDIO
+       ============================================================ */
+
+    function normalizarAudio(item) {
+
+      if (!item) return null;
+
+
+      return {
+
+        id:
+          item.id ??
+          item.ID ??
+          item.codigo ??
+          item.Código ??
+          '',
+
+        titulo:
+          item.titulo ??
+          item.Título ??
+          item.nome ??
+          item.Nome ??
+          'Áudio',
+
+        artista:
+          item.artista ??
+          item.Artista ??
+          item.autor ??
+          item.Autor ??
+          item.cantor ??
+          item.Cantor ??
+          'Rádio Onda Livre',
+
+        url:
+          converterUrlAudio(
+            item.url ??
+            item.URL ??
+            item.link ??
+            item.Link ??
+            item.arquivo ??
+            item.Arquivo ??
+            ''
+          ),
+
+        tipo:
+          String(
+            item.tipo ??
+            item.Tipo ??
+            item.categoria ??
+            item.Categoria ??
+            'Música'
+          ).toLowerCase(),
+
+        ativo:
+          item.ativo ??
+          item.Ativo ??
+          true,
+
+        ordem:
+          Number(
+            item.ordem ??
+            item.Ordem ??
+            item.posicao ??
+            item.Posição ??
+            0
+          )
+
+      };
+
+    }
+
+
+    /* ============================================================
+       CARREGAR PLAYLIST
+       ============================================================ */
+
+    function carregarPlaylist() {
+
+      $('statusSistema').textContent =
+        'Carregando playlist...';
+
+
+      chamarAPI(
+        'listarPlaylist',
+        {},
+        function(resposta) {
+
+          if (
+            !resposta ||
+            resposta.sucesso === false
+          ) {
+
+            $('statusSistema').textContent =
+              'Erro ao carregar playlist';
+
+            mostrarToast(
+              resposta?.erro ||
+              'Não foi possível carregar os áudios.'
+            );
+
+            return;
+
+          }
+
+
+          const dados =
+            Array.isArray(resposta)
+              ? resposta
+              : (
+                  resposta.playlist ||
+                  resposta.dados ||
+                  resposta.resultado ||
+                  []
+                );
+
+
+          playlist =
+            dados
+              .map(normalizarAudio)
+              .filter(audio =>
+                audio &&
+                audio.url
+              )
+              .sort(
+                (a,b) =>
+                  a.ordem - b.ordem
+              );
+
+
+          $('totalAudios').textContent =
+            playlist.length;
+
+
+          $('statusSistema').textContent =
+            playlist.length
+              ? 'Sistema funcionando'
+              : 'Nenhum áudio encontrado';
+
+
+          dividirPlaylists();
+
+          aplicarFiltro();
+
+          indiceAtual = 0;
+
+          atualizarPlayer();
+
+
+          setTimeout(() => {
+
+            tocarAtual();
+
+          }, 500);
+
+
+          registrarAcesso();
+
+        }
+      );
+
+    }
+
+
+    /* ============================================================
+       DIVIDIR PLAYLIST EM 3
+       ============================================================ */
+
+    function dividirPlaylists() {
+
+      const total =
+        playlist.length;
+
+
+      const base =
+        Math.floor(
+          total / 3
+        );
+
+
+      const resto =
+        total % 3;
+
+
+      const qtdManha =
+        base +
+        (resto >= 1 ? 1 : 0);
+
+
+      const qtdTarde =
+        base +
+        (resto >= 2 ? 1 : 0);
+
+
+      const qtdNoite =
+        base;
+
+
+      const manha =
+        playlist.slice(
+          0,
+          qtdManha
+        );
+
+
+      const tarde =
+        playlist.slice(
+          qtdManha,
+          qtdManha + qtdTarde
+        );
+
+
+      const noite =
+        playlist.slice(
+          qtdManha + qtdTarde
+        );
+
+
+      renderizarPlaylist(
+        'playlistManha',
+        'countManha',
+        manha
+      );
+
+
+      renderizarPlaylist(
+        'playlistTarde',
+        'countTarde',
+        tarde
+      );
+
+
+      renderizarPlaylist(
+        'playlistNoite',
+        'countNoite',
+        noite
+      );
+
+    }
+
+
+    /* ============================================================
+       RENDERIZAR PLAYLIST
+       ============================================================ */
+
+    function renderizarPlaylist(
+      containerId,
+      countId,
+      lista
+    ) {
+
+      const container =
+        $(containerId);
+
+      const count =
+        $(countId);
+
+
+      if (!container) return;
+
+
+      count.textContent =
+        lista.length;
+
+
+      if (!lista.length) {
+
+        container.innerHTML =
+          `
+            <div style="
+              padding:20px;
+              color:#8093ad;
+              text-align:center;
+              font-size:13px;
+            ">
+              Nenhum áudio nesta playlist.
+            </div>
+          `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        lista
+          .map(
+            (audio, indice) => {
+
+              const indiceGlobal =
+                playlist.findIndex(
+                  item =>
+                    String(item.id) ===
+                    String(audio.id)
+                );
+
+
+              return `
+                <div
+                  class="playlist-item"
+                  data-index="${indiceGlobal}"
+                  onclick="selecionarAudio(${indiceGlobal})"
+                >
+
+                  <div class="track-number">
+                    ${String(indice + 1).padStart(2,'0')}
+                  </div>
+
+                  <div class="track-info">
+
+                    <div class="track-title">
+                      ${escaparHTML(audio.titulo)}
+                    </div>
+
+                    <div class="track-artist">
+                      ${escaparHTML(audio.artista)}
+                    </div>
+
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join('');
+
+    }
+
+
+    /* ============================================================
+       FILTRO
+       ============================================================ */
+
+    function aplicarFiltro() {
+
+      if (
+        filtroAtual ===
+        'todos'
+      ) {
+
+        playlistFiltrada =
+          [...playlist];
+
+      } else {
+
+        playlistFiltrada =
+          playlist.filter(audio =>
+            normalizarTipo(
+              audio.tipo
+            ) === filtroAtual
+          );
+
+      }
+
+
+      atualizarItensAtivos();
+
+    }
+
+
+    function normalizarTipo(tipo) {
+
+      tipo =
+        String(tipo || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(
+            /[\u0300-\u036f]/g,
+            ''
+          );
+
+
+      if (
+        tipo.includes('oracao')
+      ) {
+
+        return 'oracao';
+
+      }
+
+
+      if (
+        tipo.includes('mensagem')
+      ) {
+
+        return 'mensagem';
+
+      }
+
+
+      return 'musica';
+
+    }
+
+
+    /* ============================================================
+       ITENS ATIVOS
+       ============================================================ */
+
+    function atualizarItensAtivos() {
+
+      document
+        .querySelectorAll(
+          '.playlist-item'
+        )
+        .forEach(item => {
+
+          const indice =
+            Number(
+              item.dataset.index
+            );
+
+
+          item.classList.toggle(
+            'active',
+            indice === indiceAtual
+          );
+
+        });
+
+    }
+
+
+    /* ============================================================
+       SELECIONAR ÁUDIO
+       ============================================================ */
+
+    function selecionarAudio(
+      indice
+    ) {
+
+      if (
+        indice < 0 ||
+        indice >= playlist.length
+      ) {
+
+        return;
+
+      }
+
+
+      indiceAtual =
+        indice;
+
+
+      atualizarPlayer();
+
+      tocarAtual();
+
+    }
+
+
+    /* ============================================================
+       ATUALIZAR PLAYER
+       ============================================================ */
+
+    function atualizarPlayer() {
+
+      const audio =
+        playlist[indiceAtual];
+
+
+      if (!audio) return;
+
+
+      $('nowTitle').textContent =
+        audio.titulo;
+
+
+      $('nowArtist').textContent =
+        audio.artista;
+
+
+      $('audioPlayer').src =
+        audio.url;
+
+
+      atualizarItensAtivos();
+
+
+      $('playlistAtual').textContent =
+        identificarPlaylistAtual();
+
+
+    }
+
+
+    /* ============================================================
+       IDENTIFICAR PLAYLIST ATUAL
+       ============================================================ */
+
+    function identificarPlaylistAtual() {
+
+      const total =
+        playlist.length;
+
+
+      if (!total) {
+        return 'Manhã';
+      }
+
+
+      const base =
+        Math.floor(
+          total / 3
+        );
+
+
+      const resto =
+        total % 3;
+
+
+      const manha =
+        base +
+        (resto >= 1 ? 1 : 0);
+
+
+      const tarde =
+        base +
+        (resto >= 2 ? 1 : 0);
+
+
+      if (
+        indiceAtual < manha
+      ) {
+
+        return '🌅 Manhã';
+
+      }
+
+
+      if (
+        indiceAtual <
+        manha + tarde
+      ) {
+
+        return '☀️ Tarde';
+
+      }
+
+
+      return '🌙 Noite';
+
+    }
+
+
+    /* ============================================================
+       TOCAR ATUAL
+       ============================================================ */
+
+    function tocarAtual() {
+
+      const player =
+        $('audioPlayer');
+
+
+      if (!player.src) return;
+
+
+      player.play()
+        .then(() => {
+
+          $('playBtn').textContent =
+            '⏸';
+
+          registrarEvento(
+            'PLAY'
+          );
+
+        })
+        .catch(() => {
+
+          $('playBtn').textContent =
+            '▶';
+
+        });
+
+    }
+
+
+    /* ============================================================
+       PLAY / PAUSE
+       ============================================================ */
+
+    function alternarPlay() {
+
+      const player =
+        $('audioPlayer');
+
+
+      if (
+        player.paused
+      ) {
+
+        tocarAtual();
+
+      } else {
+
+        player.pause();
+
+        $('playBtn').textContent =
+          '▶';
+
+        registrarEvento(
+          'PAUSE'
+        );
 
       }
 
     }
-    catch (erro) {}
-
-  }
 
 
-  for (
-    let tentativa = 1;
-    tentativa <= 2;
-    tentativa++
-  ) {
+    /* ============================================================
+       PRÓXIMO
+       ============================================================ */
 
-    const dados =
-      await obterLocalizacao();
+    function proximoAudio() {
+
+      if (!playlist.length) return;
 
 
-    if (
-      dados &&
-      (
-        dados.city ||
-        dados.region
-      )
+      indiceAtual =
+        (
+          indiceAtual + 1
+        ) %
+        playlist.length;
+
+
+      atualizarPlayer();
+
+      tocarAtual();
+
+    }
+
+
+    /* ============================================================
+       ANTERIOR
+       ============================================================ */
+
+    function audioAnterior() {
+
+      if (!playlist.length) return;
+
+
+      indiceAtual =
+        (
+          indiceAtual - 1 +
+          playlist.length
+        ) %
+        playlist.length;
+
+
+      atualizarPlayer();
+
+      tocarAtual();
+
+    }
+
+
+    /* ============================================================
+       PARAR
+       ============================================================ */
+
+    function pararAudio() {
+
+      const player =
+        $('audioPlayer');
+
+
+      player.pause();
+
+      player.currentTime = 0;
+
+
+      $('playBtn').textContent =
+        '▶';
+
+
+      registrarEvento(
+        'PAUSE'
+      );
+
+    }
+
+
+    /* ============================================================
+       EVENTOS DO PLAYER
+       ============================================================ */
+
+    function configurarPlayer() {
+
+      const player =
+        $('audioPlayer');
+
+
+      $('playBtn')
+        .addEventListener(
+          'click',
+          alternarPlay
+        );
+
+
+      $('prevBtn')
+        .addEventListener(
+          'click',
+          audioAnterior
+        );
+
+
+      $('nextBtn')
+        .addEventListener(
+          'click',
+          proximoAudio
+        );
+
+
+      $('stopBtn')
+        .addEventListener(
+          'click',
+          pararAudio
+        );
+
+
+      player.addEventListener(
+        'play',
+        function() {
+
+          $('playBtn').textContent =
+            '⏸';
+
+        }
+      );
+
+
+      player.addEventListener(
+        'pause',
+        function() {
+
+          $('playBtn').textContent =
+            '▶';
+
+        }
+      );
+
+
+      player.addEventListener(
+        'ended',
+        function() {
+
+          registrarEvento(
+            'FIM'
+          );
+
+          proximoAudio();
+
+        }
+      );
+
+
+      player.addEventListener(
+        'timeupdate',
+        function() {
+
+          iniciarHeartbeat();
+
+        }
+      );
+
+    }
+
+
+    /* ============================================================
+       HEARTBEAT
+       ============================================================ */
+
+    function iniciarHeartbeat() {
+
+      if (heartbeatTimer) {
+        return;
+      }
+
+
+      heartbeatTimer =
+        setInterval(
+          () => {
+
+            const player =
+              $('audioPlayer');
+
+
+            if (
+              player &&
+              !player.paused &&
+              player.currentTime > 0
+            ) {
+
+              registrarEvento(
+                'HEARTBEAT'
+              );
+
+            }
+
+          },
+          60000
+        );
+
+    }
+
+
+    /* ============================================================
+       EVENTOS API
+       ============================================================ */
+
+    function registrarEvento(
+      evento
     ) {
 
-      const local =
+      const audio =
+        playlist[indiceAtual];
+
+
+      if (!audio) return;
+
+
+      chamarAPI(
+        'registrarEvento',
         {
-
+          id: sessao,
+          evento: evento,
+          audioId: audio.id,
+          titulo: audio.titulo,
+          sessao: sessao,
           cidade:
-            dados.city ||
-            '',
-
+            localStorage.getItem(
+              'radio_onda_livre_cidade'
+            ) || '',
           estado:
-            dados.region ||
-            ''
+            localStorage.getItem(
+              'radio_onda_livre_estado'
+            ) || ''
+        },
+        function() {}
+      );
+
+    }
+
+
+    /* ============================================================
+       REGISTRAR ACESSO
+       ============================================================ */
+
+    function registrarAcesso() {
+
+      const chave =
+        'radio_onda_livre_acesso_registrado';
+
+
+      if (
+        sessionStorage.getItem(
+          chave
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      sessionStorage.setItem(
+        chave,
+        '1'
+      );
+
+
+      const audio =
+        playlist[0];
+
+
+      if (!audio) return;
+
+
+      chamarAPI(
+        'registrarEvento',
+        {
+          id: sessao,
+          evento: 'ACESSO',
+          audioId: audio.id,
+          titulo: audio.titulo,
+          sessao: sessao,
+          cidade:
+            localStorage.getItem(
+              'radio_onda_livre_cidade'
+            ) || '',
+          estado:
+            localStorage.getItem(
+              'radio_onda_livre_estado'
+            ) || ''
+        },
+        function() {}
+      );
+
+    }
+
+
+    /* ============================================================
+       LOCALIZAÇÃO
+       ============================================================ */
+
+    function carregarLocalizacao() {
+
+      const cidadeSalva =
+        localStorage.getItem(
+          'radio_onda_livre_cidade'
+        );
+
+
+      const estadoSalvo =
+        localStorage.getItem(
+          'radio_onda_livre_estado'
+        );
+
+
+      if (
+        cidadeSalva
+      ) {
+
+        atualizarLocalizacao(
+          cidadeSalva,
+          estadoSalvo
+        );
+
+        return;
+
+      }
+
+
+      $('statusLocalizacao').textContent =
+        'Localizando...';
+
+
+      const callback =
+        'callbackLocalizacao_' +
+        Date.now();
+
+
+      window[callback] =
+        function(data) {
+
+          try {
+
+            const cidade =
+              data?.city ||
+              data?.cidade ||
+              '';
+
+
+            const estado =
+              data?.region ||
+              data?.estado ||
+              '';
+
+
+            if (cidade) {
+
+              localStorage.setItem(
+                'radio_onda_livre_cidade',
+                cidade
+              );
+
+            }
+
+
+            if (estado) {
+
+              localStorage.setItem(
+                'radio_onda_livre_estado',
+                estado
+              );
+
+            }
+
+
+            atualizarLocalizacao(
+              cidade,
+              estado
+            );
+
+          } finally {
+
+            delete window[callback];
+
+          }
 
         };
 
 
-      localStorage.setItem(
-        'radio_onda_livre_localizacao',
-        JSON.stringify(
-          local
-        )
+      const script =
+        document.createElement('script');
+
+
+      script.src =
+        'https://ipapi.co/jsonp/?callback=' +
+        callback;
+
+
+      script.onerror =
+        function() {
+
+          $('statusLocalizacao').textContent =
+            'Não identificada';
+
+          $('localAtual').textContent =
+            'Não identificada';
+
+          delete window[callback];
+
+          script.remove();
+
+        };
+
+
+      document.body.appendChild(
+        script
       );
-
-
-      atualizarLocalizacao(
-        local
-      );
-
-
-      localizacaoObtida =
-        true;
-
-
-      return local;
 
     }
 
 
-    if (
-      tentativa === 1
+    /* ============================================================
+       ATUALIZAR LOCALIZAÇÃO
+       ============================================================ */
+
+    function atualizarLocalizacao(
+      cidade,
+      estado
     ) {
 
-      await new Promise(
-        resolve =>
-          setTimeout(
-            resolve,
-            800
-          )
-      );
+      let texto =
+        cidade || 'Local não identificado';
+
+
+      if (estado) {
+
+        texto +=
+          ' - ' +
+          estado;
+
+      }
+
+
+      $('statusLocalizacao').textContent =
+        'Identificada';
+
+
+      $('localizacaoTexto').textContent =
+        texto;
+
+
+      $('localAtual').textContent =
+        texto;
 
     }
 
-  }
+
+    /* ============================================================
+       PESQUISA
+       ============================================================ */
+
+    function pesquisar() {
+
+      const campo =
+        $('searchInput');
 
 
-  texto.textContent =
-    'Localização não identificada';
-
-  return null;
-
-}
+      const caixa =
+        $('searchResults');
 
 
-/* ============================================================
-   ATUALIZAR LOCALIZAÇÃO
-   ============================================================ */
-
-function atualizarLocalizacao(
-  dados
-) {
-
-  const cidade =
-    dados.cidade ||
-    '';
-
-  const estado =
-    dados.estado ||
-    '';
-
-  let texto =
-    'Localização não identificada';
+      const termo =
+        campo.value
+          .trim()
+          .toLowerCase();
 
 
-  if (
-    cidade &&
-    estado
-  ) {
+      if (!termo) {
 
-    texto =
-      cidade +
-      ' - ' +
-      estado;
+        limparPesquisa();
 
-  } else if (
-    cidade
-  ) {
+        return;
 
-    texto =
-      cidade;
-
-  } else if (
-    estado
-  ) {
-
-    texto =
-      estado;
-
-  }
+      }
 
 
-  document.getElementById(
-    'localizacaoTexto'
-  ).textContent =
-    texto;
-
-  document.getElementById(
-    'localAtual'
-  ).textContent =
-    texto;
-
-}
-
-
-/* ============================================================
-   REGISTRAR ACESSO
-   ============================================================ */
-
-async function registrarAcesso() {
-
-  const chave =
-    'radio_onda_livre_acesso_registrado';
+      const resultados =
+        playlist.filter(
+          audio =>
+            audio.titulo
+              .toLowerCase()
+              .includes(termo) ||
+            audio.artista
+              .toLowerCase()
+              .includes(termo) ||
+            audio.tipo
+              .toLowerCase()
+              .includes(termo)
+        );
 
 
-  if (
-    sessionStorage.getItem(
-      chave
-    )
-  ) {
+      if (!resultados.length) {
 
-    return;
+        caixa.innerHTML =
+          `
+            <div style="
+              padding:16px;
+              color:#8093ad;
+              text-align:center;
+            ">
+              Nenhum áudio encontrado.
+            </div>
+          `;
 
-  }
+      } else {
+
+        caixa.innerHTML =
+          resultados
+            .slice(0, 20)
+            .map(audio => {
+
+              const indice =
+                playlist.findIndex(
+                  item =>
+                    String(item.id) ===
+                    String(audio.id)
+                );
 
 
-  let local = null;
+              return `
+                <div
+                  class="search-result"
+                  onclick="selecionarResultado(${indice})"
+                >
 
-  try {
+                  <strong>
+                    ${escaparHTML(audio.titulo)}
+                  </strong>
 
-    const salvo =
-      localStorage.getItem(
-        'radio_onda_livre_localizacao'
-      );
+                  <div style="
+                    margin-top:3px;
+                    color:#8093ad;
+                    font-size:12px;
+                  ">
+                    ${escaparHTML(audio.artista)}
+                  </div>
 
-    if (salvo) {
+                </div>
+              `;
 
-      local =
-        JSON.parse(
-          salvo
+            })
+            .join('');
+
+      }
+
+
+      caixa.style.display =
+        'block';
+
+    }
+
+
+    /* ============================================================
+       SELECIONAR RESULTADO
+       ============================================================ */
+
+    function selecionarResultado(
+      indice
+    ) {
+
+      indiceAtual =
+        indice;
+
+
+      aplicarFiltro();
+
+      atualizarPlayer();
+
+      tocarAtual();
+
+      $('searchResults')
+        .style.display =
+        'none';
+
+    }
+
+
+    /* ============================================================
+       LIMPAR PESQUISA
+       ============================================================ */
+
+    function limparPesquisa() {
+
+      const campo =
+        document.getElementById(
+          'searchInput'
+        );
+
+
+      const caixa =
+        document.getElementById(
+          'searchResults'
+        );
+
+
+      campo.value = '';
+
+      caixa.innerHTML = '';
+
+      caixa.style.display =
+        'none';
+
+      campo.focus();
+
+    }
+
+
+    /* ============================================================
+       COMPARTILHAR RÁDIO
+       ============================================================ */
+
+    async function compartilharRadio() {
+
+      const url =
+        window.location.href;
+
+
+      const texto =
+        'Ouça a Rádio Onda Livre e seja abençoado com louvores, oração e mensagens. 🎵🙏';
+
+
+      if (
+        navigator.share
+      ) {
+
+        try {
+
+          await navigator.share({
+            title:
+              'Rádio Onda Livre',
+            text:
+              texto,
+            url:
+              url
+          });
+
+        } catch (erro) {
+
+          // Compartilhamento cancelado.
+
+        }
+
+        return;
+
+      }
+
+
+      try {
+
+        await navigator.clipboard.writeText(
+          url
+        );
+
+        mostrarToast(
+          'Link da rádio copiado!'
+        );
+
+      } catch (erro) {
+
+        mostrarToast(
+          'Copie o endereço desta página para compartilhar.'
+        );
+
+      }
+
+    }
+
+
+    /* ============================================================
+       FILTROS
+       ============================================================ */
+
+    function configurarFiltros() {
+
+      document
+        .querySelectorAll(
+          '.filter-btn'
+        )
+        .forEach(botao => {
+
+          botao.addEventListener(
+            'click',
+            function() {
+
+              document
+                .querySelectorAll(
+                  '.filter-btn'
+                )
+                .forEach(btn =>
+                  btn.classList.remove(
+                    'active'
+                  )
+                );
+
+
+              this.classList.add(
+                'active'
+              );
+
+
+              filtroAtual =
+                this.dataset.filter;
+
+
+              aplicarFiltro();
+
+            }
+          );
+
+        });
+
+    }
+
+
+    /* ============================================================
+       EVENTOS DE INTERFACE
+       ============================================================ */
+
+    function configurarInterface() {
+
+      $('searchInput')
+        .addEventListener(
+          'input',
+          pesquisar
+        );
+
+
+      $('clearSearchBtn')
+        .addEventListener(
+          'click',
+          limparPesquisa
+        );
+
+
+      $('shareRadioBtn')
+        .addEventListener(
+          'click',
+          compartilharRadio
         );
 
     }
 
-  }
-  catch (erro) {}
 
+    /* ============================================================
+       INICIAR
+       ============================================================ */
 
-  try {
+    function iniciarRadio() {
 
-    await chamarAPI(
-      'registrarEvento',
-      {
+      configurarLinkBiblia();
 
-        evento:
-          'ACESSO',
+      configurarPlayer();
 
-        audioId:
-          '',
+      configurarFiltros();
 
-        titulo:
-          '',
+      configurarInterface();
 
-        sessao:
-          sessao,
+      carregarLocalizacao();
 
-        cidade:
-          local?.cidade ||
-          '',
-
-        estado:
-          local?.estado ||
-          ''
-
-      },
-      10000
-    );
-
-
-    sessionStorage.setItem(
-      chave,
-      '1'
-    );
-
-  }
-  catch (erro) {
-
-    console.warn(
-      'Não foi possível registrar o acesso.',
-      erro
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   REGISTRAR EVENTO
-   ============================================================ */
-
-async function registrarEvento(
-  evento,
-  audio
-) {
-
-  if (
-    !URL_API ||
-    URL_API.includes(
-      'COLE_AQUI'
-    )
-  ) {
-
-    return;
-
-  }
-
-
-  let local = {
-
-    cidade: '',
-    estado: ''
-
-  };
-
-
-  try {
-
-    const salvo =
-      localStorage.getItem(
-        'radio_onda_livre_localizacao'
-      );
-
-    if (salvo) {
-
-      local =
-        JSON.parse(
-          salvo
-        );
+      carregarPlaylist();
 
     }
 
-  }
-  catch (erro) {}
 
+    /* ============================================================
+       DOM READY
+       ============================================================ */
 
-  try {
-
-    await chamarAPI(
-      'registrarEvento',
-      {
-
-        evento:
-          evento,
-
-        audioId:
-          audio?.id ||
-          '',
-
-        titulo:
-          audio?.titulo ||
-          '',
-
-        sessao:
-          sessao,
-
-        cidade:
-          local.cidade ||
-          '',
-
-        estado:
-          local.estado ||
-          ''
-
-      },
-      10000
+    document.addEventListener(
+      'DOMContentLoaded',
+      iniciarRadio
     );
 
-  }
-  catch (erro) {
-
-    console.warn(
-      'Evento não registrado:',
-      evento,
-      erro
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   INICIALIZAÇÃO
-   ============================================================ */
-
-async function iniciarRadio() {
-
-  if (
-    !URL_API ||
-    URL_API.includes(
-      'COLE_AQUI'
-    )
-  ) {
-
-    alterarStatus(
-      'Configure a URL da API',
-      'error'
-    );
-
-    mostrarToast(
-      'Informe a URL do seu Apps Script no código.'
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * Primeiro tenta identificar
-   * a localização.
-   */
-
-  await carregarLocalizacao();
-
-
-  /*
-   * Depois carrega a playlist.
-   */
-
-  await carregarPlaylist();
-
-}
-
-
-/* ============================================================
-   INICIAR
-   ============================================================ */
-
-document.addEventListener(
-  'DOMContentLoaded',
-  iniciarRadio
-);
-
-</script>
+  </script>
 
 </body>
 </html>
