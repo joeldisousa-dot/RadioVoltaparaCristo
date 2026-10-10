@@ -184,8 +184,146 @@ function api(acao, params, ok, fail) {
   s.src = URL_API + (URL_API.includes("?") ? "&" : "?") + q;
   document.head.appendChild(s);
 }
+/* ---------- Identificação do visitante ---------- */
+/*
+ * Localização aproximada por IP: depende do serviço externo e pode não
+ * estar disponível em todos os acessos. Nenhum número de telefone é coletado.
+ * O campo "Celular" na planilha indica se o visitante usa um celular.
+ */
+const CHAVE_VISITANTE = "rol_dados_visitante_v1";
+let promessaVisitante = null;
+
+function identificarNavegador(ua) {
+  ua = String(ua || "");
+  if (/Edg\//i.test(ua)) return "Microsoft Edge";
+  if (/OPR\//i.test(ua) || /Opera/i.test(ua)) return "Opera";
+  if (/Firefox\//i.test(ua)) return "Mozilla Firefox";
+  if (/SamsungBrowser/i.test(ua)) return "Samsung Internet";
+  if (/CriOS/i.test(ua)) return "Google Chrome (iOS)";
+  if (/FxiOS/i.test(ua)) return "Firefox (iOS)";
+  if (/Chrome\//i.test(ua) && !/Chromium/i.test(ua)) return "Google Chrome";
+  if (/Safari\//i.test(ua) && !/Chrome|Chromium|CriOS/i.test(ua)) return "Safari";
+  return "Navegador não identificado";
+}
+
+function identificarSistema(ua) {
+  ua = String(ua || "");
+  if (/Windows NT 10/i.test(ua)) return "Windows 10/11";
+  if (/Windows/i.test(ua)) return "Windows";
+  if (/Android/i.test(ua)) return "Android";
+  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS/iPadOS";
+  if (/Mac OS X|Macintosh/i.test(ua)) return "macOS";
+  if (/CrOS/i.test(ua)) return "ChromeOS";
+  if (/Linux/i.test(ua)) return "Linux";
+  return "Sistema não identificado";
+}
+
+function dadosBasicosVisitante() {
+  const ua = navigator.userAgent || "";
+  const celular = /Android|iPhone|iPod|Windows Phone|Mobile/i.test(ua);
+  let dispositivo = celular ? "Celular" : (/iPad|Tablet/i.test(ua) ? "Tablet" : "Computador");
+  if (/iPad|Tablet/i.test(ua)) dispositivo = "Tablet";
+
+  return {
+    cidade: "",
+    estado: "",
+    pais: "",
+    dispositivo,
+    navegador: identificarNavegador(ua),
+    sistemaOperacional: identificarSistema(ua),
+    origem: document.referrer || "Acesso direto",
+    celular: celular ? "Sim" : "Não",
+    fusoHorario: (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (_) { return ""; } })(),
+    idioma: navigator.language || ""
+  };
+}
+
+function obterDadosVisitante() {
+  if (promessaVisitante) return promessaVisitante;
+
+  promessaVisitante = new Promise(resolve => {
+    const basicos = dadosBasicosVisitante();
+    try {
+      const salvo = localStorage.getItem(CHAVE_VISITANTE);
+      if (salvo) {
+        const obj = JSON.parse(salvo);
+        // Atualiza dados que podem variar entre sessões/dispositivos.
+        const combinado = { ...obj, ...basicos };
+        if (obj.cidade) combinado.cidade = obj.cidade;
+        if (obj.estado) combinado.estado = obj.estado;
+        if (obj.pais) combinado.pais = obj.pais;
+        if (obj.fusoHorario) combinado.fusoHorario = obj.fusoHorario;
+        resolve(combinado);
+        // Atualiza localização em segundo plano quando a cache já existe.
+        consultarLocalizacaoIP(basicos, () => {});
+        return;
+      }
+    } catch (_) {}
+
+    consultarLocalizacaoIP(basicos, resolve);
+  });
+
+  return promessaVisitante;
+}
+
+function consultarLocalizacaoIP(basicos, concluir) {
+  const cb = "rol_geo_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
+  const script = document.createElement("script");
+  let terminou = false;
+  const timer = setTimeout(() => finalizar(null), 4500);
+
+  function finalizar(dados) {
+    if (terminou) return;
+    terminou = true;
+    clearTimeout(timer);
+    script.remove();
+    try { delete window[cb]; } catch (_) {}
+
+    const geo = dados || {};
+    const info = {
+      ...basicos,
+      cidade: String(geo.city || geo.city_name || ""),
+      estado: String(geo.region || geo.region_code || ""),
+      pais: String(geo.country_name || geo.country || ""),
+      fusoHorario: String(geo.timezone || basicos.fusoHorario || "")
+    };
+
+    try { localStorage.setItem(CHAVE_VISITANTE, JSON.stringify(info)); } catch (_) {}
+    concluir(info);
+  }
+
+  window[cb] = dados => finalizar(dados);
+  script.onerror = () => finalizar(null);
+  script.src = "https://ipapi.co/jsonp/?callback=" + encodeURIComponent(cb);
+  document.head.appendChild(script);
+}
+
+/* Envia os dados de visitante junto com cada evento registrado no GS. */
 function evento(ev, item) {
-  api("registrarEvento", { id: sessao, evento: ev, audioId: item ? item.id : "", titulo: item ? item.titulo : "Acesso à Rádio Onda Livre", sessao });
+  obterDadosVisitante().then(info => {
+    api("registrarEvento", {
+      evento: ev,
+      audioId: item ? item.id : "",
+      titulo: item ? item.titulo : "Acesso à Rádio Onda Livre",
+      sessao,
+      cidade: info.cidade || "",
+      estado: info.estado || "",
+      pais: info.pais || "",
+      dispositivo: info.dispositivo || "",
+      navegador: info.navegador || "",
+      sistemaOperacional: info.sistemaOperacional || "",
+      origem: info.origem || "Acesso direto",
+      celular: info.celular || "",
+      fusoHorario: info.fusoHorario || "",
+      idioma: info.idioma || ""
+    }, resposta => {
+      if (resposta && resposta.sucesso === false) {
+        console.warn("A API não registrou o evento:", resposta.erro || resposta.mensagem || "Erro não informado");
+      }
+    }, erro => console.warn("Falha ao registrar evento na rádio:", erro));
+  }).catch(erro => {
+    console.warn("Não foi possível obter os dados do visitante:", erro);
+  });
 }
 
 /* ---------- Dados ---------- */
