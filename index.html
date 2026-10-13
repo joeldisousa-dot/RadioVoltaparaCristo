@@ -56,7 +56,7 @@ function consultarLocalizacaoIP(basicos,concluir){const cb="rol_geo_"+Date.now()
 function evento(ev,item){obterDadosVisitante().then(info=>api("registrarEvento",{evento:ev,audioId:item?item.id:"",titulo:item?item.titulo:"Acesso à Rádio Onda Livre",sessao,cidade:info.cidade||"",estado:info.estado||"",pais:info.pais||"",dispositivo:info.dispositivo||"",navegador:info.navegador||"",sistemaOperacional:info.sistemaOperacional||"",origem:info.origem||"Acesso direto",celular:info.celular||"",fusoHorario:info.fusoHorario||"",idioma:info.idioma||""},r=>{if(r&&r.sucesso===false)console.warn("A API não registrou o evento:",r.erro||r.mensagem||"Erro não informado")},e=>console.warn("Falha ao registrar evento:",e))).catch(e=>console.warn("Não foi possível obter os dados do visitante:",e))}
 function categoria(tipo){const c=norm(tipo);if(/oracao|prece|intercessao/.test(c))return"oracao";if(/mensagem|pregacao|palavra|estudo|reflexao|sermao/.test(c))return"mensagem";return"musica"}
 function urlAudio(u){u=String(u||"").trim();if(!u)return"";const m=u.match(/drive\.google\.com\/file\/d\/([^/?]+)/i)||(u.includes("drive.google.com")&&u.match(/[?&]id=([^&]+)/i));return m?"https://drive.google.com/uc?export=download&id="+m[1]:u}
-function normalizar(it,i){const tipo=String(pick(it,["Tipo","tipo","Categoria","categoria","tipoAudio","tipo_audio"],"Música")),ativo=norm(pick(it,["Ativo","ativo","Status","status"],"sim"));return{id:String(pick(it,["ID","id","Codigo","Código","codigo","AudioID","audioId"],"audio_"+i)),titulo:String(pick(it,["Título","titulo","Nome","nome","title"],"Áudio "+(i+1))),artista:String(pick(it,["Artista","artista","Autor","autor","Cantor","cantor"],"Rádio Onda Livre")),tipo,cat:categoria(tipo),url:urlAudio(pick(it,["URL","Url","url","Link","link","Arquivo","arquivo"],"")),ativo:!["nao","false","0","inativo","inativa","desativado","desativada"].includes(ativo),ordem:Number(pick(it,["Ordem","ordem","Posição","posicao"],i))}}
+function normalizar(it,i){const tipo=String(pick(it,["Tipo","tipo","Categoria","categoria","tipoAudio","tipo_audio"],"Música")),ativo=norm(pick(it,["Ativo","ativo","Status","status"],"sim"));const idOriginal=pick(it,["ID","id","Id","ID_AUDIO","id_audio","AudioID","audioId","audio_id","idAudio","IdAudio","Codigo","Código","codigo","Código da música","ID da música","Identificador"],null);return{id:String(idOriginal!=null?idOriginal:"audio_"+i).trim(),idCompartilhavel:idOriginal!=null&&String(idOriginal).trim()!=="",titulo:String(pick(it,["Título","titulo","Nome","nome","title"],"Áudio "+(i+1))),artista:String(pick(it,["Artista","artista","Autor","autor","Cantor","cantor"],"Rádio Onda Livre")),tipo,cat:categoria(tipo),url:urlAudio(pick(it,["URL","Url","url","Link","link","Arquivo","arquivo"],"")),ativo:!["nao","false","0","inativo","inativa","desativado","desativada"].includes(ativo),ordem:Number(pick(it,["Ordem","ordem","Posição","posicao"],i))}}
 function extrair(r){if(Array.isArray(r))return r;if(!r||typeof r!=="object")return[];return[r.playlist,r.dados,r.audios,r.lista,r.resultado,r.data].find(Array.isArray)||[]}
 function carregar(){status("Carregando a programação…");const usar=r=>{const itens=extrair(r);if(itens.length){iniciar(itens);return true}return false};api("playlist",{},r=>{if(!usar(r))antiga()},antiga);function antiga(){api("listarPlaylist",{},r=>{if(!usar(r))falhar(Error("A programação não retornou áudios."))},falhar)}}
 function falhar(e){$("titulo").textContent="Não foi possível carregar a programação";$("artista").textContent="Atualize a página ou tente novamente em instantes.";$("estado").textContent="Sem conexão com a rádio";status(e&&e.message,"erro")}
@@ -66,9 +66,10 @@ function iniciar(itens){
   status("");
   evento("ACESSO");
 
-  // Se o link recebido contém ?musica=ID, prioriza essa faixa.
+  // Se o link recebido contém ?musica=ID, prioriza a faixa correspondente.
   if(MUSICA_SOLICITADA){
-    const indiceSolicitado=lista.findIndex(a=>a.id===MUSICA_SOLICITADA);
+    const idSolicitado=String(MUSICA_SOLICITADA).trim();
+    const indiceSolicitado=lista.findIndex(a=>String(a.id).trim()===idSolicitado);
     if(indiceSolicitado>=0){
       status("Abrindo a música compartilhada…");
       tocar(indiceSolicitado,true);
@@ -92,15 +93,28 @@ async function compartilharAtual(){
   const botao=$("btnCompartilhar");
   if(atual<0||!lista[atual]){status("Aguarde uma música ser carregada para compartilhar.");return}
   const faixa=lista[atual];
-  // O link abre o HTML da rádio e solicita a faixa compartilhada pelo ID.
-  const linkCompartilhamento=URL_RADIO+"?musica="+encodeURIComponent(faixa.id);
-  const texto="Estou ouvindo "+faixa.titulo+" — "+faixa.artista+" na Rádio Onda Livre! 🎶";
-  const mensagem=texto+"\n"+linkCompartilhamento;
+  if(!faixa.idCompartilhavel){
+    status("A API não forneceu o ID real desta música. Verifique se a playlist retorna a coluna ID.","erro");
+    return;
+  }
+
+  // Gera o endereço público do HTML da rádio com o ID real da faixa.
+  const destino=new URL(URL_RADIO);
+  destino.searchParams.set("musica",String(faixa.id).trim());
+  const linkCompartilhamento=destino.toString();
+  const titulo=String(faixa.titulo||"Música").trim();
+  const artista=String(faixa.artista||"").trim();
+  const artistaValido=artista&&! ["-","—","–","Rádio Onda Livre","Artista não informado","Desconhecido"].includes(artista);
+  const texto=artistaValido
+    ? `Estou ouvindo "${titulo}" — ${artista} na Rádio Onda Livre! 🎶`
+    : `Estou ouvindo "${titulo}" na Rádio Onda Livre! 🎶`;
+  // O link completo vai dentro de text: alguns aplicativos ignoram o campo url.
+  const mensagem=`${texto}\n${linkCompartilhamento}`;
   botao.disabled=true;
   try{
     if(navigator.share){
-      await navigator.share({title:"Rádio Onda Livre",text:texto,url:linkCompartilhamento});
-      status("Link da música compartilhada aberto com a Rádio Onda Livre.");
+      await navigator.share({title:`Rádio Onda Livre — ${titulo}`,text:mensagem});
+      status("Compartilhamento preparado com o ID da música no link.");
       return;
     }
     if(navigator.clipboard&&window.isSecureContext){
@@ -108,15 +122,15 @@ async function compartilharAtual(){
     }else{
       const campo=document.createElement("textarea");
       campo.value=mensagem;campo.setAttribute("readonly","");
-      campo.style.position="fixed";campo.style.opacity="0";
+      campo.style.position="fixed";campo.style.left="-9999px";
       document.body.appendChild(campo);campo.select();
       const copiado=document.execCommand("copy");campo.remove();
       if(!copiado)throw new Error("Não foi possível copiar o link automaticamente.");
     }
-    status("Link e mensagem copiados! Compartilhe com seus amigos.");
+    status("Mensagem e link com o ID da música copiados!");
   }catch(erro){
     if(erro&&erro.name==="AbortError")status("Compartilhamento cancelado.");
-    else status("Não foi possível compartilhar automaticamente. Tente copiar o endereço da rádio pelo navegador.","erro");
+    else status("Não foi possível compartilhar automaticamente. Tente novamente.","erro");
   }finally{botao.disabled=false}
 }
 $("btnPlay").addEventListener("click",()=>{if(atual<0)return;audio.paused?tocar(atual,false):audio.pause()});$("btnProximo").addEventListener("click",proximo);$("btnAnterior").addEventListener("click",anterior);$("btnAtivar").addEventListener("click",()=>atual>=0&&tocar(atual,false));$("btnFavAtual").addEventListener("click",alternarFavAtual);$("btnCompartilhar").addEventListener("click",compartilharAtual);
