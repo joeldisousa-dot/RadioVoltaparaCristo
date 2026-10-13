@@ -8,550 +8,71 @@
 <meta name="theme-color" content="#08121f">
 <style>
 :root{--bg:#08121f;--card:#0f1e32;--card2:#142840;--line:rgba(255,255,255,.09);--gold:#e0b25a;--gold2:#ffe2a0;--text:#eef2f7;--mute:#9fb0c3;--ok:#65dfa4;--err:#ff8080;--serif:Georgia,"Times New Roman",serif}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(ellipse at 50% -10%,#173a5e 0,transparent 55%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh}
-button,input{font:inherit;color:inherit}
-button{cursor:pointer;border:0;background:none}
-:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
-.wrap{width:min(920px,calc(100% - 28px));margin:0 auto}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0 8px}
-.marca{display:flex;align-items:center;gap:12px}
-.logo{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,var(--gold2),#c38b30);color:#17243a;font-size:22px}
-h1{margin:0;font:700 22px/1.1 var(--serif);letter-spacing:-.2px}
-.sub{margin:2px 0 0;color:var(--mute);font-size:13px}
-.saudacao{color:var(--mute);font-size:14px;text-align:right}
-.saudacao b{display:block;color:var(--gold2);font:700 16px var(--serif)}
-
-.player{position:relative;overflow:hidden;margin:18px 0;padding:26px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(150deg,var(--card2),var(--card));box-shadow:0 20px 50px rgba(0,0,0,.3)}
-.status{display:flex;align-items:center;gap:10px;color:var(--mute);font-size:13px}
-.eq{display:flex;align-items:flex-end;gap:3px;height:18px}
-.eq i{width:3px;height:30%;background:var(--gold);border-radius:2px}
-.tocando .eq i{animation:eq 1s ease-in-out infinite}
-.eq i:nth-child(2){animation-delay:-.4s!important}.eq i:nth-child(3){animation-delay:-.8s!important}.eq i:nth-child(4){animation-delay:-.2s!important}
-@keyframes eq{50%{height:100%}}
-.titulo{margin:16px 0 4px;font:700 clamp(24px,5vw,36px)/1.15 var(--serif);overflow-wrap:anywhere}
-.artista{margin:0;color:var(--mute)}
-.barra{display:flex;align-items:center;gap:10px;margin:22px 0 6px;color:var(--mute);font-size:12px;font-variant-numeric:tabular-nums}
-input[type=range]{flex:1;height:4px;accent-color:var(--gold);cursor:pointer}
-.controles{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
-.ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:var(--mute);transition:background .15s,color .15s}
-.ic:hover{background:rgba(255,255,255,.07);color:var(--text)}
-.ic.on{color:var(--gold2)}
-.play{width:64px;height:64px;font-size:24px;color:#17243a;background:linear-gradient(135deg,var(--gold2),#d0a043)}
-.play:hover{background:linear-gradient(135deg,#fff0c4,var(--gold));color:#17243a}
-.vol{display:flex;align-items:center;gap:8px;max-width:220px;margin:14px auto 0;color:var(--mute);font-size:14px}
-.aviso{display:none;margin-top:18px;padding:14px;border:1px solid rgba(224,178,90,.4);border-radius:12px;background:rgba(224,178,90,.08);font-size:14px;text-align:center}
-.aviso.on{display:block}
-.btn{padding:10px 18px;border-radius:999px;font-weight:700;color:#17243a;background:linear-gradient(135deg,var(--gold2),#d0a043)}
-.aviso .btn{display:block;margin:10px auto 0}
-.msg{min-height:20px;margin:0 0 6px;font-size:13px;color:var(--mute)}.msg.erro{color:var(--err)}
-
-.versiculo{margin:0 0 26px;padding:16px 20px;border-left:3px solid var(--gold);background:rgba(255,255,255,.03);border-radius:0 12px 12px 0}
-.versiculo p{margin:0;font:italic 17px/1.5 var(--serif)}
-.versiculo small{display:block;margin-top:6px;color:var(--mute)}
-.btn-biblia{display:inline-block;margin-top:12px;padding:10px 18px;border:1px solid var(--gold);border-radius:999px;color:var(--gold2);font-weight:700;font-size:14px;text-decoration:none;transition:background .15s,color .15s}
-.btn-biblia:hover{background:var(--gold);color:#17243a}
-
-.biblioteca h2{margin:0 0 12px;font:700 22px var(--serif)}
-.busca{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:#0a1829}
-.busca::placeholder{color:#7d90a6}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.chip{padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--mute);font-size:13px}
-.chip.on{border-color:var(--gold);color:var(--gold2);background:rgba(224,178,90,.1)}
-.lista{display:grid;gap:6px;margin:0;padding:0;list-style:none}
-.item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;border:1px solid transparent}
-.item:hover{background:rgba(255,255,255,.04)}
-.item.atual{background:rgba(224,178,90,.09);border-color:rgba(224,178,90,.35)}
-.item .play-i{width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:rgba(224,178,90,.14);color:var(--gold2);font-size:13px}
-.item.atual .play-i{background:var(--gold);color:#17243a}
-.txt{flex:1;min-width:0}
-.txt strong{display:block;font-size:15px;overflow-wrap:anywhere}
-.txt span{display:block;color:var(--mute);font-size:12px;overflow-wrap:anywhere}
-.fav{color:var(--mute);font-size:18px;width:36px;height:36px}
-.fav.on{color:var(--gold)}
-.vazio{padding:22px;border:1px dashed var(--line);border-radius:12px;color:var(--mute);text-align:center;font-size:14px}
-footer{margin-top:40px;padding:22px 0 34px;border-top:1px solid var(--line);color:var(--mute);font-size:12px;text-align:center}
-@media(max-width:520px){.player{padding:20px}.saudacao{display:none}}
-@media(prefers-reduced-motion:reduce){.tocando .eq i{animation:none;height:70%}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#173a5e 0,transparent 55%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh}button,input{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none}:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}.wrap{width:min(920px,calc(100% - 28px));margin:0 auto}header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0 8px}.marca{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,var(--gold2),#c38b30);color:#17243a;font-size:22px}h1{margin:0;font:700 22px/1.1 var(--serif);letter-spacing:-.2px}.sub{margin:2px 0 0;color:var(--mute);font-size:13px}.saudacao{color:var(--mute);font-size:14px;text-align:right}.saudacao b{display:block;color:var(--gold2);font:700 16px var(--serif)}
+.player{position:relative;overflow:hidden;margin:18px 0;padding:26px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(150deg,var(--card2),var(--card));box-shadow:0 20px 50px rgba(0,0,0,.3)}.status{display:flex;align-items:center;gap:10px;color:var(--mute);font-size:13px}.eq{display:flex;align-items:flex-end;gap:3px;height:18px}.eq i{width:3px;height:30%;background:var(--gold);border-radius:2px}.tocando .eq i{animation:eq 1s ease-in-out infinite}.eq i:nth-child(2){animation-delay:-.4s!important}.eq i:nth-child(3){animation-delay:-.8s!important}.eq i:nth-child(4){animation-delay:-.2s!important}@keyframes eq{50%{height:100%}}.titulo{margin:16px 0 4px;font:700 clamp(24px,5vw,36px)/1.15 var(--serif);overflow-wrap:anywhere}.artista{margin:0;color:var(--mute)}.barra{display:flex;align-items:center;gap:10px;margin:22px 0 6px;color:var(--mute);font-size:12px;font-variant-numeric:tabular-nums}input[type=range]{flex:1;height:4px;accent-color:var(--gold);cursor:pointer}.controles{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}.ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:var(--mute);transition:background .15s,color .15s}.ic:hover{background:rgba(255,255,255,.07);color:var(--text)}.ic.on{color:var(--gold2)}.play{width:64px;height:64px;font-size:24px;color:#17243a;background:linear-gradient(135deg,var(--gold2),#d0a043)}.play:hover{background:linear-gradient(135deg,#fff0c4,var(--gold));color:#17243a}.vol{display:flex;align-items:center;gap:8px;max-width:220px;margin:14px auto 0;color:var(--mute);font-size:14px}.aviso{display:none;margin-top:18px;padding:14px;border:1px solid rgba(224,178,90,.4);border-radius:12px;background:rgba(224,178,90,.08);font-size:14px;text-align:center}.aviso.on{display:block}.btn{padding:10px 18px;border-radius:999px;font-weight:700;color:#17243a;background:linear-gradient(135deg,var(--gold2),#d0a043)}.aviso .btn{display:block;margin:10px auto 0}.msg{min-height:20px;margin:0 0 6px;font-size:13px;color:var(--mute)}.msg.erro{color:var(--err)}
+.versiculo{margin:0 0 26px;padding:16px 20px;border-left:3px solid var(--gold);background:rgba(255,255,255,.03);border-radius:0 12px 12px 0}.versiculo p{margin:0;font:italic 17px/1.5 var(--serif)}.versiculo small{display:block;margin-top:6px;color:var(--mute)}.btn-biblia{display:inline-block;margin-top:12px;padding:10px 18px;border:1px solid var(--gold);border-radius:999px;color:var(--gold2);font-weight:700;font-size:14px;text-decoration:none;transition:background .15s,color .15s}.btn-biblia:hover{background:var(--gold);color:#17243a}footer{margin-top:40px;padding:22px 0 34px;border-top:1px solid var(--line);color:var(--mute);font-size:12px;text-align:center}@media(max-width:520px){.player{padding:20px}.saudacao{display:none}}@media(prefers-reduced-motion:reduce){.tocando .eq i{animation:none;height:70%}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div class="marca">
-      <div class="logo" aria-hidden="true">♫</div>
-      <div><h1>Rádio Onda Livre</h1><p class="sub">Louvores, orações e mensagens</p></div>
-    </div>
-    <div class="saudacao"><b id="saudacao">Olá!</b><span id="sugestao"></span></div>
-  </header>
-
-  <main>
-    <section class="player" id="player" aria-label="Reprodutor">
-      <div class="status"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="estado">Conectando à rádio…</span></div>
-      <h2 class="titulo" id="titulo">Preparando a programação…</h2>
-      <p class="artista" id="artista">Escolhendo algo especial para você.</p>
-
-      <div class="barra">
-        <span id="tAtual">0:00</span>
-        <input type="range" id="progresso" min="0" max="100" value="0" step="0.1" aria-label="Progresso do áudio">
-        <span id="tTotal">0:00</span>
-      </div>
-
-      <div class="controles">
-        <button class="ic on" id="btnAleatorio" type="button" aria-label="Ordem aleatória" aria-pressed="true" title="Aleatório">🔀</button>
-        <button class="ic" id="btnAnterior" type="button" aria-label="Anterior">⏮</button>
-        <button class="ic play" id="btnPlay" type="button" aria-label="Tocar">▶</button>
-        <button class="ic" id="btnProximo" type="button" aria-label="Próximo">⏭</button>
-        <button class="ic" id="btnFavAtual" type="button" aria-label="Favoritar" title="Favoritar">♡</button>
-      </div>
-      <label class="vol">🔈 <input type="range" id="volume" min="0" max="1" step="0.05" value="1" aria-label="Volume"></label>
-
-      <div class="aviso" id="aviso" role="status">O navegador pediu uma confirmação para iniciar o som.
-        <button class="btn" id="btnAtivar" type="button">Ouvir agora</button>
-      </div>
-      <audio id="audio" preload="auto"></audio>
-    </section>
-
-    <p class="msg" id="msg" role="status" aria-live="polite"></p>
-
-    <aside class="versiculo">
-      <p>“Lâmpada para os meus pés é tua palavra, e luz para o meu caminho.”</p>
-      <small>Salmos 119:105</small>
-      <a class="btn-biblia" href="https://joeldisousa-dot.github.io/bibliakj/" target="_blank" rel="noopener noreferrer">📖 Ler a Bíblia King James</a>
-    </aside>
-
-    <section class="biblioteca" aria-label="Biblioteca de áudios">
-      <h2>Escolha o que ouvir</h2>
-      <input class="busca" id="busca" type="search" placeholder="Buscar por título, artista ou tipo" autocomplete="off" aria-label="Buscar áudios">
-      <div class="chips" id="chips">
-        <button class="chip on" type="button" data-f="todos">Todos</button>
-        <button class="chip" type="button" data-f="musica">Louvores</button>
-        <button class="chip" type="button" data-f="oracao">Orações</button>
-        <button class="chip" type="button" data-f="mensagem">Mensagens</button>
-        <button class="chip" type="button" data-f="fav">♥ Meus favoritos</button>
-      </div>
-      <ul class="lista" id="lista"><li class="vazio">Carregando áudios…</li></ul>
-    </section>
-  </main>
-
-  <footer>Rádio Onda Livre • Joel Rodrigues</footer>
+<header><div class="marca"><div class="logo" aria-hidden="true">♫</div><div><h1>Rádio Onda Livre</h1><p class="sub">Louvores, orações e mensagens</p></div></div><div class="saudacao"><b id="saudacao">Olá!</b><span id="sugestao"></span></div></header>
+<main>
+<section class="player" id="player" aria-label="Reprodutor de áudio">
+<div class="status"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="estado">Conectando à rádio…</span></div>
+<h2 class="titulo" id="titulo">Preparando a programação…</h2><p class="artista" id="artista">Escolhendo algo especial para você.</p>
+<div class="barra"><span id="tAtual">0:00</span><input type="range" id="progresso" min="0" max="100" value="0" step="0.1" aria-label="Progresso do áudio"><span id="tTotal">0:00</span></div>
+<div class="controles"><button class="ic on" id="btnAleatorio" type="button" aria-label="Ordem aleatória" aria-pressed="true" title="Aleatório">🔀</button><button class="ic" id="btnAnterior" type="button" aria-label="Anterior">⏮</button><button class="ic play" id="btnPlay" type="button" aria-label="Tocar">▶</button><button class="ic" id="btnProximo" type="button" aria-label="Próximo">⏭</button><button class="ic" id="btnFavAtual" type="button" aria-label="Favoritar faixa atual" title="Favoritar faixa atual">♡</button></div>
+<label class="vol">🔈 <input type="range" id="volume" min="0" max="1" step="0.05" value="1" aria-label="Volume"></label>
+<div class="aviso" id="aviso" role="status">O navegador pediu uma confirmação para iniciar o som.<button class="btn" id="btnAtivar" type="button">Ouvir agora</button></div><audio id="audio" preload="auto" playsinline></audio>
+</section>
+<p class="msg" id="msg" role="status" aria-live="polite"></p>
+<aside class="versiculo"><p>“Lâmpada para os meus pés é tua palavra, e luz para o meu caminho.”</p><small>Salmos 119:105</small><a class="btn-biblia" href="https://joeldisousa-dot.github.io/bibliakj/" target="_blank" rel="noopener noreferrer">📖 Ler a Bíblia King James</a></aside>
+</main><footer>Rádio Onda Livre • Joel Rodrigues</footer>
 </div>
-
 <script>
 "use strict";
-const URL_API = "https://script.google.com/macros/s/AKfycbxhGy5lnk2Y1dIdpKEzZMvjmAFoS-oql8m-Eh6ZuwatyvRleaaqUbBvfkv825EbWWdC7g/exec";
-const $ = id => document.getElementById(id);
-const audio = $("audio");
-
-let lista = [], atual = -1, filtro = "todos", aleatorio = true;
-let historico = [], restantes = [], falhas = 0, hb = null, tocouAlgo = false;
-
-/* ---------- Utilidades ---------- */
-const norm = v => String(v ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
-const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const pick = (o, nomes, pad) => { for (const n of nomes) if (o && o[n] != null && String(o[n]).trim() !== "") return o[n]; return pad; };
-const fmt = s => isFinite(s) ? Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0") : "0:00";
-const status = (t, tipo) => { $("msg").textContent = t || ""; $("msg").className = "msg" + (tipo ? " " + tipo : ""); };
-
-function guardar(chave, valor) { try { localStorage.setItem(chave, JSON.stringify(valor)); } catch (e) {} }
-function ler(chave, pad) { try { const v = localStorage.getItem(chave); return v == null ? pad : JSON.parse(v); } catch (e) { return pad; } }
-
-let favoritos = new Set(ler("rol_fav", []));
-const sessao = (() => { try { let s = sessionStorage.getItem("rol_sessao"); if (!s) { s = "sessao_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8); sessionStorage.setItem("rol_sessao", s); } return s; } catch (e) { return "sessao_" + Date.now().toString(36); } })();
-
-/* ---------- Saudação dinâmica ---------- */
-(function saudar() {
-  const h = new Date().getHours();
-  const [oi, dica] = h < 5 ? ["Boa madrugada", "Um momento de paz na madrugada."]
-    : h < 12 ? ["Bom dia", "Comece o dia com louvor."]
-    : h < 18 ? ["Boa tarde", "Uma pausa para renovar a fé."]
-    : ["Boa noite", "Feche o dia em oração."];
-  $("saudacao").textContent = oi + "!";
-  $("sugestao").textContent = dica;
-})();
-
-/* ---------- API (JSONP) ---------- */
-function api(acao, params, ok, fail) {
-  const cb = "cb_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
-  const s = document.createElement("script");
-  const q = new URLSearchParams({ acao, callback: cb, ...params });
-  let fim = false;
-  const limpar = () => { clearTimeout(t); s.remove(); delete window[cb]; };
-  const t = setTimeout(() => { if (!fim) { fim = true; limpar(); fail && fail(new Error("Tempo esgotado ao consultar a programação.")); } }, 15000);
-  window[cb] = r => { if (fim) return; fim = true; limpar(); ok && ok(r); };
-  s.onerror = () => { if (fim) return; fim = true; limpar(); fail && fail(new Error("Não foi possível acessar a programação.")); };
-  s.src = URL_API + (URL_API.includes("?") ? "&" : "?") + q;
-  document.head.appendChild(s);
-}
-/* ---------- Identificação do visitante ---------- */
-/*
- * Localização aproximada por IP: depende do serviço externo e pode não
- * estar disponível em todos os acessos. Nenhum número de telefone é coletado.
- * O campo "Celular" na planilha indica se o visitante usa um celular.
- */
-const CHAVE_VISITANTE = "rol_dados_visitante_v1";
-let promessaVisitante = null;
-
-function identificarNavegador(ua) {
-  ua = String(ua || "");
-  if (/Edg\//i.test(ua)) return "Microsoft Edge";
-  if (/OPR\//i.test(ua) || /Opera/i.test(ua)) return "Opera";
-  if (/Firefox\//i.test(ua)) return "Mozilla Firefox";
-  if (/SamsungBrowser/i.test(ua)) return "Samsung Internet";
-  if (/CriOS/i.test(ua)) return "Google Chrome (iOS)";
-  if (/FxiOS/i.test(ua)) return "Firefox (iOS)";
-  if (/Chrome\//i.test(ua) && !/Chromium/i.test(ua)) return "Google Chrome";
-  if (/Safari\//i.test(ua) && !/Chrome|Chromium|CriOS/i.test(ua)) return "Safari";
-  return "Navegador não identificado";
-}
-
-function identificarSistema(ua) {
-  ua = String(ua || "");
-  if (/Windows NT 10/i.test(ua)) return "Windows 10/11";
-  if (/Windows/i.test(ua)) return "Windows";
-  if (/Android/i.test(ua)) return "Android";
-  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS/iPadOS";
-  if (/Mac OS X|Macintosh/i.test(ua)) return "macOS";
-  if (/CrOS/i.test(ua)) return "ChromeOS";
-  if (/Linux/i.test(ua)) return "Linux";
-  return "Sistema não identificado";
-}
-
-function dadosBasicosVisitante() {
-  const ua = navigator.userAgent || "";
-  const celular = /Android|iPhone|iPod|Windows Phone|Mobile/i.test(ua);
-  let dispositivo = celular ? "Celular" : (/iPad|Tablet/i.test(ua) ? "Tablet" : "Computador");
-  if (/iPad|Tablet/i.test(ua)) dispositivo = "Tablet";
-
-  return {
-    cidade: "",
-    estado: "",
-    pais: "",
-    dispositivo,
-    navegador: identificarNavegador(ua),
-    sistemaOperacional: identificarSistema(ua),
-    origem: document.referrer || "Acesso direto",
-    celular: celular ? "Sim" : "Não",
-    fusoHorario: (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (_) { return ""; } })(),
-    idioma: navigator.language || ""
-  };
-}
-
-function obterDadosVisitante() {
-  if (promessaVisitante) return promessaVisitante;
-
-  promessaVisitante = new Promise(resolve => {
-    const basicos = dadosBasicosVisitante();
-    try {
-      const salvo = localStorage.getItem(CHAVE_VISITANTE);
-      if (salvo) {
-        const obj = JSON.parse(salvo);
-        // Atualiza dados que podem variar entre sessões/dispositivos.
-        const combinado = { ...obj, ...basicos };
-        if (obj.cidade) combinado.cidade = obj.cidade;
-        if (obj.estado) combinado.estado = obj.estado;
-        if (obj.pais) combinado.pais = obj.pais;
-        if (obj.fusoHorario) combinado.fusoHorario = obj.fusoHorario;
-        resolve(combinado);
-        // Atualiza localização em segundo plano quando a cache já existe.
-        consultarLocalizacaoIP(basicos, () => {});
-        return;
-      }
-    } catch (_) {}
-
-    consultarLocalizacaoIP(basicos, resolve);
-  });
-
-  return promessaVisitante;
-}
-
-function consultarLocalizacaoIP(basicos, concluir) {
-  const cb = "rol_geo_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
-  const script = document.createElement("script");
-  let terminou = false;
-  const timer = setTimeout(() => finalizar(null), 4500);
-
-  function finalizar(dados) {
-    if (terminou) return;
-    terminou = true;
-    clearTimeout(timer);
-    script.remove();
-    try { delete window[cb]; } catch (_) {}
-
-    const geo = dados || {};
-    const info = {
-      ...basicos,
-      cidade: String(geo.city || geo.city_name || ""),
-      estado: String(geo.region || geo.region_code || ""),
-      pais: String(geo.country_name || geo.country || ""),
-      fusoHorario: String(geo.timezone || basicos.fusoHorario || "")
-    };
-
-    try { localStorage.setItem(CHAVE_VISITANTE, JSON.stringify(info)); } catch (_) {}
-    concluir(info);
-  }
-
-  window[cb] = dados => finalizar(dados);
-  script.onerror = () => finalizar(null);
-  script.src = "https://ipapi.co/jsonp/?callback=" + encodeURIComponent(cb);
-  document.head.appendChild(script);
-}
-
-/* Envia os dados de visitante junto com cada evento registrado no GS. */
-function evento(ev, item) {
-  obterDadosVisitante().then(info => {
-    api("registrarEvento", {
-      evento: ev,
-      audioId: item ? item.id : "",
-      titulo: item ? item.titulo : "Acesso à Rádio Onda Livre",
-      sessao,
-      cidade: info.cidade || "",
-      estado: info.estado || "",
-      pais: info.pais || "",
-      dispositivo: info.dispositivo || "",
-      navegador: info.navegador || "",
-      sistemaOperacional: info.sistemaOperacional || "",
-      origem: info.origem || "Acesso direto",
-      celular: info.celular || "",
-      fusoHorario: info.fusoHorario || "",
-      idioma: info.idioma || ""
-    }, resposta => {
-      if (resposta && resposta.sucesso === false) {
-        console.warn("A API não registrou o evento:", resposta.erro || resposta.mensagem || "Erro não informado");
-      }
-    }, erro => console.warn("Falha ao registrar evento na rádio:", erro));
-  }).catch(erro => {
-    console.warn("Não foi possível obter os dados do visitante:", erro);
-  });
-}
-
-/* ---------- Dados ---------- */
-function categoria(tipo) {
-  const c = norm(tipo);
-  if (/oracao|prece|intercessao/.test(c)) return "oracao";
-  if (/mensagem|pregacao|palavra|estudo|reflexao|sermao/.test(c)) return "mensagem";
-  return "musica";
-}
-function urlAudio(u) {
-  u = String(u || "").trim();
-  if (!u) return "";
-  const m = u.match(/drive\.google\.com\/file\/d\/([^/?]+)/i) || (u.includes("drive.google.com") && u.match(/[?&]id=([^&]+)/i));
-  return m ? "https://drive.google.com/uc?export=download&id=" + m[1] : u;
-}
-function normalizar(it, i) {
-  const tipo = String(pick(it, ["Tipo", "tipo", "Categoria", "categoria", "tipoAudio", "tipo_audio"], "Música"));
-  const ativo = norm(pick(it, ["Ativo", "ativo", "Status", "status"], "sim"));
-  return {
-    id: String(pick(it, ["ID", "id", "Codigo", "Código", "codigo", "AudioID", "audioId"], "audio_" + i)),
-    titulo: String(pick(it, ["Título", "titulo", "Nome", "nome", "title"], "Áudio " + (i + 1))),
-    artista: String(pick(it, ["Artista", "artista", "Autor", "autor", "Cantor", "cantor"], "Rádio Onda Livre")),
-    tipo, cat: categoria(tipo),
-    url: urlAudio(pick(it, ["URL", "Url", "url", "Link", "link", "Arquivo", "arquivo"], "")),
-    ativo: !["nao", "false", "0", "inativo", "inativa", "desativado", "desativada"].includes(ativo),
-    ordem: Number(pick(it, ["Ordem", "ordem", "Posição", "posicao"], i))
-  };
-}
-function extrair(r) {
-  if (Array.isArray(r)) return r;
-  if (!r || typeof r !== "object") return [];
-  return [r.playlist, r.dados, r.audios, r.lista, r.resultado, r.data].find(Array.isArray) || [];
-}
-function carregar() {
-  status("Carregando a programação…");
-  const usar = r => {
-    const itens = extrair(r);
-    return itens.length ? (iniciar(itens), true) : false;
-  };
-  api("playlist", {}, r => { if (!usar(r)) antiga(); }, antiga);
-  function antiga() {
-    api("listarPlaylist", {}, r => { if (!usar(r)) falhar(new Error("A programação não retornou áudios.")); }, falhar);
-  }
-}
-function falhar(e) {
-  $("titulo").textContent = "Não foi possível carregar a programação";
-  $("artista").textContent = "Atualize a página ou tente novamente em instantes.";
-  $("estado").textContent = "Sem conexão com a rádio";
-  $("lista").innerHTML = '<li class="vazio">Nenhum áudio disponível no momento.</li>';
-  status(e && e.message, "erro");
-}
-
-/* ---------- Início: áudio aleatório ---------- */
-function iniciar(itens) {
-  lista = itens.map(normalizar).filter(a => a.ativo && a.url).sort((a, b) => a.ordem - b.ordem);
-  if (!lista.length) return falhar(new Error("Não há áudios ativos com endereço válido."));
-  status("");
-  renderizar();
-  evento("ACESSO");
-  // Começa por um louvor sorteado (se houver); demais seguem a ordem aleatória.
-  const musicas = lista.map((a, i) => i).filter(i => lista[i].cat === "musica");
-  const base = musicas.length ? musicas : lista.map((a, i) => i);
-  tocar(base[Math.floor(Math.random() * base.length)], true);
-}
-
-/* ---------- Reprodução ---------- */
-function sortearProximo() {
-  if (lista.length === 1) return 0;
-  if (!restantes.length) restantes = lista.map((a, i) => i).filter(i => i !== atual);
-  const k = Math.floor(Math.random() * restantes.length);
-  return restantes.splice(k, 1)[0];
-}
-function tocar(i, auto) {
-  if (i < 0 || i >= lista.length) return;
-  const it = lista[i];
-  if (i !== atual) {
-    if (atual >= 0) historico.push(atual);
-    if (historico.length > 50) historico.shift();
-    restantes = restantes.filter(x => x !== i);
-    atual = i;
-    audio.src = it.url;
-    $("titulo").textContent = it.titulo;
-    $("artista").textContent = it.artista + " · " + it.tipo;
-    $("progresso").value = 0; $("tAtual").textContent = "0:00"; $("tTotal").textContent = "0:00";
-    if ("mediaSession" in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: it.titulo, artist: it.artista, album: "Rádio Onda Livre" });
-    marcar();
-  }
-  $("estado").textContent = "Iniciando…";
-  const p = audio.play();
-  if (p && p.then) p.then(() => {
-    $("aviso").classList.remove("on");
-    if (!tocouAlgo || !auto) evento("PLAY", it);
-    tocouAlgo = true;
-  }).catch(() => {
-    $("aviso").classList.add("on");
-    $("estado").textContent = auto ? "Toque para começar a ouvir" : "Não foi possível iniciar o áudio";
-    esperarGesto();
-  });
-}
-function proximo() {
-  if (!lista.length) return;
-  tocar(aleatorio ? sortearProximo() : (atual + 1) % lista.length, false);
-}
-function anterior() {
-  if (!lista.length) return;
-  if (audio.currentTime > 4) { audio.currentTime = 0; return; }
-  const h = historico.pop();
-  if (h != null) { const cur = atual; atual = -1; tocar(h, false); restantes.push(cur); historico.pop(); }
-  else tocar((atual - 1 + lista.length) % lista.length, false);
-}
-// Se o navegador bloquear o autoplay, o primeiro toque em qualquer lugar inicia a rádio.
-function esperarGesto() {
-  const go = e => {
-    if (e.target.closest && e.target.closest("#player,.chip,.item,input,a")) { if (e.target.closest("#player")) {} }
-    document.removeEventListener("pointerdown", go, true);
-    document.removeEventListener("keydown", go, true);
-    if (audio.paused && !tocouAlgo && atual >= 0) audio.play().then(() => { $("aviso").classList.remove("on"); tocouAlgo = true; evento("PLAY", lista[atual]); }).catch(() => {});
-  };
-  document.addEventListener("pointerdown", go, true);
-  document.addEventListener("keydown", go, true);
-}
-
-/* ---------- Interface ---------- */
-function marcar() {
-  document.querySelectorAll(".item").forEach(li => {
-    const on = Number(li.dataset.i) === atual;
-    li.classList.toggle("atual", on);
-    li.querySelector(".play-i").textContent = on && !audio.paused ? "❚❚" : "▶";
-  });
-  const fav = atual >= 0 && favoritos.has(lista[atual].id);
-  $("btnFavAtual").textContent = fav ? "♥" : "♡";
-  $("btnFavAtual").classList.toggle("on", fav);
-}
-function renderizar() {
-  const termo = norm($("busca").value);
-  const itens = lista.map((a, i) => ({ a, i })).filter(({ a }) =>
-    (filtro === "todos" || (filtro === "fav" ? favoritos.has(a.id) : a.cat === filtro)) &&
-    (!termo || norm(a.titulo + " " + a.artista + " " + a.tipo).includes(termo)));
-  $("lista").innerHTML = itens.length ? itens.map(({ a, i }) => `
-    <li class="item" data-i="${i}">
-      <button class="play-i" type="button" data-play="${i}" aria-label="Tocar ${esc(a.titulo)}">▶</button>
-      <div class="txt"><strong>${esc(a.titulo)}</strong><span>${esc(a.artista)} · ${esc(a.tipo)}</span></div>
-      <button class="fav ${favoritos.has(a.id) ? "on" : ""}" type="button" data-fav="${i}" aria-label="Favoritar ${esc(a.titulo)}">${favoritos.has(a.id) ? "♥" : "♡"}</button>
-    </li>`).join("")
-    : `<li class="vazio">${filtro === "fav" ? "Toque no ♡ de um áudio para guardá-lo aqui." : "Nenhum áudio encontrado."}</li>`;
-  marcar();
-}
-function alternarFav(i) {
-  const id = lista[i].id;
-  favoritos.has(id) ? favoritos.delete(id) : favoritos.add(id);
-  guardar("rol_fav", [...favoritos]);
-  renderizar();
-}
-
-$("lista").addEventListener("click", e => {
-  const p = e.target.closest("[data-play]"), f = e.target.closest("[data-fav]");
-  if (f) return alternarFav(Number(f.dataset.fav));
-  if (p) {
-    const i = Number(p.dataset.play);
-    i === atual && !audio.paused ? audio.pause() : tocar(i, false);
-  }
-});
-$("chips").addEventListener("click", e => {
-  const c = e.target.closest("[data-f]"); if (!c) return;
-  filtro = c.dataset.f;
-  document.querySelectorAll(".chip").forEach(x => x.classList.toggle("on", x === c));
-  renderizar();
-});
-$("busca").addEventListener("input", renderizar);
-$("btnPlay").addEventListener("click", () => { if (atual < 0) return; audio.paused ? tocar(atual, false) : audio.pause(); });
-$("btnProximo").addEventListener("click", proximo);
-$("btnAnterior").addEventListener("click", anterior);
-$("btnAtivar").addEventListener("click", () => atual >= 0 && tocar(atual, false));
-$("btnFavAtual").addEventListener("click", () => atual >= 0 && alternarFav(atual));
-$("btnAleatorio").addEventListener("click", e => {
-  aleatorio = !aleatorio; guardar("rol_aleatorio", aleatorio);
-  e.currentTarget.classList.toggle("on", aleatorio);
-  e.currentTarget.setAttribute("aria-pressed", aleatorio);
-});
-$("progresso").addEventListener("input", e => { if (audio.duration) audio.currentTime = audio.duration * e.target.value / 100; });
-$("volume").addEventListener("input", e => { audio.volume = Number(e.target.value); guardar("rol_volume", audio.volume); });
-
-audio.addEventListener("timeupdate", () => {
-  if (audio.duration) $("progresso").value = audio.currentTime / audio.duration * 100;
-  $("tAtual").textContent = fmt(audio.currentTime);
-});
-audio.addEventListener("loadedmetadata", () => $("tTotal").textContent = fmt(audio.duration));
-audio.addEventListener("play", () => {
-  falhas = 0;
-  $("player").classList.add("tocando");
-  $("estado").textContent = "Tocando agora";
-  $("btnPlay").textContent = "❚❚"; $("btnPlay").setAttribute("aria-label", "Pausar");
-  clearInterval(hb);
-  hb = setInterval(() => { if (!audio.paused && atual >= 0) evento("HEARTBEAT", lista[atual]); }, 60000);
-  marcar();
-});
-audio.addEventListener("pause", () => {
-  if (audio.ended) return;
-  $("player").classList.remove("tocando");
-  $("estado").textContent = "Pausado";
-  $("btnPlay").textContent = "▶"; $("btnPlay").setAttribute("aria-label", "Tocar");
-  clearInterval(hb);
-  if (atual >= 0) evento("PAUSE", lista[atual]);
-  marcar();
-});
-audio.addEventListener("ended", () => { if (atual >= 0) evento("FIM", lista[atual]); proximo(); });
-audio.addEventListener("error", () => {
-  if (!audio.currentSrc) return;
-  falhas++;
-  $("estado").textContent = "Arquivo indisponível";
-  if (falhas < 4 && lista.length > 1) { status("Um áudio não pôde ser carregado. Passando para o próximo…", "erro"); setTimeout(proximo, 800); }
-  else status("Não foi possível reproduzir. Confira se os links estão públicos e em formato compatível.", "erro");
-});
-
-if ("mediaSession" in navigator) {
-  navigator.mediaSession.setActionHandler("play", () => audio.play());
-  navigator.mediaSession.setActionHandler("pause", () => audio.pause());
-  navigator.mediaSession.setActionHandler("nexttrack", proximo);
-  navigator.mediaSession.setActionHandler("previoustrack", anterior);
-}
-
-/* ---------- Preferências do visitante e início ---------- */
-aleatorio = ler("rol_aleatorio", true);
-$("btnAleatorio").classList.toggle("on", aleatorio);
-$("btnAleatorio").setAttribute("aria-pressed", aleatorio);
-audio.volume = Math.min(1, Math.max(0, Number(ler("rol_volume", 1))));
-$("volume").value = audio.volume;
-carregar();
+const URL_API="https://script.google.com/macros/s/AKfycbxhGy5lnk2Y1dIdpKEzZMvjmAFoS-oql8m-Eh6ZuwatyvRleaaqUbBvfkv825EbWWdC7g/exec";
+const $=id=>document.getElementById(id),audio=$("audio");
+let lista=[],atual=-1,aleatorio=true,historico=[],restantes=[],falhas=0,hb=null,tocouAlgo=false,solicitando=false;
+const norm=v=>String(v??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase();
+const pick=(o,nomes,pad)=>{for(const n of nomes)if(o&&o[n]!=null&&String(o[n]).trim()!=="")return o[n];return pad};
+const fmt=s=>Number.isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
+const status=(t,tipo)=>{$("msg").textContent=t||"";$("msg").className="msg"+(tipo?" "+tipo:"")};
+function guardar(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}}
+function ler(k,p){try{const v=localStorage.getItem(k);return v==null?p:JSON.parse(v)}catch(_){return p}}
+let favoritos=new Set(ler("rol_fav",[]));
+const sessao=(()=>{try{let s=sessionStorage.getItem("rol_sessao");if(!s){s="sessao_"+Date.now().toString(36)+Math.random().toString(36).slice(2,8);sessionStorage.setItem("rol_sessao",s)}return s}catch(_){return "sessao_"+Date.now().toString(36)}})();
+(function saudar(){const h=new Date().getHours(),x=h<5?["Boa madrugada","Um momento de paz na madrugada."]:h<12?["Bom dia","Comece o dia com louvor."]:h<18?["Boa tarde","Uma pausa para renovar a fé."]:["Boa noite","Feche o dia em oração."];$ ("saudacao").textContent=x[0]+"!";$("sugestao").textContent=x[1]})();
+function api(acao,params,ok,fail){const cb="cb_"+Date.now()+"_"+Math.random().toString(36).slice(2,7),s=document.createElement("script"),q=new URLSearchParams({acao,callback:cb,...params});let fim=false;const limpar=()=>{clearTimeout(t);s.remove();delete window[cb]};const t=setTimeout(()=>{if(!fim){fim=true;limpar();fail&&fail(Error("Tempo esgotado ao consultar a programação."))}},15000);window[cb]=r=>{if(fim)return;fim=true;limpar();ok&&ok(r)};s.onerror=()=>{if(fim)return;fim=true;limpar();fail&&fail(Error("Não foi possível acessar a programação."))};s.src=URL_API+(URL_API.includes("?")?"&":"?")+q;document.head.appendChild(s)}
+function identificarNavegador(ua){if(/Edg\//i.test(ua))return"Microsoft Edge";if(/OPR\//i.test(ua)||/Opera/i.test(ua))return"Opera";if(/Firefox\//i.test(ua))return"Mozilla Firefox";if(/SamsungBrowser/i.test(ua))return"Samsung Internet";if(/CriOS/i.test(ua))return"Google Chrome (iOS)";if(/FxiOS/i.test(ua))return"Firefox (iOS)";if(/Chrome\//i.test(ua)&&!/Chromium/i.test(ua))return"Google Chrome";if(/Safari\//i.test(ua)&&!/Chrome|Chromium|CriOS/i.test(ua))return"Safari";return"Navegador não identificado"}
+function identificarSistema(ua){if(/Windows NT 10/i.test(ua))return"Windows 10/11";if(/Windows/i.test(ua))return"Windows";if(/Android/i.test(ua))return"Android";if(/iPhone|iPad|iPod/i.test(ua))return"iOS/iPadOS";if(/Mac OS X|Macintosh/i.test(ua))return"macOS";if(/CrOS/i.test(ua))return"ChromeOS";if(/Linux/i.test(ua))return"Linux";return"Sistema não identificado"}
+function dadosBasicos(){const ua=navigator.userAgent||"",cel=/Android|iPhone|iPod|Windows Phone|Mobile/i.test(ua),tablet=/iPad|Tablet/i.test(ua);return{cidade:"",estado:"",pais:"",dispositivo:tablet?"Tablet":cel?"Celular":"Computador",navegador:identificarNavegador(ua),sistemaOperacional:identificarSistema(ua),origem:document.referrer||"Acesso direto",celular:cel?"Sim":"Não",fusoHorario:(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(_){return""}})(),idioma:navigator.language||""}}
+let promessaVisitante=null;
+function obterDadosVisitante(){if(promessaVisitante)return promessaVisitante;promessaVisitante=new Promise(resolve=>{const basicos=dadosBasicos();try{const salvo=localStorage.getItem("rol_dados_visitante_v1");if(salvo){const obj=JSON.parse(salvo),mix={...obj,...basicos};["cidade","estado","pais"].forEach(k=>{if(obj[k])mix[k]=obj[k]});consultarLocalizacaoIP(basicos,()=>{});resolve(mix);return}}catch(_){}consultarLocalizacaoIP(basicos,resolve)});return promessaVisitante}
+function consultarLocalizacaoIP(basicos,concluir){const cb="rol_geo_"+Date.now()+"_"+Math.random().toString(36).slice(2,7),s=document.createElement("script");let terminou=false;const timer=setTimeout(()=>finalizar(null),4500);function finalizar(d){if(terminou)return;terminou=true;clearTimeout(timer);s.remove();try{delete window[cb]}catch(_){}const g=d||{},info={...basicos,cidade:String(g.city||g.city_name||""),estado:String(g.region||g.region_code||""),pais:String(g.country_name||g.country||""),fusoHorario:String(g.timezone||basicos.fusoHorario||"")};try{localStorage.setItem("rol_dados_visitante_v1",JSON.stringify(info))}catch(_){}concluir(info)}window[cb]=finalizar;s.onerror=()=>finalizar(null);s.src="https://ipapi.co/jsonp/?callback="+encodeURIComponent(cb);document.head.appendChild(s)}
+function evento(ev,item){obterDadosVisitante().then(info=>api("registrarEvento",{evento:ev,audioId:item?item.id:"",titulo:item?item.titulo:"Acesso à Rádio Onda Livre",sessao,cidade:info.cidade||"",estado:info.estado||"",pais:info.pais||"",dispositivo:info.dispositivo||"",navegador:info.navegador||"",sistemaOperacional:info.sistemaOperacional||"",origem:info.origem||"Acesso direto",celular:info.celular||"",fusoHorario:info.fusoHorario||"",idioma:info.idioma||""},r=>{if(r&&r.sucesso===false)console.warn("A API não registrou o evento:",r.erro||r.mensagem||"Erro não informado")},e=>console.warn("Falha ao registrar evento:",e))).catch(e=>console.warn("Não foi possível obter os dados do visitante:",e))}
+function categoria(tipo){const c=norm(tipo);if(/oracao|prece|intercessao/.test(c))return"oracao";if(/mensagem|pregacao|palavra|estudo|reflexao|sermao/.test(c))return"mensagem";return"musica"}
+function urlAudio(u){u=String(u||"").trim();if(!u)return"";const m=u.match(/drive\.google\.com\/file\/d\/([^/?]+)/i)||(u.includes("drive.google.com")&&u.match(/[?&]id=([^&]+)/i));return m?"https://drive.google.com/uc?export=download&id="+m[1]:u}
+function normalizar(it,i){const tipo=String(pick(it,["Tipo","tipo","Categoria","categoria","tipoAudio","tipo_audio"],"Música")),ativo=norm(pick(it,["Ativo","ativo","Status","status"],"sim"));return{id:String(pick(it,["ID","id","Codigo","Código","codigo","AudioID","audioId"],"audio_"+i)),titulo:String(pick(it,["Título","titulo","Nome","nome","title"],"Áudio "+(i+1))),artista:String(pick(it,["Artista","artista","Autor","autor","Cantor","cantor"],"Rádio Onda Livre")),tipo,cat:categoria(tipo),url:urlAudio(pick(it,["URL","Url","url","Link","link","Arquivo","arquivo"],"")),ativo:!["nao","false","0","inativo","inativa","desativado","desativada"].includes(ativo),ordem:Number(pick(it,["Ordem","ordem","Posição","posicao"],i))}}
+function extrair(r){if(Array.isArray(r))return r;if(!r||typeof r!=="object")return[];return[r.playlist,r.dados,r.audios,r.lista,r.resultado,r.data].find(Array.isArray)||[]}
+function carregar(){status("Carregando a programação…");const usar=r=>{const itens=extrair(r);if(itens.length){iniciar(itens);return true}return false};api("playlist",{},r=>{if(!usar(r))antiga()},antiga);function antiga(){api("listarPlaylist",{},r=>{if(!usar(r))falhar(Error("A programação não retornou áudios."))},falhar)}}
+function falhar(e){$("titulo").textContent="Não foi possível carregar a programação";$("artista").textContent="Atualize a página ou tente novamente em instantes.";$("estado").textContent="Sem conexão com a rádio";status(e&&e.message,"erro")}
+function iniciar(itens){lista=itens.map(normalizar).filter(a=>a.ativo&&a.url).sort((a,b)=>a.ordem-b.ordem);if(!lista.length)return falhar(Error("Não há áudios ativos com endereço válido."));status("");evento("ACESSO");const musicas=lista.map((a,i)=>i).filter(i=>lista[i].cat==="musica"),base=musicas.length?musicas:lista.map((a,i)=>i);tocar(base[Math.floor(Math.random()*base.length)],true)}
+function sortearProximo(){if(lista.length===1)return 0;if(!restantes.length)restantes=lista.map((a,i)=>i).filter(i=>i!==atual);const k=Math.floor(Math.random()*restantes.length);return restantes.splice(k,1)[0]}
+function tocar(i,auto){if(i<0||i>=lista.length)return;const it=lista[i];if(i!==atual){if(atual>=0){historico.push(atual);if(historico.length>50)historico.shift()}restantes=restantes.filter(x=>x!==i);atual=i;audio.src=it.url;$("titulo").textContent=it.titulo;$("artista").textContent=it.artista+" · "+it.tipo;$("progresso").value=0;$("tAtual").textContent="0:00";$("tTotal").textContent="0:00";try{if("mediaSession"in navigator&&"MediaMetadata"in window)navigator.mediaSession.metadata=new MediaMetadata({title:it.titulo,artist:it.artista,album:"Rádio Onda Livre"})}catch(_){}marcar()}$("estado").textContent="Iniciando…";const p=audio.play();if(p&&p.then)p.then(()=>{$("aviso").classList.remove("on");if(!tocouAlgo||!auto)evento("PLAY",it);tocouAlgo=true}).catch(()=>{$("aviso").classList.add("on");$("estado").textContent=auto?"Toque para começar a ouvir":"Não foi possível iniciar o áudio";esperarGesto()})}
+function proximo(){if(!lista.length)return;tocar(aleatorio?sortearProximo():(atual+1)%lista.length,false)}
+function anterior(){if(!lista.length)return;if(audio.currentTime>4){audio.currentTime=0;return}const h=historico.pop();if(h!=null){const cur=atual;atual=-1;tocar(h,false);restantes.push(cur)}else tocar((atual-1+lista.length)%lista.length,false)}
+function esperarGesto(){if(solicitando)return;solicitando=true;const go=()=>{document.removeEventListener("pointerdown",go,true);document.removeEventListener("keydown",go,true);solicitando=false;if(audio.paused&&!tocouAlgo&&atual>=0)audio.play().then(()=>{$("aviso").classList.remove("on");tocouAlgo=true;evento("PLAY",lista[atual])}).catch(()=>{})};document.addEventListener("pointerdown",go,true);document.addEventListener("keydown",go,true)}
+function marcar(){const fav=atual>=0&&favoritos.has(lista[atual].id);$("btnFavAtual").textContent=fav?"♥":"♡";$("btnFavAtual").classList.toggle("on",fav);$("btnFavAtual").setAttribute("aria-pressed",String(fav))}
+function alternarFavAtual(){if(atual<0)return;const id=lista[atual].id;favoritos.has(id)?favoritos.delete(id):favoritos.add(id);guardar("rol_fav",[...favoritos]);marcar();status(favoritos.has(id)?"Faixa adicionada aos favoritos.":"Faixa removida dos favoritos.")}
+$("btnPlay").addEventListener("click",()=>{if(atual<0)return;audio.paused?tocar(atual,false):audio.pause()});$("btnProximo").addEventListener("click",proximo);$("btnAnterior").addEventListener("click",anterior);$("btnAtivar").addEventListener("click",()=>atual>=0&&tocar(atual,false));$("btnFavAtual").addEventListener("click",alternarFavAtual);
+$("btnAleatorio").addEventListener("click",e=>{aleatorio=!aleatorio;guardar("rol_aleatorio",aleatorio);e.currentTarget.classList.toggle("on",aleatorio);e.currentTarget.setAttribute("aria-pressed",String(aleatorio));status(aleatorio?"Ordem aleatória ativada.":"Reprodução em ordem da programação.")});
+$("progresso").addEventListener("input",e=>{if(audio.duration)audio.currentTime=audio.duration*Number(e.target.value)/100});$("volume").addEventListener("input",e=>{audio.volume=Number(e.target.value);guardar("rol_volume",audio.volume)});
+audio.addEventListener("timeupdate",()=>{if(audio.duration)$("progresso").value=audio.currentTime/audio.duration*100;$("tAtual").textContent=fmt(audio.currentTime)});audio.addEventListener("loadedmetadata",()=>$("tTotal").textContent=fmt(audio.duration));
+audio.addEventListener("play",()=>{falhas=0;$("player").classList.add("tocando");$("estado").textContent="Tocando agora";$("btnPlay").textContent="❚❚";$("btnPlay").setAttribute("aria-label","Pausar");clearInterval(hb);hb=setInterval(()=>{if(!audio.paused&&atual>=0)evento("HEARTBEAT",lista[atual])},60000);marcar()});
+audio.addEventListener("pause",()=>{if(audio.ended)return;$("player").classList.remove("tocando");$("estado").textContent="Pausado";$("btnPlay").textContent="▶";$("btnPlay").setAttribute("aria-label","Tocar");clearInterval(hb);if(atual>=0)evento("PAUSE",lista[atual]);marcar()});audio.addEventListener("ended",()=>{if(atual>=0)evento("FIM",lista[atual]);proximo()});audio.addEventListener("error",()=>{if(!audio.currentSrc)return;falhas++;$("estado").textContent="Arquivo indisponível";if(falhas<4&&lista.length>1){status("Um áudio não pôde ser carregado. Passando para o próximo…","erro");setTimeout(proximo,800)}else status("Não foi possível reproduzir. Confira se os links estão públicos e em formato compatível.","erro")});
+if("mediaSession"in navigator){try{navigator.mediaSession.setActionHandler("play",()=>audio.play());navigator.mediaSession.setActionHandler("pause",()=>audio.pause());navigator.mediaSession.setActionHandler("nexttrack",proximo);navigator.mediaSession.setActionHandler("previoustrack",anterior)}catch(_){}}
+aleatorio=ler("rol_aleatorio",true);$("btnAleatorio").classList.toggle("on",aleatorio);$("btnAleatorio").setAttribute("aria-pressed",String(aleatorio));audio.volume=Math.min(1,Math.max(0,Number(ler("rol_volume",1))));$("volume").value=audio.volume;carregar();
 </script>
 </body>
 </html>
