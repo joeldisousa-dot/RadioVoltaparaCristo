@@ -80,9 +80,28 @@ function iniciar(itens){
 
   const musicas=lista.map((a,i)=>i).filter(i=>lista[i].cat==="musica");
   const base=musicas.length?musicas:lista.map((a,i)=>i);
-  tocar(base[Math.floor(Math.random()*base.length)],true);
+  // No iPhone/Safari, a reprodução iniciada após carregar a playlist pode ser bloqueada.
+  // Seleciona a faixa, mas deixa o primeiro play para um toque explícito do usuário.
+  const primeira=base[Math.floor(Math.random()*base.length)];
+  prepararFaixa(primeira);
+  $("estado").textContent="Pronto para ouvir";
+  $("aviso").classList.add("on");
 }
 function sortearProximo(){if(lista.length===1)return 0;if(!restantes.length)restantes=lista.map((a,i)=>i).filter(i=>i!==atual);const k=Math.floor(Math.random()*restantes.length);return restantes.splice(k,1)[0]}
+function prepararFaixa(i){
+  if(i<0||i>=lista.length)return;
+  const it=lista[i];
+  atual=i;
+  audio.pause();
+  audio.src=it.url;
+  audio.load();
+  $("titulo").textContent=it.titulo;
+  $("artista").textContent=it.artista+" · "+it.tipo;
+  $("progresso").value=0;
+  $("tAtual").textContent="0:00";
+  $("tTotal").textContent="0:00";
+  marcar();
+}
 function tocar(i,auto){if(i<0||i>=lista.length)return;const it=lista[i];if(i!==atual){if(atual>=0){historico.push(atual);if(historico.length>50)historico.shift()}restantes=restantes.filter(x=>x!==i);atual=i;audio.src=it.url;$("titulo").textContent=it.titulo;$("artista").textContent=it.artista+" · "+it.tipo;$("progresso").value=0;$("tAtual").textContent="0:00";$("tTotal").textContent="0:00";try{if("mediaSession"in navigator&&"MediaMetadata"in window)navigator.mediaSession.metadata=new MediaMetadata({title:it.titulo,artist:it.artista,album:"Rádio Onda Livre"})}catch(_){}marcar()}$("estado").textContent="Iniciando…";const p=audio.play();if(p&&p.then)p.then(()=>{$("aviso").classList.remove("on");if(!tocouAlgo||!auto)evento("PLAY",it);tocouAlgo=true}).catch(()=>{$("aviso").classList.add("on");$("estado").textContent=auto?"Toque para começar a ouvir":"Não foi possível iniciar o áudio";esperarGesto()})}
 function proximo(){if(!lista.length)return;tocar(aleatorio?sortearProximo():(atual+1)%lista.length,false)}
 function anterior(){if(!lista.length)return;if(audio.currentTime>4){audio.currentTime=0;return}const h=historico.pop();if(h!=null){const cur=atual;atual=-1;tocar(h,false);restantes.push(cur)}else tocar((atual-1+lista.length)%lista.length,false)}
@@ -133,12 +152,27 @@ async function compartilharAtual(){
     else status("Não foi possível compartilhar automaticamente. Tente novamente.","erro");
   }finally{botao.disabled=false}
 }
-$("btnPlay").addEventListener("click",()=>{if(atual<0)return;audio.paused?tocar(atual,false):audio.pause()});$("btnProximo").addEventListener("click",proximo);$("btnAnterior").addEventListener("click",anterior);$("btnAtivar").addEventListener("click",()=>atual>=0&&tocar(atual,false));$("btnFavAtual").addEventListener("click",alternarFavAtual);$("btnCompartilhar").addEventListener("click",compartilharAtual);
+$("btnPlay").addEventListener("click",()=>{
+  if(atual<0)return;
+  if(!audio.paused){audio.pause();return;}
+  // play() é chamado diretamente no clique, preservando a autorização do Safari/iOS.
+  audio.play().then(()=>{$("aviso").classList.remove("on");tocouAlgo=true;evento("PLAY",lista[atual]);})
+    .catch(err=>{
+      $("aviso").classList.add("on");
+      $("estado").textContent="Não foi possível iniciar o áudio";
+      status("O iPhone não conseguiu reproduzir este arquivo. Toque em Ouvir agora ou confira se o link do áudio está público e em formato compatível.","erro");
+      console.warn("Falha ao reproduzir áudio:",err);
+    });
+});$("btnProximo").addEventListener("click",proximo);$("btnAnterior").addEventListener("click",anterior);$("btnAtivar").addEventListener("click",()=>{
+  if(atual<0)return;
+  audio.play().then(()=>{$("aviso").classList.remove("on");tocouAlgo=true;evento("PLAY",lista[atual]);})
+    .catch(err=>{status("Não foi possível reproduzir. Verifique se o arquivo está público e se o formato é compatível com o Safari do iPhone.","erro");console.warn("Falha ao ativar áudio:",err);});
+});$("btnFavAtual").addEventListener("click",alternarFavAtual);$("btnCompartilhar").addEventListener("click",compartilharAtual);
 $("btnAleatorio").addEventListener("click",e=>{aleatorio=!aleatorio;guardar("rol_aleatorio",aleatorio);e.currentTarget.classList.toggle("on",aleatorio);e.currentTarget.setAttribute("aria-pressed",String(aleatorio));status(aleatorio?"Ordem aleatória ativada.":"Reprodução em ordem da programação.")});
 $("progresso").addEventListener("input",e=>{if(audio.duration)audio.currentTime=audio.duration*Number(e.target.value)/100});$("volume").addEventListener("input",e=>{audio.volume=Number(e.target.value);guardar("rol_volume",audio.volume)});
 audio.addEventListener("timeupdate",()=>{if(audio.duration)$("progresso").value=audio.currentTime/audio.duration*100;$("tAtual").textContent=fmt(audio.currentTime)});audio.addEventListener("loadedmetadata",()=>$("tTotal").textContent=fmt(audio.duration));
 audio.addEventListener("play",()=>{falhas=0;$("player").classList.add("tocando");$("estado").textContent="Tocando agora";$("btnPlay").textContent="❚❚";$("btnPlay").setAttribute("aria-label","Pausar");clearInterval(hb);hb=setInterval(()=>{if(!audio.paused&&atual>=0)evento("HEARTBEAT",lista[atual])},60000);marcar()});
-audio.addEventListener("pause",()=>{if(audio.ended)return;$("player").classList.remove("tocando");$("estado").textContent="Pausado";$("btnPlay").textContent="▶";$("btnPlay").setAttribute("aria-label","Tocar");clearInterval(hb);if(atual>=0)evento("PAUSE",lista[atual]);marcar()});audio.addEventListener("ended",()=>{if(atual>=0)evento("FIM",lista[atual]);proximo()});audio.addEventListener("error",()=>{if(!audio.currentSrc)return;falhas++;$("estado").textContent="Arquivo indisponível";if(falhas<4&&lista.length>1){status("Um áudio não pôde ser carregado. Passando para o próximo…","erro");setTimeout(proximo,800)}else status("Não foi possível reproduzir. Confira se os links estão públicos e em formato compatível.","erro")});
+audio.addEventListener("pause",()=>{if(audio.ended)return;$("player").classList.remove("tocando");$("estado").textContent="Pausado";$("btnPlay").textContent="▶";$("btnPlay").setAttribute("aria-label","Tocar");clearInterval(hb);if(atual>=0)evento("PAUSE",lista[atual]);marcar()});audio.addEventListener("ended",()=>{if(atual>=0)evento("FIM",lista[atual]);proximo()});audio.addEventListener("error",()=>{if(!audio.currentSrc)return;falhas++;const codigo=audio.error?audio.error.code:0;$("estado").textContent="Erro ao carregar áudio";console.warn("Erro de áudio HTMLMediaElement:",codigo,audio.error);if(falhas<4&&lista.length>1){status("Um áudio não pôde ser carregado. Passando para o próximo…","erro");setTimeout(proximo,800)}else status("O Safari não conseguiu abrir o arquivo. Confirme que o link é público e aponta para um arquivo de áudio compatível (MP3, M4A ou AAC), não para uma página de visualização.","erro")});
 if("mediaSession"in navigator){try{navigator.mediaSession.setActionHandler("play",()=>audio.play());navigator.mediaSession.setActionHandler("pause",()=>audio.pause());navigator.mediaSession.setActionHandler("nexttrack",proximo);navigator.mediaSession.setActionHandler("previoustrack",anterior)}catch(_){}}
 aleatorio=ler("rol_aleatorio",true);$("btnAleatorio").classList.toggle("on",aleatorio);$("btnAleatorio").setAttribute("aria-pressed",String(aleatorio));audio.volume=Math.min(1,Math.max(0,Number(ler("rol_volume",1))));$("volume").value=audio.volume;carregar();
 </script>
